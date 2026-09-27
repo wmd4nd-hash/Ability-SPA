@@ -281,7 +281,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .spa-day { display: grid; gap: 28px; }
 .spa-day-intro h2 em { color: var(--gold-text); }
 .spa-day-intro p:last-child { max-width: 40ch; }
-.price-list { margin: 0 0 28px; border-top: 1px solid var(--line); }
+.price-list { margin: 0; border-top: 1px solid var(--line); }
 .price-list div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .price-list dt { font-weight: 500; }
 .price-list dt span { display: block; font-size: .875rem; font-weight: 400; color: var(--gold-text); }
@@ -441,7 +441,10 @@ ul { list-style: none; margin: 0; padding: 0; }
   .facilities .split .photo, .facilities .split-rev .photo { max-width: none; justify-self: stretch; aspect-ratio: 4 / 3; }
   .facilities .split-text { padding: 40px 0; }
 
-  .spa-day { grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+  .spa-day { grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
+  .spa-day-intro { display: flex; flex-direction: column; }
+  .spa-day-photo { display: block; margin-top: 28px; flex: 1 1 0; height: 0; min-height: 240px; aspect-ratio: auto; object-fit: cover; }
+
 
   .location-grid { grid-template-columns: 1fr 1fr; }
   .location { padding: 44px 40px 36px; }
@@ -560,3 +563,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .site-footer p a { text-decoration: none; }
 .site-footer .social { flex-wrap: wrap; gap: 4px 16px; margin-top: 0; }
 .footer-book { margin-top: 8px; }
+.spa-day-intro .btn-row { margin: 28px 0 24px; }
+.price-other { font-size: .875rem; margin: 0 0 8px; max-width: 46ch; }
+@media (max-width: 719px) { .spa-day-photo { display: none; } }
+.price-other a { font-weight: 600; }

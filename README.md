@@ -34,7 +34,7 @@ social links.
 - Logo is built from the low-res PNG; replace with SVG when the vector file arrives.
 - Prices are in **€** (Bulgaria uses the euro since 1 Jan 2026).
 - First-visit FAQ answers contain placeholders (towels/robes, kids' rules, duration, parking). Add FAQPage JSON-LD only once all answers are confirmed.
-- Varna booking link is `[BOOKING_URL_VARNA]` (probably `?site=2` – to confirm).
+- Varna has no online booking on the current site (bookings by phone/Viber), so the Varna card offers call + Viber.
 - Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
 - Hero uses the 1080 px pool photo full-width; a ≥ 2400 px original would look sharper on large desktops.
 
