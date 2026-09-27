@@ -10,7 +10,10 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 - `current-site/` – saved HTML of the current homepage (for content + redirect mapping)
 - `docs/preview-*.png` – screenshots at 390 px (phone) and 1440 px (desktop)
 
-Open `index.html` in a browser to view it. No build step.
+**Live preview:** https://raw.githack.com/wmd4nd-hash/Ability-SPA/claude/new-session-bmiv3x/index.html
+(always shows the latest push to this branch; may take a few minutes to refresh)
+
+Or open `index.html` locally in a browser. No build step.
 
 ## Status
 
