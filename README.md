@@ -15,6 +15,10 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 
 Or open `index.html` locally in a browser. No build step.
 
+Links to pages that don't exist yet (`masazhi-burgas/`, `ceni/`, `vaucheri/` …) open simple
+"coming soon" pages (`noindex`) so nothing is broken in the preview. Links whose target is still a
+`[PLACEHOLDER]` show a short note instead – that script and `.proto-note` are **prototype-only**.
+
 ## Status
 
 Prototype only – platform (WordPress / static / Wix) is still to be decided.

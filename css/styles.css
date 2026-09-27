@@ -498,3 +498,19 @@ ul { list-style: none; margin: 0; padding: 0; }
   .hero-shade { inset: auto; left: 0; right: 0; top: 0; aspect-ratio: 4 / 3; background: linear-gradient(to top, var(--espresso) 0%, rgba(32, 26, 24, 0) 35%); }
   .hero-content { padding-top: 8px; padding-bottom: 36px; margin-top: -28px; position: relative; }
 }
+
+/* ---------- Prototype-only: note for placeholder links (remove before launch) ---------- */
+.proto-note {
+  position: fixed; left: 50%; bottom: 84px; z-index: 70; transform: translate(-50%, 12px);
+  background: var(--white); color: var(--espresso); border: 1px solid var(--line);
+  padding: 12px 18px; border-radius: 12px; box-shadow: 0 12px 30px rgba(32, 26, 24, .2);
+  width: max-content; max-width: calc(100% - 32px); text-align: center;
+  font-size: .9375rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.proto-note.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Placeholder ("coming soon") pages ---------- */
+.stub-header .logo img { height: 30px; }
+.stub-main { min-height: calc(100svh - var(--header-h)); display: flex; align-items: center; background: var(--sand-soft); }
+.stub-main h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+.stub-text { max-width: 46ch; font-size: 1.125rem; margin-bottom: 28px; }
