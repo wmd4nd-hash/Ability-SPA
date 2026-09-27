@@ -388,6 +388,20 @@ ul { list-style: none; margin: 0; padding: 0; }
 .faq details p { margin: 0 0 18px; max-width: 60ch; }
 .faq details a { font-weight: 600; }
 
+/* ---------- Facilities: wide, large photos, interlocking rows (after thermanumera.com) ---------- */
+.container-wide { max-width: 1440px; }
+.feature-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; }
+.feature-list li {
+  padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px;
+  font-size: .875rem; font-weight: 500;
+}
+.section-dark .feature-list li { border-color: var(--line-dark); color: var(--sand); }
+.facilities .split { padding: 28px 0; border-top: 0; }
+.facilities .split:first-of-type { padding-top: 0; }
+.facilities .split .photo { max-width: none; aspect-ratio: 4 / 3; }
+.facilities .split-text p:not(.kicker) { max-width: 46ch; }
+.facilities .split-text p:not(.kicker):last-of-type { margin-bottom: 20px; }
+
 /* =========================================================
    Tablet
    ========================================================= */
@@ -421,6 +435,13 @@ ul { list-style: none; margin: 0; padding: 0; }
   .split { grid-template-columns: 1fr 1fr; gap: 56px; padding: 48px 0; }
   .split-rev > :first-child { order: 2; justify-self: end; }
   .split .ph, .split .photo.tall { max-width: 460px; aspect-ratio: 4 / 4.6; }
+
+  :root { --gutter-wide: 48px; }
+  .container-wide { padding: 0 var(--gutter-wide); }
+  .facilities .split { grid-template-columns: 1fr 1fr; gap: 0 64px; padding: 0; align-items: center; }
+  .facilities .split + .split { margin-top: 0; }
+  .facilities .split .photo, .facilities .split-rev .photo { max-width: none; justify-self: stretch; aspect-ratio: 4 / 3; }
+  .facilities .split-text { padding: 40px 0; }
 
   .spa-day { grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
 
@@ -471,4 +492,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   .section { padding: 112px 0; }
   .section-head { margin-bottom: 56px; }
   .split-text h3 { font-size: 2.75rem; }
+  :root { --gutter-wide: 88px; }
+  .facilities .split { gap: 0 88px; }
 }
