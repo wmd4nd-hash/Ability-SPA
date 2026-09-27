@@ -47,7 +47,7 @@ h2 em, h3 em { font-style: italic; font-weight: 500; }
 p { margin: 0 0 1em; }
 ul { list-style: none; margin: 0; padding: 0; }
 
-.container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+.container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter); }
 
 .skip-link {
   position: absolute; left: 8px; top: -60px; z-index: 100;
@@ -149,7 +149,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   box-shadow: 0 24px 40px rgba(32, 26, 24, .12);
 }
 .main-nav.is-open { display: block; }
-.nav-inner { max-width: 1240px; margin: 0 auto; padding: 8px var(--gutter) 28px; display: grid; gap: 20px; }
+.nav-inner { max-width: 1440px; margin: 0 auto; padding: 8px var(--gutter) 28px; display: grid; gap: 20px; }
 .nav-main a {
   display: flex; align-items: center; min-height: 54px; border-bottom: 1px solid var(--line);
   font-family: var(--serif); font-size: 1.75rem; font-weight: 600; text-decoration: none;
@@ -389,7 +389,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 .faq details a { font-weight: 600; }
 
 /* ---------- Facilities: wide, large photos, interlocking rows (after thermanumera.com) ---------- */
-.container-wide { max-width: 1440px; }
 .feature-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; }
 .feature-list li {
   padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px;
@@ -436,8 +435,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .split-rev > :first-child { order: 2; justify-self: end; }
   .split .ph, .split .photo.tall { max-width: 460px; aspect-ratio: 4 / 4.6; }
 
-  :root { --gutter-wide: 48px; }
-  .container-wide { padding: 0 var(--gutter-wide); }
+  :root { --gutter: 48px; }
   .facilities .split { grid-template-columns: 1fr 1fr; gap: 0 64px; padding: 0; align-items: center; }
   .facilities .split + .split { margin-top: 0; }
   .facilities .split .photo, .facilities .split-rev .photo { max-width: none; justify-self: stretch; aspect-ratio: 4 / 3; }
@@ -492,6 +490,68 @@ ul { list-style: none; margin: 0; padding: 0; }
   .section { padding: 112px 0; }
   .section-head { margin-bottom: 56px; }
   .split-text h3 { font-size: 2.75rem; }
-  :root { --gutter-wide: 88px; }
+  :root { --gutter: 88px; }
   .facilities .split { gap: 0 88px; }
+}
+
+/* =========================================================
+   Motion – subtle, CSS-driven. Hidden-before-reveal only applies when JS runs
+   (html.js), and everything is switched off for prefers-reduced-motion.
+   ========================================================= */
+:root { --ease-out: cubic-bezier(.2, .7, .2, 1); }
+
+/* Header shadow on scroll */
+.site-header { transition: box-shadow .3s; }
+.site-header.is-scrolled { box-shadow: 0 6px 24px rgba(32, 26, 24, .08); }
+
+/* Hero: slow settle-in zoom on the photo, text fades up in sequence */
+@keyframes hero-settle { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes line-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.hero-bg { animation: hero-settle 14s var(--ease-out) both; will-change: transform; }
+.hero-tags, .hero h1, .hero .btn-row, .hero-aside { animation: rise-in 1s var(--ease-out) both; }
+.hero-tags { animation-delay: .15s; }
+.hero h1 { animation-delay: .3s; }
+.hero .btn-row { animation-delay: .55s; }
+.hero-aside { animation-delay: .75s; position: relative; border-left-color: transparent; }
+.hero-aside::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, .4);
+  transform-origin: top; animation: line-grow 1s var(--ease-out) .9s both;
+}
+
+/* Scroll reveal */
+.js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
+  .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
+  .location, .review, .voucher-card, .voucher-text, .contact-grid > div) {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+.js .voucher-card { transform: translateY(28px) rotate(-3deg); }
+.js .voucher-card.is-in { transform: rotate(-3deg); }
+.js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
+  .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
+  .location, .review, .voucher-text, .contact-grid > div).is-in { opacity: 1; transform: none; }
+
+/* Facility photos: soft wipe-in with a slight settle */
+.js .facilities .photo {
+  clip-path: inset(10% 10% 10% 10%); opacity: 0; transform: scale(1.06);
+  transition: clip-path 1.2s var(--ease-out), opacity .8s var(--ease-out), transform 1.4s var(--ease-out);
+}
+.js .facilities .photo.is-in { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+
+/* Hover polish */
+.facilities .split { overflow: hidden; }
+.photo { transition: transform .8s var(--ease-out); }
+.btn { transition: background-color .2s, color .2s, border-color .2s, transform .2s; }
+.btn:active { transform: translateY(1px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .hero-tags, .hero h1, .hero .btn-row, .hero-aside, .hero-aside::before { animation: none !important; }
+  .js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
+    .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
+    .location, .review, .voucher-card, .voucher-text, .contact-grid > div) {
+    opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important;
+  }
+  .js .voucher-card { transform: rotate(-3deg) !important; }
 }

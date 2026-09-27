@@ -38,6 +38,13 @@ social links.
 - Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
 - Hero uses the 1080 px pool photo full-width; a ≥ 2400 px original would look sharper on large desktops.
 
+## Motion
+
+Subtle, CSS-driven animations with no library: slow settle-in zoom and staggered fade-up in the
+hero, fade/rise reveal on scroll (IntersectionObserver), soft wipe on facility photos, header
+shadow on scroll. Hidden-before-reveal only applies when JS runs (`html.js`), and all motion is
+disabled for `prefers-reduced-motion`.
+
 ## Layout notes
 
 Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,

@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- LocalBusiness (DaySpa) per location. Unknown fields (telephone, openingHours, geo) are omitted until confirmed — never fill with placeholders. -->
@@ -239,7 +240,7 @@
 
     <!-- ============ III. FACILITIES ============ -->
     <section class="section section-sand facilities" aria-labelledby="zoni-title">
-      <div class="container container-wide">
+      <div class="container">
         <div class="section-head">
           <p class="eyebrow"><span class="num">III.</span> Зони в Бургас</p>
           <h2 id="zoni-title">Топлина, вода и&nbsp;тишина</h2>
@@ -274,7 +275,7 @@
     </section>
 
     <section class="section section-dark facilities" aria-label="Фитнес и солна стая">
-      <div class="container container-wide">
+      <div class="container">
         <article class="split">
           <img class="photo" src="images/spa-burgas-fitnes-technogym-zala-1080.webp" srcset="images/spa-burgas-fitnes-technogym-zala-640.webp 640w, images/spa-burgas-fitnes-technogym-zala-1080.webp 1080w" sizes="(min-width: 720px) 50vw, 100vw" alt="Фитнес зала с уреди Technogym и дървен таван в Ability SPA Бургас" width="1080" height="1350" loading="lazy" decoding="async">
           <div class="split-text">
@@ -519,6 +520,31 @@
 
 
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Scroll reveal: elements fade/rise in once as they enter the viewport.
+      var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
+        ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
+        ' .location, .review, .voucher-card, .voucher-text, .contact-grid > div';
+      var items = document.querySelectorAll(revealSel);
+      items.forEach(function (el) {
+        var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+        el.style.setProperty('--d', Math.min(i, 5));   // stagger siblings
+      });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        items.forEach(function (el) { io.observe(el); });
+      } else {
+        items.forEach(function (el) { el.classList.add('is-in'); });
+      }
+
+      // Header gets a soft shadow once the page scrolls
+      var header = document.querySelector('.site-header');
+      var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
       // PROTOTYPE ONLY – remove before launch: links whose target is still a [PLACEHOLDER]
       // show a short note instead of opening a broken page.
