@@ -6,7 +6,8 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 
 - `index.html` – homepage (Bulgarian), static HTML, mobile-first
 - `css/styles.css` – all styles, brand colours as CSS variables
-- `images/` – real photos (WebP, 640/960 px), logo variants, OG image
+- `images/` – photos used on the homepage (WebP), logo variants, OG image
+- `images/library/` – all 53 real photos from the current site's media library (max 1600 px WebP), for sub-pages; originals up to 6720 px can be re-downloaded from abilityspa.com/wp-content/uploads/
 - `current-site/` – saved homepage HTML, text of all 69 live pages (`pages-text/`), the price-list PDFs
   (`price-lists/`) and the sitemap URL list
 - `docs/facts-from-current-site.md` – contacts, hours, facilities, prices and inconsistencies found on the live site
