@@ -36,6 +36,6 @@ social links.
 
 Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,
 numbered sections, text-on-image service cards, entry prices on the homepage, reviews,
-contact strip) while keeping Ability's colours, arch motif and readable type.
+contact strip) while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.

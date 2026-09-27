@@ -17,7 +17,6 @@
   --sans: "Jost", "Segoe UI", system-ui, sans-serif;
 
   --radius: 6px;
-  --arch: 999px 999px var(--radius) var(--radius);
   --header-h: 64px;
   --gutter: 16px;
 }
@@ -207,13 +206,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ---------- Photos & placeholders ---------- */
 .photo { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); background: var(--sand); }
-.photo.arch { border-radius: var(--arch); aspect-ratio: 4 / 5; }
+.photo.tall { aspect-ratio: 4 / 5; }
 .ph {
   position: relative; overflow: hidden; border-radius: var(--radius);
   aspect-ratio: 4 / 3; background: var(--sand);
   display: flex; align-items: flex-start; justify-content: flex-start;
 }
-.ph.arch { border-radius: var(--arch); aspect-ratio: 4 / 5; align-items: flex-end; }
+.ph.tall { aspect-ratio: 4 / 5; align-items: flex-end; }
 .ph-label {
   margin: 12px; padding: 4px 10px; border-radius: 999px;
   background: rgba(32, 26, 24, .78); color: var(--white);
@@ -229,10 +228,10 @@ ul { list-style: none; margin: 0; padding: 0; }
 .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .exp-card {
   position: relative; display: block; overflow: hidden; text-decoration: none; color: var(--white);
-  border-radius: 90px 90px var(--radius) var(--radius);
+  border-radius: var(--radius);
 }
 .exp-card .ph { aspect-ratio: 3 / 4.4; border-radius: 0; justify-content: center; }
-.exp-card .ph-label { margin-top: 56px; }
+.exp-card .ph-label { margin-top: 16px; }
 .exp-body {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 14px 14px;
   background: linear-gradient(to top, rgba(32, 26, 24, .9) 0%, rgba(32, 26, 24, .65) 60%, rgba(32, 26, 24, 0) 100%);
@@ -259,7 +258,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .split:first-of-type { border-top: 0; padding-top: 0; }
 .section-dark .split { border-color: var(--line-dark); }
 .section-dark .split:last-child { padding-bottom: 0; }
-.split .ph, .split .photo.arch { max-width: 420px; width: 100%; }
+.split .ph, .split .photo.tall { max-width: 420px; width: 100%; }
 .split-text h3 { font-size: 2.125rem; }
 .split-text p:last-child { margin-bottom: 0; max-width: 42ch; }
 .section-dark .split-text p:last-child { color: var(--sand); }
@@ -278,8 +277,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .location-grid { display: grid; gap: 20px; }
 .location {
   background: var(--espresso); color: var(--white);
-  border-radius: 140px 140px var(--radius) var(--radius);
-  padding: 56px 24px 28px;
+  border-radius: var(--radius);
+  padding: 32px 24px 28px;
 }
 .location h3 { font-size: 2.5rem; color: var(--white); margin-bottom: 4px; }
 .loc-sub { color: var(--sand); margin-bottom: 12px; }
@@ -366,7 +365,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   .facts-list li:last-child { border-right: 0; }
 
   .exp-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .exp-card { border-radius: 140px 140px var(--radius) var(--radius); }
   .exp-body { padding: 64px 20px 20px; }
   .exp-card h3 { font-size: 1.75rem; }
 
@@ -374,12 +372,12 @@ ul { list-style: none; margin: 0; padding: 0; }
 
   .split { grid-template-columns: 1fr 1fr; gap: 56px; padding: 48px 0; }
   .split-rev > :first-child { order: 2; justify-self: end; }
-  .split .ph, .split .photo.arch { max-width: 400px; aspect-ratio: 5 / 5.8; }
+  .split .ph, .split .photo.tall { max-width: 460px; aspect-ratio: 4 / 4.6; }
 
   .spa-day { grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
 
   .location-grid { grid-template-columns: 1fr 1fr; }
-  .location { padding: 72px 40px 36px; }
+  .location { padding: 44px 40px 36px; }
   .location dl div { grid-template-columns: 150px 1fr; }
 
   .review-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }

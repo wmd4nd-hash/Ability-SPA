@@ -128,12 +128,12 @@ Contrast rules:
    - Dark text on light sand and light text on dark brown, which is readable
    - Useful assets: gift card, printed massage menu, loyalty card (stamps → free massage)
 2. **"Velora" wellness retreat branding** (Behance, by Ishita Uniyal). This is the warmth reference.
-   - The **arch** motif (photos with an arched or rounded top corner, arched frames)
+   - ~~The arch motif~~ – **dropped by the owner's team (not a fan). Use clean rectangular photos and cards, as on thermanumera.com.**
    - Alternating dark-brown and cream sections for rhythm
    - Warm, calm, sunlit mood
    - Avoid its thin light text on dark/cream, because it fails contrast.
 
-**Combined direction:** Omra's structure, typography, and readability, plus Velora's warmth and arch shapes, all in Ability's original colors.
+**Combined direction:** Omra's structure, typography, and readability, plus Velora's warmth (no arch shapes), all in Ability's original colors.
 
 ### Typography (proposal)
 - Display: an elegant serif with **Cyrillic support** (e.g. Cormorant Garamond, which the current site already uses a Garamond family).
@@ -152,7 +152,7 @@ Contrast rules:
 1. **Header:** logo, nav (Услуги, Цени, Бургас, Варна, Ваучери, Контакти), language switch BG/EN, and a **sticky "Резервирай" button**. On mobile, add a tap-to-call icon.
 2. **Hero:** strong photo, an H1 like "СПА център в Бургас и Варна", one line of value, primary "Резервирай" and secondary "Виж услугите" buttons, and the city/address visible.
 3. **Services:** 4 cards (Масажи, Терапии, Козметика, Остеопатия) in a 2×2 grid on mobile, each with a photo, label, "от [ЦЕНА] лв", and a link. No hover-dependent content.
-4. **Facilities:** thermal zone, pool and jacuzzi, fitness, salt room, in split photo/text panels with arch-shaped photos.
+4. **Facilities:** thermal zone, pool and jacuzzi, fitness, salt room, in split photo/text panels with rectangular photos.
 5. **Locations:** two cards (Burgas and Varna), each with facilities, address, hours, phone, map link, and a Book button.
 6. **Social proof:** rating summary (100% recommend on Facebook) plus real reviews **[TO CONFIRM]**. Don't invent quotes.
 7. **Gift vouchers:** visual card and a CTA.
