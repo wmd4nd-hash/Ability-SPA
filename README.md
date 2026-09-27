@@ -33,7 +33,7 @@ social links.
 - Booking link (Burgas) taken from the current site: `https://book.abilityspa.com/reservations/start?site=1`
 - Photos: pool (hero), jacuzzi, fitness and OG image are 1080 px originals supplied by the team; pool shots have a gentle warm grade. Sauna and salt room are still the 960 px files from the current site.
 - Note: the current site's file named `БАСЕЙН-...png` (and the supplied `pool-jacuzzi.png`) actually shows cacao pods.
-- Service cards (massage, therapies, cosmetics, osteopathy) still need treatment photos.
+- Service cards, thermal zone and location cards use photos from the current site's media library (professional shoot, up to 6720 px originals, downscaled to WebP).
 - Logo is built from the low-res PNG; replace with SVG when the vector file arrives.
 - Prices are in **€** (Bulgaria uses the euro since 1 Jan 2026).
 - First-visit FAQ answers contain placeholders (towels/robes, kids' rules, duration, parking). Add FAQPage JSON-LD only once all answers are confirmed.
