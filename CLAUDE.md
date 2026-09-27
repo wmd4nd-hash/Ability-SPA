@@ -180,10 +180,38 @@ Contrast rules:
 
 ---
 
-## 9. Source materials to add to this folder
+## 9. Files in this project folder
 
-- `saveweb2zip-com-abilityspa-com.zip` – snapshot of the current homepage (HTML, CSS, images)
-- The Behance reference zips (Velora, Omra)
-- The logo in vector format (SVG/AI/PDF) **[TO CONFIRM]**
-- High-resolution photos **[TO CONFIRM]**
-- Texts and price list **[TO CONFIRM]**
+LOOK AT THE REFERENCE IMAGES before designing anything. The colors must stay Ability's original colors (section 5), not the colors of the references.
+
+```
+CLAUDE.md                       <- this brief
+references/
+  omra-spa/omra-01..10.jpg      <- MAIN structural reference: layout, typography, section labels, readability
+                                   (01 cover, 02 concept, 03 logotype, 04 clear space, 05 colour palette,
+                                    06 gift certificates, 07 printed menu/price list, 08 loyalty card,
+                                    09 social media, 10 closing)
+  velora/velora-part-01..08.jpg <- WARMTH reference: arch motif, dark/cream section rhythm, mood
+  velora/velora-full-board.jpg     (full board in one tall image)
+assets/
+  logo/ability-spa-logo.png     <- current logo (dark text + beige lotus, transparent PNG, low-res)
+  photos/sauna-thermal-zone.png
+  photos/salt-relax-room.png
+  photos/pool-jacuzzi.png
+  photos/fitness-technogym.jpg  <- real photos from the current site (about 960 px wide, low-res)
+current-site/
+  current-homepage-source.html  <- saved HTML of the current homepage (for SEO/content reference)
+  current-homepage-snapshot.zip <- full snapshot with CSS/images (mobile version)
+  screenshots/                  <- renders of the current homepage, desktop and mobile.
+                                   Note: slider photos and web fonts did not load in these renders,
+                                   so blank areas and the serif fallback font are rendering gaps, not real design.
+```
+
+Reference images are for inspiration only. Do not copy the Omra or Velora logos, names, or layouts one-to-one.
+
+### Still missing [TO CONFIRM]
+- Logo in vector format (SVG/AI/PDF)
+- High-resolution original photos, plus treatment/people photos
+- Texts, full price list, phone numbers, opening hours, Varna details
+- Exact booking URL
+- Platform decision (section 7)

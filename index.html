@@ -10,7 +10,7 @@
   <link rel="alternate" hreflang="en" href="https://abilityspa.com/en/">
   <link rel="alternate" hreflang="x-default" href="https://abilityspa.com/">
 
-  <!-- Single source of OG tags. TODO: og:image must be a real spa photo (1200×630). -->
+  <!-- Single source of OG tags. TODO: regenerate og:image from a hi-res photo. -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="bg_BG">
   <meta property="og:site_name" content="Ability SPA">
@@ -18,6 +18,8 @@
   <meta property="og:description" content="Басейн, джакузи, сауни, хамам, масажи и козметика в центъра на Бургас и във Варна.">
   <meta property="og:url" content="https://abilityspa.com/">
   <meta property="og:image" content="https://abilityspa.com/images/og-spa-burgas.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,14 +69,9 @@
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="/" aria-label="Ability SPA – начало">
-        <!-- TODO: replace with the official lotus logo (SVG) -->
-        <svg class="logo-mark" viewBox="0 0 40 28" aria-hidden="true" focusable="false">
-          <path d="M20 2c4 5 4 14 0 22-4-8-4-17 0-22Z"/>
-          <path d="M20 24C15 18 9 15 3 15c3 6 9 9 17 9Z"/>
-          <path d="M20 24c5-6 11-9 17-9-3 6-9 9-17 9Z"/>
-        </svg>
-        <span class="logo-text">Ability <span>SPA</span></span>
+      <a class="logo" href="/">
+        <!-- TODO: swap for SVG once the vector logo is supplied -->
+        <img src="images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
       </a>
 
       <nav class="main-nav" id="main-nav" aria-label="Основна навигация">
@@ -96,7 +93,7 @@
         <a class="icon-btn call-btn" href="tel:[ТЕЛЕФОН]" aria-label="Обадете се">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
         </a>
-        <a class="btn btn-dark btn-book" href="[BOOKING_URL]">Резервирай</a>
+        <a class="btn btn-dark btn-book" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
         <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Меню">
           <span></span><span></span><span></span>
         </button>
@@ -114,7 +111,7 @@
           <h1>СПА център в&nbsp;Бургас и&nbsp;Варна</h1>
           <p class="lead">Басейн, сауни, хамам и професионални масажи – в&nbsp;самия център на града, в&nbsp;хотел „България“.</p>
           <div class="btn-row">
-            <a class="btn btn-dark" href="[BOOKING_URL]">Резервирай</a>
+            <a class="btn btn-dark" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
             <a class="btn btn-outline" href="#uslugi">Виж услугите</a>
           </div>
           <p class="hero-address">
@@ -123,9 +120,7 @@
           </p>
         </div>
         <div class="hero-media">
-          <div class="ph arch ph-pool" role="img" aria-label="Закрит басейн с джакузи в Ability SPA Бургас">
-            <span class="ph-label">[СНИМКА: басейн]</span>
-          </div>
+          <img class="photo arch" src="images/spa-burgas-finlandska-sauna-960.webp" srcset="images/spa-burgas-finlandska-sauna-640.webp 640w, images/spa-burgas-finlandska-sauna-960.webp 960w" sizes="(min-width: 720px) 45vw, 100vw" alt="Финландска сауна от светло дърво в термалната зона на Ability SPA Бургас" width="960" height="720" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -183,7 +178,7 @@
         </div>
 
         <article class="split">
-          <div class="ph arch ph-sauna" role="img" aria-label="Финландска сауна в термалната зона"><span class="ph-label">[СНИМКА: сауна]</span></div>
+          <img class="photo arch" src="images/spa-burgas-finlandska-sauna-960.webp" srcset="images/spa-burgas-finlandska-sauna-640.webp 640w, images/spa-burgas-finlandska-sauna-960.webp 960w" sizes="(min-width: 720px) 45vw, 100vw" alt="Финландска сауна с дървени пейки в термалната зона" width="960" height="720" loading="lazy" decoding="async">
           <div class="split-text">
             <p class="eyebrow">01</p>
             <h3>Термална зона</h3>
@@ -201,7 +196,7 @@
         </article>
 
         <article class="split">
-          <div class="ph arch ph-gym" role="img" aria-label="Фитнес зала с уреди Technogym"><span class="ph-label">[СНИМКА: фитнес]</span></div>
+          <img class="photo arch" src="images/spa-burgas-fitnes-technogym-960.webp" srcset="images/spa-burgas-fitnes-technogym-640.webp 640w, images/spa-burgas-fitnes-technogym-960.webp 960w" sizes="(min-width: 720px) 45vw, 100vw" alt="Фитнес зала с кардио уреди Technogym в Ability SPA Бургас" width="960" height="720" loading="lazy" decoding="async">
           <div class="split-text">
             <p class="eyebrow">03</p>
             <h3>Фитнес</h3>
@@ -210,7 +205,7 @@
         </article>
 
         <article class="split split-rev">
-          <div class="ph arch ph-salt" role="img" aria-label="Солна релакс стая"><span class="ph-label">[СНИМКА: солна стая]</span></div>
+          <img class="photo arch" src="images/spa-burgas-solna-staya-960.webp" srcset="images/spa-burgas-solna-staya-640.webp 640w, images/spa-burgas-solna-staya-960.webp 960w" sizes="(min-width: 720px) 45vw, 100vw" alt="Солна стая с шезлонги и осветена стена от хималайска сол" width="960" height="720" loading="lazy" decoding="async">
           <div class="split-text">
             <p class="eyebrow">04</p>
             <h3>Солна стая</h3>
@@ -238,7 +233,7 @@
               <div><dt>Телефон</dt><dd><a href="tel:[ТЕЛЕФОН_БУРГАС]">[ТЕЛЕФОН_БУРГАС]</a></dd></div>
             </dl>
             <div class="btn-row">
-              <a class="btn btn-light" href="[BOOKING_URL]">Резервирай в Бургас</a>
+              <a class="btn btn-light" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай в Бургас</a>
               <a class="btn btn-outline-light" href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Карта</a>
             </div>
           </article>
@@ -253,7 +248,7 @@
               <div><dt>Телефон</dt><dd><a href="tel:[ТЕЛЕФОН_ВАРНА]">[ТЕЛЕФОН_ВАРНА]</a></dd></div>
             </dl>
             <div class="btn-row">
-              <a class="btn btn-light" href="[BOOKING_URL]">Резервирай във Варна</a>
+              <a class="btn btn-light" href="[BOOKING_URL_VARNA]">Резервирай във Варна</a>
               <a class="btn btn-outline-light" href="https://maps.google.com/?q=хотел+Черно+море,+Варна" rel="noopener">Карта</a>
             </div>
           </article>
@@ -277,9 +272,8 @@
     <section class="section section-dark" id="vaucheri" aria-labelledby="vaucheri-title">
       <div class="container voucher">
         <div class="voucher-card" aria-hidden="true">
-          <svg class="logo-mark" viewBox="0 0 40 28"><path d="M20 2c4 5 4 14 0 22-4-8-4-17 0-22Z"/><path d="M20 24C15 18 9 15 3 15c3 6 9 9 17 9Z"/><path d="M20 24c5-6 11-9 17-9-3 6-9 9-17 9Z"/></svg>
+          <img class="vc-logo" src="images/ability-spa-logo.png" alt="" width="454" height="250" loading="lazy">
           <p class="vc-title">Подаръчен ваучер</p>
-          <p class="vc-brand">Ability SPA</p>
         </div>
         <div class="voucher-text">
           <p class="eyebrow">Ваучери</p>
@@ -303,9 +297,8 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
-        <a class="logo logo-footer" href="/" aria-label="Ability SPA – начало">
-          <svg class="logo-mark" viewBox="0 0 40 28" aria-hidden="true" focusable="false"><path d="M20 2c4 5 4 14 0 22-4-8-4-17 0-22Z"/><path d="M20 24C15 18 9 15 3 15c3 6 9 9 17 9Z"/><path d="M20 24c5-6 11-9 17-9-3 6-9 9-17 9Z"/></svg>
-          <span class="logo-text">Ability <span>SPA</span></span>
+        <a class="logo logo-footer" href="/">
+          <img src="images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
         </a>
         <p class="footer-tag">Градски СПА център в Бургас и Варна.</p>
       </div>
