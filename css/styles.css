@@ -528,7 +528,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   transition-delay: calc(var(--d, 0) * 90ms);
 }
 .js .voucher-card { transform: translateY(28px) rotate(-3deg); }
-.js .voucher-card.is-in { transform: rotate(-3deg); }
+.js .voucher-card.is-in { opacity: 1; transform: rotate(-3deg); }
 .js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
   .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
   .location, .review, .voucher-text, .contact-grid > div).is-in { opacity: 1; transform: none; }
