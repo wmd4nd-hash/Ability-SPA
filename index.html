@@ -106,6 +106,7 @@
         <ul class="nav-main">
           <li><a href="#uslugi">Услуги</a></li>
           <li><a href="#spa-den">Цени</a></li>
+          <li><a href="#parvo-poseshtenie">Първо посещение</a></li>
           <li><a href="#burgas">Бургас</a></li>
           <li><a href="#varna">Варна</a></li>
           <li><a href="#vaucheri">Ваучери</a></li>
@@ -137,9 +138,15 @@
         <p class="hero-tags">Градски СПА <span aria-hidden="true">·</span> Бургас <span aria-hidden="true">·</span> Варна</p>
         <h1>СПА център в&nbsp;Бургас и&nbsp;Варна</h1>
         <p class="lead">Басейн, сауни, хамам и професионални масажи – в&nbsp;самия център на града, в&nbsp;хотел „България“.</p>
-        <div class="btn-row">
-          <a class="btn btn-light" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
-          <a class="btn btn-outline-light" href="#uslugi">Виж услугите</a>
+        <!-- Booking bar: pick a location, then book. Without JS the Burgas link still works. -->
+        <div class="book-bar">
+          <fieldset class="book-loc">
+            <legend class="book-legend">Обект</legend>
+            <label><input type="radio" name="book-loc" value="burgas" data-url="https://book.abilityspa.com/reservations/start?site=1" checked><span>Бургас</span></label>
+            <label><input type="radio" name="book-loc" value="varna" data-url="[BOOKING_URL_VARNA]"><span>Варна</span></label>
+          </fieldset>
+          <a class="btn btn-light book-go" id="book-go" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
+          <a class="btn btn-outline-light book-gift" href="#vaucheri">Ваучер</a>
         </div>
         <p class="hero-address">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
@@ -147,6 +154,15 @@
         </p>
       </div>
     </section>
+
+    <!-- ============ QUICK TILES (visitor's first questions) ============ -->
+    <nav class="tiles" aria-label="Бързи връзки">
+      <ul class="container tiles-list">
+        <li><a class="tile" href="#spa-den"><span class="tile-kicker">Вижте нашите</span><span class="tile-title">Цени</span><span class="tile-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="tile tile-accent" href="#parvo-poseshtenie"><span class="tile-kicker">Подгответе се за</span><span class="tile-title">Първо посещение</span><span class="tile-arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="tile" href="#vaucheri"><span class="tile-kicker">Подарете</span><span class="tile-title">Ваучери</span><span class="tile-arrow" aria-hidden="true">→</span></a></li>
+      </ul>
+    </nav>
 
     <!-- ============ KEY FACTS ============ -->
     <section class="facts" aria-label="Накратко">
@@ -297,11 +313,50 @@
       </div>
     </section>
 
-    <!-- ============ V. LOCATIONS ============ -->
-    <section class="section section-sand" aria-labelledby="obekti-title">
+    <!-- ============ V. FIRST VISIT ============ -->
+    <!-- TODO: add FAQPage JSON-LD once every answer is confirmed (no placeholders in structured data). -->
+    <section class="section section-sand" id="parvo-poseshtenie" aria-labelledby="parvo-title">
+      <div class="container first-visit">
+        <div class="first-visit-intro">
+          <p class="eyebrow"><span class="num">V.</span> Първо посещение</p>
+          <h2 id="parvo-title">Какво да знаете, преди да&nbsp;дойдете</h2>
+          <p>Кратки отговори на въпросите, които гостите ни задават най-често.</p>
+          <a class="btn btn-dark" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Какво да взема със себе си?</summary>
+            <p>Бански и чехли. [ХАВЛИЯ И ХАЛАТ – включени ли са в цената, под наем ли са и на каква цена]</p>
+          </details>
+          <details>
+            <summary>Трябва ли да резервирам предварително?</summary>
+            <p>Препоръчваме да резервирате онлайн предварително. <a href="https://book.abilityspa.com/reservations/start?site=1">Резервирайте в Бургас</a>. [ВАЖИ ЛИ И ЗА СПА ДОСТЪП БЕЗ ПРОЦЕДУРА]</p>
+          </details>
+          <details>
+            <summary>Може ли да дойда с деца?</summary>
+            <p>Да – в Бургас има детски басейн с температура 32–33&nbsp;°C. [ПРАВИЛА ЗА ДЕЦА – възраст, придружител, часове за достъп]</p>
+          </details>
+          <details>
+            <summary>Колко време да отделя?</summary>
+            <p>[ПРОДЪЛЖИТЕЛНОСТ НА СПА ДОСТЪПА – напр. 2 часа / цял ден]</p>
+          </details>
+          <details>
+            <summary>Приемате ли карти Multisport?</summary>
+            <p>Да, в делнични дни от 07:00 до 22:00. [ДОКУМЕНТ ЗА САМОЛИЧНОСТ / ДРУГИ УСЛОВИЯ]</p>
+          </details>
+          <details>
+            <summary>Как да стигна и има ли паркинг?</summary>
+            <p>Бургас: ул. „Александровска“ 21, в хотел „България“, в центъра на града. <a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Карта</a>. [ПАРКИНГ]</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VI. LOCATIONS ============ -->
+    <section class="section" aria-labelledby="obekti-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow"><span class="num">V.</span> Обекти</p>
+          <p class="eyebrow"><span class="num">VI.</span> Обекти</p>
           <h2 id="obekti-title">Два града, едно усещане</h2>
         </div>
         <div class="location-grid">
@@ -338,11 +393,11 @@
       </div>
     </section>
 
-    <!-- ============ VI. REVIEWS ============ -->
-    <section class="section" aria-labelledby="otzivi-title">
+    <!-- ============ VII. REVIEWS ============ -->
+    <section class="section section-sand" aria-labelledby="otzivi-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow"><span class="num">VI.</span> Отзиви</p>
+          <p class="eyebrow"><span class="num">VII.</span> Отзиви</p>
           <h2 id="otzivi-title">100% от гостите ни ни&nbsp;препоръчват</h2>
           <p class="proof-meta">42 отзива във Facebook. Гостите най-често отбелязват чистотата, персонала, басейна, сауните и доброто съотношение цена–качество.</p>
         </div>
@@ -356,7 +411,7 @@
       </div>
     </section>
 
-    <!-- ============ VII. GIFT VOUCHERS ============ -->
+    <!-- ============ VIII. GIFT VOUCHERS ============ -->
     <section class="section section-dark" id="vaucheri" aria-labelledby="vaucheri-title">
       <div class="container voucher">
         <div class="voucher-card" aria-hidden="true">
@@ -364,7 +419,7 @@
           <p class="vc-title">Подаръчен ваучер</p>
         </div>
         <div class="voucher-text">
-          <p class="eyebrow"><span class="num">VII.</span> Ваучери</p>
+          <p class="eyebrow"><span class="num">VIII.</span> Ваучери</p>
           <h2 id="vaucheri-title">Подарете време за&nbsp;себе&nbsp;си</h2>
           <p>Подаръчен ваучер за масаж, СПА ден или процедура – идеален подарък за рожден ден, годишнина или просто така.</p>
           <div class="btn-row">
@@ -451,6 +506,14 @@
       document.getElementById('cookie-ok').addEventListener('click', function () {
         bar.hidden = true;
         try { localStorage.setItem('cookie-ok', '1'); } catch (e) {}
+      });
+
+      var go = document.getElementById('book-go');
+      document.querySelectorAll('input[name="book-loc"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          go.href = r.dataset.url;
+          go.textContent = r.value === 'varna' ? 'Резервирай във Варна' : 'Резервирай';
+        });
       });
 
       document.getElementById('year').textContent = new Date().getFullYear();

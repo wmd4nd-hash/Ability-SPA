@@ -29,6 +29,8 @@ social links.
 - Service cards (massage, therapies, cosmetics, osteopathy) still need treatment photos.
 - Logo is built from the low-res PNG; replace with SVG when the vector file arrives.
 - Prices are in **€** (Bulgaria uses the euro since 1 Jan 2026).
+- First-visit FAQ answers contain placeholders (towels/robes, kids' rules, duration, parking). Add FAQPage JSON-LD only once all answers are confirmed.
+- Varna booking link is `[BOOKING_URL_VARNA]` (probably `?site=2` – to confirm).
 - Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
 - Hero uses the 1080 px pool photo full-width; a ≥ 2400 px original would look sharper on large desktops.
 
@@ -36,6 +38,7 @@ social links.
 
 Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,
 numbered sections, text-on-image service cards, entry prices on the homepage, reviews,
-contact strip) while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
+contact strip) and from AIRE, Vabali and Therme Bucharest (hero booking bar with
+location choice, quick tiles for prices / first visit / vouchers, first-visit FAQ) while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.
