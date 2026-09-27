@@ -7,7 +7,10 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 - `index.html` – homepage (Bulgarian), static HTML, mobile-first
 - `css/styles.css` – all styles, brand colours as CSS variables
 - `images/` – real photos (WebP, 640/960 px), logo variants, OG image
-- `current-site/` – saved HTML of the current homepage (for content + redirect mapping)
+- `current-site/` – saved homepage HTML, text of all 69 live pages (`pages-text/`), the price-list PDFs
+  (`price-lists/`) and the sitemap URL list
+- `docs/facts-from-current-site.md` – contacts, hours, facilities, prices and inconsistencies found on the live site
+- `docs/redirect-map.md` – draft 301 map for every old URL
 - `docs/preview-*.png` – screenshots at 390 px (phone) and 1440 px (desktop)
 
 **Live preview:** https://raw.githack.com/wmd4nd-hash/Ability-SPA/claude/new-session-bmiv3x/index.html
