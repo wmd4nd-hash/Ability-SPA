@@ -349,25 +349,37 @@ ul { list-style: none; margin: 0; padding: 0; }
 .cookie-bar a { color: var(--white); }
 
 /* ---------- Hero booking bar ---------- */
+/* Step 1 (location) is a switch, step 2 (book) is the only button – they must not look alike. */
 .book-bar {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  margin: 24px 0 22px; padding: 10px;
+  display: grid; gap: 14px;
+  margin: 24px 0 12px; padding: 14px;
   background: rgba(32, 26, 24, .72); border: 1px solid var(--line-dark); border-radius: 14px;
-  max-width: 620px;
+  max-width: 560px;
 }
-.book-loc { grid-column: 1 / -1; display: flex; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
-.book-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.book-loc label { flex: 1; position: relative; cursor: pointer; }
-.book-loc input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.book-loc span {
-  display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px;
-  border: 1.5px solid var(--line-dark); color: var(--sand);
-  font-weight: 600; font-size: .9375rem; letter-spacing: .06em;
+.book-loc { margin: 0; padding: 0; border: 0; min-width: 0; }
+.book-label { float: left; width: 100%; margin-bottom: 8px; padding: 0; font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--sand); }
+.book-switch { clear: both; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line-dark); border-radius: 8px; overflow: hidden; }
+.book-switch label { position: relative; cursor: pointer; }
+.book-switch label + label { border-left: 1px solid var(--line-dark); }
+.book-switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.book-switch span {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px;
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--sand);
 }
-.book-loc input:checked + span { background: var(--white); border-color: var(--white); color: var(--espresso); }
-.book-loc input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+.book-switch span::before {
+  content: ""; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--sand); flex: none;
+}
+.book-switch input:checked + span { background: rgba(221, 211, 192, .16); color: var(--white); }
+.book-switch input:checked + span::before { border-color: var(--gold); background: var(--gold); box-shadow: inset 0 0 0 3px var(--espresso); }
+.book-switch input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: -3px; }
+.book-actions { display: flex; }
 .book-go { width: 100%; }
-.book-gift { width: 100%; }
+.book-gift { margin: 0 0 20px; }
+.book-gift a {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px;
+  color: var(--sand); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+}
+.book-gift a:hover { color: var(--white); }
 
 /* ---------- Quick tiles ---------- */
 .tiles { background: var(--white); border-bottom: 1px solid var(--line); }
@@ -411,11 +423,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   .nav-inner { grid-template-columns: 2fr 1fr; gap: 48px; padding-top: 24px; padding-bottom: 40px; }
   .nav-sub { grid-template-columns: 1fr; align-content: start; }
 
-  .book-bar { grid-template-columns: auto 1fr auto; align-items: center; border-radius: 999px; padding: 6px; }
-  .book-loc { grid-column: auto; }
-  .book-loc label { flex: none; }
-  .book-loc span { padding: 0 22px; }
-  .book-go, .book-gift { width: auto; }
+  .book-bar { grid-template-columns: 1fr auto; align-items: end; gap: 18px; padding: 14px 14px 14px 18px; }
+  .book-switch span { padding: 0 22px; }
+  .book-go { width: auto; min-width: 190px; }
 
   .tiles { background: linear-gradient(to bottom, transparent 44px, var(--espresso) 44px); border: 0; position: relative; z-index: 2; margin-top: -44px; }
   .tiles-list { grid-template-columns: repeat(3, 1fr); }
