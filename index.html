@@ -136,26 +136,17 @@
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="container hero-content">
         <p class="hero-tags">Градски СПА <span aria-hidden="true">·</span> Бургас <span aria-hidden="true">·</span> Варна</p>
-        <h1>СПА център в&nbsp;Бургас и&nbsp;Варна</h1>
-        <p class="lead">Басейн, сауни, хамам и професионални масажи – в&nbsp;самия център на града, в&nbsp;хотел „България“.</p>
-        <!-- Booking bar: step 1 choose a location (switch), step 2 book (action). Without JS the Burgas link still works. -->
-        <div class="book-bar">
-          <fieldset class="book-loc">
-            <legend class="book-label">Изберете обект</legend>
-            <div class="book-switch">
-              <label><input type="radio" name="book-loc" value="burgas" data-url="https://book.abilityspa.com/reservations/start?site=1" checked><span>Бургас</span></label>
-              <label><input type="radio" name="book-loc" value="varna" data-url="[BOOKING_URL_VARNA]"><span>Варна</span></label>
-            </div>
-          </fieldset>
-          <div class="book-actions">
-            <a class="btn btn-light book-go" id="book-go" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
+        <h1>СПА център<br> в&nbsp;Бургас и&nbsp;Варна</h1>
+        <div class="hero-bottom">
+          <div class="btn-row">
+            <a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline-light btn-arrow" href="#parvo-poseshtenie">Планирай посещение <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-aside">
+            <p class="hero-aside-main">Басейн · Сауни · Хамам · Масажи</p>
+            <p class="hero-aside-where">Бургас · хотел „България“<br>Варна · хотел „Черно море“</p>
           </div>
         </div>
-        <p class="book-gift"><a href="#vaucheri">или подарете ваучер <span aria-hidden="true">→</span></a></p>
-        <p class="hero-address">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          Бургас, ул. „Александровска“ 21 · Варна, хотел „Черно море“
-        </p>
       </div>
     </section>
 
@@ -512,12 +503,6 @@
         try { localStorage.setItem('cookie-ok', '1'); } catch (e) {}
       });
 
-      var go = document.getElementById('book-go');
-      document.querySelectorAll('input[name="book-loc"]').forEach(function (r) {
-        r.addEventListener('change', function () {
-          go.href = r.dataset.url;
-        });
-      });
 
       document.getElementById('year').textContent = new Date().getFullYear();
 

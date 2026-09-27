@@ -42,7 +42,8 @@ social links.
 
 Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,
 numbered sections, text-on-image service cards, entry prices on the homepage, reviews,
-contact strip) and from AIRE, Vabali and Therme Bucharest (hero booking bar with
-location choice, quick tiles for prices / first visit / vouchers, first-visit FAQ) while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
+contact strip) and from AIRE, Vabali and Therme Bucharest (quick tiles for prices / first visit /
+vouchers, first-visit FAQ). The hero follows Therma Numera's minimal pattern: photo,
+tag line, big H1, two buttons, short caption – nothing else on the photo while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.
