@@ -28,3 +28,14 @@ social links.
 - **Pool photo is missing** – the supplied `pool-jacuzzi.png` actually shows cacao pods, so the pool slot is still a placeholder.
 - Service cards (massage, therapies, cosmetics, osteopathy) still need treatment photos.
 - Logo is built from the low-res PNG; replace with SVG when the vector file arrives.
+- Prices are in **€** (Bulgaria uses the euro since 1 Jan 2026).
+- Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
+- Hero uses the 960 px sauna photo full-width; it needs a hi-res original (≥ 2400 px) to look sharp on desktop.
+
+## Layout notes
+
+Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,
+numbered sections, text-on-image service cards, entry prices on the homepage, reviews,
+contact strip) while keeping Ability's colours, arch motif and readable type.
+Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
+ultra-thin grey text, brand-only English H1.
