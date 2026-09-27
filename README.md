@@ -24,13 +24,13 @@ phone numbers, opening hours, prices, Varna address, facilities and booking link
 social links.
 
 - Booking link (Burgas) taken from the current site: `https://book.abilityspa.com/reservations/start?site=1`
-- Photos: sauna, fitness and salt room are real but low-res (960 px). The gym photo has a gentle warm grade.
-- Pool photo comes from the current site (`Untitled-design-5.png`, 960 px) with a gentle warm grade. Note: the current site's file named `БАСЕЙН-...png` (and the supplied `pool-jacuzzi.png`) actually shows cacao pods.
+- Photos: pool (hero), jacuzzi, fitness and OG image are 1080 px originals supplied by the team; pool shots have a gentle warm grade. Sauna and salt room are still the 960 px files from the current site.
+- Note: the current site's file named `БАСЕЙН-...png` (and the supplied `pool-jacuzzi.png`) actually shows cacao pods.
 - Service cards (massage, therapies, cosmetics, osteopathy) still need treatment photos.
 - Logo is built from the low-res PNG; replace with SVG when the vector file arrives.
 - Prices are in **€** (Bulgaria uses the euro since 1 Jan 2026).
 - Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
-- Hero uses the 960 px pool photo full-width; it needs a hi-res original (≥ 2400 px) to look sharp on desktop.
+- Hero uses the 1080 px pool photo full-width; a ≥ 2400 px original would look sharper on large desktops.
 
 ## Layout notes
 
