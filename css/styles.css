@@ -254,9 +254,17 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ---------- II. Statement ---------- */
 .statement .eyebrow { padding-bottom: 14px; border-bottom: 1px solid var(--line-dark); margin-bottom: 32px; }
-.statement-title { font-size: clamp(2.25rem, 7vw, 4.25rem); font-weight: 500; max-width: 18ch; line-height: 1.08; }
+.statement-grid { display: grid; gap: 28px; }
+.statement-title { font-size: clamp(2.25rem, 7vw, 4.25rem); font-weight: 500; line-height: 1.08; margin: 0; }
 .statement-title em { color: var(--gold); }
-.statement-cols { display: grid; gap: 8px; margin-top: 28px; color: var(--sand); max-width: 900px; }
+.statement-cols { color: var(--sand); max-width: 46ch; }
+.statement-cols p { margin-bottom: 14px; }
+.statement-link {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 4px;
+  color: var(--white); font-weight: 600; font-size: .875rem; letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; border-bottom: 1px solid var(--gold);
+}
+.statement-link:hover { color: var(--gold); }
 
 /* ---------- III. Facilities split panels ---------- */
 .split { display: grid; gap: 20px; align-items: center; padding: 28px 0; border-top: 1px solid var(--line); }
@@ -429,7 +437,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .exp-body { padding: 64px 20px 20px; }
   .exp-card h3 { font-size: 1.75rem; }
 
-  .statement-cols { grid-template-columns: 1fr 1fr; gap: 40px; margin-left: auto; max-width: 760px; }
+  .statement-grid { grid-template-columns: 1.35fr 1fr; gap: 80px; align-items: end; }
 
   .split { grid-template-columns: 1fr 1fr; gap: 56px; padding: 48px 0; }
   .split-rev > :first-child { order: 2; justify-self: end; }
