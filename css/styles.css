@@ -35,6 +35,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -316,24 +317,15 @@ ul { list-style: none; margin: 0; padding: 0; }
 .voucher-card {
   aspect-ratio: 1.6 / 1; max-width: 420px; width: 100%;
   border-radius: 14px; padding: 24px;
-  background: linear-gradient(135deg, var(--sand) 0%, #eee6d8 100%);
-  color: var(--espresso);
+  background: linear-gradient(135deg, #2E2522 0%, var(--espresso) 100%);
+  color: var(--white); border: 1px solid rgba(195, 159, 118, .35);
   display: flex; flex-direction: column; justify-content: space-between;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, .35);
+  box-shadow: 0 24px 50px rgba(32, 26, 24, .28);
   transform: rotate(-3deg);
 }
 .vc-logo { width: 96px; height: auto; }
 .vc-title { font-family: var(--serif); font-size: 1.875rem; font-weight: 600; margin: 0; }
-.voucher-text p { color: var(--sand); max-width: 44ch; }
-
-/* ---------- Contact strip ---------- */
-.contact-strip { background: var(--sand); }
-.contact-grid { display: grid; }
-.contact-grid > div { padding: 20px 0; border-bottom: 1px solid var(--line); }
-.contact-grid > div:last-child { border-bottom: 0; }
-.cs-label { font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 4px; }
-.contact-grid a { display: inline-flex; align-items: center; min-height: 32px; font-family: var(--serif); font-size: 1.375rem; font-weight: 600; text-decoration: none; }
-.contact-grid a:hover { text-decoration: underline; }
+.voucher-text p { max-width: 44ch; }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--espresso); color: var(--sand); padding: 56px 0 96px; }
@@ -460,10 +452,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   .voucher { grid-template-columns: 1fr 1fr; gap: 56px; }
   .voucher-card { justify-self: center; }
 
-  .contact-grid { grid-template-columns: repeat(3, 1fr); }
-  .contact-grid > div { padding: 28px 24px; border-bottom: 0; border-right: 1px solid var(--line); }
-  .contact-grid > div:first-child { padding-left: 0; }
-  .contact-grid > div:last-child { border-right: 0; }
 
   .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
   .site-footer { padding-bottom: 56px; }
@@ -530,7 +518,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* Scroll reveal */
 .js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
   .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
-  .location, .review, .voucher-card, .voucher-text, .contact-grid > div) {
+  .location, .review, .voucher-card, .voucher-text) {
   opacity: 0; transform: translateY(28px);
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
   transition-delay: calc(var(--d, 0) * 90ms);
@@ -539,7 +527,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .js .voucher-card.is-in { opacity: 1; transform: rotate(-3deg); }
 .js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
   .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
-  .location, .review, .voucher-text, .contact-grid > div).is-in { opacity: 1; transform: none; }
+  .location, .review, .voucher-text).is-in { opacity: 1; transform: none; }
 
 /* Facility photos: soft wipe-in with a slight settle */
 .js .facilities .photo {
@@ -558,10 +546,17 @@ ul { list-style: none; margin: 0; padding: 0; }
   .hero-bg, .hero-tags, .hero h1, .hero .btn-row, .hero-aside, .hero-aside::before { animation: none !important; }
   .js :is(.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,
     .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,
-    .location, .review, .voucher-card, .voucher-text, .contact-grid > div) {
+    .location, .review, .voucher-card, .voucher-text) {
     opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important;
   }
   .js .voucher-card { transform: rotate(-3deg) !important; }
 }
 
 .price-note { font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 10px; }
+
+.contact-list { margin: 0 0 14px; }
+.contact-list a { display: inline-flex; min-height: 36px; align-items: center; text-decoration: none; font-variant-numeric: lining-nums tabular-nums; }
+.contact-list a:hover, .site-footer p a:hover { text-decoration: underline; }
+.site-footer p a { text-decoration: none; }
+.site-footer .social { flex-wrap: wrap; gap: 4px 16px; margin-top: 0; }
+.footer-book { margin-top: 8px; }
