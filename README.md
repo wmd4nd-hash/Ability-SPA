@@ -11,7 +11,8 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 - `current-site/` – saved homepage HTML, text of all 69 live pages (`pages-text/`), the price-list PDFs
   (`price-lists/`) and the sitemap URL list
 - `docs/facts-from-current-site.md` – contacts, hours, facilities, prices and inconsistencies found on the live site
-- `docs/redirect-map.md` – draft 301 map for every old URL
+- `docs/sitemap-current.md` + `docs/sitemap-current.png` – sitemap of the live site (menu, sub-pages, hidden pages, blog, old addresses and structural issues)
+- `docs/redirect-map.md` – draft 301 map for every old URL, including 58 older addresses still linked internally
 - `docs/preview-*.png` – screenshots at 390 px (phone) and 1440 px (desktop)
 
 **Live preview:** https://raw.githack.com/wmd4nd-hash/Ability-SPA/claude/new-session-bmiv3x/index.html
