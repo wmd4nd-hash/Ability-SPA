@@ -12,6 +12,7 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
   (`price-lists/`) and the sitemap URL list
 - `docs/facts-from-current-site.md` – contacts, hours, facilities, prices and inconsistencies found on the live site
 - `docs/sitemap-current.md` + `docs/sitemap-current.png` – sitemap of the live site (menu, sub-pages, hidden pages, blog, old addresses and structural issues)
+- `docs/sitemap-new.md` + `docs/sitemap-new.png` – proposed structure of the new site (61 pages + blog, navigation, keyword per page, old → new)
 - `docs/redirect-map.md` – draft 301 map for every old URL, including 58 older addresses still linked internally
 - `docs/preview-*.png` – screenshots at 390 px (phone) and 1440 px (desktop)
 
@@ -20,7 +21,7 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 
 Or open `index.html` locally in a browser. No build step.
 
-Links to pages that don't exist yet (`masazhi-burgas/`, `ceni/`, `vaucheri/` …) open simple
+Links to pages that don't exist yet (`masazhi-burgas/`, `terapii/`, `ceni/`, `vaucheri/` …, addresses as in `docs/sitemap-new.md`) open simple
 "coming soon" pages (`noindex`) so nothing is broken in the preview. Links whose target is still a
 `[PLACEHOLDER]` show a short note instead – that script and `.proto-note` are **prototype-only**.
 

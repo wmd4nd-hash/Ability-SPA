@@ -20,7 +20,7 @@ traffic but are not in the sitemap (e.g. `/professionalni-masazhi-burgas/` menti
 | `/turska-banya-hamam/` | `/spa-burgas/hamam/` |
 | `/spa-zone/` | `/spa-burgas/termalna-zona/` |
 | `/cosmetic-treatments/` | `/kozmetika-burgas/` |
-| `/spa-etiket/` | `/spa-etiket/ (unchanged)` |
+| `/spa-etiket/` | `/parvo-poseshtenie/#etiket` |
 | `/therapies/fitness-nuts-therapy/` | `/terapii/fitness-nuts/` |
 | `/therapies/coffee-time-therapy/` | `/terapii/coffee-time/` |
 | `/fitness-burgas/` | `/fitnes-burgas/` |
