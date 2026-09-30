@@ -59,9 +59,9 @@ social links.
 
 ## Ability Club prototype (`klub/`)
 
-Clickable prototype of a member area / "app" without an app store (soft, airy look: warm gradient light, frosted-glass cards, full-photo welcome, floating glass tab bar): an installable web page (web app manifest)
-plus a loyalty card meant for Apple / Google Wallet. Four screens – card with stamps, promotions (the real Burgas
-autumn offers), gift voucher in 3 steps, and "Моите" (vouchers, visits, notification settings).
+Clickable prototype of a member area / "app" without an app store (dark, photo-led look: sign-in over a spa photo, full-photo home hero, offer detail laid out like a media player, floating dark tab bar): an installable web page (web app manifest)
+plus a loyalty card meant for Apple / Google Wallet. Screens – sign-in, home (featured offer, stamp card, popular services), offers (the real Burgas autumn offers, each with a
+detail screen showing the days left), gift voucher in 3 steps, and profile (vouchers, visits, notification settings).
 On desktop it is shown in a phone frame with notes for the owner. Not linked from the site and `noindex`.
 
 Everything is front-end only: nothing is saved, paid or sent. Loyalty rules, the reward, how offers are redeemed
