@@ -526,7 +526,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .two-col > *, .price-group, .contact-card, .cta-band-inner) {
   opacity: 0; transform: translateY(28px);
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
-  transition-delay: calc(var(--d, 0) * 90ms);
+  transition-delay: calc(min(var(--d, 0), 5) * 90ms);
 }
 .js .voucher-card { transform: translateY(28px) rotate(-3deg); }
 .js .voucher-card.is-in { opacity: 1; transform: rotate(-3deg); }
@@ -712,4 +712,95 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 @media (min-width: 1024px) {
   .class-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* =========================================================
+   Livelier motion (calm): word-by-word headlines, list stagger, parallax,
+   hover lift, drawn lines, reading progress. All off for prefers-reduced-motion.
+   ========================================================= */
+/* Headlines: each word rises out of a mask */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .08em .14em 0; margin: 0 -.08em -.14em 0; }
+.w > span { display: inline-block; }
+.js .split-ready .w > span { transform: translateY(110%); transition: transform 1s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms + 120ms); }
+.js .split-ready.words-in .w > span { transform: none; }
+.js .hero h1.split-ready { animation: none; }
+
+/* Lists: rows and checks slide in one after another */
+.js :is(.checklist > li, .price-list > div, .class-list > li) {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out), background-color .3s;
+  transition-delay: calc(var(--d, 0) * 60ms);
+}
+.js :is(.checklist > li, .price-list > div, .class-list > li).is-in { opacity: 1; transform: none; }
+.checklist li::before { transition: transform .4s var(--ease-out); }
+.checklist li:hover::before { transform: rotate(45deg) scale(1.25); }
+
+/* Section labels: the hairline under the eyebrow draws itself */
+.js .section-head .eyebrow {
+  border-bottom-color: transparent;
+  background: linear-gradient(var(--line), var(--line)) left bottom / 0% 1px no-repeat;
+  transition: background-size 1.4s var(--ease-out) .25s;
+}
+.js .section-dark .section-head .eyebrow { background-image: linear-gradient(var(--line-dark), var(--line-dark)); }
+.js .section-head.is-in .eyebrow { background-size: 100% 1px; }
+
+/* Parallax frames */
+.is-parallax { scale: 1.12; will-change: translate; }
+.photo-frame { overflow: hidden; border-radius: var(--radius); }
+.facilities .photo-frame { justify-self: stretch; width: 100%; }
+.photo-frame .photo { border-radius: 0; }
+
+/* Hover: cards lift, arrows swing, prices light up */
+.exp-card { transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out); }
+.exp-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(32, 26, 24, .2); }
+.exp-more > span { display: inline-block; transition: transform .3s var(--ease-out); }
+.exp-card:hover .exp-more > span { transform: translateX(5px); }
+.tile-title { transition: transform .4s var(--ease-out); }
+.tile:hover .tile-title { transform: translateX(6px); }
+.tile-arrow { transition: background-color .2s, color .2s, border-color .2s, transform .4s var(--ease-out); }
+.tile:hover .tile-arrow { transform: rotate(-45deg); }
+:is(.review, .location, .contact-card, .class-list > li) { transition: translate .5s var(--ease-out), box-shadow .5s var(--ease-out); }
+/* lift uses `translate`, so it never fights the scroll-reveal `transform` */
+.js :is(.review, .location, .contact-card) {
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out), translate .5s var(--ease-out), box-shadow .5s var(--ease-out);
+  transition-delay: calc(min(var(--d, 0), 5) * 90ms), calc(min(var(--d, 0), 5) * 90ms), 0s, 0s;
+}
+.js .class-list > li {
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out), translate .5s var(--ease-out), box-shadow .5s var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 60ms), calc(var(--d, 0) * 60ms), 0s, 0s;
+}
+:is(.review, .location, .contact-card, .class-list > li):hover { translate: 0 -4px; box-shadow: 0 16px 32px rgba(32, 26, 24, .12); }
+.price-list dd { transition: color .3s; }
+.price-list div:hover dd { color: var(--gold-text); }
+.nav-main a { transition: color .2s, padding-left .35s var(--ease-out); }
+.nav-main a:hover { padding-left: 10px; }
+
+/* Buttons: a soft light sweep on hover */
+.btn-dark, .btn-light { position: relative; overflow: hidden; isolation: isolate; }
+.btn-dark::after, .btn-light::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .22) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .9s var(--ease-out);
+}
+.btn-light::after { background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .7) 50%, transparent 70%); }
+.btn-dark:hover::after, .btn-light:hover::after { transform: translateX(120%); }
+
+/* Reading progress: thin gold line under the header */
+.scroll-progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left; pointer-events: none;
+}
+
+@media (hover: none) {
+  .exp-card:hover { transform: none; box-shadow: none; }
+  :is(.review, .location, .contact-card, .class-list > li):hover { translate: none; box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js :is(.checklist > li, .price-list > div, .class-list > li) { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .js .section-head .eyebrow { background-size: 100% 1px; transition: none; }
+  .is-parallax { scale: none; translate: none !important; }
+  .exp-card, .tile-title, .tile-arrow, .btn-dark::after, .btn-light::after, :is(.review, .location, .contact-card, .class-list > li) { transition: none; }
+  .exp-card:hover, .tile:hover .tile-title, .tile:hover .tile-arrow { transform: none; }
+  :is(.review, .location, .contact-card, .class-list > li):hover { translate: none; }
 }

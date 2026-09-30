@@ -59,10 +59,15 @@ social links.
 
 ## Motion
 
-Subtle, CSS-driven animations with no library: slow settle-in zoom and staggered fade-up in the
-hero, fade/rise reveal on scroll (IntersectionObserver), soft wipe on facility photos, header
-shadow on scroll. Hidden-before-reveal only applies when JS runs (`html.js`), and all motion is
-disabled for `prefers-reduced-motion`.
+Calm, CSS-driven motion with a small script (`js/main.js`), no library:
+- hero photo settles in; headlines rise word by word out of a mask (on load for the H1, on scroll for section titles)
+- blocks fade/rise in on scroll (IntersectionObserver); price rows, checklists and class cards follow one after another
+- the hairline under each section label draws itself; facility photos wipe in
+- big photos (hero, page heroes, location and facility photos on desktop) drift slightly slower than the page (parallax, inside their own frame)
+- hover: cards lift, tile arrows turn, prices light up in gold, buttons get a soft light sweep, menu links slide
+- a thin gold reading-progress line under the header
+
+Hidden-before-reveal only applies when JS runs (`html.js`), and all of it is switched off for `prefers-reduced-motion`.
 
 ## Layout notes
 
