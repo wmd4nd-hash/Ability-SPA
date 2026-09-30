@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>СПА център в Бургас и Варна | Басейн, сауна, масажи – Ability SPA</title>
+  <title>СПА център в Бургас и Варна: басейн, масажи | Ability SPA</title>
   <meta name="description" content="Градски СПА център в Бургас (хотел България) и Варна (хотел Черно море): басейн, джакузи, сауни, хамам, масажи и козметика. Резервирайте онлайн.">
   <link rel="canonical" href="https://abilityspa.com/">
   <link rel="alternate" hreflang="bg" href="https://abilityspa.com/">
@@ -114,20 +114,21 @@
     <nav class="main-nav" id="main-nav" aria-label="Основна навигация">
       <div class="nav-inner">
         <ul class="nav-main">
-          <li><a href="#uslugi">Услуги</a></li>
-          <li><a href="#spa-den">Цени</a></li>
-          <li><a href="#parvo-poseshtenie">Първо посещение</a></li>
-          <li><a href="#burgas">Бургас</a></li>
-          <li><a href="#varna">Варна</a></li>
-          <li><a href="#vaucheri">Ваучери</a></li>
-          <li><a href="#kontakti">Контакти</a></li>
+          <li><a href="spa-burgas/">Бургас</a></li>
+          <li><a href="spa-varna/">Варна</a></li>
+          <li><a href="masazhi-burgas/">Масажи</a></li>
+          <li><a href="terapii/">СПА терапии</a></li>
+          <li><a href="kozmetika-burgas/">Козметика</a></li>
+          <li><a href="ceni/">Цени</a></li>
+          <li><a href="kontakti/">Контакти</a></li>
         </ul>
         <ul class="nav-sub">
-          <li><a href="masazhi-burgas/">Масажи</a></li>
-          <li><a href="terapii/">Терапии</a></li>
-          <li><a href="kozmetika-burgas/">Козметика</a></li>
           <li><a href="osteopatiya-burgas/">Остеопатия</a></li>
+          <li><a href="paketi/">Пакети</a></li>
+          <li><a href="vaucheri/">Ваучери</a></li>
           <li><a href="promocii/">Промоции</a></li>
+          <li><a href="parvo-poseshtenie/">Първо посещение</a></li>
+          <li><a href="za-nas/">За нас</a></li>
           <li><a href="blog/">Блог</a></li>
         </ul>
         <div class="lang lang-mobile" aria-label="Език">
@@ -483,10 +484,12 @@
         <h2 class="footer-h">Изживявания</h2>
         <ul class="footer-links">
           <li><a href="masazhi-burgas/">Масажи</a></li>
-          <li><a href="terapii/">Терапии</a></li>
+          <li><a href="terapii/">СПА терапии</a></li>
           <li><a href="kozmetika-burgas/">Козметика</a></li>
           <li><a href="osteopatiya-burgas/">Остеопатия</a></li>
           <li><a href="ceni/">Цени</a></li>
+          <li><a href="paketi/">Пакети</a></li>
+          <li><a href="parvo-poseshtenie/">Първо посещение</a></li>
         </ul>
       </div>
       <div>
@@ -523,7 +526,7 @@
     </div>
     <div class="container footer-bottom">
       <p>© <span id="year">2026</span> Ability SPA &amp; Wellness</p>
-      <p><a href="vaucheri/">Ваучери</a> · <a href="blog/">Блог</a> · <a href="obshti-usloviya/">Общи условия</a> · <a href="poveritelnost/">Поверителност</a> · <a href="biskvitki/">Бисквитки</a></p>
+      <p><a href="vaucheri/">Ваучери</a> · <a href="promocii/">Промоции</a> · <a href="za-nas/">За нас</a> · <a href="blog/">Блог</a> · <a href="obshti-usloviya/">Общи условия</a> · <a href="poveritelnost/">Поверителност</a> · <a href="biskvitki/">Бисквитки</a></p>
     </div>
   </footer>
 
@@ -533,72 +536,6 @@
     <button class="btn btn-light btn-sm" type="button" id="cookie-ok">Приемам</button>
   </div>
 
-  <script>
-    (function () {
-      var btn = document.querySelector('.menu-btn');
-      var nav = document.getElementById('main-nav');
-      function setOpen(open) {
-        btn.setAttribute('aria-expanded', String(open));
-        nav.classList.toggle('is-open', open);
-      }
-      btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
-      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
-
-      var bar = document.getElementById('cookie-bar');
-      var seen = null;
-      try { seen = localStorage.getItem('cookie-ok'); } catch (e) {}
-      if (!seen) bar.hidden = false;
-      document.getElementById('cookie-ok').addEventListener('click', function () {
-        bar.hidden = true;
-        try { localStorage.setItem('cookie-ok', '1'); } catch (e) {}
-      });
-
-
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Scroll reveal: elements fade/rise in once as they enter the viewport.
-      var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
-        ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
-        ' .location, .review, .voucher-card, .voucher-text';
-      var items = document.querySelectorAll(revealSel);
-      items.forEach(function (el) {
-        var i = Array.prototype.indexOf.call(el.parentNode.children, el);
-        el.style.setProperty('--d', Math.min(i, 5));   // stagger siblings
-      });
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-          });
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-        items.forEach(function (el) { io.observe(el); });
-      } else {
-        items.forEach(function (el) { el.classList.add('is-in'); });
-      }
-
-      // Header gets a soft shadow once the page scrolls
-      var header = document.querySelector('.site-header');
-      var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
-      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-      // PROTOTYPE ONLY – remove before launch: links whose target is still a [PLACEHOLDER]
-      // show a short note instead of opening a broken page.
-      var note;
-      document.addEventListener('click', function (e) {
-        var a = e.target.closest('a');
-        if (!a || !/\[|%5B/.test(a.getAttribute('href') || '')) return;
-        e.preventDefault();
-        if (!note) {
-          note = document.createElement('div');
-          note.className = 'proto-note'; note.setAttribute('role', 'status');
-          document.body.appendChild(note);
-        }
-        note.textContent = 'Тази връзка ще бъде добавена скоро.';
-        note.classList.add('is-visible');
-        clearTimeout(note._t); note._t = setTimeout(function () { note.classList.remove('is-visible'); }, 2600);
-      });
-    })();
-  </script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

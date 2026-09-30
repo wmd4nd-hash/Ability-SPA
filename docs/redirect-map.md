@@ -85,7 +85,7 @@ Blog slugs are already descriptive – keep them unchanged (no redirect needed i
 | `/blog/infrachervena-peika/` | (unchanged) |
 | `/blog/sauna-parna-banya-razliki-polzi/` | (unchanged) |
 | `/blog/letni-trenirovki-kakvo-tribva-da-znaem/` | (unchanged) |
-| `/blog/spa-voucher/` | (unchanged) |
+| `/blog/spa-voucher/` | `/vaucheri/` (vouchers get their own page) |
 | `/blog/zashto-se-chuvstvame-umoreni-prez-lyatoto/` | (unchanged) |
 
 ## Older addresses still linked on the live site (58)
