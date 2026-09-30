@@ -694,3 +694,22 @@ ul { list-style: none; margin: 0; padding: 0; }
   .cta-band { padding: 96px 0; }
   .cta-band-inner { padding: 56px 72px; }
 }
+
+/* Batch 2: class cards (Varna group classes), blog post list, legal text */
+.class-list { display: grid; gap: 12px; }
+.class-list li { background: var(--sand-soft); border-radius: var(--radius); padding: 20px 22px; }
+.class-list h3 { font-size: 1.5rem; margin-bottom: 2px; }
+.class-list .kicker { margin-bottom: 6px; }
+.class-list p:last-child { margin: 0; font-size: .9375rem; }
+.post-list .tile { border-bottom: 1px solid var(--line); }
+.post-list li:first-child .tile { border-top: 1px solid var(--line); }
+.post-list .tile-title { font-size: 1.375rem; }
+.legal { max-width: 72ch; }
+.legal h2 { margin-top: 1.6em; }
+.legal .checklist { margin: 0 0 1em; }
+@media (min-width: 720px) {
+  .class-list { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (min-width: 1024px) {
+  .class-list { grid-template-columns: repeat(3, 1fr); }
+}

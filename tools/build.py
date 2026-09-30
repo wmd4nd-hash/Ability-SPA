@@ -30,6 +30,9 @@ e = html.escape
 # ------------------------------------------------------------------------------------------------
 # Shared chrome
 # ------------------------------------------------------------------------------------------------
+EN_MAP = {'': 'en/', 'spa-burgas/': 'en/spa-burgas/', 'spa-varna/': 'en/spa-varna/', 'masazhi-burgas/': 'en/massages/',
+          'ceni/': 'en/prices/', 'vaucheri/': 'en/vouchers/', 'promocii/varna/': 'en/promotions/varna/', 'kontakti/': 'en/contact/'}
+BG_MAP = {v: k for k, v in EN_MAP.items()}
 NAV_MAIN = [('spa-burgas/', 'Бургас'), ('spa-varna/', 'Варна'), ('masazhi-burgas/', 'Масажи'),
             ('terapii/', 'СПА терапии'), ('kozmetika-burgas/', 'Козметика'), ('ceni/', 'Цени'),
             ('kontakti/', 'Контакти')]
@@ -56,7 +59,7 @@ def header(p, current='', path=''):
         </button>
         <div class="lang" aria-label="Език">
           <a href="./" aria-current="true" lang="bg">BG</a>
-          <a href="{p}en/" lang="en" hreflang="en">EN</a>
+          <a href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en">EN</a>
         </div>
       </div>
 
@@ -84,7 +87,7 @@ def header(p, current='', path=''):
         </ul>
         <div class="lang lang-mobile" aria-label="Език">
           <a href="./" aria-current="true" lang="bg">BG</a>
-          <a href="{p}en/" lang="en" hreflang="en">EN</a>
+          <a href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en">EN</a>
         </div>
       </div>
     </nav>
@@ -158,10 +161,119 @@ def footer(p):
   </div>'''
 
 
+EN_NAV = [('en/spa-burgas/', 'Burgas'), ('en/spa-varna/', 'Varna'), ('en/massages/', 'Massages'), ('en/prices/', 'Prices'),
+          ('en/vouchers/', 'Gift vouchers'), ('en/contact/', 'Contact')]
+
+
+def en_header(p, path):
+    nl = '\n          '
+    lis = nl.join(f'<li><a href="{p}{h}"' + (' aria-current="page"' if h == path else '') + f'>{l}</a></li>' for h, l in EN_NAV)
+    bg = p + BG_MAP.get(path, '')
+    return f'''<header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
+          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="menu-label">Menu</span>
+        </button>
+        <div class="lang" aria-label="Language">
+          <a href="{bg or './'}" lang="bg" hreflang="bg">BG</a>
+          <a href="./" aria-current="true" lang="en">EN</a>
+        </div>
+      </div>
+
+      <a class="logo" href="{p}en/">
+        <img src="{p}images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
+      </a>
+
+      <div class="header-right">
+        <a class="header-phone" href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>
+        <a class="icon-btn call-btn" href="tel:{TEL_BURGAS}" aria-label="Call us">
+          {PHONE_SVG}
+        </a>
+        <a class="btn btn-dark btn-book" href="{BOOK_BURGAS}">Book</a>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <div class="nav-inner">
+        <ul class="nav-main">
+          {lis}
+        </ul>
+        <ul class="nav-sub">
+          <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
+          <li><a href="{bg or './'}" lang="bg">Български сайт</a></li>
+        </ul>
+        <div class="lang lang-mobile" aria-label="Language">
+          <a href="{bg or './'}" lang="bg" hreflang="bg">BG</a>
+          <a href="./" aria-current="true" lang="en">EN</a>
+        </div>
+      </div>
+    </nav>
+  </header>'''
+
+
+def en_footer(p):
+    return f'''<footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo logo-footer" href="{p}en/">
+          <img src="{p}images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
+        </a>
+        <p class="footer-tag">City spa in Burgas and Varna, Bulgaria.</p>
+        <a class="btn btn-light footer-book" href="{BOOK_BURGAS}">Book in Burgas</a>
+      </div>
+      <div>
+        <h2 class="footer-h">Explore</h2>
+        <ul class="footer-links">
+          <li><a href="{p}en/massages/">Massages</a></li>
+          <li><a href="{p}en/prices/">Prices</a></li>
+          <li><a href="{p}en/vouchers/">Gift vouchers</a></li>
+          <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
+          <li><a href="{p}en/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">Burgas</h2>
+        <p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">21 Aleksandrovska St.<br>Hotel Bulgaria</a></p>
+        <p>Daily, 07:00 – 22:00</p>
+        <ul class="contact-list">
+          <li><a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a></li>
+          <li><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-h">Varna</h2>
+        <p><a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">33 Slivnitsa Blvd.<br>Hotel Cherno More</a></p>
+        <p>Daily, [07:00 or 09:00] – 21:00</p>
+        <ul class="contact-list">
+          <li><a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a></li>
+          <li><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> Ability SPA &amp; Wellness</p>
+      <p><a href="{p}poveritelnost/" lang="bg">Privacy (BG)</a> · <a href="{p}biskvitki/" lang="bg">Cookies (BG)</a></p>
+    </div>
+  </footer>
+
+  <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Cookies" hidden>
+    <p>This site uses cookies. <a href="{p}biskvitki/" lang="bg">Learn more</a></p>
+    <button class="btn btn-light btn-sm" type="button" id="cookie-ok">OK</button>
+  </div>'''
+
+
 def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-burgas.jpg', lang='bg'):
     assert len(title) <= 60, f'title too long ({len(title)}): {title}'
     assert len(desc) <= 155, f'description too long ({len(desc)}): {desc}'
     robots = '\n  <meta name="robots" content="noindex, follow">' if noindex else ''
+    alt = ''
+    pair = EN_MAP.get(path) if lang == 'bg' else BG_MAP.get(path)
+    if pair is not None and not noindex:
+        bg, en = (path, pair) if lang == 'bg' else (pair, path)
+        alt = (f'\n  <link rel="alternate" hreflang="bg" href="{SITE}/{bg}">\n  <link rel="alternate" hreflang="en" href="{SITE}/{en}">'
+               f'\n  <link rel="alternate" hreflang="x-default" href="{SITE}/{bg}">')
     ld = '\n'.join(f'  <script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in jsonld)
     return f'''<!doctype html>
 <html lang="{lang}">
@@ -170,7 +282,7 @@ def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-bu
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{e(title)}</title>
   <meta name="description" content="{e(desc)}">{robots}
-  <link rel="canonical" href="{SITE}/{path}">
+  <link rel="canonical" href="{SITE}/{path}">{alt}
   <meta property="og:type" content="website">
   <meta property="og:locale" content="{"en_GB" if lang == "en" else "bg_BG"}">
   <meta property="og:site_name" content="Ability SPA">
@@ -199,15 +311,15 @@ def page(path, title, desc, body, crumbs, jsonld=(), current='', noindex=False, 
     ld = [breadcrumb_ld(crumbs)] + list(jsonld)
     doc = f'''{head(path, title, desc, p, ld, noindex, lang=lang)}
 <body>
-  <a class="skip-link" href="#main">Към съдържанието</a>
+  <a class="skip-link" href="#main">{"Skip to content" if lang == "en" else "Към съдържанието"}</a>
 
-  {header(p, current, path)}
+  {en_header(p, path) if lang == "en" else header(p, current, path)}
 
   <main id="main">
 {body(p)}
   </main>
 
-  {footer(p)}
+  {en_footer(p) if lang == "en" else footer(p)}
 
   <script src="{p}js/main.js" defer></script>
 </body>
@@ -355,7 +467,7 @@ MASSAGES = [
          burgas=[('60 мин', '49 €')], varna=[('60 мин', '49 €')], price_from='49 €'),
     dict(slug='sporten-masazh', name='Спортен масаж', title='Спортен масаж в Бургас | Ability SPA',
          desc='Спортен масаж в Ability SPA Бургас и Варна – 60 мин за 49 €. Подготовка преди натоварване, по-бързо възстановяване и по-малко травми.',
-         kw='спортен масаж Бургас', img=('images/library/2024_07_ability389.webp', 'Спортен масаж в Ability SPA'),
+         kw='спортен масаж Бургас', img=('images/library/2024_07_aspa_427.webp', 'Масаж на гърба и раменете в Ability SPA'),
          intro=['Спортният масаж е техника, съсредоточена не върху релаксацията, а върху превенцията и лечението на травми и по-добрите спортни резултати.',
                 'Комбинират се различни техники, включително разтягане, което отпуска мускулите и повишава гъвкавостта. Чрез дълбоко въздействие върху мускули, фасции и сухожилия тялото се подготвя за натоварване и се възстановява по-бързо.'],
          benefits=['Увеличава обхвата на движение на ставите', 'Намалява умората', 'Намалява напрежението в мускулите',
@@ -373,7 +485,7 @@ MASSAGES = [
          burgas=[('60 мин', '49 €')], varna=[('60 мин', '49 €')], price_from='49 €'),
     dict(slug='limfodrenazhen-masazh', name='Лимфодренажен масаж', title='Лимфодренажен масаж в Бургас | Ability SPA',
          desc='Лимфодренажен масаж в Ability SPA Бургас и Варна – 30 мин за 29 €. Подпомага детоксикацията и възстановяването.',
-         kw='лимфодренаж Бургас', img=('images/library/2022_06_untitled-design.webp', 'Масаж в Ability SPA'),
+         kw='лимфодренаж Бургас', img=('images/library/2023_06_untitled-design-1.webp', 'Масаж със свещ и камъни в Ability SPA'),
          intro=['При ежедневно натоварване тъканите изпадат в спазъм и създават напрежение върху кръвоносната и лимфната система.',
                 'С притискащи, изпомпващи и изцеждащи техники лимфодренажният масаж освобождава пътя на течностите, стимулира жлезите и изчистването на организма.'],
          benefits=['Подпомага детоксикацията на тялото', 'Повишава енергията и намалява тревожността', 'Подпомага следоперативното възстановяване', 'Възстановява тонуса при мускулна болка'],
@@ -523,7 +635,7 @@ def build_burgas():
         z += zone_split(p, 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и закритият басейн', 'Басейн и джакузи',
                         'Вода за цялото семейство', 'Топъл закрит басейн с релакс зона и джакузи, а за най-малките – детски басейн с температура 32–33&nbsp;°C.',
                         ['Закрит басейн', 'Джакузи', 'Детски басейн 32–33 °C'], ('spa-burgas/basein/', 'Басейнът'), rev=True)
-        z += zone_split(p, 'images/library/2020_10_ham.webp', 'Хамам в Ability Spa Бургас', 'Хамам', 'Турска баня',
+        z += zone_split(p, 'images/library/2026_01_parna_banya_ability_spa.webp', 'Входът на парната баня в Ability Spa', 'Хамам', 'Турска баня',
                         'Парна баня, пилинг с кесе и пенен масаж – вековен ритуал за релакс и пречистване.', ['45 мин – 55 €'], ('spa-burgas/hamam/', 'Хамамът'))
         z += zone_split(p, 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес зала с уреди Technogym', 'Фитнес',
                         'Technogym и протеинов бар', 'Модерна фитнес зала с уреди Technogym; протеиновият бар до басейна предлага хранителни добавки.',
@@ -780,6 +892,8 @@ def inject_homepage():
 if __name__ == '__main__':
     built = [build_burgas(), build_varna(), build_massages_hub(), build_osteopathy(), build_prices(), build_contacts(), build_vouchers()]
     built += [build_massage(m) for m in MASSAGES]
+    import pages2
+    built += pages2.build_all()
     stubs = []
     for path, name in sitemap_paths():
         if not path or path in built or path.startswith('blog/') and path != 'blog/':

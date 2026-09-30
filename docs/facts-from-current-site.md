@@ -48,6 +48,14 @@ Vouchers: a service, a package or an amount; valid one year.
 5. Varna address written both as „ул.“ and „бул.“ Сливница 33.
 6. `/footer-ability-spa/` (a theme template) is public and in the sitemap.
 7. Varna summer offers ended 22.09.2026 but are still published.
+8. Price pages vs. the Burgas spa menu (Dec 2025) – the new site uses the **menu** prices:
+   - Face cleaning with ultrasound + ampoule: page 40 min / €45, menu 50 min / €40.
+   - Sea Kissed therapy: page €48.57, menu €49.
+   - Gym monthly pass: `/fitness-burgas/` €39, menu €35 (€39 is the 10-workout pack).
+9. Children: the spa etiquette says children over 7 pay the full price, while the price list has a reduced price for ages 3–14 (€6 / €11). Marked [ДА СЕ ПОТВЪРДИ] on `/parvo-poseshtenie/`.
+10. Burgas autumn offers page writes the address as „бул.“ Александровска – it is „ул.“.
+11. The Gold Amber, Bulgarian Rose and Lavender Touch photos look like stock / AI images – confirm the rights or replace with own photos.
+12. There are no photos for Chocolate Dream, Coffee Time, Fitness Nuts, Sea Kissed or the fruit therapy – the new pages use general massage photos for now.
 
 ## Still open
 
