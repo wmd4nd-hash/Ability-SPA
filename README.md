@@ -59,7 +59,7 @@ social links.
 
 ## Ability Club prototype (`klub/`)
 
-Clickable prototype of a member area / "app" without an app store: an installable web page (web app manifest)
+Clickable prototype of a member area / "app" without an app store (soft, airy look: warm gradient light, frosted-glass cards, full-photo welcome, floating glass tab bar): an installable web page (web app manifest)
 plus a loyalty card meant for Apple / Google Wallet. Four screens – card with stamps, promotions (the real Burgas
 autumn offers), gift voucher in 3 steps, and "Моите" (vouchers, visits, notification settings).
 On desktop it is shown in a phone frame with notes for the owner. Not linked from the site and `noindex`.

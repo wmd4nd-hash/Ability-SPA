@@ -7,12 +7,12 @@
   <meta name="description" content="Прототип на клиентската зона на Ability SPA: карта за лоялност в Wallet, промоции и подаръчни ваучери.">
   <!-- PROTOTYPE – not for search engines -->
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#201A18">
+  <meta name="theme-color" content="#F6E6D8">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="../images/ability-spa-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
   <link rel="stylesheet" href="klub.css">
 </head>
 <body>
@@ -25,79 +25,107 @@
       <h1>Клиентска зона и карта за лоялност</h1>
       <p>Така може да изглежда „приложението“ на Ability SPA – без инсталиране от магазин: уеб страница, която гостът добавя на началния екран, плюс карта в Apple / Google Wallet.</p>
       <ol class="notes-list">
-        <li><strong>Карта</strong> – печати за посещения и награда. <em>Правилата са пример – решава собственикът.</em></li>
+        <li><strong>Начало</strong> – печати за посещения и награда. <em>Правилата са пример – решава собственикът.</em></li>
         <li><strong>Промоции</strong> – истинските есенни предложения в Бургас (до 19.10.2026). Може да се изпращат като известие.</li>
-        <li><strong>Подаръци</strong> – ваучер онлайн в 3 стъпки. Плащането е макет – нужен е доставчик.</li>
+        <li><strong>Подари</strong> – ваучер онлайн в 3 стъпки. Плащането е макет – нужен е доставчик.</li>
         <li><strong>Моите</strong> – ваучери, посещения и известия. Данните са примерни.</li>
       </ol>
       <p class="notes-small">Нищо не се записва и не се плаща. Всичко в [СКОБИ] чака решение.</p>
-      <p><a class="btn btn-outline" href="../">← Към сайта</a></p>
+      <p><a class="btn btn-ghost" href="../">← Към сайта</a></p>
     </aside>
 
     <div class="phone">
       <div class="app" id="app">
+
+        <!-- ============ 0. WELCOME ============ -->
+        <section class="welcome" id="welcome" aria-labelledby="w-t">
+          <img class="welcome-img" src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="" width="1080" height="1080">
+          <svg class="spark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 2c1 12 3 16 22 22-19 6-21 10-22 22-1-12-3-16-22-22C21 18 23 14 24 2Z"/></svg>
+          <div class="welcome-text">
+            <svg class="quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h6v6c0 4-2 7-6 8v-3c2-1 3-3 3-5H5Zm9 0h6v6c0 4-2 7-6 8v-3c2-1 3-3 3-5h-3Z"/></svg>
+            <h1 id="w-t">Вашето място за релакс – в&nbsp;сърцето на града</h1>
+            <p class="welcome-sub">Ability Club · Бургас и Варна</p>
+          </div>
+          <div class="welcome-actions">
+            <a class="ghost-link" href="../">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg>Към сайта
+            </a>
+            <button class="glass-btn" type="button" id="enter">Влез в клуба</button>
+          </div>
+        </section>
+
         <header class="app-top">
-          <img class="app-logo" src="../images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
-          <button class="icon-btn" type="button" id="bell" aria-label="Покажи примерно известие">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5.5-6.84V3.5a1.5 1.5 0 0 0-3 0v.66A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2Z"/></svg>
+          <button class="round-btn" type="button" data-go="s-mine" aria-label="Настройки на известията">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v6M7 14v6M17 4v2M17 10v10"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="8" r="2"/></svg>
+          </button>
+          <span class="avatar" aria-hidden="true"><img src="../images/ability-spa-logo.png" alt=""><span class="badge">6</span></span>
+          <button class="round-btn" type="button" id="bell" aria-label="Покажи примерно известие">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15ZM10 20a2 2 0 0 0 4 0"/></svg>
             <span class="dot" aria-hidden="true"></span>
           </button>
         </header>
 
         <main class="screens">
-          <!-- ============ 1. CARD ============ -->
+          <!-- ============ 1. HOME ============ -->
           <section class="screen is-active" id="s-card" aria-labelledby="t-card">
-            <p class="hello">Здравейте, <span>[ИМЕ]</span></p>
-            <h2 id="t-card" class="visually-hidden">Моята карта</h2>
+            <h2 id="t-card" class="greeting">
+              <span class="muted">Добър ден,</span> [ИМЕ]<br>
+              <span class="muted">Имате</span> <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg> 6&nbsp;печата
+              <span class="muted">и</span> <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3 4 6 7 6 11a6 6 0 0 1-12 0c0-2 1-4 2-5 0 2 1 3 2 3 0-4 1-6 2-9Z"/></svg> <span id="promo-count">6</span>&nbsp;оферти
+            </h2>
 
-            <div class="club-card" role="group" aria-label="Карта Ability Club">
-              <div class="cc-top">
-                <img src="../images/logo-horizontal-light.png" alt="" width="618" height="110">
-                <span class="cc-tier">Club</span>
+            <!-- Club card: stamp progress as a dotted track -->
+            <div class="glass hero-card" role="group" aria-label="Карта Ability Club">
+              <div class="hc-head">
+                <p class="hc-q">Вашите печати<br>до следващата награда</p>
+                <span class="chip">Club</span>
               </div>
-              <p class="cc-label">Печати до следващата награда</p>
-              <ol class="stamps" id="stamps" aria-label="6 от 10 печата"></ol>
-              <div class="cc-bottom">
-                <div><p class="cc-small">Член №</p><p class="cc-num">AS-000 000</p></div>
-                <div class="qr" aria-hidden="true"></div>
+              <img class="hc-obj" src="../images/masazh-goreshti-kamani-burgas-640.webp" alt="" width="640" height="640">
+              <p class="hc-small">Събрани</p>
+              <p class="hc-big"><span id="count">6</span> от 10</p>
+              <div class="track" aria-label="6 от 10 печата" role="img">
+                <ol class="track-dots" id="dots"></ol>
+                <span class="knob" id="knob" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13"/></svg></span>
+              </div>
+              <p class="hc-foot">Още <b id="left">4</b> до: [НАГРАДА – напр. безплатно СПА посещение]</p>
+            </div>
+
+            <div class="glass row-card">
+              <button class="row-main" type="button" data-go="s-promo">
+                <span class="rc-t">Есенни предложения</span>
+                <span class="rc-s">Бургас · до 19.10.2026</span>
+              </button>
+              <div class="pills" aria-hidden="true">
+                <span class="pill"><b>750</b>€</span><span class="pill"><b>260</b>€</span><span class="pill"><b>200</b>€</span><span class="pill"><b>55</b>€</span>
               </div>
             </div>
 
-            <p class="reward">Още <strong id="left">4</strong> посещения до: <span>[НАГРАДА – напр. безплатно СПА посещение]</span></p>
-            <p class="rule">Пример: 1 печат за всяко платено посещение в Бургас или Варна. [ПРАВИЛАТА СЕ ОПРЕДЕЛЯТ ОТ СОБСТВЕНИКА]</p>
+            <ul class="list">
+              <li><a class="glass list-item" href="https://book.abilityspa.com/reservations/start?site=1">
+                <img src="../images/finlandska-sauna-burgas-640.webp" alt="" width="640" height="640">
+                <span><span class="li-t">Резервирай в Бургас</span><span class="li-s">Онлайн, всеки ден 07:00 – 22:00</span></span>
+                <span class="chip">→</span></a></li>
+              <li><a class="glass list-item" href="tel:+359899994149">
+                <img src="../images/library/2026_01_termalna_zona_abilitwellness_varna.webp" alt="" width="640" height="640">
+                <span><span class="li-t">Час във Варна</span><span class="li-s">По телефона или във Viber</span></span>
+                <span class="chip">Обади се</span></a></li>
+            </ul>
 
             <div class="wallet-row">
               <button class="wallet-btn" type="button" data-toast="В реалната версия картата се добавя в Apple Wallet и се обновява сама след всяко посещение.">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18" stroke="#201A18" stroke-width="2"/></svg>
-                Добави в Apple Wallet
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/></svg>Apple Wallet
               </button>
               <button class="wallet-btn" type="button" data-toast="В реалната версия картата се добавя в Google Wallet и се обновява сама след всяко посещение.">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18" stroke="#201A18" stroke-width="2"/></svg>
-                Добави в Google Wallet
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/></svg>Google Wallet
               </button>
             </div>
-
-            <h3 class="h-small">Бързо</h3>
-            <div class="quick">
-              <a class="quick-item" href="https://book.abilityspa.com/reservations/start?site=1">
-                <span class="qi-t">Резервирай</span><span class="qi-s">Бургас, онлайн</span>
-              </a>
-              <a class="quick-item" href="tel:+359899994149">
-                <span class="qi-t">Обади се</span><span class="qi-s">Варна</span>
-              </a>
-              <button class="quick-item" type="button" data-go="s-gift">
-                <span class="qi-t">Подари</span><span class="qi-s">Ваучер</span>
-              </button>
-              <button class="quick-item" type="button" data-go="s-promo">
-                <span class="qi-t">Промоции</span><span class="qi-s">6 в Бургас</span>
-              </button>
-            </div>
+            <p class="rule">Пример: 1 печат за всяко платено посещение в Бургас или Варна. [ПРАВИЛАТА СЕ ОПРЕДЕЛЯТ ОТ СОБСТВЕНИКА]</p>
           </section>
 
           <!-- ============ 2. PROMOTIONS ============ -->
           <section class="screen" id="s-promo" aria-labelledby="t-promo">
-            <h2 id="t-promo" class="screen-title">Промоции</h2>
-            <div class="seg" role="group" aria-label="Обект">
+            <h2 id="t-promo" class="greeting small"><span class="muted">Промоции</span><br>за вас</h2>
+            <div class="seg glass" role="group" aria-label="Обект">
               <button type="button" class="seg-btn" aria-pressed="true" data-city="burgas">Бургас</button>
               <button type="button" class="seg-btn" aria-pressed="false" data-city="varna">Варна</button>
             </div>
@@ -107,13 +135,13 @@
               <ul class="offers" id="offers"></ul>
             </div>
             <div class="city" id="city-varna" hidden>
-              <div class="empty">
+              <div class="glass empty">
                 <p class="empty-t">Летните предложения приключиха на 22.09.2026.</p>
                 <p>[НОВИ ПРЕДЛОЖЕНИЯ – ОЧАКВАТ СЕ ОТ ЕКИПА]</p>
-                <button class="btn btn-outline btn-block" type="button" data-toast="В реалната версия гостът получава известие, когато има нова промоция във Варна.">Извести ме за нови</button>
+                <button class="glass-btn dark" type="button" data-toast="В реалната версия гостът получава известие, когато има нова промоция във Варна.">Извести ме за нови</button>
               </div>
               <h3 class="h-small">Постоянни пакети</h3>
-              <ul class="plain-list">
+              <ul class="glass plain-list">
                 <li><span>„Релакс“ – дневна СПА карта + масаж 60 мин</span><b>50 €</b></li>
                 <li><span>„Абилити Дама“ – Chocolate Dream + дневна карта</span><b>85 €</b></li>
                 <li><span>СПА пакет за двама</span><b>100 €</b></li>
@@ -123,7 +151,7 @@
 
           <!-- ============ 3. GIFTS ============ -->
           <section class="screen" id="s-gift" aria-labelledby="t-gift">
-            <h2 id="t-gift" class="screen-title">Подари ваучер</h2>
+            <h2 id="t-gift" class="greeting small"><span class="muted">Подарете</span><br>време за себе си</h2>
             <ol class="steps" aria-label="Стъпки">
               <li class="is-on" id="st1">Избор</li><li id="st2">За кого</li><li id="st3">Преглед</li>
             </ol>
@@ -131,9 +159,8 @@
             <form id="gift-form" novalidate>
               <fieldset class="step" id="g1">
                 <legend class="visually-hidden">Изберете ваучер</legend>
-                <p class="field-label">Вид</p>
                 <div class="choices" id="gift-choices"></div>
-                <button class="btn btn-dark btn-block" type="button" data-next="2">Напред</button>
+                <button class="glass-btn dark block" type="button" data-next="2">Напред</button>
               </fieldset>
 
               <fieldset class="step" id="g2" hidden>
@@ -141,13 +168,13 @@
                 <label class="field"><span>Име на получателя</span><input id="g-to" autocomplete="off" placeholder="напр. Мария" maxlength="30"></label>
                 <label class="field"><span>Поздрав (по желание)</span><textarea id="g-msg" rows="3" maxlength="120" placeholder="Честит рожден ден!"></textarea></label>
                 <p class="field-label">Обект</p>
-                <div class="seg" role="group" aria-label="Обект на ваучера">
+                <div class="seg glass" role="group" aria-label="Обект на ваучера">
                   <button type="button" class="seg-btn" aria-pressed="true" data-gcity="Бургас">Бургас</button>
                   <button type="button" class="seg-btn" aria-pressed="false" data-gcity="Варна">Варна</button>
                 </div>
                 <div class="row-btns">
-                  <button class="btn btn-outline" type="button" data-next="1">Назад</button>
-                  <button class="btn btn-dark" type="button" data-next="3">Преглед</button>
+                  <button class="glass-btn" type="button" data-next="1">Назад</button>
+                  <button class="glass-btn dark" type="button" data-next="3">Преглед</button>
                 </div>
               </fieldset>
 
@@ -156,8 +183,8 @@
                 <div class="voucher" id="v-preview"></div>
                 <p class="rule">Валиден 1 година от датата на покупката. Изпраща се по имейл като PDF и може да се добави в Wallet.</p>
                 <div class="row-btns">
-                  <button class="btn btn-outline" type="button" data-next="2">Назад</button>
-                  <button class="btn btn-dark" type="button" id="pay">Плати <span id="pay-sum"></span></button>
+                  <button class="glass-btn" type="button" data-next="2">Назад</button>
+                  <button class="glass-btn dark" type="button" id="pay">Плати <span id="pay-sum"></span></button>
                 </div>
                 <p class="rule">[ПЛАЩАНЕ С КАРТА – ДОСТАВЧИК ПО ИЗБОР]</p>
               </fieldset>
@@ -166,23 +193,23 @@
 
           <!-- ============ 4. MINE ============ -->
           <section class="screen" id="s-mine" aria-labelledby="t-mine">
-            <h2 id="t-mine" class="screen-title">Моите</h2>
+            <h2 id="t-mine" class="greeting small"><span class="muted">Моите</span><br>ваучери и посещения</h2>
             <p class="demo-tag">Примерни данни</p>
 
             <h3 class="h-small">Ваучери</h3>
-            <ul class="plain-list" id="my-vouchers">
-              <li class="muted"><span>Все още няма ваучери. Опитайте „Подари“.</span></li>
+            <ul class="glass plain-list" id="my-vouchers">
+              <li class="muted-li"><span>Все още няма ваучери. Опитайте „Подари“.</span></li>
             </ul>
 
             <h3 class="h-small">Последни посещения</h3>
-            <ul class="plain-list">
+            <ul class="glass plain-list">
               <li><span>Дневна СПА карта · Бургас</span><b>+1 печат</b></li>
               <li><span>Класически масаж 60 мин · Бургас</span><b>+1 печат</b></li>
               <li><span>СПА посещение · Варна</span><b>+1 печат</b></li>
             </ul>
 
             <h3 class="h-small">Известия</h3>
-            <ul class="toggles">
+            <ul class="glass toggles">
               <li><label><span>Промоции в Бургас</span><input type="checkbox" role="switch" checked></label></li>
               <li><label><span>Промоции във Варна</span><input type="checkbox" role="switch" checked></label></li>
               <li><label><span>Напомняне преди резервация</span><input type="checkbox" role="switch"></label></li>
@@ -190,26 +217,33 @@
           </section>
         </main>
 
-        <nav class="tabbar" aria-label="Раздели">
-          <button type="button" data-go="s-card" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5"/></svg>Карта</button>
-          <button type="button" data-go="s-promo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 12 20 4 12V4h8Z"/><circle cx="8" cy="8" r="1.6" fill="#fff"/></svg>Промоции</button>
-          <button type="button" data-go="s-gift"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13"/></svg>Подари</button>
-          <button type="button" data-go="s-mine"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0Z"/></svg>Моите</button>
-        </nav>
+        <!-- Floating glass tab bar + round booking button -->
+        <div class="dock">
+          <nav class="tabbar glass" aria-label="Раздели">
+            <button type="button" data-go="s-card" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg>Начало</button>
+            <button type="button" data-go="s-promo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-4-3-7-6-7-11a7 7 0 0 1 14 0c0 5-3 8-7 11Zm0-15v8M9 10h6"/></svg>Оферти</button>
+            <button type="button" data-go="s-gift"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13"/></svg>Подари</button>
+            <button type="button" data-go="s-mine"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v17l-5-4-5 4Z"/></svg>Моите</button>
+          </nav>
+          <a class="fab" href="https://book.abilityspa.com/reservations/start?site=1" aria-label="Резервирай в Бургас">
+            <img src="../images/masazh-goreshti-kamani-burgas-640.webp" alt="" width="640" height="640">
+          </a>
+        </div>
 
-        <!-- Sheets & toasts -->
-        <div class="push" id="push" role="status" aria-live="polite" hidden>
+        <!-- Push, sheet, toast -->
+        <div class="push glass" id="push" role="status" aria-live="polite" hidden>
           <img src="../images/ability-spa-logo.png" alt="" width="36" height="36">
           <div><p class="push-t">Ability SPA · сега</p><p>Есенни предложения в Бургас: годишна СПА карта за 750 € – до 19.10.</p></div>
         </div>
         <div class="sheet-wrap" id="sheet" hidden>
           <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t">
+            <span class="grabber" aria-hidden="true"></span>
             <p class="eyebrow">Покажете на рецепцията</p>
             <h3 id="sheet-t"></h3>
             <p id="sheet-d"></p>
-            <div class="qr big" aria-hidden="true"></div>
+            <div class="qr" aria-hidden="true"></div>
             <p class="rule">Кодът е пример. [КАК СЕ ОТЧИТА ПРОМОЦИЯТА – ДА СЕ РЕШИ]</p>
-            <button class="btn btn-dark btn-block" type="button" id="sheet-close">Затвори</button>
+            <button class="glass-btn dark block" type="button" id="sheet-close">Затвори</button>
           </div>
         </div>
         <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>

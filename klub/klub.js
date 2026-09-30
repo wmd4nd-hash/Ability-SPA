@@ -3,6 +3,13 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  // ---------- Welcome ----------
+  var welcome = $('#welcome');
+  $('#enter').addEventListener('click', function () {
+    welcome.classList.add('is-leaving');
+    setTimeout(function () { welcome.hidden = true; drawStamps(); }, 600);
+  });
+
   // ---------- Toast ----------
   var toastEl = $('#toast'), toastT;
   function toast(msg) {
@@ -28,21 +35,22 @@
     if (t) go(t.getAttribute('data-go'));
   });
 
-  // ---------- Stamp card (example: 6 of 10) ----------
+  // ---------- Stamp track (example: 6 of 10) ----------
   var STAMPS = 6, TOTAL = 10;
-  var check = '<svg viewBox="0 0 24 24"><path d="M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L20.1 8.4 18.7 7z"/></svg>';
-  var giftIcon = '<svg viewBox="0 0 24 24"><path d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13M12 7c-2-4-6-3-5 0M12 7c2-4 6-3 5 0"/></svg>';
+  $('#dots').innerHTML = new Array(TOTAL + 1).join('<li></li>');
   function drawStamps() {
-    var html = '';
-    for (var i = 0; i < TOTAL; i++) {
-      if (i < STAMPS) html += '<li class="on" style="--i:' + i + '">' + check + '</li>';
-      else if (i === TOTAL - 1) html += '<li class="gift">' + giftIcon + '</li>';
-      else html += '<li></li>';
-    }
-    $('#stamps').innerHTML = html;
+    var dots = $$('#dots li'), knob = $('#knob');
+    dots.forEach(function (d) { d.classList.remove('on'); });
+    knob.style.left = '16px';
+    setTimeout(function () {
+      dots.forEach(function (d, i) { if (i < STAMPS) setTimeout(function () { d.classList.add('on'); }, i * 90); });
+      var last = dots[STAMPS - 1], track = knob.parentNode;
+      knob.style.left = (last.offsetLeft + last.offsetWidth / 2 + (track.clientLeft || 0)) + 'px';
+    }, 120);
+    $('#count').textContent = STAMPS;
     $('#left').textContent = TOTAL - STAMPS;
   }
-  drawStamps();
+  if (welcome.hidden) drawStamps();
 
   // ---------- Push preview ----------
   $('#bell').addEventListener('click', function () {
@@ -54,16 +62,18 @@
 
   // ---------- Promotions (real Burgas autumn offers, valid 28.09 – 19.10.2026) ----------
   var OFFERS = [
-    ['Годишна фитнес карта', 'Фитнес зона, уреди Technogym, протеинов бар', '260 €', '−13%'],
-    ['Годишна СПА карта', 'Фитнес, басейн и джакузи, термална зона', '750 €', '−40%'],
-    ['20 посещения на басейн', 'Басейн и джакузи', '125 €', '−12%'],
-    ['Пакет „Фитнес“', 'Месечна фитнес карта + 5 посещения термална зона', '55 €', '−24%'],
-    ['Пакет „Спорт“', 'Месечна фитнес карта + 3 спортни масажа', '130 €', '−14%'],
-    ['Пакет 20 СПА посещения', 'Басейн и джакузи, фитнес, термална зона', '200 €', '−15%']
+    ['Годишна фитнес карта', 'Фитнес зона, уреди Technogym, протеинов бар', '260 €', '−13%', '../images/spa-burgas-fitnes-technogym-zala-640.webp'],
+    ['Годишна СПА карта', 'Фитнес, басейн и джакузи, термална зона', '750 €', '−40%', '../images/spa-burgas-basein-simetrichen-640.webp'],
+    ['20 посещения на басейн', 'Басейн и джакузи', '125 €', '−12%', '../images/spa-burgas-dzhakuzi-basein-640.webp'],
+    ['Пакет „Фитнес“', 'Месечна фитнес карта + 5 посещения термална зона', '55 €', '−24%', '../images/finlandska-sauna-burgas-640.webp'],
+    ['Пакет „Спорт“', 'Месечна фитнес карта + 3 спортни масажа', '130 €', '−14%', '../images/masazh-goreshti-kamani-burgas-640.webp'],
+    ['Пакет 20 СПА посещения', 'Басейн и джакузи, фитнес, термална зона', '200 €', '−15%', '../images/spa-burgas-basein-shezlongi-640.webp']
   ];
+  $('#promo-count').textContent = OFFERS.length;
   $('#offers').innerHTML = OFFERS.map(function (o, i) {
-    return '<li><button class="offer" type="button" style="--i:' + i + '" data-offer="' + i + '">' +
-      '<span class="offer-t">' + o[0] + '</span><span class="offer-d">' + o[1] + '</span>' +
+    return '<li><button class="offer glass" type="button" style="--i:' + i + '" data-offer="' + i + '">' +
+      '<img src="' + o[4] + '" alt="" width="640" height="640">' +
+      '<span class="offer-txt"><span class="offer-t">' + o[0] + '</span><span class="offer-d">' + o[1] + '</span></span>' +
       '<span class="offer-p"><b>' + o[2] + '</b><span>' + o[3] + '</span></span></button></li>';
   }).join('');
   $$('[data-city]').forEach(function (b) {
@@ -121,7 +131,7 @@
   function voucherHTML() {
     var c = CHOICES[gift.choice], to = $('#g-to').value.trim(), msg = $('#g-msg').value.trim();
     var until = new Date(); until.setFullYear(until.getFullYear() + 1);
-    return '<img src="../images/logo-horizontal-light.png" alt="Ability SPA">' +
+    return '<img src="../images/logo-horizontal.png" alt="Ability SPA">' +
       '<p class="v-what">' + esc(c[0] === 'Сума' ? 'Ваучер за ' + c[2] + ' €' : c[0]) + '</p>' +
       '<p class="v-to">За: ' + esc(to || '[ИМЕ]') + '</p>' + (msg ? '<p class="v-msg">„' + esc(msg) + '“</p>' : '') +
       '<p class="v-meta"><span>' + esc(gift.city) + '</span><span>до ' + until.toLocaleDateString('bg-BG') + '</span></p>';
@@ -154,8 +164,8 @@
     ok.className = 'success';
     ok.innerHTML = '<div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg></div>' +
       '<h3>Ваучерът е готов</h3><p>В реалната версия: PDF по имейл и бутон „Добави в Wallet“ за получателя.</p>' +
-      '<button class="btn btn-dark btn-block" type="button" id="again">Още един подарък</button>' +
-      '<button class="btn btn-outline btn-block" type="button" data-go="s-mine">Моите ваучери</button>';
+      '<button class="glass-btn dark" type="button" id="again">Още един подарък</button>' +
+      '<button class="glass-btn" type="button" data-go="s-mine">Моите ваучери</button>';
     $('#gift-form').appendChild(ok);
     $('#again').addEventListener('click', function () {
       ok.remove(); $('#g-to').value = ''; $('#g-msg').value = ''; step(1);
