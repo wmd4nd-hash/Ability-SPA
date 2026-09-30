@@ -6,7 +6,7 @@ difference is listed in docs/facts-from-current-site.md. Anything not confirmed 
 """
 import os, re
 from build import *  # noqa: F401,F403 – shared chrome, components and constants
-from build import MASSAGES, ROOT, BUBBLES, e
+from build import MASSAGES, ROOT, e
 
 L = 'images/library/'
 
@@ -283,10 +283,10 @@ def build_cosmetics_hub():
 # ------------------------------------------------------------------------------------------------
 # Зони – Бургас
 # ------------------------------------------------------------------------------------------------
-def zone_page(path, crumbs, eyebrow, h1, lead, image, meta, blocks, prices, price_note, title, desc, rel, current, place='burgas', ld=None, water=False):
+def zone_page(path, crumbs, eyebrow, h1, lead, image, meta, blocks, prices, price_note, title, desc, rel, current, place='burgas', ld=None):
     def body(p):
         acts = [('btn-dark', BOOK_BURGAS, 'Резервирай')] if place == 'burgas' else [('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')]
-        s = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=acts, water=water)
+        s = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=acts)
         s += section(blocks(p), cls='facilities')
         s += section(f'<div class="two-col">{head_block("Цени", e(price_note))}<div>{price_rows(prices)}'
                      f'<p class="price-other"><a href="{p}ceni/{"#varna" if place == "varna" else ""}">Всички цени →</a></p></div></div>', cls='section-sand')
@@ -361,7 +361,7 @@ def build_burgas_zones():
                          [('Еднократно', '12 € · деца 3–14 г. 6 €'), ('Работно време', 'всеки ден, 07:00 – 22:00')], pool, zone_prices('Басейн и джакузи'), 'Ability Spa Бургас',
                          'Закрит басейн и джакузи в Бургас | Ability SPA',
                          'Закрит басейн, джакузи и детски басейн (32–33 °C) в хотел България, Бургас – еднократно 12 €, деца 6 €. Всеки ден 07:00–22:00.',
-                         rel_b('spa-burgas/basein/'), 'spa-burgas/', water=True))
+                         rel_b('spa-burgas/basein/'), 'spa-burgas/'))
 
     # Солна стая
     def salt(p):
@@ -553,7 +553,7 @@ def build_packages():
     def body2(p):
         s = page_hero(p, crumbs2, 'Пакети · Бургас и Варна', 'СПА пакет за двама',
                       'Масаж и цял ден СПА за двама – в Бургас с басейн, солна стая и бутилка вино или шампанско, във Варна със сауни и инфрачервена пейка.',
-                      image=('images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът в Ability Spa Бургас'), water=True,
+                      image=('images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът в Ability Spa Бургас'),
                       meta=[('Бургас', '120 €'), ('Варна', '100 €')], actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), varna_call()])
         s += section('<div class="two-col">'
                      f'<div><h2 class="h3">Бургас – 120 €</h2>{checklist(["2 масажа на цяло тяло", "Цял ден СПА – басейн, джакузи, термална зона и фитнес", "Солна стая", "Бутилка вино или шампанско"])}</div>'
@@ -598,7 +598,7 @@ def build_promotions():
     def body_b(p):
         s = page_hero(p, cb, 'Промоции · Бургас', 'Есенни предложения в&nbsp;Бургас',
                       'Шест специални цени на карти и пакети за СПА и фитнес в хотел „България“ – от 28.09.2026 до 19.10.2026.',
-                      image=('images/spa-burgas-basein-simetrichen-1080.webp', 'Басейнът на Ability Spa Бургас'), water=True,
+                      image=('images/spa-burgas-basein-simetrichen-1080.webp', 'Басейнът на Ability Spa Бургас'),
                       meta=[('Валидност', '28.09.2026 – 19.10.2026'), ('Къде', 'ул. „Александровска“ 21, хотел „България“')])
         s += section(f'<div class="two-col">{head_block("Специални цени", "Шест предложения")}<div>{price_rows(PROMO_B)}'
                      f'<p class="price-other">Специалните есенни предложения са валидни до 19 октомври 2026. За повече информация се свържете с нас или заповядайте на място.</p></div></div>')
@@ -778,7 +778,6 @@ def en_page(path, title, desc, crumbs, body, ld=()):
 def en_cta(p):
     return f'''    <section class="cta-band" aria-label="Booking">
       <div class="container"><div class="cta-band-inner">
-        {BUBBLES}
         <div><h2>Time for yourself?</h2><p>Book online in Burgas, or call us for Varna.</p></div>
         <div class="btn-row">
           <a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Book in Burgas <span aria-hidden="true">→</span></a>
@@ -789,8 +788,8 @@ def en_cta(p):
 '''
 
 
-def en_hero(p, crumbs, eyebrow, h1, lead, image=None, meta=None, actions=None, water=False):
-    h = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=actions if actions is not None else [('btn-dark', BOOK_BURGAS, 'Book')], water=water)
+def en_hero(p, crumbs, eyebrow, h1, lead, image=None, meta=None, actions=None):
+    h = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=actions if actions is not None else [('btn-dark', BOOK_BURGAS, 'Book')])
     return h.replace('aria-label="Навигационна пътека"', 'aria-label="Breadcrumb"')
 
 
@@ -805,7 +804,7 @@ def build_english():
     def home(p):
         s = en_hero(p, H, 'Burgas · Varna', 'City spa in Burgas and Varna',
                     'Ability SPA is a day spa in two city-centre hotels: Hotel Bulgaria in Burgas, with a pool, jacuzzi, saunas, hamam and gym, and Hotel Cherno More in Varna, with saunas, an infrared bench, a gym and group classes.',
-                    image=('images/spa-burgas-basein-simetrichen-1080.webp', 'The indoor pool at Ability Spa Burgas'), water=True,
+                    image=('images/spa-burgas-basein-simetrichen-1080.webp', 'The indoor pool at Ability Spa Burgas'),
                     meta=[('Burgas', 'daily, 07:00 – 22:00'), ('Varna', 'daily, [07:00 or 09:00] – 21:00')],
                     actions=[('btn-dark', BOOK_BURGAS, 'Book in Burgas'), ('btn-outline', f'tel:{TEL_VARNA}', 'Call Varna')])
         s += section(en_head('Two locations', 'Choose your spa') + cards(p, [
@@ -822,7 +821,7 @@ def build_english():
         c = H + [('en/spa-burgas/', 'Burgas')]
         s = en_hero(p, c, 'Ability Spa · Hotel Bulgaria', 'Spa in Burgas',
                     'In the heart of Burgas, in the renovated Hotel Bulgaria: an indoor pool with jacuzzi and a children’s pool (32–33 °C), Finnish and herbal sauna, steam bath, hamam, salt room and a Technogym gym.',
-                    image=('images/spa-burgas-dzhakuzi-basein-1080.webp', 'Jacuzzi and pool in Burgas'), water=True,
+                    image=('images/spa-burgas-dzhakuzi-basein-1080.webp', 'Jacuzzi and pool in Burgas'),
                     meta=[('Address', '21 Aleksandrovska St.'), ('Hours', 'daily, 07:00 – 22:00'), ('Phone', f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>')])
         s += section(f'<div class="two-col">{en_head("Prices", "Spa access")}<div>' + price_rows([
             ('Single visit', 'thermal zone, pool & jacuzzi, or salt room', '12 €'), ('Children 3–14', 'single visit', '6 €'),

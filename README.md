@@ -66,9 +66,6 @@ Calm, CSS-driven motion with a small script (`js/main.js`), no library:
 - big photos (hero, page heroes, location and facility photos on desktop) drift slightly slower than the page (parallax, inside their own frame)
 - hover: cards lift, tile arrows turn, prices light up in gold, buttons get a soft light sweep, menu links slide
 - a thin gold reading-progress line under the header
-- spa touches: slow-moving water light on pool photos (`images/water-light.webp`, a 45 KB seamless texture generated for the site),
-  bubbles rising in the sand booking box, and a slow band of words (zones and treatments) on the homepage and the Бургас / Варна pages.
-  They use transform-only animations and pause while off-screen.
 
 Hidden-before-reveal only applies when JS runs (`html.js`), and all of it is switched off for `prefers-reduced-motion`.
 
