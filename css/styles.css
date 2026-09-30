@@ -804,3 +804,79 @@ ul { list-style: none; margin: 0; padding: 0; }
   .exp-card:hover, .tile:hover .tile-title, .tile:hover .tile-arrow { transform: none; }
   :is(.review, .location, .contact-card, .class-list > li):hover { translate: none; }
 }
+
+/* =========================================================
+   Spa touches: water light on pool photos, bubbles in the booking box,
+   a slow band of words. Transform-only animations; paused off-screen (JS)
+   and switched off for prefers-reduced-motion.
+   ========================================================= */
+/* Water light – a seamless caustics texture drifting in two layers over the water */
+.caustics {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  mix-blend-mode: soft-light; opacity: .7;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 30%, #000 70%);
+  mask-image: linear-gradient(to bottom, transparent 30%, #000 70%);
+}
+.hero .caustics {
+  z-index: -2;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 48%, #000 80%);
+  mask-image: linear-gradient(to bottom, transparent 48%, #000 80%);
+}
+.page-hero-media { position: relative; }
+.caustics::before, .caustics::after {
+  content: ""; position: absolute; top: -560px; left: -560px; right: -560px; bottom: -560px;
+  background: url(../images/water-light.webp) 0 0 / 420px 420px repeat;
+  animation: water-a 40s linear infinite; will-change: transform;
+}
+.caustics::after { background-size: 560px 560px; opacity: .55; animation: water-b 56s linear infinite; }
+@keyframes water-a { to { transform: translate3d(420px, 420px, 0); } }
+@keyframes water-b { to { transform: translate3d(-560px, 560px, 0); } }
+
+/* Bubbles rising slowly in the sand booking box */
+.cta-band-inner { position: relative; overflow: hidden; isolation: isolate; }
+.bubbles { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.bubbles i {
+  position: absolute; bottom: -48px; left: 10%; width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, .95) 0 12%, rgba(255, 255, 255, .28) 30%, rgba(255, 255, 255, .06) 68%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6);
+  opacity: 0; animation: bubble 14s ease-in infinite;
+}
+.bubbles i:nth-child(1) { left: 6%;  width: 14px; height: 14px; animation-duration: 13s; animation-delay: -2s; }
+.bubbles i:nth-child(2) { left: 18%; width: 26px; height: 26px; animation-duration: 17s; animation-delay: -9s; }
+.bubbles i:nth-child(3) { left: 31%; width: 10px; height: 10px; animation-duration: 11s; animation-delay: -5s; }
+.bubbles i:nth-child(4) { left: 45%; width: 20px; height: 20px; animation-duration: 15s; animation-delay: -12s; }
+.bubbles i:nth-child(5) { left: 58%; width: 12px; height: 12px; animation-duration: 12s; animation-delay: -1s; }
+.bubbles i:nth-child(6) { left: 69%; width: 30px; height: 30px; animation-duration: 19s; animation-delay: -7s; }
+.bubbles i:nth-child(7) { left: 80%; width: 16px; height: 16px; animation-duration: 14s; animation-delay: -4s; }
+.bubbles i:nth-child(8) { left: 90%; width: 22px; height: 22px; animation-duration: 16s; animation-delay: -10s; }
+.bubbles i:nth-child(9) { left: 96%; width: 11px; height: 11px; animation-duration: 12s; animation-delay: -6s; }
+@keyframes bubble {
+  0%   { transform: translate3d(0, 0, 0) scale(.7); opacity: 0; }
+  12%  { opacity: .95; }
+  50%  { transform: translate3d(14px, -210px, 0) scale(1); }
+  85%  { opacity: .8; }
+  100% { transform: translate3d(-8px, -440px, 0) scale(1.08); opacity: 0; }
+}
+
+/* Slow band of words */
+.marquee { overflow: hidden; background: var(--white); border-block: 1px solid var(--line); padding: 18px 0; }
+.marquee-track { display: flex; width: max-content; animation: marquee 70s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee span {
+  display: inline-flex; align-items: center; white-space: nowrap;
+  font-family: var(--serif); font-style: italic; font-weight: 500; line-height: 1.1;
+  font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+}
+.marquee span:nth-child(even) { color: var(--gold-text); }
+.marquee span::after { content: "✦"; font-style: normal; font-size: .42em; color: var(--gold); margin: 0 .9em; }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+@media (min-width: 1024px) { .marquee { padding: 26px 0; } }
+
+/* Only animate while on screen */
+.js :is(.caustics, .bubbles, .marquee):not(.is-playing) :is(i, .marquee-track),
+.js .caustics:not(.is-playing)::before, .js .caustics:not(.is-playing)::after { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .caustics::before, .caustics::after, .marquee-track { animation: none; }
+  .bubbles { display: none; }
+}

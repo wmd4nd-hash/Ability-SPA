@@ -349,14 +349,15 @@ def img(p, src, alt, cls='photo', eager=False):
     return f'<img class="{cls}" src="{p}{src}" alt="{e(alt)}" {load} decoding="async">'
 
 
-def page_hero(p, crumbs, eyebrow, h1, lead, image=None, actions=None, meta=None):
+def page_hero(p, crumbs, eyebrow, h1, lead, image=None, actions=None, meta=None, water=False):
     act = actions if actions is not None else [('btn-dark', BOOK_BURGAS, 'Резервирай')]
     btns = ''.join(f'<a class="btn {c} btn-arrow" href="{h if h.startswith(("http", "tel:", "viber:", "#")) else p + h}">{e(t)} <span aria-hidden="true">→</span></a>'
                    for c, h, t in act)
     meta_html = ''
     if meta:
         meta_html = '<dl class="svc-meta">' + ''.join(f'<div><dt>{e(k)}</dt><dd>{v}</dd></div>' for k, v in meta) + '</dl>'
-    media = f'<div class="page-hero-media">{img(p, image[0], image[1], "photo", eager=True)}</div>' if image else ''
+    wl = '<div class="caustics" aria-hidden="true"></div>' if water else ''  # moving water light on pool photos
+    media = f'<div class="page-hero-media">{img(p, image[0], image[1], "photo", eager=True)}{wl}</div>' if image else ''
     return f'''    <section class="page-hero{" has-media" if image else ""}">
       <div class="container page-hero-grid">
         <div class="page-hero-text">
@@ -414,9 +415,28 @@ def cards(p, items):
     return f'<ul class="exp-grid">{"".join(out)}</ul>'
 
 
+BUBBLES = '<span class="bubbles" aria-hidden="true">' + '<i></i>' * 9 + '</span>'
+
+
+def marquee(words):
+    """Slow band of words between sections (decorative – every word is also on the page)."""
+    track = ''.join(f'<span>{e(w)}</span>' for w in words) * 2
+    return f'''    <div class="marquee" aria-hidden="true"><div class="marquee-track">{track}</div></div>
+'''
+
+
+MARQUEE_HOME = ['Басейн', 'Джакузи', 'Финландска сауна', 'Билкова сауна', 'Парна баня', 'Хамам', 'Солна стая', 'Инфрачервена пейка',
+                'Масаж', 'СПА терапии', 'Козметика', 'Фитнес']
+MARQUEE_BURGAS = ['Басейн', 'Джакузи', 'Детски басейн', 'Финландска сауна', 'Билкова сауна', 'Парна баня', 'Хамам', 'Солна стая',
+                  'Масаж', 'Фитнес Technogym']
+MARQUEE_VARNA = ['Финландска сауна', 'Билкова сауна', 'Солна парна баня', 'Инфрачервена пейка', 'Камина', 'Йога', 'Пилатес', 'Kangoo Jumps',
+                 'Масаж', 'Technogym']
+
+
 def cta_band(p, title='Готови за малко време за себе си?', text='Резервирайте онлайн за Бургас или ни се обадете за Варна.'):
     return f'''    <section class="cta-band" aria-label="Резервация">
       <div class="container"><div class="cta-band-inner">
+        {BUBBLES}
         <div><h2>{title}</h2><p>{text}</p></div>
         <div class="btn-row">
           <a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Резервирай в Бургас <span aria-hidden="true">→</span></a>
@@ -625,7 +645,7 @@ def build_burgas():
     def body(p):
         s = page_hero(p, crumbs, 'Ability Spa · хотел „България“', 'СПА център в&nbsp;Бургас',
                       'В сърцето на Бургас, в обновения хотел „България“ – уютна обстановка, индивидуално подбрани процедури, качествени продукти и висококвалифицирани специалисти.',
-                      image=('images/spa-burgas-basein-simetrichen-1080.webp', 'Закритият басейн на Ability Spa Бургас с осветена синя стена'),
+                      image=('images/spa-burgas-basein-simetrichen-1080.webp', 'Закритият басейн на Ability Spa Бургас с осветена синя стена'), water=True,
                       meta=[('Адрес', 'ул. „Александровска“ 21'), ('Работно време', 'всеки ден, 07:00 – 22:00'), ('Телефон', f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>')],
                       actions=[('btn-dark', BOOK_BURGAS, 'Резервирай'), ('btn-outline', '#zoni', 'Разгледай зоните')])
         z = head_block('Зони', 'Всичко на едно място', 'zoni-h')
@@ -659,6 +679,7 @@ def build_burgas():
             'ул. „Александровска“ 21, гр. Бургас · всеки ден 07:00 – 22:00',
             f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a> · <a href="tel:{TEL_BURGAS2}">{TEL_BURGAS2_TXT}</a> · <a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a>',
             '<a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Отвори в Google Maps →</a>']) + '</div>', cls='section-sand')
+        s += marquee(MARQUEE_BURGAS)
         s += cta_band(p)
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-burgas/#spa', 'name': 'Ability Spa – Бургас',
@@ -707,6 +728,7 @@ def build_varna():
             f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a> · <a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a>',
             'Засега резервации за Варна се правят по телефона, във Viber или WhatsApp.',
             '<a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">Отвори в Google Maps →</a>']) + '</div>', cls='section-sand')
+        s += marquee(MARQUEE_VARNA)
         s += cta_band(p, 'Запазете час във Варна', 'Обадете се или ни пишете във Viber / WhatsApp.')
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-varna/#spa', 'name': 'Ability Spa&Wellness – Варна',
@@ -886,6 +908,10 @@ def inject_homepage():
     t = re.sub(r'<header class="site-header">.*?</header>', header('').replace('\n  ', '\n  ', 1), t, count=1, flags=re.S)
     t = re.sub(r'<footer class="site-footer".*?</footer>\s*<!-- Slim cookie bar.*?</div>', footer(''), t, count=1, flags=re.S)
     t = t.replace('href="./spa-burgas/"', 'href="spa-burgas/"')
+    if 'class="caustics"' not in t:
+        t = t.replace('<div class="hero-shade" aria-hidden="true"></div>', '<div class="caustics" aria-hidden="true"></div>\n      <div class="hero-shade" aria-hidden="true"></div>', 1)
+    t = re.sub(r'\n    <div class="marquee".*?</div></div>\n', '\n', t, flags=re.S)
+    t = re.sub(r'(<section class="facts".*?</section>\n)', lambda m: m.group(1) + '\n' + marquee(MARQUEE_HOME), t, count=1, flags=re.S)
     open(f, 'w', encoding='utf-8').write(t)
 
 

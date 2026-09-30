@@ -79,6 +79,17 @@
     document.querySelectorAll('.split-ready').forEach(function (h) { h.classList.add('words-in'); });
   }
 
+  // Spa touches (water light, bubbles, word band) only animate while visible
+  var ambient = document.querySelectorAll('.caustics, .bubbles, .marquee');
+  if ('IntersectionObserver' in window) {
+    var aio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.classList.toggle('is-playing', e.isIntersecting); });
+    });
+    ambient.forEach(function (el) { aio.observe(el); });
+  } else {
+    ambient.forEach(function (el) { el.classList.add('is-playing'); });
+  }
+
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];
   if (!reduce) {
