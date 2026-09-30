@@ -57,6 +57,16 @@ social links.
 - Review cards are empty slots – fill only with real, attributed Google/Facebook reviews.
 - Hero uses the 1080 px pool photo full-width; a ≥ 2400 px original would look sharper on large desktops.
 
+## Ability Club prototype (`klub/`)
+
+Clickable prototype of a member area / "app" without an app store: an installable web page (web app manifest)
+plus a loyalty card meant for Apple / Google Wallet. Four screens – card with stamps, promotions (the real Burgas
+autumn offers), gift voucher in 3 steps, and "Моите" (vouchers, visits, notification settings).
+On desktop it is shown in a phone frame with notes for the owner. Not linked from the site and `noindex`.
+
+Everything is front-end only: nothing is saved, paid or sent. Loyalty rules, the reward, how offers are redeemed
+at reception and the payment provider are `[PLACEHOLDERS]` for the owner to decide. Visit history is example data.
+
 ## Motion
 
 Calm, CSS-driven motion with a small script (`js/main.js`), no library:

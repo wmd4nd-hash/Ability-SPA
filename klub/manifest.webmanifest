@@ -1,0 +1,13 @@
+{
+  "name": "Ability Club – Ability SPA",
+  "short_name": "Ability Club",
+  "lang": "bg",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#201A18",
+  "icons": [
+    { "src": "../images/ability-spa-logo.png", "sizes": "any", "type": "image/png", "purpose": "any" }
+  ]
+}
