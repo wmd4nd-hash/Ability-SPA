@@ -81,7 +81,7 @@ Without `?palette` the site looks as before (a).
 - **f · Басейн** – a deep pool teal (from the Burgas pool photo) in place of espresso – *outside the current brand colours*
 - **g · Светла** – brown only as an accent (text, buttons, active tab, thin lines): the hero photo fades into cream,
   the statement band and footer are sand, location cards light, the voucher card gold
-  (on phones the cream fade starts just above the headline, so it stays readable on any screen height)
+  (on phones the photo sits in a band at the top and the text on cream below it, so both stay visible on any screen height)
 
 All text pairs checked for ≥ 4.5:1 contrast. Once one is chosen: fold it into the `:root` colours and delete the
 palette block in `css/styles.css`, the picker in `js/main.js` and the palette line in the head script.

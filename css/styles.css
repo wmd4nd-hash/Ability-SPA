@@ -1169,3 +1169,19 @@ html[data-palette="g"] .site-footer .btn-light { color: #DDD3C0; }
 .footer-grid a { overflow-wrap: anywhere; }
 @media (min-width: 720px) and (max-width: 1023px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 .header-phone { white-space: nowrap; }
+/* g · phones/tablets: always keep a clear band of photo above the headline (the hero grows on short screens) */
+@media (max-width: 1023px) {
+  html[data-palette="g"] .hero3 > .container { padding-top: max(240px, 36svh); }
+  html[data-palette="g"] :is(.hero3 .hero3-head, .city-section .cs-controls)::before {
+    top: -64px; background: linear-gradient(to bottom, rgba(var(--veil), 0) 0, rgba(var(--veil), .8) 40px, rgba(var(--veil), .96) 64px);
+  }
+  html[data-palette="g"] .city-section .cs-panel { padding-top: 0; }
+}
+@media (max-width: 1023px) {
+  html[data-palette="g"] .hero3 .cs-media { bottom: auto; height: calc(max(240px, 36svh) + 72px); }
+  html[data-palette="g"] .hero3 .cs-media img { object-position: 50% 60%; }
+  html[data-palette="g"] .hero3 { background: rgb(var(--veil)); }
+}
+@media (max-width: 1023px) {
+  html[data-palette="g"] .hero3 .hero3-head::before { background: linear-gradient(to bottom, rgba(var(--veil), 0) 0, rgba(var(--veil), .85) 40px, rgb(var(--veil)) 64px); }
+}
