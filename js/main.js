@@ -21,6 +21,34 @@
   });
 
 
+  // PROTOTYPE ONLY – colour palettes to compare. Shown once a page is opened with ?palette=a…f (kept while browsing).
+  if (document.documentElement.hasAttribute('data-palette-ui')) {
+    var pals = [['a', 'Сегашна', '#FFFFFF', '#201A18'], ['b', 'Топъл пясък', '#DDD3C0', '#201A18'], ['c', 'Злато', '#C39F76', '#201A18'],
+      ['d', 'Мока', '#F1E9DC', '#3A2C26'], ['e', 'Вечер', '#201A18', '#C39F76'], ['f', 'Басейн', '#F1ECE3', '#16302F']];
+    var pick = document.createElement('div');
+    pick.className = 'palette-picker'; pick.setAttribute('role', 'group'); pick.setAttribute('aria-label', 'Цветова комбинация (прототип)');
+    pick.innerHTML = '<button type="button" class="pp-toggle" aria-expanded="false" aria-label="Цветове"><i></i></button><span>Цветове</span>' + pals.map(function (x) {
+      return '<button type="button" data-p="' + x[0] + '" aria-label="' + x[0].toUpperCase() + ' · ' + x[1] + '" title="' + x[0].toUpperCase() + ' · ' + x[1] + '"><i style="--a:' + x[2] + ';--b:' + x[3] + '"></i></button>';
+    }).join('');
+    var mark = function () {
+      var cur = document.documentElement.getAttribute('data-palette') || 'a';
+      pick.querySelectorAll('[data-p]').forEach(function (b) {
+        var on = b.getAttribute('data-p') === cur;
+        b.setAttribute('aria-pressed', String(on));
+        if (on) pick.querySelector('.pp-toggle i').setAttribute('style', b.querySelector('i').getAttribute('style'));
+      });
+    };
+    pick.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.classList.contains('pp-toggle')) { var o = pick.classList.toggle('is-open'); b.setAttribute('aria-expanded', String(o)); return; }
+      var v = b.getAttribute('data-p');
+      document.documentElement.setAttribute('data-palette', v);
+      try { sessionStorage.setItem('palette', v); history.replaceState(null, '', location.pathname + '?palette=' + v + location.hash); } catch (err) {}
+      mark(); pick.classList.remove('is-open'); pick.querySelector('.pp-toggle').setAttribute('aria-expanded', 'false');
+    });
+    mark(); document.body.appendChild(pick);
+  }
+
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 

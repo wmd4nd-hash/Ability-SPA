@@ -16,7 +16,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>(function (d) { d.classList.add('js');
+    /* PROTOTYPE ONLY: colour palettes to compare (?palette=a…f), see js/main.js */
+    try { var m = location.search.match(/[?&]palette=([a-f])/), v = m ? m[1] : sessionStorage.getItem('palette');
+      if (m) sessionStorage.setItem('palette', v);
+      if (v) { d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); } } catch (e) {}
+  })(document.documentElement);</script>
   <link rel="stylesheet" href="../../css/styles.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Начало", "item": "https://abilityspa.com/"}, {"@type": "ListItem", "position": 2, "name": "СПА терапии", "item": "https://abilityspa.com/terapii/"}, {"@type": "ListItem", "position": 3, "name": "Вулканични камъни", "item": "https://abilityspa.com/terapii/vulkanichni-kamani/"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Масаж с вулканични камъни", "provider": {"@id": "https://abilityspa.com/spa-burgas/#spa"}, "areaServed": ["Бургас", "Варна"], "offers": {"@type": "Offer", "price": "49", "priceCurrency": "EUR"}}</script>

@@ -12,6 +12,7 @@
   --sand-soft: #F3EFE7;   /* light section background */
   --line: rgba(32, 26, 24, .16);
   --line-dark: rgba(221, 211, 192, .28);
+  --veil: 20, 15, 13;     /* hero photo fade (rgb of a deep espresso) */
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Jost", "Segoe UI", system-ui, sans-serif;
@@ -986,11 +987,11 @@ ul { list-style: none; margin: 0; padding: 0; }
 .city-switch .cs-media img { height: 100%; aspect-ratio: auto; object-position: 50% 40%; }
 .city-switch .cs-media::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(20, 15, 13, .96) 0%, rgba(20, 15, 13, .88) 40%, rgba(20, 15, 13, .58) 66%, rgba(20, 15, 13, .42) 100%);
+  background: linear-gradient(to top, rgba(var(--veil), .96) 0%, rgba(var(--veil), .88) 40%, rgba(var(--veil), .58) 66%, rgba(var(--veil), .42) 100%);
 }
-.cs-tabs { background: rgba(20, 15, 13, .35); border-color: rgba(255, 255, 255, .28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.cs-tabs { background: rgba(var(--veil), .35); border-color: rgba(255, 255, 255, .28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .cs-tab { color: var(--white); }
-.cs-pause { background: rgba(20, 15, 13, .35); border-color: rgba(255, 255, 255, .35); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.cs-pause { background: rgba(var(--veil), .35); border-color: rgba(255, 255, 255, .35); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .cs-hotel, .cs-other, .hero3-note { color: #E9E1D2; }
 .hero3 h1, .cs-name { text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .section-dark.city-section .cs-panel { min-height: 560px; align-content: end; }
@@ -1004,8 +1005,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   .city-switch .cs-media img { object-position: 50% 55%; }
   .city-switch .cs-media::after {
     background:
-      linear-gradient(to right, rgba(20, 15, 13, .9) 0%, rgba(20, 15, 13, .78) 34%, rgba(20, 15, 13, .3) 62%, rgba(20, 15, 13, .05) 85%),
-      linear-gradient(to top, rgba(20, 15, 13, .7) 0%, rgba(20, 15, 13, 0) 45%);
+      linear-gradient(to right, rgba(var(--veil), .9) 0%, rgba(var(--veil), .78) 34%, rgba(var(--veil), .3) 62%, rgba(var(--veil), .05) 85%),
+      linear-gradient(to top, rgba(var(--veil), .7) 0%, rgba(var(--veil), 0) 45%);
   }
   .section-dark.city-section .cs-panel { min-height: 640px; }
 }
@@ -1027,4 +1028,75 @@ ul { list-style: none; margin: 0; padding: 0; }
 @media (min-width: 1024px) {
   .cs-hotel br { display: none; }
   .cs-hotel .cs-hours::before { content: "·"; margin: 0 8px; color: #E9E1D2; font-weight: 400; }
+}
+
+/* =====================================================================
+   PROTOTYPE ONLY – colour combinations to compare (open any page with ?palette=b … f).
+   a = current. All built from espresso / sand / gold / white, except f (adds a deep pool teal).
+   Remove the unused ones (and the picker in js/main.js) once a palette is chosen.
+   ===================================================================== */
+
+/* b · Топъл пясък – cream pages, full-sand alternating sections */
+html[data-palette="b"] { --gold-text: #6B4E2E; }
+html[data-palette="b"] body, html[data-palette="b"] .tiles.related { background: #F7F2EA; }
+html[data-palette="b"] .site-header { background: rgba(247, 242, 234, .97); }
+html[data-palette="b"] .section-sand, html[data-palette="b"] .tiles { background: var(--sand); }
+html[data-palette="b"] .review { background: #F7F2EA; }
+html[data-palette="b"] .cta-band-inner { background: var(--espresso); color: var(--white); }
+html[data-palette="b"] .cta-band-inner h2 { color: var(--white); }
+html[data-palette="b"] .cta-band-inner .btn-dark { background: var(--gold); color: var(--espresso); }
+
+/* c · Злато – gold leads: gold buttons, a gold statement band, light-gold sections */
+html[data-palette="c"] { --sand-soft: #F3E8D8; }
+html[data-palette="c"] .btn-dark, html[data-palette="c"] .cs-body .btn-light { background: var(--gold); color: var(--espresso); }
+html[data-palette="c"] .btn-dark:hover, html[data-palette="c"] .cs-body .btn-light:hover { background: #D7B48C; }
+html[data-palette="c"] .cs-tab[aria-selected="true"] { background: var(--sand); }
+html[data-palette="c"] .statement { background: var(--gold); color: var(--espresso); --line-dark: rgba(32, 26, 24, .25); }
+html[data-palette="c"] .statement :is(h2, .eyebrow, .statement-cols, .statement-link, .statement-title em) { color: var(--espresso); }
+html[data-palette="c"] .statement-title em { font-style: italic; }
+html[data-palette="c"] .statement-link:hover { color: var(--white); }
+
+/* d · Мока – softer, browner darks instead of near-black */
+html[data-palette="d"] { --espresso: #3A2C26; --veil: 52, 39, 33; --sand-soft: #F1E9DC; }
+html[data-palette="d"] body, html[data-palette="d"] .tiles.related { background: #FCFAF6; }
+html[data-palette="d"] .site-header { background: rgba(252, 250, 246, .97); }
+html[data-palette="d"] .btn-dark:hover { background: #4C3B33; }
+html[data-palette="d"] .voucher-card { background: linear-gradient(135deg, #4C3B33 0%, var(--espresso) 100%); }
+
+/* e · Вечер – dark pages, light text, gold accents; photo areas keep their own colours */
+html[data-palette="e"] {
+  --espresso: #EFE8DC; --white: #201A18; --sand: #2E2522; --sand-soft: #2A2220;
+  --gold-text: #C39F76; --line: rgba(233, 225, 210, .16);
+}
+html[data-palette="e"] :is(.hero3, .section-dark, .site-footer, .exp-card, .location, .voucher-card, .facts, .lang-hint, .cookie-bar) {
+  --espresso: #201A18; --white: #FFFFFF; --sand: #DDD3C0; --sand-soft: #F3EFE7; --gold-text: #7A5A36; --line: rgba(32, 26, 24, .16);
+}
+html[data-palette="e"] .site-header { background: rgba(32, 26, 24, .97); border-color: rgba(233, 225, 210, .12); }
+html[data-palette="e"] .site-header .logo img { content: url("../images/logo-horizontal-light.png"); }
+html[data-palette="e"] .section-dark { background: #2B2320; }
+html[data-palette="e"] .site-footer { background: #17120F; }
+html[data-palette="e"] .btn-dark { background: var(--gold); color: #201A18; }
+html[data-palette="e"] .btn-dark:hover { background: #D7B48C; }
+
+/* f · Басейн – a deep pool teal (from the Burgas pool photo) in place of espresso; outside the current brand colours */
+html[data-palette="f"] { --espresso: #16302F; --veil: 12, 34, 35; --sand-soft: #F1ECE3; }
+html[data-palette="f"] body { color: #201A18; }
+html[data-palette="f"] .btn-dark:hover { background: #224644; }
+html[data-palette="f"] .voucher-card { background: linear-gradient(135deg, #224644 0%, var(--espresso) 100%); }
+
+/* Picker */
+.palette-picker { position: fixed; z-index: 90; left: 12px; bottom: 12px; display: flex; align-items: center; gap: 4px; padding: 6px 8px 6px 14px;
+  background: rgba(255, 255, 255, .96); color: #201A18; border: 1px solid rgba(32, 26, 24, .16); border-radius: 999px; box-shadow: 0 8px 28px rgba(0, 0, 0, .18); font: 600 .8125rem/1 var(--sans); }
+.palette-picker span { margin-right: 6px; letter-spacing: .06em; text-transform: uppercase; }
+.palette-picker button { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; display: grid; place-items: center; }
+.palette-picker i { display: block; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(32, 26, 24, .25); background: linear-gradient(135deg, var(--a) 0 50%, var(--b) 50% 100%); }
+.palette-picker button[aria-pressed="true"] i { outline: 2px solid #201A18; outline-offset: 3px; }
+.palette-picker button:focus-visible { outline: 2px solid #201A18; outline-offset: 0; }
+@media (max-width: 719px) { .palette-picker { bottom: 84px; } .palette-picker span { display: none; } }
+.palette-picker .pp-toggle { display: none; }
+@media (max-width: 719px) {
+  .palette-picker { padding: 0; gap: 0; }
+  .palette-picker .pp-toggle { display: grid; }
+  .palette-picker:not(.is-open) [data-p] { display: none; }
+  .palette-picker.is-open { padding-right: 4px; }
 }

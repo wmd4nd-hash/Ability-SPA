@@ -297,7 +297,12 @@ def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-bu
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>(function (d) {{ d.classList.add('js');
+    /* PROTOTYPE ONLY: colour palettes to compare (?palette=a…f), see js/main.js */
+    try {{ var m = location.search.match(/[?&]palette=([a-f])/), v = m ? m[1] : sessionStorage.getItem('palette');
+      if (m) sessionStorage.setItem('palette', v);
+      if (v) {{ d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); }} }} catch (e) {{}}
+  }})(document.documentElement);</script>
   <link rel="stylesheet" href="{p}css/styles.css">
 {ld}
 </head>'''
