@@ -1135,3 +1135,37 @@ html[data-palette="g"] .city-switch .cs-media::after {
 }
 html[data-palette="g"] .site-footer .btn-light { color: #DDD3C0; }
 @media (max-width: 719px) { .palette-picker { left: auto; right: 12px; } }
+
+/* Crossfade: the photo and the text fade separately, so a fading panel never becomes its own layer
+   (it was painted over the headline and the tabs for about half a second at every switch). */
+.js .cs-panel, .js .cs-panel.is-active { opacity: 1; }
+.js .cs-panel > :is(.cs-media, .cs-body) { opacity: 0; transition: opacity .7s var(--ease-out); }
+.js .cs-panel.is-active > :is(.cs-media, .cs-body) { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .js .cs-panel > :is(.cs-media, .cs-body) { transition: none; } }
+
+/* g · phones/tablets: the cream fade starts just above the first line of text (wherever the text lands on a
+   given screen height) and stays solid below it, so the text never sits on the dark part of the photo. */
+@media (max-width: 1023px) {
+  html[data-palette="g"] .city-switch .cs-media { z-index: -2; }
+  html[data-palette="g"] .city-switch .cs-media::after { background: none; }
+  html[data-palette="g"] :is(.hero3 .hero3-head, .city-section .cs-controls) { position: relative; }
+  html[data-palette="g"] :is(.hero3 .hero3-head, .city-section .cs-controls)::before {
+    content: ""; position: absolute; z-index: -1; top: -96px; left: -100vw; right: -100vw; height: 400vh; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(var(--veil), 0) 0, rgba(var(--veil), .82) 64px, rgba(var(--veil), .96) 96px);
+  }
+}
+/* g · desktop: solid cream behind the text column (its width is fixed), fading out to the right of it */
+@media (min-width: 1024px) {
+  html[data-palette="g"] .city-switch .cs-media::after {
+    background: linear-gradient(to right,
+      rgba(var(--veil), .97) 0,
+      rgba(var(--veil), .93) calc(max(0px, (100% - 1440px) / 2) + var(--gutter) + 650px),
+      rgba(var(--veil), 0) calc(max(0px, (100% - 1440px) / 2) + var(--gutter) + 870px));
+  }
+}
+
+/* Footer: two columns on tablets (four did not fit below ~920 px and pushed the page sideways) */
+.footer-grid > * { min-width: 0; }
+.footer-grid a { overflow-wrap: anywhere; }
+@media (min-width: 720px) and (max-width: 1023px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.header-phone { white-space: nowrap; }
