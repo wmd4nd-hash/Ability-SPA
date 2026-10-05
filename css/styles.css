@@ -974,3 +974,39 @@ ul { list-style: none; margin: 0; padding: 0; }
   .hero3 .eyebrow, .js .cs-panel.is-active .cs-media img, .js .cs-panel.is-active .cs-body > * { animation: none !important; }
   .js .cs-panel, .js .cs-panel.is-active { transition: none; }
 }
+
+/* Full-bleed version: the active city's photo fills the whole hero and crossfades with the switch.
+   Text sits on a dark fade (bottom on phones, left + bottom on desktop). */
+.hero3, .section-dark.city-section { position: relative; isolation: isolate; overflow: hidden; }
+.hero3 { display: flex; min-height: calc(100svh - var(--header-h)); padding: 0; }
+.hero3 > .container { display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; padding-bottom: 28px; }
+.city-switch .cs-panel { grid-template-columns: 1fr; gap: 0; }
+.city-switch .cs-media { position: absolute; inset: 0; z-index: -1; border-radius: 0; }
+.city-switch .cs-media img { height: 100%; aspect-ratio: auto; object-position: 50% 40%; }
+.city-switch .cs-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20, 15, 13, .96) 0%, rgba(20, 15, 13, .88) 40%, rgba(20, 15, 13, .58) 66%, rgba(20, 15, 13, .42) 100%);
+}
+.cs-tabs { background: rgba(20, 15, 13, .35); border-color: rgba(255, 255, 255, .28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.cs-tab { color: var(--white); }
+.cs-pause { background: rgba(20, 15, 13, .35); border-color: rgba(255, 255, 255, .35); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.cs-hotel, .cs-other, .hero3-note { color: #E9E1D2; }
+.hero3 h1, .cs-name { text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+.section-dark.city-section .cs-panel { min-height: 560px; align-content: end; }
+@media (min-width: 720px) {
+  .city-switch .cs-panel { grid-template-columns: 1fr; gap: 0; max-width: 640px; }
+  .hero3 > .container { padding-top: 140px; padding-bottom: 48px; }
+}
+@media (min-width: 1024px) {
+  .hero3 { min-height: min(900px, calc(100vh - var(--header-h))); }
+  .hero3 > .container { padding-top: 64px; padding-bottom: 56px; }
+  .city-switch .cs-media img { object-position: 50% 55%; }
+  .city-switch .cs-media::after {
+    background:
+      linear-gradient(to right, rgba(20, 15, 13, .9) 0%, rgba(20, 15, 13, .78) 34%, rgba(20, 15, 13, .3) 62%, rgba(20, 15, 13, .05) 85%),
+      linear-gradient(to top, rgba(20, 15, 13, .7) 0%, rgba(20, 15, 13, 0) 45%);
+  }
+  .section-dark.city-section .cs-panel { min-height: 640px; }
+}
+
+.hero3-head { max-width: 640px; }
