@@ -84,7 +84,18 @@ Hidden-before-reveal only applies when JS runs (`html.js`), and all of it is swi
 Layout takes cues from competitor thermanumera.com (full-bleed hero, key-facts band,
 numbered sections, text-on-image service cards, entry prices on the homepage, reviews,
 contact strip) and from AIRE, Vabali and Therme Bucharest (quick tiles for prices / first visit /
-vouchers, first-visit FAQ). The hero follows Therma Numera's minimal pattern: photo,
-tag line, big H1, two buttons, short caption – nothing else on the photo while keeping Ability's colours and readable type. Arches were dropped at the owner's request.
+vouchers, first-visit FAQ). Arches were dropped at the owner's request.
+
+**Feedback 04.10 (voice messages):**
+- *Two locations at the top.* A single pool photo under "СПА център в Бургас и Варна" suggested a pool in Varna too.
+  The homepage now opens with the H1 on a light background and the two locations side by side
+  (Бургас – pool photo, Варна – infrared bench), each listing what it has, its hotel, hours and its own action
+  (online booking / call). Data lives in `CITIES` in `tools/build.py`; the same cards open the English homepage.
+- *Language switch always visible.* Phones get an EN / BG button in the header (it replaces the call icon, which
+  only reached Burgas – both numbers are now in the menu, labelled by city). Visitors whose browser is in another
+  language see a one-line offer at the top to switch; it stays closed once dismissed.
+- *Easier reading.* 18 px body text, bigger labels with less letter-spacing, bolder headings (Cormorant 700),
+  upright prices. References the team liked for clarity: r.fitness, pulsefit.bg.
+- *Site first, app later.* The `klub/` prototype is on hold until the site's look is final.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.

@@ -6,7 +6,7 @@ difference is listed in docs/facts-from-current-site.md. Anything not confirmed 
 """
 import os, re
 from build import *  # noqa: F401,F403 – shared chrome, components and constants
-from build import MASSAGES, ROOT, e
+from build import MASSAGES, ROOT, city_cards, e
 
 L = 'images/library/'
 
@@ -553,7 +553,7 @@ def build_packages():
     def body2(p):
         s = page_hero(p, crumbs2, 'Пакети · Бургас и Варна', 'СПА пакет за двама',
                       'Масаж и цял ден СПА за двама – в Бургас с басейн, солна стая и бутилка вино или шампанско, във Варна със сауни и инфрачервена пейка.',
-                      image=('images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът в Ability Spa Бургас'),
+                      image=(L + '2024_07_aspa_427.webp', 'Масаж за релакс в Ability SPA'),
                       meta=[('Бургас', '120 €'), ('Варна', '100 €')], actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), varna_call()])
         s += section('<div class="two-col">'
                      f'<div><h2 class="h3">Бургас – 120 €</h2>{checklist(["2 масажа на цяло тяло", "Цял ден СПА – басейн, джакузи, термална зона и фитнес", "Солна стая", "Бутилка вино или шампанско"])}</div>'
@@ -802,16 +802,15 @@ def build_english():
     H = [('en/', 'Home')]
 
     def home(p):
-        s = en_hero(p, H, 'Burgas · Varna', 'City spa in Burgas and Varna',
-                    'Ability SPA is a day spa in two city-centre hotels: Hotel Bulgaria in Burgas, with a pool, jacuzzi, saunas, hamam and gym, and Hotel Cherno More in Varna, with saunas, an infrared bench, a gym and group classes.',
-                    image=('images/spa-burgas-basein-simetrichen-1080.webp', 'The indoor pool at Ability Spa Burgas'),
-                    meta=[('Burgas', 'daily, 07:00 – 22:00'), ('Varna', 'daily, [07:00 or 09:00] – 21:00')],
-                    actions=[('btn-dark', BOOK_BURGAS, 'Book in Burgas'), ('btn-outline', f'tel:{TEL_VARNA}', 'Call Varna')])
-        s += section(en_head('Two locations', 'Choose your spa') + cards(p, [
-            ('en/spa-burgas/', 'Burgas – Hotel Bulgaria', 'day pass 19 €', 'images/hotel-bulgaria-burgas-1024.webp', 'Hotel Bulgaria, Burgas'),
-            ('en/spa-varna/', 'Varna – Hotel Cherno More', 'spa visit 15 €', 'images/hotel-cherno-more-varna-1080.webp', 'Hotel Cherno More, Varna'),
+        s = en_hero(p, H, 'City spa · two locations', 'City spa in Burgas and Varna',
+                    'Two day spas in city-centre hotels – Hotel Bulgaria in Burgas and Hotel Cherno More in Varna. Each has its own zones: see what is where.',
+                    actions=[])
+        s += section(city_cards(p, 'en'), cls='city-section')
+        s += section(en_head('More', 'Massages and gifts') + cards(p, [
             ('en/massages/', 'Massages', 'from 28 €', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Hot stone massage'),
-            ('en/vouchers/', 'Gift vouchers', 'valid 1 year', L + '2023_11_untitled-design.webp', 'Ability SPA gift card')]))
+            ('en/prices/', 'Prices', 'day pass 19 €', 'images/finlandska-sauna-burgas-1080.webp', 'Finnish sauna in Burgas'),
+            ('en/vouchers/', 'Gift vouchers', 'valid 1 year', L + '2023_11_untitled-design.webp', 'Ability SPA gift card'),
+            ('en/contact/', 'Contact', 'Burgas & Varna', 'images/hotel-cherno-more-varna-1080.webp', 'Hotel Cherno More, Varna')]), cls='section-sand')
         s += en_cta(p)
         return s
     out.append(en_page('en/', 'Day spa in Burgas & Varna, Bulgaria | Ability SPA',

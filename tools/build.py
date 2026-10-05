@@ -57,7 +57,8 @@ def header(p, current='', path=''):
           <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="menu-label">Меню</span>
         </button>
-        <div class="lang" aria-label="Език">
+        <div class="lang" role="group" aria-label="Език / Language">
+          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
           <a href="./" aria-current="true" lang="bg">BG</a>
           <a href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en">EN</a>
         </div>
@@ -70,9 +71,7 @@ def header(p, current='', path=''):
 
       <div class="header-right">
         <a class="header-phone" href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>
-        <a class="icon-btn call-btn" href="tel:{TEL_BURGAS}" aria-label="Обадете се">
-          {PHONE_SVG}
-        </a>
+        <a class="lang-toggle" href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en" aria-label="English version">EN</a>
         <a class="btn btn-dark btn-book" href="{BOOK_BURGAS}">Резервирай</a>
       </div>
     </div>
@@ -82,12 +81,15 @@ def header(p, current='', path=''):
         <ul class="nav-main">
           {nl.join(li(h, l) for h, l in NAV_MAIN)}
         </ul>
-        <ul class="nav-sub">
-          {nl.join(li(h, l) for h, l in NAV_SUB)}
-        </ul>
-        <div class="lang lang-mobile" aria-label="Език">
-          <a href="./" aria-current="true" lang="bg">BG</a>
-          <a href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en">EN</a>
+        <div class="nav-side">
+          <ul class="nav-sub">
+            {nl.join(li(h, l) for h, l in NAV_SUB)}
+          </ul>
+          <div class="nav-call">
+            <p>Обадете се</p>
+            <a href="tel:{TEL_BURGAS}"><span>Бургас</span>{TEL_BURGAS_TXT}</a>
+            <a href="tel:{TEL_VARNA}"><span>Варна</span>{TEL_VARNA_TXT}</a>
+          </div>
         </div>
       </div>
     </nav>
@@ -176,7 +178,8 @@ def en_header(p, path):
           <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="menu-label">Menu</span>
         </button>
-        <div class="lang" aria-label="Language">
+        <div class="lang" role="group" aria-label="Language / Език">
+          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
           <a href="{bg or './'}" lang="bg" hreflang="bg">BG</a>
           <a href="./" aria-current="true" lang="en">EN</a>
         </div>
@@ -188,9 +191,7 @@ def en_header(p, path):
 
       <div class="header-right">
         <a class="header-phone" href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>
-        <a class="icon-btn call-btn" href="tel:{TEL_BURGAS}" aria-label="Call us">
-          {PHONE_SVG}
-        </a>
+        <a class="lang-toggle" href="{bg or './'}" lang="bg" hreflang="bg" aria-label="Български сайт">BG</a>
         <a class="btn btn-dark btn-book" href="{BOOK_BURGAS}">Book</a>
       </div>
     </div>
@@ -200,13 +201,16 @@ def en_header(p, path):
         <ul class="nav-main">
           {lis}
         </ul>
-        <ul class="nav-sub">
-          <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
-          <li><a href="{bg or './'}" lang="bg">Български сайт</a></li>
-        </ul>
-        <div class="lang lang-mobile" aria-label="Language">
-          <a href="{bg or './'}" lang="bg" hreflang="bg">BG</a>
-          <a href="./" aria-current="true" lang="en">EN</a>
+        <div class="nav-side">
+          <ul class="nav-sub">
+            <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
+            <li><a href="{bg or './'}" lang="bg">Български сайт</a></li>
+          </ul>
+          <div class="nav-call">
+            <p>Call us</p>
+            <a href="tel:{TEL_BURGAS}"><span>Burgas</span>{TEL_BURGAS_TXT}</a>
+            <a href="tel:{TEL_VARNA}"><span>Varna</span>{TEL_VARNA_TXT}</a>
+          </div>
         </div>
       </div>
     </nav>
@@ -292,7 +296,7 @@ def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-bu
   <meta property="og:image" content="{SITE}/{og_image}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="{p}css/styles.css">
 {ld}
@@ -412,6 +416,50 @@ def cards(p, items):
         media = img(p, im, alt, 'exp-img') if im else '<div class="ph ph-massage" aria-hidden="true"></div>'
         out.append(f'''<li><a class="exp-card" href="{p}{h}">{media}<div class="exp-body"><p class="exp-num">{i + 1:02d}</p><h3>{e(t)}</h3><p class="exp-price">{e(pr)}</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li>''')
     return f'<ul class="exp-grid">{"".join(out)}</ul>'
+
+
+CITIES = {
+    'bg': [dict(name='Бургас', href='spa-burgas/', hotel='хотел „България“', addr='ул. „Александровска“ 21',
+                img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='Закритият басейн в Ability Spa Бургас',
+                has=['Басейн и джакузи', 'Детски басейн', 'Сауни и хамам', 'Солна стая', 'Фитнес Technogym', 'Масажи и козметика'],
+                hours='Всеки ден 07:00 – 22:00', cta=(BOOK_BURGAS, 'Резервирай онлайн')),
+           dict(name='Варна', href='spa-varna/', hotel='хотел „Черно море“', addr='бул. „Сливница“ 33',
+                img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='Инфрачервената пейка в Ability Spa&Wellness Варна',
+                has=['Сауни и солна парна баня', 'Инфрачервена пейка', 'Фитнес и групови тренировки', 'Релакс зона с камина', 'Масажи и СПА терапии'],
+                hours='Всеки ден [07:00 или 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Обадете се'))],
+    'en': [dict(name='Burgas', href='en/spa-burgas/', hotel='Hotel Bulgaria', addr='21 Aleksandrovska St.',
+                img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='The indoor pool at Ability Spa Burgas',
+                has=['Indoor pool & jacuzzi', "Children's pool", 'Saunas & hamam', 'Salt room', 'Technogym gym', 'Massages & beauty'],
+                hours='Daily 07:00 – 22:00', cta=(BOOK_BURGAS, 'Book online')),
+           dict(name='Varna', href='en/spa-varna/', hotel='Hotel Cherno More', addr='33 Slivnitsa Blvd.',
+                img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='The infrared bench at Ability Spa&Wellness Varna',
+                has=['Saunas & salt steam bath', 'Infrared bench', 'Gym & group classes', 'Relax zone with fireplace', 'Massages & body therapies'],
+                hours='Daily [07:00 or 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Call to book'))],
+}
+
+
+def city_cards(p, lang='bg'):
+    """The two locations side by side, each with what it has – so a pool photo never suggests a pool in Varna."""
+    out = []
+    for i, c in enumerate(CITIES[lang]):
+        if c['w']:
+            src = f'src="{p}{c["img"]}-{c["w"][1]}.webp" srcset="{p}{c["img"]}-{c["w"][0]}.webp {c["w"][0]}w, {p}{c["img"]}-{c["w"][1]}.webp {c["w"][1]}w" sizes="(min-width: 720px) 50vw, 50vw"'
+        else:
+            src = f'src="{p}{c["img"]}.webp"'
+        load = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
+        has = ''.join(f'<li>{e(x)}</li>' for x in c['has'])
+        ext = c['cta'][0].startswith(('http', 'tel:'))
+        out.append(f'''<li class="city-card">
+          <div class="city-media"><img class="city-img" {src} alt="{e(c["alt"])}" width="1080" height="1080" {load} decoding="async"></div>
+          <div class="city-body">
+            <h2 class="city-name"><a href="{p}{c["href"]}">{e(c["name"])}<span class="city-arrow" aria-hidden="true">→</span></a></h2>
+            <p class="city-hotel">{e(c["hotel"])}<span> · {e(c["addr"])}</span></p>
+            <ul class="city-has">{has}</ul>
+            <p class="city-hours">{e(c["hours"])}</p>
+            <a class="btn {"btn-dark" if i == 0 else "btn-outline"} city-cta" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}</a>
+          </div>
+        </li>''')
+    return '<ul class="city-grid">' + ''.join(out) + '</ul>'
 
 
 def cta_band(p, title='Готови за малко време за себе си?', text='Резервирайте онлайн за Бургас или ни се обадете за Варна.'):
@@ -886,6 +934,7 @@ def inject_homepage():
     t = re.sub(r'<header class="site-header">.*?</header>', header('').replace('\n  ', '\n  ', 1), t, count=1, flags=re.S)
     t = re.sub(r'<footer class="site-footer".*?</footer>\s*<!-- Slim cookie bar.*?</div>', footer(''), t, count=1, flags=re.S)
     t = t.replace('href="./spa-burgas/"', 'href="spa-burgas/"')
+    t = re.sub(r'<!-- CITY-CARDS -->.*?<!-- /CITY-CARDS -->', lambda m: '<!-- CITY-CARDS -->' + city_cards('') + '<!-- /CITY-CARDS -->', t, count=1, flags=re.S)
     open(f, 'w', encoding='utf-8').write(t)
 
 

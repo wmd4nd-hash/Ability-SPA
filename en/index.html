@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://abilityspa.com/images/og-spa-burgas.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="../css/styles.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://abilityspa.com/en/"}]}</script>
@@ -33,7 +33,8 @@
           <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="menu-label">Menu</span>
         </button>
-        <div class="lang" aria-label="Language">
+        <div class="lang" role="group" aria-label="Language / Език">
+          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
           <a href="../" lang="bg" hreflang="bg">BG</a>
           <a href="./" aria-current="true" lang="en">EN</a>
         </div>
@@ -45,9 +46,7 @@
 
       <div class="header-right">
         <a class="header-phone" href="tel:+359895635555">+359 895 635 555</a>
-        <a class="icon-btn call-btn" href="tel:+359895635555" aria-label="Call us">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
-        </a>
+        <a class="lang-toggle" href="../" lang="bg" hreflang="bg" aria-label="Български сайт">BG</a>
         <a class="btn btn-dark btn-book" href="https://book.abilityspa.com/reservations/start?site=1">Book</a>
       </div>
     </div>
@@ -62,35 +61,61 @@
           <li><a href="../en/vouchers/">Gift vouchers</a></li>
           <li><a href="../en/contact/">Contact</a></li>
         </ul>
-        <ul class="nav-sub">
-          <li><a href="../en/promotions/varna/">Offers in Varna</a></li>
-          <li><a href="../" lang="bg">Български сайт</a></li>
-        </ul>
-        <div class="lang lang-mobile" aria-label="Language">
-          <a href="../" lang="bg" hreflang="bg">BG</a>
-          <a href="./" aria-current="true" lang="en">EN</a>
+        <div class="nav-side">
+          <ul class="nav-sub">
+            <li><a href="../en/promotions/varna/">Offers in Varna</a></li>
+            <li><a href="../" lang="bg">Български сайт</a></li>
+          </ul>
+          <div class="nav-call">
+            <p>Call us</p>
+            <a href="tel:+359895635555"><span>Burgas</span>+359 895 635 555</a>
+            <a href="tel:+359899994149"><span>Varna</span>+359 899 994 149</a>
+          </div>
         </div>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="page-hero has-media">
+    <section class="page-hero">
       <div class="container page-hero-grid">
         <div class="page-hero-text">
           <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li aria-current="page">Home</li></ol></nav>
-          <p class="eyebrow">Burgas · Varna</p>
+          <p class="eyebrow">City spa · two locations</p>
           <h1>City spa in Burgas and Varna</h1>
-          <p class="page-lead">Ability SPA is a day spa in two city-centre hotels: Hotel Bulgaria in Burgas, with a pool, jacuzzi, saunas, hamam and gym, and Hotel Cherno More in Varna, with saunas, an infrared bench, a gym and group classes.</p>
-          <dl class="svc-meta"><div><dt>Burgas</dt><dd>daily, 07:00 – 22:00</dd></div><div><dt>Varna</dt><dd>daily, [07:00 or 09:00] – 21:00</dd></div></dl>
-          <div class="btn-row"><a class="btn btn-dark btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Book in Burgas <span aria-hidden="true">→</span></a><a class="btn btn-outline btn-arrow" href="tel:+359899994149">Call Varna <span aria-hidden="true">→</span></a></div>
+          <p class="page-lead">Two day spas in city-centre hotels – Hotel Bulgaria in Burgas and Hotel Cherno More in Varna. Each has its own zones: see what is where.</p>
+          
+          <div class="btn-row"></div>
         </div>
-        <div class="page-hero-media"><img class="photo" src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="The indoor pool at Ability Spa Burgas" fetchpriority="high" decoding="async"></div>
+        
       </div>
     </section>
-    <section class="section ">
+    <section class="section city-section">
       <div class="container">
-<div class="section-head"><p class="eyebrow">Two locations</p><h2>Choose your spa</h2></div><ul class="exp-grid"><li><a class="exp-card" href="../en/spa-burgas/"><img class="exp-img" src="../images/hotel-bulgaria-burgas-1024.webp" alt="Hotel Bulgaria, Burgas" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">01</p><h3>Burgas – Hotel Bulgaria</h3><p class="exp-price">day pass 19 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/spa-varna/"><img class="exp-img" src="../images/hotel-cherno-more-varna-1080.webp" alt="Hotel Cherno More, Varna" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">02</p><h3>Varna – Hotel Cherno More</h3><p class="exp-price">spa visit 15 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/massages/"><img class="exp-img" src="../images/masazh-goreshti-kamani-burgas-1080.webp" alt="Hot stone massage" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">03</p><h3>Massages</h3><p class="exp-price">from 28 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/vouchers/"><img class="exp-img" src="../images/library/2023_11_untitled-design.webp" alt="Ability SPA gift card" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">04</p><h3>Gift vouchers</h3><p class="exp-price">valid 1 year</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li></ul>
+<ul class="city-grid"><li class="city-card">
+          <div class="city-media"><img class="city-img" src="../images/spa-burgas-basein-simetrichen-1080.webp" srcset="../images/spa-burgas-basein-simetrichen-640.webp 640w, ../images/spa-burgas-basein-simetrichen-1080.webp 1080w" sizes="(min-width: 720px) 50vw, 50vw" alt="The indoor pool at Ability Spa Burgas" width="1080" height="1080" fetchpriority="high" decoding="async"></div>
+          <div class="city-body">
+            <h2 class="city-name"><a href="../en/spa-burgas/">Burgas<span class="city-arrow" aria-hidden="true">→</span></a></h2>
+            <p class="city-hotel">Hotel Bulgaria<span> · 21 Aleksandrovska St.</span></p>
+            <ul class="city-has"><li>Indoor pool &amp; jacuzzi</li><li>Children&#x27;s pool</li><li>Saunas &amp; hamam</li><li>Salt room</li><li>Technogym gym</li><li>Massages &amp; beauty</li></ul>
+            <p class="city-hours">Daily 07:00 – 22:00</p>
+            <a class="btn btn-dark city-cta" href="https://book.abilityspa.com/reservations/start?site=1">Book online</a>
+          </div>
+        </li><li class="city-card">
+          <div class="city-media"><img class="city-img" src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="The infrared bench at Ability Spa&amp;Wellness Varna" width="1080" height="1080" loading="eager" decoding="async"></div>
+          <div class="city-body">
+            <h2 class="city-name"><a href="../en/spa-varna/">Varna<span class="city-arrow" aria-hidden="true">→</span></a></h2>
+            <p class="city-hotel">Hotel Cherno More<span> · 33 Slivnitsa Blvd.</span></p>
+            <ul class="city-has"><li>Saunas &amp; salt steam bath</li><li>Infrared bench</li><li>Gym &amp; group classes</li><li>Relax zone with fireplace</li><li>Massages &amp; body therapies</li></ul>
+            <p class="city-hours">Daily [07:00 or 09:00] – 21:00</p>
+            <a class="btn btn-outline city-cta" href="tel:+359899994149">Call to book</a>
+          </div>
+        </li></ul>
+      </div>
+    </section>
+    <section class="section section-sand">
+      <div class="container">
+<div class="section-head"><p class="eyebrow">More</p><h2>Massages and gifts</h2></div><ul class="exp-grid"><li><a class="exp-card" href="../en/massages/"><img class="exp-img" src="../images/masazh-goreshti-kamani-burgas-1080.webp" alt="Hot stone massage" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">01</p><h3>Massages</h3><p class="exp-price">from 28 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/prices/"><img class="exp-img" src="../images/finlandska-sauna-burgas-1080.webp" alt="Finnish sauna in Burgas" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">02</p><h3>Prices</h3><p class="exp-price">day pass 19 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/vouchers/"><img class="exp-img" src="../images/library/2023_11_untitled-design.webp" alt="Ability SPA gift card" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">03</p><h3>Gift vouchers</h3><p class="exp-price">valid 1 year</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../en/contact/"><img class="exp-img" src="../images/hotel-cherno-more-varna-1080.webp" alt="Hotel Cherno More, Varna" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">04</p><h3>Contact</h3><p class="exp-price">Burgas &amp; Varna</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li></ul>
       </div>
     </section>
     <section class="cta-band" aria-label="Booking">

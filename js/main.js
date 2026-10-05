@@ -47,9 +47,9 @@
     el.classList.add('split-ready');
   }
   if (!reduce) {
-    document.querySelectorAll('.hero h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
+    document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
     requestAnimationFrame(function () { requestAnimationFrame(function () {
-      document.querySelectorAll('.hero h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
+      document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
     }); });
   }
 
@@ -82,7 +82,7 @@
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];
   if (!reduce) {
-    document.querySelectorAll('.hero-bg, .page-hero-media .photo, .loc-photo').forEach(function (el) { par.push({ el: el, box: el.parentNode, k: .08 }); });
+    document.querySelectorAll('.hero-bg, .page-hero-media .photo, .loc-photo, .city-img').forEach(function (el) { par.push({ el: el, box: el.parentNode, k: .08 }); });
     if (window.matchMedia && matchMedia('(min-width: 1024px)').matches) {
       document.querySelectorAll('.facilities .split > .photo').forEach(function (img) {
         var f = document.createElement('div');
@@ -103,6 +103,31 @@
       p.el.style.translate = '0 ' + y.toFixed(1) + 'px';
     });
   }
+
+  // Language offer: visitors whose browser is not in the page's language (e.g. hotel guests from abroad)
+  // get one line at the very top with a link to the other language. Dismissed once = gone.
+  (function () {
+    var lang = document.documentElement.lang === 'en' ? 'en' : 'bg';
+    var other = lang === 'bg' ? 'en' : 'bg';
+    var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map(function (l) { return String(l).toLowerCase(); });
+    var wantsBg = langs.some(function (l) { return l.indexOf('bg') === 0; });
+    if ((lang === 'bg') === wantsBg) return;
+    try { if (localStorage.getItem('lang-hint-off')) return; } catch (e) {}
+    var link = document.querySelector('.lang a[lang="' + other + '"]');
+    if (!link) return;
+    var hint = document.createElement('div');
+    hint.className = 'lang-hint'; hint.setAttribute('role', 'region'); hint.setAttribute('aria-label', other === 'en' ? 'Language' : 'Език');
+    hint.innerHTML = other === 'en'
+      ? '<p lang="en">This website is also in English.</p><a lang="en" hreflang="en">English</a><button type="button" aria-label="Close">×</button>'
+      : '<p lang="bg">Сайтът е и на български.</p><a lang="bg" hreflang="bg">Български</a><button type="button" aria-label="Затвори">×</button>';
+    hint.querySelector('a').href = link.href;
+    hint.querySelector('button').addEventListener('click', function () {
+      hint.remove();
+      try { localStorage.setItem('lang-hint-off', '1'); } catch (e) {}
+    });
+    var skip = document.querySelector('.skip-link');
+    document.body.insertBefore(hint, skip ? skip.nextSibling : document.body.firstChild);
+  })();
 
   // Header: soft shadow once the page scrolls + thin gold reading-progress line
   var header = document.querySelector('.site-header');
