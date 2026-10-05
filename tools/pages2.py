@@ -6,7 +6,7 @@ difference is listed in docs/facts-from-current-site.md. Anything not confirmed 
 """
 import os, re
 from build import *  # noqa: F401,F403 – shared chrome, components and constants
-from build import MASSAGES, ROOT, city_cards, e
+from build import MASSAGES, ROOT, city_switch, e
 
 L = 'images/library/'
 
@@ -805,7 +805,7 @@ def build_english():
         s = en_hero(p, H, 'City spa · two locations', 'City spa in Burgas and Varna',
                     'Two day spas in city-centre hotels – Hotel Bulgaria in Burgas and Hotel Cherno More in Varna. Each has its own zones: see what is where.',
                     actions=[])
-        s += section(city_cards(p, 'en'), cls='city-section')
+        s += section(city_switch(p, 'en'), cls='section-dark city-section')
         s += section(en_head('More', 'Massages and gifts') + cards(p, [
             ('en/massages/', 'Massages', 'from 28 €', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Hot stone massage'),
             ('en/prices/', 'Prices', 'day pass 19 €', 'images/finlandska-sauna-burgas-1080.webp', 'Finnish sauna in Burgas'),

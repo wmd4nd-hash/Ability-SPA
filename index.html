@@ -143,36 +143,44 @@
 
   <main id="main">
 
-    <!-- ============ HERO: two locations side by side (what each one has) ============ -->
-    <section class="hero2" aria-labelledby="hero-title">
-      <div class="container hero2-head">
-        <div>
+    <!-- ============ HERO: Бургас / Варна switch (changes every 5 s, see js/main.js) ============ -->
+    <section class="hero3" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero3-head">
           <p class="eyebrow">Градски СПА <span aria-hidden="true">·</span> два обекта</p>
           <h1 id="hero-title">СПА център в&nbsp;Бургас и&nbsp;Варна</h1>
         </div>
-        <p class="hero2-lead">В центъра на двата града – в хотел „България“ в Бургас и в хотел „Черно море“ във Варна. Всеки обект има свои зони.</p>
-      </div>
-      <div class="container">
-        <!-- CITY-CARDS --><ul class="city-grid"><li class="city-card">
-          <div class="city-media"><img class="city-img" src="images/spa-burgas-basein-simetrichen-1080.webp" srcset="images/spa-burgas-basein-simetrichen-640.webp 640w, images/spa-burgas-basein-simetrichen-1080.webp 1080w" sizes="(min-width: 720px) 50vw, 50vw" alt="Закритият басейн в Ability Spa Бургас" width="1080" height="1080" fetchpriority="high" decoding="async"></div>
-          <div class="city-body">
-            <h2 class="city-name"><a href="spa-burgas/">Бургас<span class="city-arrow" aria-hidden="true">→</span></a></h2>
-            <p class="city-hotel">хотел „България“<span> · ул. „Александровска“ 21</span></p>
-            <ul class="city-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
-            <p class="city-hours">Всеки ден 07:00 – 22:00</p>
-            <a class="btn btn-dark city-cta" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн</a>
+        <!-- CITY-CARDS --><div class="city-switch" data-interval="5000">
+          <div class="cs-controls">
+            <div class="cs-tabs" role="tablist" aria-label="Изберете обект"><button class="cs-tab" type="button" role="tab" id="cs-tab-burgas" aria-controls="cs-panel-burgas" aria-selected="true">Бургас<span class="cs-bar" aria-hidden="true"></span></button><button class="cs-tab" type="button" role="tab" id="cs-tab-varna" aria-controls="cs-panel-varna" aria-selected="false" tabindex="-1">Варна<span class="cs-bar" aria-hidden="true"></span></button></div>
+            <button class="cs-pause" type="button" aria-pressed="false" data-pause="Спри автоматичната смяна" data-play="Пусни автоматичната смяна" aria-label="Спри автоматичната смяна">
+              <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+              <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
           </div>
-        </li><li class="city-card">
-          <div class="city-media"><img class="city-img" src="images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка в Ability Spa&amp;Wellness Варна" width="1080" height="1080" loading="eager" decoding="async"></div>
-          <div class="city-body">
-            <h2 class="city-name"><a href="spa-varna/">Варна<span class="city-arrow" aria-hidden="true">→</span></a></h2>
-            <p class="city-hotel">хотел „Черно море“<span> · бул. „Сливница“ 33</span></p>
-            <ul class="city-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
-            <p class="city-hours">Всеки ден [07:00 или 09:00] – 21:00</p>
-            <a class="btn btn-outline city-cta" href="tel:+359899994149">Обадете се</a>
+          <div class="cs-panels"><div class="cs-panel is-active" id="cs-panel-burgas" role="tabpanel" aria-labelledby="cs-tab-burgas">
+          <div class="cs-media"><img src="images/spa-burgas-basein-simetrichen-1080.webp" srcset="images/spa-burgas-basein-simetrichen-640.webp 640w, images/spa-burgas-basein-simetrichen-1080.webp 1080w" sizes="(min-width: 1024px) 58vw, 100vw" alt="Закритият басейн в Ability Spa Бургас" width="1080" height="1080" fetchpriority="high" decoding="async"></div>
+          <div class="cs-body">
+            <h2 class="cs-name"><a href="spa-burgas/">Бургас<span aria-hidden="true">→</span></a></h2>
+            <p class="cs-hotel">хотел „България“ · ул. „Александровска“ 21</p>
+            <ul class="cs-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+            <p class="cs-hours">Всеки ден 07:00 – 22:00</p>
+            <div class="btn-row"><a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн <span aria-hidden="true">→</span></a></div>
+            <p class="cs-other">Търсите Варна? <button type="button" data-cs-tab="cs-tab-varna">Вижте какво има там</button></p>
           </div>
-        </li></ul><!-- /CITY-CARDS -->
-        <p class="hero2-note">Карти Multisport – в делнични дни. <a href="#parvo-poseshtenie">Първо посещение →</a></p>
+        </div><div class="cs-panel" id="cs-panel-varna" role="tabpanel" aria-labelledby="cs-tab-varna">
+          <div class="cs-media"><img src="images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка в Ability Spa&amp;Wellness Варна" width="1080" height="1080" loading="lazy" decoding="async"></div>
+          <div class="cs-body">
+            <h2 class="cs-name"><a href="spa-varna/">Варна<span aria-hidden="true">→</span></a></h2>
+            <p class="cs-hotel">хотел „Черно море“ · бул. „Сливница“ 33</p>
+            <ul class="cs-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+            <p class="cs-hours">Всеки ден [07:00 или 09:00] – 21:00</p>
+            <div class="btn-row"><a class="btn btn-outline-light" href="tel:+359899994149">Обадете се</a></div>
+            <p class="cs-other">Търсите Бургас? <button type="button" data-cs-tab="cs-tab-burgas">Вижте какво има там</button></p>
+          </div>
+        </div></div>
+        </div><!-- /CITY-CARDS -->
+        <p class="hero3-note">Карти Multisport – в делнични дни. <a href="#parvo-poseshtenie">Първо посещение →</a></p>
       </div>
     </section>
 

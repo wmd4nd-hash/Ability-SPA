@@ -438,28 +438,55 @@ CITIES = {
 }
 
 
-def city_cards(p, lang='bg'):
-    """The two locations side by side, each with what it has – so a pool photo never suggests a pool in Varna."""
-    out = []
-    for i, c in enumerate(CITIES[lang]):
+CS_TEXT = {
+    'bg': dict(label='Изберете обект', pause='Спри автоматичната смяна', play='Пусни автоматичната смяна',
+               other='Търсите {}?', see='Вижте какво има там'),
+    'en': dict(label='Choose a location', pause='Stop switching automatically', play='Switch automatically',
+               other='Looking for {}?', see='See what is there'),
+}
+
+
+def city_switch(p, lang='bg'):
+    """Бургас / Варна switch (homepage variant D). Changes every 5 s (js/main.js) with a progress line, a pause button,
+    pause on hover / focus / off-screen, stops for good once a city is picked, never moves for reduced motion.
+    Without JS both cities simply show one under the other."""
+    T, cs = CS_TEXT[lang], CITIES[lang]
+    slug = lambda c: c['href'].rstrip('/').split('/')[-1].replace('spa-', '')
+    tabs = ''.join(
+        f'''<button class="cs-tab" type="button" role="tab" id="cs-tab-{slug(c)}" aria-controls="cs-panel-{slug(c)}" aria-selected="{str(i == 0).lower()}"{"" if i == 0 else ' tabindex="-1"'}>{e(c["name"])}<span class="cs-bar" aria-hidden="true"></span></button>'''
+        for i, c in enumerate(cs))
+    panels = []
+    for i, c in enumerate(cs):
+        o = cs[1 - i]
         if c['w']:
-            src = f'src="{p}{c["img"]}-{c["w"][1]}.webp" srcset="{p}{c["img"]}-{c["w"][0]}.webp {c["w"][0]}w, {p}{c["img"]}-{c["w"][1]}.webp {c["w"][1]}w" sizes="(min-width: 720px) 50vw, 50vw"'
+            src = f'src="{p}{c["img"]}-{c["w"][1]}.webp" srcset="{p}{c["img"]}-{c["w"][0]}.webp {c["w"][0]}w, {p}{c["img"]}-{c["w"][1]}.webp {c["w"][1]}w" sizes="(min-width: 1024px) 58vw, 100vw"'
         else:
             src = f'src="{p}{c["img"]}.webp"'
-        load = 'fetchpriority="high"' if i == 0 else 'loading="eager"'
         has = ''.join(f'<li>{e(x)}</li>' for x in c['has'])
         ext = c['cta'][0].startswith(('http', 'tel:'))
-        out.append(f'''<li class="city-card">
-          <div class="city-media"><img class="city-img" {src} alt="{e(c["alt"])}" width="1080" height="1080" {load} decoding="async"></div>
-          <div class="city-body">
-            <h2 class="city-name"><a href="{p}{c["href"]}">{e(c["name"])}<span class="city-arrow" aria-hidden="true">→</span></a></h2>
-            <p class="city-hotel">{e(c["hotel"])}<span> · {e(c["addr"])}</span></p>
-            <ul class="city-has">{has}</ul>
-            <p class="city-hours">{e(c["hours"])}</p>
-            <a class="btn {"btn-dark" if i == 0 else "btn-outline"} city-cta" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}</a>
+        load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
+        arrow = ' <span aria-hidden="true">→</span>' if i == 0 else ''
+        panels.append(f'''<div class="cs-panel{" is-active" if i == 0 else ""}" id="cs-panel-{slug(c)}" role="tabpanel" aria-labelledby="cs-tab-{slug(c)}">
+          <div class="cs-media"><img {src} alt="{e(c["alt"])}" width="1080" height="1080" {load} decoding="async"></div>
+          <div class="cs-body">
+            <h2 class="cs-name"><a href="{p}{c["href"]}">{e(c["name"])}<span aria-hidden="true">→</span></a></h2>
+            <p class="cs-hotel">{e(c["hotel"])} · {e(c["addr"])}</p>
+            <ul class="cs-has">{has}</ul>
+            <p class="cs-hours">{e(c["hours"])}</p>
+            <div class="btn-row"><a class="btn {"btn-light btn-arrow" if i == 0 else "btn-outline-light"}" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}{arrow}</a></div>
+            <p class="cs-other">{e(T["other"].format(o["name"]))} <button type="button" data-cs-tab="cs-tab-{slug(o)}">{e(T["see"])}</button></p>
           </div>
-        </li>''')
-    return '<ul class="city-grid">' + ''.join(out) + '</ul>'
+        </div>''')
+    return f'''<div class="city-switch" data-interval="5000">
+          <div class="cs-controls">
+            <div class="cs-tabs" role="tablist" aria-label="{e(T["label"])}">{tabs}</div>
+            <button class="cs-pause" type="button" aria-pressed="false" data-pause="{e(T["pause"])}" data-play="{e(T["play"])}" aria-label="{e(T["pause"])}">
+              <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+              <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+          <div class="cs-panels">{"".join(panels)}</div>
+        </div>'''
 
 
 def cta_band(p, title='Готови за малко време за себе си?', text='Резервирайте онлайн за Бургас или ни се обадете за Варна.'):
@@ -934,7 +961,7 @@ def inject_homepage():
     t = re.sub(r'<header class="site-header">.*?</header>', header('').replace('\n  ', '\n  ', 1), t, count=1, flags=re.S)
     t = re.sub(r'<footer class="site-footer".*?</footer>\s*<!-- Slim cookie bar.*?</div>', footer(''), t, count=1, flags=re.S)
     t = t.replace('href="./spa-burgas/"', 'href="spa-burgas/"')
-    t = re.sub(r'<!-- CITY-CARDS -->.*?<!-- /CITY-CARDS -->', lambda m: '<!-- CITY-CARDS -->' + city_cards('') + '<!-- /CITY-CARDS -->', t, count=1, flags=re.S)
+    t = re.sub(r'<!-- CITY-CARDS -->.*?<!-- /CITY-CARDS -->', lambda m: '<!-- CITY-CARDS -->' + city_switch('') + '<!-- /CITY-CARDS -->', t, count=1, flags=re.S)
     open(f, 'w', encoding='utf-8').write(t)
 
 

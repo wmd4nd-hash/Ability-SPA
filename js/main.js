@@ -47,9 +47,9 @@
     el.classList.add('split-ready');
   }
   if (!reduce) {
-    document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
+    document.querySelectorAll('.hero h1, .hero2 h1, .hero3 h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
     requestAnimationFrame(function () { requestAnimationFrame(function () {
-      document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
+      document.querySelectorAll('.hero h1, .hero2 h1, .hero3 h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
     }); });
   }
 
@@ -78,6 +78,47 @@
     items.forEach(function (el) { el.classList.add('is-in'); });
     document.querySelectorAll('.split-ready').forEach(function (h) { h.classList.add('words-in'); });
   }
+
+  // Бургас / Варна switch (homepage): changes every 5 s. The progress line on the active tab is a CSS
+  // animation; when it ends, the next city shows – so pausing it (button, hover, focus, off-screen) pauses the switch.
+  // Picking a city stops the automatic change for good; reduced motion never starts it.
+  document.querySelectorAll('.city-switch').forEach(function (sw) {
+    var tabs = Array.prototype.slice.call(sw.querySelectorAll('[role="tab"]'));
+    var pause = sw.querySelector('.cs-pause');
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).classList.toggle('is-active', on);
+      });
+      if (focus) tab.focus();
+    }
+    function stop() { sw.classList.remove('is-auto'); }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { stop(); select(t); });
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!n) return;
+        e.preventDefault(); stop(); select(tabs[(i + n + tabs.length) % tabs.length], true);
+      });
+      t.querySelector('.cs-bar').addEventListener('animationend', function () {
+        if (sw.classList.contains('is-auto')) select(tabs[(i + 1) % tabs.length]);
+      });
+    });
+    sw.querySelectorAll('[data-cs-tab]').forEach(function (b) {
+      b.addEventListener('click', function () { stop(); select(document.getElementById(b.getAttribute('data-cs-tab')), true); });
+    });
+    if (reduce || tabs.length < 2) return;
+    sw.classList.add('is-auto');
+    pause.addEventListener('click', function () {
+      var paused = sw.classList.toggle('is-paused');
+      pause.setAttribute('aria-pressed', String(paused));
+      pause.setAttribute('aria-label', pause.getAttribute(paused ? 'data-play' : 'data-pause'));
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { sw.classList.toggle('is-offscreen', !en[0].isIntersecting); }).observe(sw);
+    }
+  });
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];
