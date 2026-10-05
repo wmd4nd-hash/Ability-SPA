@@ -105,9 +105,6 @@
         if (sw.classList.contains('is-auto')) select(tabs[(i + 1) % tabs.length]);
       });
     });
-    sw.querySelectorAll('[data-cs-tab]').forEach(function (b) {
-      b.addEventListener('click', function () { stop(); select(document.getElementById(b.getAttribute('data-cs-tab')), true); });
-    });
     if (reduce || tabs.length < 2) return;
     sw.classList.add('is-auto');
     pause.addEventListener('click', function () {

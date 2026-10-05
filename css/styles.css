@@ -1011,3 +1011,20 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .hero3-head { max-width: 640px; }
+
+/* ---------- Hero, less crowded: headline, city tabs, one meta line, one facilities line, two actions ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.city-switch .cs-controls { margin: 28px 0 24px; }
+.cs-hotel { margin: 0 0 10px; line-height: 1.5; }
+.cs-hotel .cs-hours { display: inline; margin: 0; font-weight: 600; color: var(--gold); }
+.cs-has { display: block; margin: 0 0 24px; color: var(--white); font-weight: 500; }
+.cs-has span { color: var(--gold); margin: 0 4px; }
+.city-switch .btn-row { align-items: center; gap: 8px 24px; }
+.cs-more { display: inline-flex; align-items: center; min-height: 44px; color: var(--white); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .45); text-underline-offset: 4px; }
+.cs-more:hover { text-decoration-color: var(--gold); }
+.cs-more span { display: inline-block; margin-left: 6px; color: var(--gold); transition: margin-left .3s var(--ease-out); }
+.cs-more:hover span { margin-left: 10px; }
+@media (min-width: 1024px) {
+  .cs-hotel br { display: none; }
+  .cs-hotel .cs-hours::before { content: "·"; margin: 0 8px; color: #E9E1D2; font-weight: 400; }
+}

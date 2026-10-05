@@ -421,33 +421,33 @@ def cards(p, items):
 CITIES = {
     'bg': [dict(name='Бургас', href='spa-burgas/', hotel='хотел „България“', addr='ул. „Александровска“ 21',
                 img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='Закритият басейн в Ability Spa Бургас',
-                has=['Басейн и джакузи', 'Детски басейн', 'Сауни и хамам', 'Солна стая', 'Фитнес Technogym', 'Масажи и козметика'],
+                has=['Басейн и джакузи', 'Сауни и хамам', 'Солна стая', 'Фитнес', 'Масажи'],
                 hours='Всеки ден 07:00 – 22:00', cta=(BOOK_BURGAS, 'Резервирай онлайн')),
            dict(name='Варна', href='spa-varna/', hotel='хотел „Черно море“', addr='бул. „Сливница“ 33',
                 img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='Инфрачервената пейка в Ability Spa&Wellness Варна',
-                has=['Сауни и солна парна баня', 'Инфрачервена пейка', 'Фитнес и групови тренировки', 'Релакс зона с камина', 'Масажи и СПА терапии'],
+                has=['Сауни и солна парна баня', 'Инфрачервена пейка', 'Фитнес', 'Масажи'],
                 hours='Всеки ден [07:00 или 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Обадете се'))],
     'en': [dict(name='Burgas', href='en/spa-burgas/', hotel='Hotel Bulgaria', addr='21 Aleksandrovska St.',
                 img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='The indoor pool at Ability Spa Burgas',
-                has=['Indoor pool & jacuzzi', "Children's pool", 'Saunas & hamam', 'Salt room', 'Technogym gym', 'Massages & beauty'],
+                has=['Pool & jacuzzi', 'Saunas & hamam', 'Salt room', 'Gym', 'Massages'],
                 hours='Daily 07:00 – 22:00', cta=(BOOK_BURGAS, 'Book online')),
            dict(name='Varna', href='en/spa-varna/', hotel='Hotel Cherno More', addr='33 Slivnitsa Blvd.',
                 img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='The infrared bench at Ability Spa&Wellness Varna',
-                has=['Saunas & salt steam bath', 'Infrared bench', 'Gym & group classes', 'Relax zone with fireplace', 'Massages & body therapies'],
+                has=['Saunas & salt steam bath', 'Infrared bench', 'Gym', 'Massages'],
                 hours='Daily [07:00 or 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Call to book'))],
 }
 
 
 CS_TEXT = {
     'bg': dict(label='Изберете обект', pause='Спри автоматичната смяна', play='Пусни автоматичната смяна',
-               other='Търсите {}?', see='Вижте какво има там'),
+               more='Повече за {}'),
     'en': dict(label='Choose a location', pause='Stop switching automatically', play='Switch automatically',
-               other='Looking for {}?', see='See what is there'),
+               more='More about {}'),
 }
 
 
 def city_switch(p, lang='bg'):
-    """Бургас / Варна switch (homepage variant D). Changes every 5 s (js/main.js) with a progress line, a pause button,
+    """Бургас / Варна switch (homepage variant D). Changes every 5 s (js/main.js, no visible timer), a pause button,
     pause on hover / focus / off-screen, stops for good once a city is picked, never moves for reduced motion.
     Without JS both cities simply show one under the other."""
     T, cs = CS_TEXT[lang], CITIES[lang]
@@ -457,24 +457,21 @@ def city_switch(p, lang='bg'):
         for i, c in enumerate(cs))
     panels = []
     for i, c in enumerate(cs):
-        o = cs[1 - i]
         if c['w']:
             src = f'src="{p}{c["img"]}-{c["w"][1]}.webp" srcset="{p}{c["img"]}-{c["w"][0]}.webp {c["w"][0]}w, {p}{c["img"]}-{c["w"][1]}.webp {c["w"][1]}w" sizes="(min-width: 1024px) 58vw, 100vw"'
         else:
             src = f'src="{p}{c["img"]}.webp"'
-        has = ''.join(f'<li>{e(x)}</li>' for x in c['has'])
+        has = ' <span aria-hidden="true">·</span> '.join(e(x) for x in c['has'])
         ext = c['cta'][0].startswith(('http', 'tel:'))
         load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
         arrow = ' <span aria-hidden="true">→</span>' if i == 0 else ''
         panels.append(f'''<div class="cs-panel{" is-active" if i == 0 else ""}" id="cs-panel-{slug(c)}" role="tabpanel" aria-labelledby="cs-tab-{slug(c)}">
           <div class="cs-media"><img {src} alt="{e(c["alt"])}" width="1080" height="1080" {load} decoding="async"></div>
           <div class="cs-body">
-            <h2 class="cs-name"><a href="{p}{c["href"]}">{e(c["name"])}<span aria-hidden="true">→</span></a></h2>
-            <p class="cs-hotel">{e(c["hotel"])} · {e(c["addr"])}</p>
-            <ul class="cs-has">{has}</ul>
-            <p class="cs-hours">{e(c["hours"])}</p>
-            <div class="btn-row"><a class="btn {"btn-light btn-arrow" if i == 0 else "btn-outline-light"}" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}{arrow}</a></div>
-            <p class="cs-other">{e(T["other"].format(o["name"]))} <button type="button" data-cs-tab="cs-tab-{slug(o)}">{e(T["see"])}</button></p>
+            <h2 class="sr-only">{e(c["name"])}</h2>
+            <p class="cs-hotel">{e(c["hotel"])} · {e(c["addr"])}<br><span class="cs-hours">{e(c["hours"])}</span></p>
+            <p class="cs-has">{has}</p>
+            <div class="btn-row"><a class="btn {"btn-light btn-arrow" if i == 0 else "btn-outline-light"}" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}{arrow}</a><a class="cs-more" href="{p}{c["href"]}">{e(T["more"].format(c["name"]))} <span aria-hidden="true">→</span></a></div>
           </div>
         </div>''')
     return f'''<div class="city-switch" data-interval="5000">
