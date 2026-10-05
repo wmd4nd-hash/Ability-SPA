@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Варианти – Бургас / Варна</title>
+  <!-- PROTOTYPE – design options for the owner, not for search engines -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ---------- Page chrome for the comparison ---------- */
+    .vbar { position: sticky; top: 0; z-index: 30; background: #fff; border-bottom: 1px solid var(--line); }
+    .vbar-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-top: 10px; padding-bottom: 10px; }
+    .vbar strong { font-family: var(--serif); font-size: 1.375rem; }
+    .vbar nav { display: flex; flex-wrap: wrap; gap: 6px; }
+    .vbar nav a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; font-weight: 700; text-decoration: none; }
+    .vbar nav a:hover { background: var(--espresso); color: #fff; }
+    .vlabel { background: var(--gold); color: var(--espresso); }
+    .vlabel .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding-top: 12px; padding-bottom: 12px; }
+    .vlabel b { font-size: 1.125rem; }
+    .vlabel span { font-size: 1rem; }
+    .vsec { scroll-margin-top: 70px; }
+
+    /* Shared bits */
+    .dark { background: var(--espresso); color: var(--white); }
+    .dark .eyebrow { color: var(--gold); }
+    .dark h1, .dark h2 { color: var(--white); }
+    .v-h1 { font-size: clamp(2.5rem, 10vw, 5.25rem); line-height: 1; margin: 0; }
+    .v-lead { font-size: 1.1875rem; max-width: 46ch; margin: 12px 0 0; }
+    .dark .v-lead { color: var(--sand); }
+    .dots li { position: relative; padding: 3px 0 3px 18px; line-height: 1.35; }
+    .dots li::before { content: ""; position: absolute; left: 1px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    .hours { font-weight: 600; color: var(--gold); }
+    .city-nm { font-family: var(--serif); font-weight: 700; line-height: 1; margin: 0 0 6px; }
+    .city-nm a { text-decoration: none; }
+    .city-nm span { font-family: var(--sans); font-size: .55em; vertical-align: .2em; margin-left: 8px; color: var(--gold); }
+
+    /* ---------- B: dark, full photos side by side ---------- */
+    .vb-head { padding-top: 36px; padding-bottom: 28px; }
+    .vb-grid { display: grid; gap: 2px; }
+    .vb-city { position: relative; min-height: 440px; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; }
+    .vb-city img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform 1s var(--ease-out); }
+    .vb-city:hover img { transform: scale(1.04); }
+    .vb-city::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(20, 15, 13, .96) 0%, rgba(20, 15, 13, .82) 45%, rgba(20, 15, 13, .15) 85%); }
+    .vb-body { padding: 24px var(--gutter) 28px; width: 100%; }
+    .vb-body .city-nm { font-size: 3rem; }
+    .vb-hotel { color: var(--sand); font-weight: 500; margin: 0 0 12px; }
+    .vb-has { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; margin: 0 0 14px; }
+    .vb-body .btn-row { margin-top: 14px; }
+
+    /* ---------- C: dark band with cards ---------- */
+    .vc { padding-top: 36px; padding-bottom: 44px; }
+    .vc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+    .vc-card { position: relative; display: flex; flex-direction: column; background: #2C2421; border: 1px solid rgba(221, 211, 192, .16); border-radius: 10px; overflow: hidden; }
+    .vc-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+    .vc-body { display: flex; flex-direction: column; flex: 1; padding: 14px 12px; }
+    .vc-body .city-nm { font-size: 2rem; }
+    .vc-body .city-nm a::after { content: ""; position: absolute; inset: 0; }
+    .vc-hotel { font-size: .9375rem; color: var(--sand); margin: 0 0 10px; }
+    .vc-has li { font-size: .9375rem; }
+    .vc-has li:nth-child(n+5) { display: none; }
+    .vc-body .hours { font-size: .875rem; margin: auto 0 12px; padding-top: 10px; }
+    .vc-body .btn { position: relative; z-index: 1; width: 100%; min-height: 44px; padding: 0 8px; font-size: .8125rem; }
+
+    /* ---------- D: dark, switch between the two ---------- */
+    .vd { padding-top: 36px; padding-bottom: 44px; }
+    .vd-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; margin: 24px 0 18px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(221, 211, 192, .2); }
+    .vd-tab { min-height: 56px; border: 0; border-radius: 999px; background: transparent; color: var(--sand); font: 700 1.5rem/1 var(--serif); cursor: pointer; transition: background-color .25s, color .25s; }
+    .vd-tab[aria-selected="true"] { background: var(--gold); color: var(--espresso); }
+    .vd-panel { display: grid; gap: 18px; animation: rise-in .6s var(--ease-out) both; }
+    .vd-panel[hidden] { display: none; }
+    .vd-panel img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 10px; }
+    .vd-panel .city-nm { font-size: 3rem; }
+    .vd-hotel { color: var(--sand); margin: 0 0 14px; }
+    .vd-has { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; margin: 0 0 14px; }
+    .vd-other { margin-top: 14px; color: var(--sand); }
+    .vd-other button { border: 0; background: none; color: var(--white); font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; padding: 0; }
+
+    /* ---------- E: dark, two big alternating rows ---------- */
+    .ve { padding-top: 36px; padding-bottom: 20px; }
+    .ve-row { display: grid; gap: 18px; padding: 28px 0; border-top: 1px solid rgba(221, 211, 192, .18); }
+    .ve-row:first-of-type { border-top: 0; }
+    .ve-row img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+    .ve-num { font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--gold); margin: 0 0 4px; }
+    .ve-row .city-nm { font-size: clamp(3rem, 12vw, 5.5rem); }
+    .ve-hotel { color: var(--sand); font-size: 1.0625rem; margin: 0 0 16px; }
+    .ve-has { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin: 0 0 16px; font-size: 1.0625rem; }
+
+    /* ---------- F: each city its own colour (taken from its photo) ---------- */
+    .vf-head { padding-top: 36px; padding-bottom: 24px; background: var(--white); }
+    .vf-grid { display: grid; }
+    .vf-city { position: relative; display: grid; color: #fff; overflow: hidden; }
+    .vf-burgas { background: #0E2A3A; }
+    .vf-varna { background: #3B2416; }
+    .vf-city img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+    .vf-body { padding: 22px var(--gutter) 30px; }
+    .vf-body .city-nm { font-size: 3rem; color: #fff; }
+    .vf-tag { display: inline-block; font-size: .875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; background: rgba(255, 255, 255, .14); margin-bottom: 10px; }
+    .vf-hotel { color: rgba(255, 255, 255, .85); margin: 0 0 12px; }
+    .vf-has { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; margin: 0 0 14px; }
+    .vf-burgas .dots li::before { background: #6FC3E8; }
+    .vf-varna .dots li::before { background: #E8A86F; }
+    .vf-burgas .hours { color: #9FD6EE; }
+    .vf-varna .hours { color: #F0C08F; }
+
+    @media (min-width: 720px) {
+      .vb-grid { grid-template-columns: 1fr 1fr; }
+      .vb-city { min-height: 640px; }
+      .vb-body { padding: 32px 40px 40px; }
+      .vb-body .city-nm { font-size: 4rem; }
+      .vb-head, .vf-head { display: grid; grid-template-columns: 1.3fr 1fr; align-items: end; gap: 40px; }
+      .vc-grid { gap: 20px; }
+      .vc-card img { aspect-ratio: 16 / 10; }
+      .vc-body { padding: 24px 28px 28px; }
+      .vc-body .city-nm { font-size: 3rem; }
+      .vc-has { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+      .vc-has li { font-size: 1rem; }
+      .vc-has li:nth-child(n+5) { display: block; }
+      .vc-body .btn { width: auto; align-self: flex-start; padding: 0 26px; font-size: .9375rem; }
+      .vd-tabs { max-width: 520px; }
+      .vd-panel { grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+      .ve-row { grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; padding: 48px 0; }
+      .ve-row.rev img { order: 2; }
+      .vf-grid { grid-template-columns: 1fr 1fr; }
+      .vf-body { padding: 28px 40px 40px; }
+      .vf-body .city-nm { font-size: 4rem; }
+    }
+    @media (min-width: 1024px) {
+      .vb-head, .vc, .vd, .ve, .vf-head { padding-top: 64px; }
+      .vc, .vd { padding-bottom: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="vbar">
+    <div class="container vbar-inner">
+      <strong>Бургас / Варна – варианти</strong>
+      <nav aria-label="Варианти">
+        <a href="#a">A</a><a href="#b">B</a><a href="#c">C</a><a href="#d">D</a><a href="#e">E</a><a href="#f">F</a>
+      </nav>
+      <a class="text-link" href="../">← Към сайта</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= A: current ================= -->
+    <section class="vsec" id="a">
+      <div class="vlabel"><div class="container"><b>A · Сега на сайта</b><span>Светъл фон, две карти една до друга.</span></div></div>
+      <div class="hero2">
+        <div class="container hero2-head">
+          <div><p class="eyebrow">Градски СПА · два обекта</p><h2 class="v-h1">СПА център в&nbsp;Бургас и&nbsp;Варна</h2></div>
+          <p class="hero2-lead">В центъра на двата града – в хотел „България“ в Бургас и в хотел „Черно море“ във Варна. Всеки обект има свои зони.</p>
+        </div>
+        <div class="container">
+          <ul class="city-grid">
+            <li class="city-card"><div class="city-media"><img class="city-img" src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080"></div>
+              <div class="city-body"><h3 class="city-name"><a href="../spa-burgas/">Бургас<span class="city-arrow" aria-hidden="true">→</span></a></h3><p class="city-hotel">хотел „България“<span> · ул. „Александровска“ 21</span></p>
+                <ul class="city-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+                <p class="city-hours">Всеки ден 07:00 – 22:00</p><a class="btn btn-dark city-cta" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн</a></div></li>
+            <li class="city-card"><div class="city-media"><img class="city-img" src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1080" height="1080"></div>
+              <div class="city-body"><h3 class="city-name"><a href="../spa-varna/">Варна<span class="city-arrow" aria-hidden="true">→</span></a></h3><p class="city-hotel">хотел „Черно море“<span> · бул. „Сливница“ 33</span></p>
+                <ul class="city-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+                <p class="city-hours">Всеки ден [07:00 или 09:00] – 21:00</p><a class="btn btn-outline city-cta" href="tel:+359899994149">Обадете се</a></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= B: dark, full photos ================= -->
+    <section class="vsec dark" id="b">
+      <div class="vlabel"><div class="container"><b>B · Тъмен, снимки на цял екран</b><span>Двата обекта като две големи половини; текстът е върху тъмен преход, не върху светлата част на снимката.</span></div></div>
+      <div class="container vb-head">
+        <div><p class="eyebrow">Градски СПА · два обекта</p><h2 class="v-h1">СПА център в&nbsp;Бургас и&nbsp;Варна</h2></div>
+        <p class="v-lead">В центъра на двата града – в хотел „България“ и в хотел „Черно море“. Всеки обект има свои зони.</p>
+      </div>
+      <div class="vb-grid">
+        <article class="vb-city">
+          <img src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080">
+          <div class="vb-body">
+            <h3 class="city-nm"><a href="../spa-burgas/">Бургас<span aria-hidden="true">→</span></a></h3>
+            <p class="vb-hotel">хотел „България“ · ул. „Александровска“ 21</p>
+            <ul class="dots vb-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+            <p class="hours">Всеки ден 07:00 – 22:00</p>
+            <div class="btn-row"><a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        <article class="vb-city">
+          <img src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1500" height="1000">
+          <div class="vb-body">
+            <h3 class="city-nm"><a href="../spa-varna/">Варна<span aria-hidden="true">→</span></a></h3>
+            <p class="vb-hotel">хотел „Черно море“ · бул. „Сливница“ 33</p>
+            <ul class="dots vb-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+            <p class="hours">Всеки ден [07:00 или 09:00] – 21:00</p>
+            <div class="btn-row"><a class="btn btn-outline-light" href="tel:+359899994149">Обадете се: 0899 994 149</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= C: dark band with cards ================= -->
+    <section class="vsec dark" id="c">
+      <div class="vlabel"><div class="container"><b>C · Тъмна лента с карти</b><span>Като A, но на тъмен фон – и двата обекта се виждат на първия екран на телефон.</span></div></div>
+      <div class="container vc">
+        <div class="vb-head" style="padding:0">
+          <div><p class="eyebrow">Градски СПА · два обекта</p><h2 class="v-h1">СПА център в&nbsp;Бургас и&nbsp;Варна</h2></div>
+          <p class="v-lead">В центъра на двата града. Всеки обект има свои зони.</p>
+        </div>
+        <ul class="vc-grid">
+          <li class="vc-card"><img src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080">
+            <div class="vc-body"><h3 class="city-nm"><a href="../spa-burgas/">Бургас<span aria-hidden="true">→</span></a></h3><p class="vc-hotel">хотел „България“</p>
+              <ul class="dots vc-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+              <p class="hours">Всеки ден 07:00 – 22:00</p><a class="btn btn-light" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн</a></div></li>
+          <li class="vc-card"><img src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1500" height="1000">
+            <div class="vc-body"><h3 class="city-nm"><a href="../spa-varna/">Варна<span aria-hidden="true">→</span></a></h3><p class="vc-hotel">хотел „Черно море“</p>
+              <ul class="dots vc-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+              <p class="hours">Всеки ден [07:00 или 09:00] – 21:00</p><a class="btn btn-outline-light" href="tel:+359899994149">Обадете се</a></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= D: dark, switch ================= -->
+    <section class="vsec dark" id="d">
+      <div class="vlabel"><div class="container"><b>D · Превключвател Бургас / Варна</b><span>Гостът първо избира града и вижда само неговите зони – без смесване.</span></div></div>
+      <div class="container vd">
+        <p class="eyebrow">Градски СПА · два обекта</p>
+        <h2 class="v-h1">Изберете своя СПА</h2>
+        <div class="vd-tabs" role="tablist" aria-label="Обект">
+          <button class="vd-tab" role="tab" id="t-burgas" aria-selected="true" aria-controls="p-burgas" type="button">Бургас</button>
+          <button class="vd-tab" role="tab" id="t-varna" aria-selected="false" aria-controls="p-varna" type="button" tabindex="-1">Варна</button>
+        </div>
+        <div class="vd-panel" id="p-burgas" role="tabpanel" aria-labelledby="t-burgas">
+          <img src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080">
+          <div>
+            <h3 class="city-nm"><a href="../spa-burgas/">Бургас<span aria-hidden="true">→</span></a></h3>
+            <p class="vd-hotel">хотел „България“ · ул. „Александровска“ 21</p>
+            <ul class="dots vd-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+            <p class="hours">Всеки ден 07:00 – 22:00</p>
+            <div class="btn-row"><a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн <span aria-hidden="true">→</span></a></div>
+            <p class="vd-other">Търсите Варна? <button type="button" data-tab="t-varna">Вижте какво има там</button></p>
+          </div>
+        </div>
+        <div class="vd-panel" id="p-varna" role="tabpanel" aria-labelledby="t-varna" hidden>
+          <img src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1500" height="1000">
+          <div>
+            <h3 class="city-nm"><a href="../spa-varna/">Варна<span aria-hidden="true">→</span></a></h3>
+            <p class="vd-hotel">хотел „Черно море“ · бул. „Сливница“ 33</p>
+            <ul class="dots vd-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+            <p class="hours">Всеки ден [07:00 или 09:00] – 21:00</p>
+            <div class="btn-row"><a class="btn btn-light" href="tel:+359899994149">Обадете се: 0899 994 149</a></div>
+            <p class="vd-other">Търсите Бургас? <button type="button" data-tab="t-burgas">Вижте какво има там</button></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= E: dark, two big rows ================= -->
+    <section class="vsec dark" id="e">
+      <div class="vlabel"><div class="container"><b>E · Тъмен, два големи реда</b><span>По-редакционно: всеки град има свой голям ред, снимките са от двете страни.</span></div></div>
+      <div class="container ve">
+        <p class="eyebrow">Градски СПА · два обекта</p>
+        <h2 class="v-h1">СПА център в&nbsp;Бургас и&nbsp;Варна</h2>
+        <article class="ve-row" style="margin-top:12px">
+          <img src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080">
+          <div>
+            <p class="ve-num">01</p>
+            <h3 class="city-nm"><a href="../spa-burgas/">Бургас<span aria-hidden="true">→</span></a></h3>
+            <p class="ve-hotel">хотел „България“ · ул. „Александровска“ 21</p>
+            <ul class="dots ve-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+            <p class="hours">Всеки ден 07:00 – 22:00</p>
+            <div class="btn-row"><a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        <article class="ve-row rev">
+          <img src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1500" height="1000">
+          <div>
+            <p class="ve-num">02</p>
+            <h3 class="city-nm"><a href="../spa-varna/">Варна<span aria-hidden="true">→</span></a></h3>
+            <p class="ve-hotel">хотел „Черно море“ · бул. „Сливница“ 33</p>
+            <ul class="dots ve-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+            <p class="hours">Всеки ден [07:00 или 09:00] – 21:00</p>
+            <div class="btn-row"><a class="btn btn-outline-light" href="tel:+359899994149">Обадете се: 0899 994 149</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= F: each city its own colour ================= -->
+    <section class="vsec" id="f">
+      <div class="vlabel"><div class="container"><b>F · Всеки град със свой цвят</b><span>Бургас – дълбоко синьо от басейна, Варна – топло кафяво от дървото. Най-силното разграничение.</span></div></div>
+      <div class="container vf-head">
+        <div><p class="eyebrow">Градски СПА · два обекта</p><h2 class="v-h1">СПА център в&nbsp;Бургас и&nbsp;Варна</h2></div>
+        <p class="v-lead">В центъра на двата града. Всеки обект има свои зони.</p>
+      </div>
+      <div class="vf-grid">
+        <article class="vf-city vf-burgas">
+          <img src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн в Бургас" width="1080" height="1080">
+          <div class="vf-body">
+            <span class="vf-tag">Басейн и СПА</span>
+            <h3 class="city-nm"><a href="../spa-burgas/">Бургас<span aria-hidden="true" style="color:#9FD6EE">→</span></a></h3>
+            <p class="vf-hotel">хотел „България“ · ул. „Александровска“ 21</p>
+            <ul class="dots vf-has"><li>Басейн и джакузи</li><li>Детски басейн</li><li>Сауни и хамам</li><li>Солна стая</li><li>Фитнес Technogym</li><li>Масажи и козметика</li></ul>
+            <p class="hours">Всеки ден 07:00 – 22:00</p>
+            <div class="btn-row"><a class="btn btn-light btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+        <article class="vf-city vf-varna">
+          <img src="../images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка във Варна" width="1500" height="1000">
+          <div class="vf-body">
+            <span class="vf-tag">СПА и фитнес</span>
+            <h3 class="city-nm"><a href="../spa-varna/">Варна<span aria-hidden="true" style="color:#F0C08F">→</span></a></h3>
+            <p class="vf-hotel">хотел „Черно море“ · бул. „Сливница“ 33</p>
+            <ul class="dots vf-has"><li>Сауни и солна парна баня</li><li>Инфрачервена пейка</li><li>Фитнес и групови тренировки</li><li>Релакс зона с камина</li><li>Масажи и СПА терапии</li></ul>
+            <p class="hours">Всеки ден [07:00 или 09:00] – 21:00</p>
+            <div class="btn-row"><a class="btn btn-outline-light" href="tel:+359899994149">Обадете се: 0899 994 149</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // D: tabs (arrow keys move between Бургас and Варна)
+    (function () {
+      var tabs = [document.getElementById('t-burgas'), document.getElementById('t-varna')];
+      function select(t) {
+        tabs.forEach(function (x) {
+          var on = x === t;
+          x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1;
+          document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+        });
+      }
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { select(t); });
+        t.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = tabs[1 - i]; select(n); n.focus(); }
+        });
+      });
+      document.querySelectorAll('[data-tab]').forEach(function (b) {
+        b.addEventListener('click', function () { var t = document.getElementById(b.getAttribute('data-tab')); select(t); t.focus(); });
+      });
+    })();
+  </script>
+</body>
+</html>
