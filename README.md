@@ -90,7 +90,7 @@ vouchers, first-visit FAQ). Arches were dropped at the owner's request.
 - *Two locations at the top.* A single pool photo under "СПА център в Бургас и Варна" suggested a pool in Varna too.
   The homepage opens with a full-bleed Бургас / Варна switch (variant D from `varianti/`): one city at a time, its photo filling the hero, with
   its photo (pool / infrared bench), hotel, what it has, hours and its own action (online booking / call).
-  It changes every 5 s with a progress line on the active tab; pause button, pauses on hover, keyboard focus and
+  It changes every 5 s (no visible timer); pause button, pauses on hover, keyboard focus and
   off-screen, stops for good once a city is picked, never moves with reduced motion; without JS both show.
   Data lives in `CITIES` in `tools/build.py` (`city_switch()`); the English homepage uses the same switch.
 - *Language switch always visible.* Phones get an EN / BG button in the header (it replaces the call icon, which

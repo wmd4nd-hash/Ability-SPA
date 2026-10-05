@@ -79,7 +79,7 @@
     document.querySelectorAll('.split-ready').forEach(function (h) { h.classList.add('words-in'); });
   }
 
-  // Бургас / Варна switch (homepage): changes every 5 s. The progress line on the active tab is a CSS
+  // Бургас / Варна switch (homepage): changes every 5 s. The timer is an invisible CSS animation on the active tab
   // animation; when it ends, the next city shows – so pausing it (button, hover, focus, off-screen) pauses the switch.
   // Picking a city stops the automatic change for good; reduced motion never starts it.
   document.querySelectorAll('.city-switch').forEach(function (sw) {
