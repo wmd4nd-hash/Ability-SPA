@@ -21,10 +21,11 @@
   });
 
 
-  // PROTOTYPE ONLY – colour palettes to compare. Shown once a page is opened with ?palette=a…f (kept while browsing).
+  // PROTOTYPE ONLY – colour palettes to compare. Shown once a page is opened with ?palette=a…g (kept while browsing).
   if (document.documentElement.hasAttribute('data-palette-ui')) {
     var pals = [['a', 'Сегашна', '#FFFFFF', '#201A18'], ['b', 'Топъл пясък', '#DDD3C0', '#201A18'], ['c', 'Злато', '#C39F76', '#201A18'],
-      ['d', 'Мока', '#F1E9DC', '#3A2C26'], ['e', 'Вечер', '#201A18', '#C39F76'], ['f', 'Басейн', '#F1ECE3', '#16302F']];
+      ['d', 'Мока', '#F1E9DC', '#3A2C26'], ['e', 'Вечер', '#201A18', '#C39F76'], ['f', 'Басейн', '#F1ECE3', '#16302F'],
+      ['g', 'Светла', '#F7F2EA', '#201A18']];
     var pick = document.createElement('div');
     pick.className = 'palette-picker'; pick.setAttribute('role', 'group'); pick.setAttribute('aria-label', 'Цветова комбинация (прототип)');
     pick.innerHTML = '<button type="button" class="pp-toggle" aria-expanded="false" aria-label="Цветове"><i></i></button><span>Цветове</span>' + pals.map(function (x) {

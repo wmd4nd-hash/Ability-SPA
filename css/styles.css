@@ -1100,3 +1100,38 @@ html[data-palette="f"] .voucher-card { background: linear-gradient(135deg, #2246
   .palette-picker:not(.is-open) [data-p] { display: none; }
   .palette-picker.is-open { padding-right: 4px; }
 }
+
+/* g · Светла – brown only as an accent (text, buttons, active tab, thin lines); every large surface is light.
+   Dark components are flipped by redefining the colour variables inside them. */
+html[data-palette="g"] :is(.section-dark, .location, .site-footer, .facts, .hero3, .city-section) {
+  --white: #201A18; --sand: #201A18; --gold: #6B4E2E; --line-dark: rgba(32, 26, 24, .18);
+}
+html[data-palette="g"] .section-dark { --espresso: #DDD3C0; }
+html[data-palette="g"] .location { --espresso: #F3EFE7; }
+html[data-palette="g"] .facts { --espresso: #F3EFE7; }
+html[data-palette="g"] .site-footer { --espresso: #DDD3C0; }
+html[data-palette="g"] .site-footer .logo-footer img { content: url("../images/logo-horizontal.png"); }
+html[data-palette="g"] .voucher-card { background: linear-gradient(135deg, #D7B48C 0%, #C39F76 100%); color: #201A18; border-color: rgba(32, 26, 24, .12); box-shadow: 0 24px 50px rgba(32, 26, 24, .16); }
+html[data-palette="g"] .voucher-card .vc-logo { content: url("../images/ability-spa-logo.png"); }
+
+/* hero: the photo fades into cream instead of espresso; dark text, brown active tab and button */
+html[data-palette="g"] :is(.hero3, .city-section) { --espresso: #F7F2EA; --veil: 247, 242, 234; }
+html[data-palette="g"] :is(.hero3 h1, .cs-name) { text-shadow: none; }
+html[data-palette="g"] .cs-hotel { color: #3A2F2B; }
+html[data-palette="g"] .cs-hotel .cs-hours { color: #6B4E2E; }
+html[data-palette="g"] .cs-hotel .cs-hours::before { color: #3A2F2B; }
+html[data-palette="g"] .cs-tabs { background: rgba(255, 255, 255, .6); border-color: rgba(32, 26, 24, .14); }
+html[data-palette="g"] .cs-tab[aria-selected="true"] { background: #201A18; color: #F7F2EA; }
+html[data-palette="g"] .cs-pause { background: rgba(255, 255, 255, .6); border-color: rgba(32, 26, 24, .2); }
+html[data-palette="g"] .cs-pause:hover { background: rgba(255, 255, 255, .9); }
+html[data-palette="g"] .cs-more { text-decoration-color: rgba(32, 26, 24, .35); }
+html[data-palette="g"] .city-switch .cs-media::after {
+  background: linear-gradient(to top, rgba(var(--veil), .98) 0%, rgba(var(--veil), .95) 52%, rgba(var(--veil), .7) 64%, rgba(var(--veil), 0) 82%);
+}
+@media (min-width: 1024px) {
+  html[data-palette="g"] .city-switch .cs-media::after {
+    background: linear-gradient(to right, rgba(var(--veil), .97) 0%, rgba(var(--veil), .93) 36%, rgba(var(--veil), .65) 50%, rgba(var(--veil), 0) 68%);
+  }
+}
+html[data-palette="g"] .site-footer .btn-light { color: #DDD3C0; }
+@media (max-width: 719px) { .palette-picker { left: auto; right: 12px; } }

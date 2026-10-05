@@ -69,8 +69,8 @@ at reception and the payment provider are `[PLACEHOLDERS]` for the owner to deci
 
 ## Colour combinations (prototype only)
 
-Open any page with `?palette=a` … `f` to compare colour combinations on the real pages; a small picker
-(bottom-left, collapsed to one swatch on phones) switches between them and the choice is kept while browsing (this tab only).
+Open any page with `?palette=a` … `g` to compare colour combinations on the real pages; a small picker
+(bottom-left; bottom-right and collapsed to one swatch on phones) switches between them and the choice is kept while browsing (this tab only).
 Without `?palette` the site looks as before (a).
 
 - **a · Сегашна** – white pages, light sand sections, espresso bands (current)
@@ -79,6 +79,8 @@ Without `?palette` the site looks as before (a).
 - **d · Мока** – softer, browner darks instead of near-black, warm off-white pages
 - **e · Вечер** – dark pages with light text and gold accents (light logo, gold book button)
 - **f · Басейн** – a deep pool teal (from the Burgas pool photo) in place of espresso – *outside the current brand colours*
+- **g · Светла** – brown only as an accent (text, buttons, active tab, thin lines): the hero photo fades into cream,
+  the statement band and footer are sand, location cards light, the voucher card gold
 
 All text pairs checked for ≥ 4.5:1 contrast. Once one is chosen: fold it into the `:root` colours and delete the
 palette block in `css/styles.css`, the picker in `js/main.js` and the palette line in the head script.
