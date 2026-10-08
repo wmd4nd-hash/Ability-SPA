@@ -86,7 +86,7 @@
   var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
     ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
     ' .location, .review, .voucher-card, .voucher-text, .two-col > *, .price-group, .contact-card, .cta-band-inner,' +
-    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .gallery-top, .gallery > li';
+    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .spots-bar, .spots';
   var items = document.querySelectorAll(revealSel);
   items.forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
@@ -146,14 +146,48 @@
     }
   });
 
-  // Photo carousels (phones): focusable for keyboard scrolling only while they actually scroll sideways.
-  var galleries = document.querySelectorAll('.gallery');
-  function galleryFocus() {
-    galleries.forEach(function (g) {
-      if (g.scrollWidth > g.clientWidth + 1) g.setAttribute('tabindex', '0'); else g.removeAttribute('tabindex');
+  // Locations carousel (homepage): arrows page through it, the Бургас / Варна chips jump to each city's intro card
+  // and show which city is in view. Without JS it is a plain sideways-scrolling row and the chips are anchor links.
+  document.querySelectorAll('.spots-wrap').forEach(function (w) {
+    var track = w.querySelector('.spots');
+    var btns = w.querySelectorAll('.spots-btn');
+    var chips = Array.prototype.slice.call(w.querySelectorAll('.chip'));
+    var how = reduce ? 'auto' : 'smooth';
+    function leftOf(el) {
+      return track.scrollLeft + el.getBoundingClientRect().left - track.getBoundingClientRect().left - parseFloat(getComputedStyle(track).paddingLeft);
+    }
+    function update() {
+      var x = track.scrollLeft, max = track.scrollWidth - track.clientWidth;
+      btns[0].disabled = x <= 2; btns[1].disabled = x >= max - 2;
+      var mid = track.getBoundingClientRect().left + track.clientWidth / 2, cur = chips[0];
+      chips.forEach(function (c) {
+        var t = document.getElementById(c.getAttribute('href').slice(1));
+        if (t && t.getBoundingClientRect().left <= mid) cur = c;
+      });
+      if (x >= max - 2) cur = chips[chips.length - 1];
+      chips.forEach(function (c) { if (c === cur) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current'); });
+      // focusable for keyboard scrolling only while it actually scrolls sideways
+      if (max > 1) track.setAttribute('tabindex', '0'); else track.removeAttribute('tabindex');
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { track.scrollBy({ left: +b.getAttribute('data-dir') * track.clientWidth * .8, behavior: how }); });
     });
-  }
-  if (galleries.length) { galleryFocus(); window.addEventListener('resize', galleryFocus); }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function (e) {
+        var t = document.getElementById(c.getAttribute('href').slice(1));
+        if (!t) return;
+        e.preventDefault();
+        track.scrollTo({ left: leftOf(t), behavior: how });
+      });
+    });
+    var queued = false;
+    track.addEventListener('scroll', function () {
+      if (queued) return; queued = true;
+      requestAnimationFrame(function () { queued = false; update(); });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];
