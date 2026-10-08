@@ -220,43 +220,48 @@
       </div>
     </section>
 
-    <!-- ============ II. LOCATIONS IN PHOTOS (one carousel: intro card per city + its photos; js/main.js) ============ -->
+    <!-- ============ II. LOCATIONS: Бургас | Варна switch, all six services of the chosen city at once (js/main.js) ============ -->
+    <!-- Варна „Масажи“ and „Спа терапии“ use treatment photos (volcanic stones, Gold Amber – both offered in Varna) – replace with photos from the Varna premises. -->
     <section class="section section-sand" id="obekti" aria-labelledby="obekti-title">
-      <div class="container spots-wrap">
+      <div class="container">
         <div class="section-head">
           <p class="eyebrow"><span class="num">II.</span> Обектите</p>
-          <h2 id="obekti-title">Два града, едно усещане</h2>
+          <h2 id="obekti-title">Какво ви очаква</h2>
         </div>
-        <div class="spots-bar">
-          <nav class="spots-chips" aria-label="Обект">
-            <a class="chip" href="#spot-burgas" aria-current="true">Бургас</a>
-            <a class="chip" href="#spot-varna">Варна</a>
-          </nav>
-          <div class="spots-nav">
-            <button class="spots-btn" type="button" data-dir="-1" aria-controls="spots" aria-label="Предишни снимки"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-            <button class="spots-btn" type="button" data-dir="1" aria-controls="spots" aria-label="Следващи снимки"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-          </div>
+        <div class="fac-tabs" role="tablist" aria-label="Изберете обект">
+          <button class="fac-tab" type="button" role="tab" id="fac-tab-burgas" aria-controls="fac-burgas" aria-selected="true">Бургас</button>
+          <button class="fac-tab" type="button" role="tab" id="fac-tab-varna" aria-controls="fac-varna" aria-selected="false" tabindex="-1">Варна</button>
         </div>
-        <ul class="spots" id="spots" aria-label="Снимки от обектите в Бургас и Варна">
-          <li class="spot-intro" id="spot-burgas">
-            <div><span class="spot-num">01</span><h3>Бургас</h3><p>хотел „България“<br>ул. „Александровска“ 21</p><p class="spot-hours">Всеки ден 07:00 – 22:00</p></div>
+        <div class="fac-panel" id="fac-burgas" role="tabpanel" aria-labelledby="fac-tab-burgas">
+          <div class="fac-top">
+            <h3 class="fac-city">Бургас</h3>
+            <p class="fac-meta">хотел „България“ · ул. „Александровска“ 21 · всеки ден 07:00 – 22:00</p>
             <a class="text-link" href="spa-burgas/">Повече за Бургас <span aria-hidden="true">→</span></a>
-          </li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/spa-burgas-basein-shezlongi-640.webp" srcset="images/spa-burgas-basein-shezlongi-640.webp 640w, images/spa-burgas-basein-shezlongi-1080.webp 1080w" sizes="(min-width: 1280px) 22vw, (min-width: 720px) 36vw, 74vw" alt="Закритият басейн с шезлонги и осветена синя стена в Ability SPA Бургас" width="1080" height="1080" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Бургас</span>Басейн</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/spa-burgas-dzhakuzi-basein-640.webp" srcset="images/spa-burgas-dzhakuzi-basein-640.webp 640w, images/spa-burgas-dzhakuzi-basein-1080.webp 1080w" sizes="(min-width: 1280px) 22vw, (min-width: 720px) 36vw, 74vw" alt="Гостенка до джакузито, зад нея закритият басейн с шезлонги" width="1080" height="1350" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Бургас</span>Джакузи</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/finlandska-sauna-burgas-640.webp" srcset="images/finlandska-sauna-burgas-640.webp 640w, images/finlandska-sauna-burgas-1080.webp 1080w, images/finlandska-sauna-burgas-1600.webp 1600w" sizes="(min-width: 1280px) 22vw, (min-width: 720px) 36vw, 74vw" alt="Гостенка почива във финландската сауна на Ability SPA Бургас" width="1080" height="720" loading="lazy" decoding="async" style="object-position: 62% 50%"></div><figcaption><span class="spot-city">Бургас</span>Финландска сауна</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/spa-burgas-fitnes-technogym-zala-640.webp" srcset="images/spa-burgas-fitnes-technogym-zala-640.webp 640w, images/spa-burgas-fitnes-technogym-zala-1080.webp 1080w" sizes="(min-width: 1280px) 22vw, (min-width: 720px) 36vw, 74vw" alt="Фитнес зала с уреди Technogym и дървен таван в Ability SPA Бургас" width="1080" height="1350" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Бургас</span>Фитнес</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/spa-burgas-solna-staya-960.webp" srcset="images/spa-burgas-solna-staya-640.webp 640w, images/spa-burgas-solna-staya-960.webp 960w" sizes="(min-width: 1280px) 22vw, (min-width: 720px) 36vw, 74vw" alt="Солна стая с шезлонги и осветена солна стена" width="960" height="720" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Бургас</span>Солна стая</figcaption></figure></li>
-          <li class="spot-intro" id="spot-varna">
-            <div><span class="spot-num">02</span><h3>Варна</h3><p>хотел „Черно море“<br>бул. „Сливница“ 33</p><p class="spot-hours">Всеки ден [07:00 или 09:00] – 21:00</p></div>
+          </div>
+          <ul class="fac-grid">
+            <li><a class="fac-tile" href="spa-burgas/basein/"><span class="fac-img"><img src="images/spa-burgas-basein-shezlongi-640.webp" srcset="images/spa-burgas-basein-shezlongi-640.webp 640w, images/spa-burgas-basein-shezlongi-1080.webp 1080w" sizes="(min-width: 720px) 31vw, 47vw" alt="Закритият басейн с шезлонги и осветена синя стена в Ability SPA Бургас" width="1080" height="1080" loading="lazy" decoding="async"></span><span class="fac-name">Басейн и джакузи <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="spa-burgas/termalna-zona/"><span class="fac-img"><img src="images/finlandska-sauna-burgas-640.webp" srcset="images/finlandska-sauna-burgas-640.webp 640w, images/finlandska-sauna-burgas-1080.webp 1080w, images/finlandska-sauna-burgas-1600.webp 1600w" sizes="(min-width: 720px) 31vw, 47vw" alt="Гостенка почива във финландската сауна на Ability SPA Бургас" width="1080" height="720" loading="lazy" decoding="async" style="object-position: 62% 50%"></span><span class="fac-name">Сауна и парна баня <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="fitnes-burgas/"><span class="fac-img"><img src="images/spa-burgas-fitnes-technogym-zala-640.webp" srcset="images/spa-burgas-fitnes-technogym-zala-640.webp 640w, images/spa-burgas-fitnes-technogym-zala-1080.webp 1080w" sizes="(min-width: 720px) 31vw, 47vw" alt="Фитнес зала с уреди Technogym и дървен таван в Ability SPA Бургас" width="1080" height="1350" loading="lazy" decoding="async"></span><span class="fac-name">Фитнес <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="masazhi-burgas/"><span class="fac-img"><img src="images/masazh-goreshti-kamani-burgas-640.webp" srcset="images/masazh-goreshti-kamani-burgas-640.webp 640w, images/masazh-goreshti-kamani-burgas-1080.webp 1080w" sizes="(min-width: 720px) 31vw, 47vw" alt="Масаж с горещи камъни и свещ в Ability SPA Бургас" width="1080" height="720" loading="lazy" decoding="async" style="object-position: 38% 50%"></span><span class="fac-name">Масажи <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="osteopatiya-burgas/"><span class="fac-img"><img src="images/osteopatiya-burgas-petar-damyanov-640.webp" srcset="images/osteopatiya-burgas-petar-damyanov-640.webp 640w, images/osteopatiya-burgas-petar-damyanov-1080.webp 1080w" sizes="(min-width: 720px) 31vw, 47vw" alt="Диплома по остеопатия на Петър Дамянов и камъни за масаж" width="1080" height="720" loading="lazy" decoding="async" style="object-position: 30% 50%"></span><span class="fac-name">Остеопатия <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="kozmetika-burgas/"><span class="fac-img"><img src="images/kozmetika-terapiya-za-litse-burgas-640.webp" srcset="images/kozmetika-terapiya-za-litse-burgas-640.webp 640w, images/kozmetika-terapiya-za-litse-burgas-1080.webp 1080w" sizes="(min-width: 720px) 31vw, 47vw" alt="Козметична терапия за лице с апарат в Ability SPA Бургас" width="1080" height="719" loading="lazy" decoding="async" style="object-position: 42% 50%"></span><span class="fac-name">Козметични услуги <span aria-hidden="true">→</span></span></a></li>
+          </ul>
+        </div>
+        <div class="fac-panel" id="fac-varna" role="tabpanel" aria-labelledby="fac-tab-varna">
+          <div class="fac-top">
+            <h3 class="fac-city">Варна</h3>
+            <p class="fac-meta">хотел „Черно море“ · бул. „Сливница“ 33 · всеки ден [07:00 или 09:00] – 21:00</p>
             <a class="text-link" href="spa-varna/">Повече за Варна <span aria-hidden="true">→</span></a>
-          </li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" alt="Инфрачервената пейка в Ability Spa&amp;Wellness Варна" width="1500" height="1000" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Варна</span>Инфрачервена пейка</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/library/2026_01_relax_zona_abilityspawellness_varna.webp" alt="Релакс зоната с шезлонги и камина във Варна" width="1200" height="628" loading="lazy" decoding="async" style="object-position: 40% 50%"></div><figcaption><span class="spot-city">Варна</span>Релакс зона с камина</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/library/2026_01_termalna_zona_abilitwellness_varna.webp" alt="Термалната зона на Ability Spa&amp;Wellness Варна" width="1200" height="628" loading="lazy" decoding="async" style="object-position: 58% 50%"></div><figcaption><span class="spot-city">Варна</span>Термална зона</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/library/2026_01_fitnes_abilityspawellness_varna.webp" alt="Фитнес залата на Ability Spa&amp;Wellness Варна" width="1200" height="628" loading="lazy" decoding="async" style="object-position: 70% 50%"></div><figcaption><span class="spot-city">Варна</span>Фитнес</figcaption></figure></li>
-          <li class="spot"><figure><div class="spot-img"><img src="images/library/2026_01_grupovi_zanimanie_abilityspawellness.webp" alt="Групова тренировка по йога във Варна" width="1500" height="1000" loading="lazy" decoding="async"></div><figcaption><span class="spot-city">Варна</span>Групови занимания</figcaption></figure></li>
-        </ul>
+          </div>
+          <ul class="fac-grid">
+            <li><a class="fac-tile" href="spa-varna/termalna-zona/"><span class="fac-img"><img src="images/library/2026_01_termalna_zona_abilitwellness_varna.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Термалната зона на Ability Spa&amp;Wellness Варна" width="1200" height="628" loading="lazy" decoding="async" style="object-position: 58% 50%"></span><span class="fac-name">Сауна и солна парна баня <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="spa-varna/termalna-zona/"><span class="fac-img"><img src="images/library/2026_01_infrachervena_peika_ability-spa_varna.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Инфрачервената пейка в Ability Spa&amp;Wellness Варна" width="1500" height="1000" loading="lazy" decoding="async"></span><span class="fac-name">Инфрачервена пейка <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="spa-varna/fitnes/"><span class="fac-img"><img src="images/library/2026_01_fitnes_abilityspawellness_varna.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Фитнес залата на Ability Spa&amp;Wellness Варна" width="1200" height="628" loading="lazy" decoding="async" style="object-position: 70% 50%"></span><span class="fac-name">Фитнес <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="spa-varna/grupovi-trenirovki/"><span class="fac-img"><img src="images/library/2026_01_grupovi_zanimanie_abilityspawellness.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Групова тренировка по йога във Варна" width="1500" height="1000" loading="lazy" decoding="async"></span><span class="fac-name">Групови занимания <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="masazhi-varna/"><span class="fac-img"><img src="images/library/2025_10_masaj_vulkanichni_kamyni_ability.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Масаж с вулканични камъни" width="1200" height="800" loading="lazy" decoding="async"></span><span class="fac-name">Масажи <span aria-hidden="true">→</span></span></a></li>
+            <li><a class="fac-tile" href="terapii/"><span class="fac-img"><img src="images/library/2026_06_terapia_gold_amber.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Терапия Gold Amber" width="1536" height="1024" loading="lazy" decoding="async"></span><span class="fac-name">Спа терапии <span aria-hidden="true">→</span></span></a></li>
+          </ul>
+        </div>
       </div>
     </section>
 

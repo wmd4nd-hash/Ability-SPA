@@ -1220,47 +1220,44 @@ html[data-palette="g"] .cs-contact a { text-decoration-color: rgba(32, 26, 24, .
   .about .section-head { margin-bottom: 0; }
 }
 
-/* II. Both locations in photos: one carousel – an intro card per city, then its photos; Бургас / Варна chips jump
-   between them, arrows on desktop, swipe on phones. Captions sit under the photos. */
-.spots-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 20px; }
-.spots-chips { display: flex; gap: 8px; }
-.chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border: 1px solid rgba(32, 26, 24, .22); border-radius: 999px; color: var(--espresso); font-weight: 600; text-decoration: none; transition: background-color .25s, color .25s, border-color .25s; }
-.chip:hover { border-color: var(--espresso); }
-.chip[aria-current="true"] { background: var(--espresso); border-color: var(--espresso); color: var(--white); }
-.spots-nav { display: none; gap: 8px; }
-.spots-btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(32, 26, 24, .3); border-radius: 50%; background: transparent; color: var(--espresso); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
-.spots-btn:hover:not(:disabled) { background: var(--espresso); color: var(--white); }
-.spots-btn:disabled { opacity: .3; cursor: default; }
-.spots-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.spots { display: flex; gap: 12px; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; overscroll-behavior-x: contain; }
-.spots::-webkit-scrollbar { display: none; }
-.spots:focus-visible { outline: 2px solid var(--espresso); outline-offset: 2px; }
-.spots > li { flex: 0 0 74%; scroll-snap-align: start; }
-.spot figure { margin: 0; }
-.spot-img { aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius); background: var(--sand); }
-.spot-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out, ease); }
-.spot:hover .spot-img img { transform: scale(1.04); }
-.spot figcaption { padding-top: 12px; font: 700 1.375rem/1.15 var(--serif); }
-.spot-city { display: block; margin-bottom: 3px; color: var(--gold-text); font: 600 .75rem/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
-.spot-intro { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 26px 24px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-.spot-intro h3 { margin: 0 0 10px; font-size: 2.5rem; line-height: 1; }
-.spot-intro p { margin: 0; }
-.spot-intro .spot-num { display: block; margin-bottom: 14px; color: var(--gold-text); font: italic 500 1.125rem/1 var(--serif); }
+/* II. Locations: a Бургас | Варна switch and all six services of the chosen city at once (3 × 2 on desktop,
+   2 × 3 on phones); each tile opens that service's page. Without JS both cities show, one under the other. */
+.fac-tabs { display: none; }
+.js .fac-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; max-width: 440px; margin: 0 0 22px; padding: 6px; border: 1px solid rgba(32, 26, 24, .16); border-radius: 999px; background: var(--white); }
+.fac-tab { min-height: 52px; border: 0; border-radius: 999px; background: transparent; color: var(--espresso); font: 700 1.5rem/1 var(--serif); cursor: pointer; transition: background-color .25s, color .25s; }
+.fac-tab:hover { background: rgba(32, 26, 24, .06); }
+.fac-tab[aria-selected="true"] { background: var(--espresso); color: var(--white); }
+.fac-tab:focus-visible { outline: 2px solid var(--espresso); outline-offset: 2px; }
+.fac-panel + .fac-panel { margin-top: 56px; }
+.js .fac-panel + .fac-panel { margin-top: 0; }
+.js .fac-panel.is-entering { animation: fac-in .55s var(--ease-out) both; }
+@keyframes fac-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.fac-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 24px; margin-bottom: 20px; }
+.fac-city { flex-basis: 100%; margin: 0; font-size: 2.25rem; }
+.js .fac-city { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.fac-meta { margin: 0; }
+.fac-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+.fac-tile { display: block; color: inherit; text-decoration: none; }
+.fac-img { display: block; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius); background: var(--sand); }
+.fac-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out, ease); }
+.fac-tile:hover .fac-img img { transform: scale(1.04); }
+.fac-name { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-top: 10px; font: 700 1.25rem/1.15 var(--serif); }
+.fac-name span { flex: none; color: var(--gold-text); font-family: var(--sans); font-weight: 400; transition: transform .3s var(--ease-out); }
+.fac-tile:hover .fac-name span { transform: translateX(4px); }
+.fac-tile:focus-visible { outline: 2px solid var(--espresso); outline-offset: 4px; border-radius: var(--radius); }
 @media (min-width: 720px) {
-  .spots-nav { display: flex; }
-  .spots { gap: 16px; }
-  .spots > li { flex-basis: calc((100% - 32px) / 2.5); }
+  .fac-grid { grid-template-columns: repeat(3, 1fr); gap: 28px 16px; }
+  .fac-img { aspect-ratio: 3 / 2; }
+  .fac-name { font-size: 1.5rem; }
 }
-@media (min-width: 1024px) { .spots > li { flex-basis: calc((100% - 48px) / 3.6); } }
-@media (min-width: 1280px) { .spots > li { flex-basis: calc((100% - 64px) / 4.4); } }
-@media (prefers-reduced-motion: reduce) { .spot-img img { transition: none; } }
-.js :is(.about-text > p, .about-facts > li, .spots-bar, .spots) {
+@media (prefers-reduced-motion: reduce) { .fac-img img, .fac-name span { transition: none; } .js .fac-panel.is-entering { animation: none; } }
+.js :is(.about-text > p, .about-facts > li, .fac-tabs) {
   opacity: 0; transform: translateY(24px);
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); transition-delay: calc(min(var(--d, 0), 5) * 90ms);
 }
-.js :is(.about-text > p, .about-facts > li, .spots-bar, .spots).is-in { opacity: 1; transform: none; }
+.js :is(.about-text > p, .about-facts > li, .fac-tabs).is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .js :is(.about-text > p, .about-facts > li, .spots-bar, .spots) { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .js :is(.about-text > p, .about-facts > li, .fac-tabs) { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 /* Phones/tablets, every palette: the photo sits in a band at the top of the hero and the text on a solid
@@ -1282,4 +1279,3 @@ html[data-palette="g"] .cs-contact a { text-decoration-color: rgba(32, 26, 24, .
 .site-footer .btn-light { color: var(--espresso); }
 html[data-palette="b"] .cta-band-inner .btn-outline { color: var(--white); border-color: var(--sand); }
 html[data-palette="b"] .cta-band-inner .btn-outline:hover { background: var(--sand); color: var(--espresso); }
-.spot-intro .spot-hours { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--gold-text); font-weight: 600; }

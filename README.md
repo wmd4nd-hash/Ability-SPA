@@ -123,9 +123,11 @@ vouchers, first-visit FAQ). Arches were dropped at the owner's request.
 - *Each slide:* „Спа център в Бургас“ / „Уелнес във Варна“, six things it has, address · hours · phone, book online
   (Варна: call) and „Повече за …“. The H1 („Градски СПА в Бургас и Варна“) is the small line above the city tabs.
 - *Then* the tiles (prices, first visit, vouchers – now opening their own pages), *then* general info instead of the
-  Burgas-only blocks: „За нас“ (both locations, the team), both locations in photos (one carousel: an intro card
-  per city and its photos, Бургас / Варна buttons to jump between them, arrows on desktop, swipe on phones), reviews
-  and a booking band. The Burgas services, zones, prices and first-visit FAQ live on
+  Burgas-only blocks: „За нас“ (both locations, the team), „Какво ви очаква“ – a Бургас | Варна switch
+  showing all six services of the chosen city at once (the same six as its slide; each tile opens that service's
+  page; a city picked in the hero opens the same city here), reviews and a booking band. Варна „Масажи“ and
+  „Спа терапии“ use treatment photos (volcanic stones, Gold Amber – both on the Varna menu) until photos from
+  the Varna premises are available. The Burgas services, zones, prices and first-visit FAQ live on
   `spa-burgas/`, `ceni/` and `parvo-poseshtenie/`.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.

@@ -86,7 +86,7 @@
   var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
     ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
     ' .location, .review, .voucher-card, .voucher-text, .two-col > *, .price-group, .contact-card, .cta-band-inner,' +
-    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .spots-bar, .spots';
+    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .fac-tabs';
   var items = document.querySelectorAll(revealSel);
   items.forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
@@ -123,12 +123,15 @@
       if (focus) tab.focus();
     }
     function stop() { sw.classList.remove('is-auto'); }
+    function picked(t) {   // a city chosen by the visitor (not the automatic change) – other sections follow it
+      try { document.dispatchEvent(new CustomEvent('city-picked', { detail: t.id.replace('cs-tab-', '') })); } catch (err) {}
+    }
     tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { stop(); select(t); });
+      t.addEventListener('click', function () { stop(); select(t); picked(t); });
       t.addEventListener('keydown', function (e) {
         var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
         if (!n) return;
-        e.preventDefault(); stop(); select(tabs[(i + n + tabs.length) % tabs.length], true);
+        e.preventDefault(); stop(); select(tabs[(i + n + tabs.length) % tabs.length], true); picked(tabs[(i + n + tabs.length) % tabs.length]);
       });
       t.querySelector('.cs-bar').addEventListener('animationend', function () {
         if (sw.classList.contains('is-auto')) select(tabs[(i + 1) % tabs.length]);
@@ -146,48 +149,36 @@
     }
   });
 
-  // Locations carousel (homepage): arrows page through it, the Бургас / Варна chips jump to each city's intro card
-  // and show which city is in view. Without JS it is a plain sideways-scrolling row and the chips are anchor links.
-  document.querySelectorAll('.spots-wrap').forEach(function (w) {
-    var track = w.querySelector('.spots');
-    var btns = w.querySelectorAll('.spots-btn');
-    var chips = Array.prototype.slice.call(w.querySelectorAll('.chip'));
-    var how = reduce ? 'auto' : 'smooth';
-    function leftOf(el) {
-      return track.scrollLeft + el.getBoundingClientRect().left - track.getBoundingClientRect().left - parseFloat(getComputedStyle(track).paddingLeft);
-    }
-    function update() {
-      var x = track.scrollLeft, max = track.scrollWidth - track.clientWidth;
-      btns[0].disabled = x <= 2; btns[1].disabled = x >= max - 2;
-      var mid = track.getBoundingClientRect().left + track.clientWidth / 2, cur = chips[0];
-      chips.forEach(function (c) {
-        var t = document.getElementById(c.getAttribute('href').slice(1));
-        if (t && t.getBoundingClientRect().left <= mid) cur = c;
-      });
-      if (x >= max - 2) cur = chips[chips.length - 1];
-      chips.forEach(function (c) { if (c === cur) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current'); });
-      // focusable for keyboard scrolling only while it actually scrolls sideways
-      if (max > 1) track.setAttribute('tabindex', '0'); else track.removeAttribute('tabindex');
-    }
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () { track.scrollBy({ left: +b.getAttribute('data-dir') * track.clientWidth * .8, behavior: how }); });
+  // Locations (homepage): Бургас | Варна switch, all six services of one city at a time. A city picked in the
+  // hero opens the same city here. Without JS both cities show (the tabs stay hidden).
+  var facTabs = Array.prototype.slice.call(document.querySelectorAll('.fac-tab'));
+  function pickFacility(tab, focus) {
+    facTabs.forEach(function (t) {
+      var on = t === tab, panel = document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      if (!on) { panel.hidden = true; return; }
+      if (panel.hidden) {
+        panel.hidden = false;
+        if (!reduce) { panel.classList.remove('is-entering'); void panel.offsetWidth; panel.classList.add('is-entering'); }
+      }
     });
-    chips.forEach(function (c) {
-      c.addEventListener('click', function (e) {
-        var t = document.getElementById(c.getAttribute('href').slice(1));
-        if (!t) return;
-        e.preventDefault();
-        track.scrollTo({ left: leftOf(t), behavior: how });
+    if (focus) tab.focus();
+  }
+  if (facTabs.length) {
+    facTabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pickFacility(t); });
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!n) return;
+        e.preventDefault(); pickFacility(facTabs[(i + n + facTabs.length) % facTabs.length], true);
       });
     });
-    var queued = false;
-    track.addEventListener('scroll', function () {
-      if (queued) return; queued = true;
-      requestAnimationFrame(function () { queued = false; update(); });
-    }, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  });
+    pickFacility(facTabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || facTabs[0]);
+    document.addEventListener('city-picked', function (e) {
+      var t = document.getElementById('fac-tab-' + e.detail);
+      if (t) pickFacility(t);
+    });
+  }
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];
