@@ -76,9 +76,9 @@
     el.classList.add('split-ready');
   }
   if (!reduce) {
-    document.querySelectorAll('.hero h1, .hero2 h1, .hero3 h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
+    document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1, .section-head h2, .statement-title, .cta-band h2').forEach(splitWords);
     requestAnimationFrame(function () { requestAnimationFrame(function () {
-      document.querySelectorAll('.hero h1, .hero2 h1, .hero3 h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
+      document.querySelectorAll('.hero h1, .hero2 h1, .page-hero h1').forEach(function (h) { h.classList.add('words-in'); });
     }); });
   }
 
@@ -86,7 +86,7 @@
   var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
     ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
     ' .location, .review, .voucher-card, .voucher-text, .two-col > *, .price-group, .contact-card, .cta-band-inner,' +
-    ' .checklist > li, .price-list > div, .class-list > li';
+    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .gallery-top, .gallery > li';
   var items = document.querySelectorAll(revealSel);
   items.forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
@@ -145,6 +145,15 @@
       new IntersectionObserver(function (en) { sw.classList.toggle('is-offscreen', !en[0].isIntersecting); }).observe(sw);
     }
   });
+
+  // Photo carousels (phones): focusable for keyboard scrolling only while they actually scroll sideways.
+  var galleries = document.querySelectorAll('.gallery');
+  function galleryFocus() {
+    galleries.forEach(function (g) {
+      if (g.scrollWidth > g.clientWidth + 1) g.setAttribute('tabindex', '0'); else g.removeAttribute('tabindex');
+    });
+  }
+  if (galleries.length) { galleryFocus(); window.addEventListener('resize', galleryFocus); }
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];

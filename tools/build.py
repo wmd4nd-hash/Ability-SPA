@@ -424,23 +424,32 @@ def cards(p, items):
 
 
 CITIES = {
-    'bg': [dict(name='Бургас', href='spa-burgas/', hotel='хотел „България“', addr='ул. „Александровска“ 21',
+    'bg': [dict(name='Бургас', title='Спа център в Бургас', href='spa-burgas/', hotel='хотел „България“', addr='ул. „Александровска“ 21',
+                tel=(TEL_BURGAS, TEL_BURGAS_TXT),
                 img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='Закритият басейн в Ability Spa Бургас',
-                has=['Басейн и джакузи', 'Сауни и хамам', 'Солна стая', 'Фитнес', 'Масажи'],
+                has=['Басейн и джакузи', 'Сауна и парна баня', 'Фитнес', 'Масажи', 'Остеопатия', 'Козметични услуги'],
                 hours='Всеки ден 07:00 – 22:00', cta=(BOOK_BURGAS, 'Резервирай онлайн')),
-           dict(name='Варна', href='spa-varna/', hotel='хотел „Черно море“', addr='бул. „Сливница“ 33',
+           dict(name='Варна', title='Уелнес във Варна', href='spa-varna/', hotel='хотел „Черно море“', addr='бул. „Сливница“ 33',
+                tel=(TEL_VARNA, TEL_VARNA_TXT),
                 img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='Инфрачервената пейка в Ability Spa&Wellness Варна',
-                has=['Сауни и солна парна баня', 'Инфрачервена пейка', 'Фитнес', 'Масажи'],
+                has=['Сауна и солна парна баня', 'Инфрачервена пейка', 'Фитнес', 'Групови занимания', 'Масажи', 'Спа терапии'],
                 hours='Всеки ден [07:00 или 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Обадете се'))],
-    'en': [dict(name='Burgas', href='en/spa-burgas/', hotel='Hotel Bulgaria', addr='21 Aleksandrovska St.',
+    'en': [dict(name='Burgas', title='Spa centre in Burgas', href='en/spa-burgas/', hotel='Hotel Bulgaria', addr='21 Aleksandrovska St.',
+                tel=(TEL_BURGAS, TEL_BURGAS_TXT),
                 img='images/spa-burgas-basein-simetrichen', w=(640, 1080), alt='The indoor pool at Ability Spa Burgas',
-                has=['Pool & jacuzzi', 'Saunas & hamam', 'Salt room', 'Gym', 'Massages'],
+                has=['Pool & jacuzzi', 'Sauna & steam bath', 'Gym', 'Massages', 'Osteopathy', 'Beauty treatments'],
                 hours='Daily 07:00 – 22:00', cta=(BOOK_BURGAS, 'Book online')),
-           dict(name='Varna', href='en/spa-varna/', hotel='Hotel Cherno More', addr='33 Slivnitsa Blvd.',
+           dict(name='Varna', title='Wellness in Varna', href='en/spa-varna/', hotel='Hotel Cherno More', addr='33 Slivnitsa Blvd.',
+                tel=(TEL_VARNA, TEL_VARNA_TXT),
                 img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='The infrared bench at Ability Spa&Wellness Varna',
-                has=['Saunas & salt steam bath', 'Infrared bench', 'Gym', 'Massages'],
+                has=['Sauna & salt steam bath', 'Infrared bench', 'Gym', 'Group classes', 'Massages', 'Spa therapies'],
                 hours='Daily [07:00 or 09:00] – 21:00', cta=(f'tel:{TEL_VARNA}', 'Call to book'))],
 }
+
+
+ICON_PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'
+ICON_CLOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'
+ICON_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg>'
 
 
 CS_TEXT = {
@@ -452,7 +461,8 @@ CS_TEXT = {
 
 
 def city_switch(p, lang='bg'):
-    """Бургас / Варна switch (homepage variant D). Changes every 5 s (js/main.js, no visible timer), a pause button,
+    """Бургас / Варна switch (homepage variant D): per city a title, what it has, address / hours / phone and two actions.
+    Changes every 5 s (js/main.js, no visible timer), a pause button,
     pause on hover / focus / off-screen, stops for good once a city is picked, never moves for reduced motion.
     Without JS both cities simply show one under the other."""
     T, cs = CS_TEXT[lang], CITIES[lang]
@@ -466,16 +476,20 @@ def city_switch(p, lang='bg'):
             src = f'src="{p}{c["img"]}-{c["w"][1]}.webp" srcset="{p}{c["img"]}-{c["w"][0]}.webp {c["w"][0]}w, {p}{c["img"]}-{c["w"][1]}.webp {c["w"][1]}w" sizes="(min-width: 1024px) 58vw, 100vw"'
         else:
             src = f'src="{p}{c["img"]}.webp"'
-        has = ' <span aria-hidden="true">·</span> '.join(e(x) for x in c['has'])
+        has = ''.join(f'<li>{e(x)}</li>' for x in c['has'])
         ext = c['cta'][0].startswith(('http', 'tel:'))
         load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
         arrow = ' <span aria-hidden="true">→</span>' if i == 0 else ''
         panels.append(f'''<div class="cs-panel{" is-active" if i == 0 else ""}" id="cs-panel-{slug(c)}" role="tabpanel" aria-labelledby="cs-tab-{slug(c)}">
           <div class="cs-media"><img {src} alt="{e(c["alt"])}" width="1080" height="1080" {load} decoding="async"></div>
           <div class="cs-body">
-            <h2 class="sr-only">{e(c["name"])}</h2>
-            <p class="cs-hotel">{e(c["hotel"])} · {e(c["addr"])}<br><span class="cs-hours">{e(c["hours"])}</span></p>
-            <p class="cs-has">{has}</p>
+            <h2 class="cs-title">{e(c["title"])}</h2>
+            <ul class="cs-has">{has}</ul>
+            <ul class="cs-contact">
+              <li>{ICON_PIN}{e(c["addr"])}, {e(c["hotel"])}</li>
+              <li>{ICON_CLOCK}{e(c["hours"])}</li>
+              <li>{ICON_PHONE}<a href="tel:{c["tel"][0]}">{e(c["tel"][1])}</a></li>
+            </ul>
             <div class="btn-row"><a class="btn {"btn-light btn-arrow" if i == 0 else "btn-outline-light"}" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}{arrow}</a><a class="cs-more" href="{p}{c["href"]}">{e(T["more"].format(c["name"]))} <span aria-hidden="true">→</span></a></div>
           </div>
         </div>''')

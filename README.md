@@ -107,9 +107,8 @@ vouchers, first-visit FAQ). Arches were dropped at the owner's request.
 
 **Feedback 04.10 (voice messages):**
 - *Two locations at the top.* A single pool photo under "СПА център в Бургас и Варна" suggested a pool in Varna too.
-  The homepage opens with a full-bleed Бургас / Варна switch (variant D from `varianti/`): one city at a time, its photo filling the hero.
-  Kept deliberately sparse: headline, city tabs, one line with hotel / address / hours, one line with what it has, and two actions
-  (book online or call, plus a link to the city page).
+  The homepage opens with a Бургас / Варна switch (variant D from `varianti/`): one city at a time, its photo filling the hero
+  on desktop and sitting in a band above the text on phones.
   It changes every 5 s (no visible timer); pause button, pauses on hover, keyboard focus and
   off-screen, stops for good once a city is picked, never moves with reduced motion; without JS both show.
   Data lives in `CITIES` in `tools/build.py` (`city_switch()`); the English homepage uses the same switch.
@@ -119,5 +118,13 @@ vouchers, first-visit FAQ). Arches were dropped at the owner's request.
 - *Easier reading.* 18 px body text, bigger labels with less letter-spacing, bolder headings (Cormorant 700),
   upright prices. References the team liked for clarity: r.fitness, pulsefit.bg.
 - *Site first, app later.* The `klub/` prototype is on hold until the site's look is final.
+
+**Feedback 08.10 – landing page structure:**
+- *Each slide:* „Спа център в Бургас“ / „Уелнес във Варна“, six things it has, address · hours · phone, book online
+  (Варна: call) and „Повече за …“. The H1 („Градски СПА в Бургас и Варна“) is the small line above the city tabs.
+- *Then* the tiles (prices, first visit, vouchers – now opening their own pages), *then* general info instead of the
+  Burgas-only blocks: „За нас“ (both locations, the team), both locations in photos (a mosaic on desktop, a swipe
+  carousel on phones), reviews and a booking band. The Burgas services, zones, prices and first-visit FAQ live on
+  `spa-burgas/`, `ceni/` and `parvo-poseshtenie/`.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.
