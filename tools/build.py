@@ -12,9 +12,13 @@
 Rules kept on every page: one H1, unique title (< 60 chars) and description (< 155 chars),
 canonical + BreadcrumbList JSON-LD, relative links (work in the preview and on the live domain).
 """
-import html, json, os, re
+import hashlib, html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Cache-busting: the stylesheet and script are referenced as styles.css?v=<hash>, so a new page never runs with an
+# older cached copy of either (the preview host caches them separately from the HTML).
+ASSET_V = hashlib.sha1(b''.join(open(os.path.join(ROOT, f), 'rb').read() for f in ('css/styles.css', 'js/main.js'))).hexdigest()[:8]
 SITE = 'https://abilityspa.com'
 BOOK_BURGAS = 'https://book.abilityspa.com/reservations/start?site=1'
 TEL_BURGAS, TEL_BURGAS_TXT = '+359895635555', '+359 895 635 555'
@@ -303,7 +307,7 @@ def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-bu
       if (m) sessionStorage.setItem('palette', v);
       if (v) {{ d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); }} }} catch (e) {{}}
   }})(document.documentElement);</script>
-  <link rel="stylesheet" href="{p}css/styles.css">
+  <link rel="stylesheet" href="{p}css/styles.css?v={ASSET_V}">
 {ld}
 </head>'''
 
@@ -330,7 +334,7 @@ def page(path, title, desc, body, crumbs, jsonld=(), current='', noindex=False, 
 
   {en_footer(p) if lang == "en" else footer(p)}
 
-  <script src="{p}js/main.js" defer></script>
+  <script src="{p}js/main.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 '''
@@ -977,6 +981,8 @@ def inject_homepage():
     t = re.sub(r'<header class="site-header">.*?</header>', header('').replace('\n  ', '\n  ', 1), t, count=1, flags=re.S)
     t = re.sub(r'<footer class="site-footer".*?</footer>\s*<!-- Slim cookie bar.*?</div>', footer(''), t, count=1, flags=re.S)
     t = t.replace('href="./spa-burgas/"', 'href="spa-burgas/"')
+    t = re.sub(r'css/styles\.css(\?v=\w+)?"', f'css/styles.css?v={ASSET_V}"', t)
+    t = re.sub(r'js/main\.js(\?v=\w+)?"', f'js/main.js?v={ASSET_V}"', t)
     t = re.sub(r'<!-- CITY-CARDS -->.*?<!-- /CITY-CARDS -->', lambda m: '<!-- CITY-CARDS -->' + city_switch('') + '<!-- /CITY-CARDS -->', t, count=1, flags=re.S)
     open(f, 'w', encoding='utf-8').write(t)
 
