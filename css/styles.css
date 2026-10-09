@@ -1279,3 +1279,103 @@ html[data-palette="g"] .cs-contact a { text-decoration-color: rgba(32, 26, 24, .
 .site-footer .btn-light { color: var(--espresso); }
 html[data-palette="b"] .cta-band-inner .btn-outline { color: var(--white); border-color: var(--sand); }
 html[data-palette="b"] .cta-band-inner .btn-outline:hover { background: var(--sand); color: var(--espresso); }
+
+/* ---------- PROTOTYPE ONLY: layout variants of „Какво ви очаква“ (.fac[data-v]) – keep one, delete the rest ---------- */
+.fac-panel[hidden] { display: none !important; }
+.fac-cover { display: none; margin: 0; }
+.proto-variants { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 36px; padding: 10px 14px; border: 1.5px dashed rgba(32, 26, 24, .3); border-radius: 14px; font-size: .9375rem; }
+.pv-label { color: var(--gold-text); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.pv-btns { display: flex; gap: 4px; }
+.pv-btns button { width: 44px; height: 44px; padding: 0; border: 1px solid rgba(32, 26, 24, .25); border-radius: 50%; background: transparent; color: var(--espresso); font: 600 1rem/1 var(--sans); cursor: pointer; }
+.pv-btns button[aria-pressed="true"] { background: var(--espresso); border-color: var(--espresso); color: var(--white); }
+.pv-btns button:focus-visible { outline: 2px solid var(--espresso); outline-offset: 2px; }
+
+/* Shared: numbered rows with a small photo (B, E, and C on phones) */
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-grid { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); counter-reset: fac; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-grid li { border-bottom: 1px solid var(--line); counter-increment: fac; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-tile { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 16px; padding: 10px 0; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-img { aspect-ratio: 1; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-name { justify-content: flex-start; padding: 0; font-size: 1.375rem; }
+:is(.fac[data-v="b"], .fac[data-v="e"], .fac[data-v="c"]) .fac-name::before { content: counter(fac, decimal-leading-zero); flex: none; align-self: center; width: 2.4em; color: var(--gold-text); font: italic 500 1rem/1 var(--serif); }
+:is(.fac[data-v="b"], .fac[data-v="e"], .fac[data-v="c"]) .fac-name > span { margin-left: auto; }
+.js :is(.fac[data-v="b"], .fac[data-v="e"]) .fac-city { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-city { font-size: 2.5rem; line-height: 1.05; }
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-top { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 22px; }
+
+/* B · Хотел + списък */
+.fac[data-v="b"] .fac-cover { display: block; aspect-ratio: 16 / 10; margin-bottom: 20px; overflow: hidden; border-radius: var(--radius); background: var(--sand); }
+.fac[data-v="b"] .fac-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 900px) {
+  .fac[data-v="b"] .fac-panel { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "cover list" "top list"; column-gap: 56px; align-content: start; }
+  .fac[data-v="b"] .fac-cover { grid-area: cover; aspect-ratio: 4 / 3; }
+  .fac[data-v="b"] .fac-top { grid-area: top; margin-bottom: 0; }
+  .fac[data-v="b"] .fac-grid { grid-area: list; align-self: start; }
+  .fac[data-v="b"] .fac-tile { grid-template-columns: 92px 1fr; gap: 20px; padding: 12px 0; }
+  .fac[data-v="b"] .fac-name { font-size: 1.625rem; }
+}
+
+/* C · Голям списък с преглед (phones: rows) */
+.fac[data-v="c"] .fac-grid { counter-reset: fac; }
+.fac[data-v="c"] .fac-grid li { counter-increment: fac; }
+@media (max-width: 899px) {
+  .fac[data-v="c"] .fac-grid { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
+  .fac[data-v="c"] .fac-grid li { border-bottom: 1px solid var(--line); }
+  .fac[data-v="c"] .fac-tile { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 16px; padding: 10px 0; }
+  .fac[data-v="c"] .fac-img { aspect-ratio: 1; }
+  .fac[data-v="c"] .fac-name { justify-content: flex-start; padding: 0; font-size: 1.375rem; }
+}
+@media (min-width: 900px) {
+  .fac[data-v="c"] .fac-grid { position: relative; display: block; min-height: 540px; padding-right: calc(50% + 40px); border-top: 1px solid var(--line); }
+  .fac[data-v="c"] .fac-grid li { border-bottom: 1px solid var(--line); }
+  .fac[data-v="c"] .fac-tile { display: block; padding: 20px 0; }
+  .fac[data-v="c"] .fac-img { position: absolute; top: 0; right: 0; width: 50%; height: 100%; aspect-ratio: auto; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease-out); }
+  .fac[data-v="c"] li.is-on .fac-img { opacity: 1; pointer-events: auto; }
+  .fac[data-v="c"] .fac-name { justify-content: flex-start; padding: 0; font-size: 2.25rem; transition: opacity .3s; }
+  .fac[data-v="c"] li:not(.is-on) .fac-name { opacity: .6; }
+  .fac[data-v="c"] li:not(.is-on) .fac-name > span { opacity: 0; }
+}
+
+/* D · Мозайка (names on the photos) */
+.fac[data-v="d"] .fac-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+.fac[data-v="d"] .fac-grid li:first-child, .fac[data-v="d"] .fac-grid li:last-child { grid-column: span 2; }
+.fac[data-v="d"] .fac-tile { position: relative; display: block; height: 100%; overflow: hidden; border-radius: var(--radius); }
+.fac[data-v="d"] .fac-img { height: 100%; border-radius: 0; }
+.fac[data-v="d"] li:is(:first-child, :last-child) .fac-img { aspect-ratio: 16 / 9; }
+.fac[data-v="d"] .fac-name { position: absolute; right: 0; bottom: 0; left: 0; padding: 48px 14px 12px; background: linear-gradient(to top, rgba(20, 15, 13, .75), rgba(20, 15, 13, 0)); color: #fff; font-size: 1.25rem; }
+.fac[data-v="d"] .fac-name > span { color: #fff; }
+@media (min-width: 720px) {
+  .fac[data-v="d"] .fac-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: clamp(170px, 18vw, 260px); gap: 12px; }
+  .fac[data-v="d"] .fac-grid li:last-child { grid-column: auto; }
+  .fac[data-v="d"] .fac-grid li:first-child { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .fac[data-v="d"] .fac-img, .fac[data-v="d"] li:is(:first-child, :last-child) .fac-img { aspect-ratio: auto; }
+  .fac[data-v="d"] .fac-name { padding: 64px 18px 16px; font-size: 1.5rem; }
+  .fac[data-v="d"] li:first-child .fac-name { font-size: 2rem; }
+}
+
+/* E · Двата града един до друг (no switch) */
+.fac[data-v="e"] .fac-tabs { display: none !important; }
+.fac[data-v="e"] .fac-panel + .fac-panel { margin-top: 56px; }
+@media (min-width: 900px) {
+  .fac[data-v="e"] .fac-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .fac[data-v="e"] .fac-panel + .fac-panel { margin-top: 0; }
+}
+
+/* F · Ленти (the one pointed at widens; phones: stacked bands) */
+.fac[data-v="f"] .fac-grid { grid-template-columns: 1fr; gap: 8px; }
+.fac[data-v="f"] .fac-tile { position: relative; display: block; height: 100%; overflow: hidden; border-radius: var(--radius); }
+.fac[data-v="f"] .fac-img { height: 120px; aspect-ratio: auto; border-radius: 0; }
+.fac[data-v="f"] .fac-name { position: absolute; inset: 0; align-items: flex-end; padding: 14px 18px; background: linear-gradient(to right, rgba(20, 15, 13, .72), rgba(20, 15, 13, .15)); color: #fff; font-size: 1.5rem; }
+.fac[data-v="f"] .fac-name > span { color: #fff; }
+@media (min-width: 900px) {
+  .fac[data-v="f"] .fac-grid { display: flex; gap: 10px; height: 500px; }
+  .fac[data-v="f"] .fac-grid li { flex: 1 1 0; min-width: 0; transition: flex-grow .6s var(--ease-out); }
+  .fac[data-v="f"] .fac-grid li.is-on { flex-grow: 3.4; }
+  .fac[data-v="f"] .fac-img { height: 100%; }
+  .fac[data-v="f"] .fac-name { top: auto; padding: 80px 18px 18px; background: linear-gradient(to top, rgba(20, 15, 13, .78), rgba(20, 15, 13, 0)); font-size: 1.25rem; }
+  .fac[data-v="f"] li.is-on .fac-name { font-size: 1.875rem; }
+  .fac[data-v="f"] li:not(.is-on) .fac-name > span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fac[data-v="f"] .fac-grid li, .fac[data-v="c"] .fac-img, .fac[data-v="c"] .fac-name { transition: none; }
+}
+:is(.fac[data-v="b"], .fac[data-v="e"]) .fac-city { flex-basis: auto; }

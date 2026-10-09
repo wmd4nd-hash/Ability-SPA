@@ -44,7 +44,7 @@
       if (b.classList.contains('pp-toggle')) { var o = pick.classList.toggle('is-open'); b.setAttribute('aria-expanded', String(o)); return; }
       var v = b.getAttribute('data-p');
       document.documentElement.setAttribute('data-palette', v);
-      try { sessionStorage.setItem('palette', v); history.replaceState(null, '', location.pathname + '?palette=' + v + location.hash); } catch (err) {}
+      try { sessionStorage.setItem('palette', v); var u = new URL(location.href); u.searchParams.set('palette', v); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (err) {}
       mark(); pick.classList.remove('is-open'); pick.querySelector('.pp-toggle').setAttribute('aria-expanded', 'false');
     });
     mark(); document.body.appendChild(pick);
@@ -152,11 +152,13 @@
   // Locations (homepage): Бургас | Варна switch, all six services of one city at a time. A city picked in the
   // hero opens the same city here. Without JS both cities show (the tabs stay hidden).
   var facTabs = Array.prototype.slice.call(document.querySelectorAll('.fac-tab'));
+  var fac = document.querySelector('.fac');
   function pickFacility(tab, focus) {
+    var both = fac && fac.getAttribute('data-v') === 'e';   // prototype variant E shows both cities side by side
     facTabs.forEach(function (t) {
       var on = t === tab, panel = document.getElementById(t.getAttribute('aria-controls'));
       t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
-      if (!on) { panel.hidden = true; return; }
+      if (!on) { panel.hidden = !both; return; }
       if (panel.hidden) {
         panel.hidden = false;
         if (!reduce) { panel.classList.remove('is-entering'); void panel.offsetWidth; panel.classList.add('is-entering'); }
@@ -178,6 +180,37 @@
       var t = document.getElementById('fac-tab-' + e.detail);
       if (t) pickFacility(t);
     });
+  }
+  // Variants C and F: the service pointed at (or focused) is the "current" one – big preview / wide band.
+  document.querySelectorAll('.fac-grid').forEach(function (g) {
+    var items = Array.prototype.slice.call(g.children);
+    function on(li) { items.forEach(function (x) { x.classList.toggle('is-on', x === li); }); }
+    items.forEach(function (li) {
+      li.addEventListener('mouseenter', function () { on(li); });
+      li.addEventListener('focusin', function () { on(li); });
+    });
+    if (items[0]) on(items[0]);
+  });
+
+  // PROTOTYPE ONLY – layout variants of the locations section (?obekti=a…f), switched from the bar inside it.
+  var pv = document.querySelector('.proto-variants');
+  if (pv && fac) {
+    var pvDesc = { a: 'Мрежа – шестте услуги, 3 × 2', b: 'Хотелът + номериран списък с услугите', c: 'Голям списък – снимката се сменя при посочване',
+      d: 'Мозайка – надписи върху снимките', e: 'Двата града един до друг, без превключване', f: 'Ленти – посочената се разширява' };
+    var setVariant = function (v, keep) {
+      if (!pvDesc[v]) v = 'a';
+      fac.setAttribute('data-v', v);
+      pv.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
+      pv.querySelector('.pv-desc').textContent = pvDesc[v];
+      var cur = facTabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || facTabs[0];
+      if (cur) pickFacility(cur);
+      if (keep) {
+        try { var u = new URL(location.href); u.searchParams.set('obekti', v); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (err) {}
+      }
+    };
+    pv.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setVariant(b.getAttribute('data-v'), true); });
+    var pvm = location.search.match(/[?&]obekti=([a-f])/);
+    setVariant(pvm ? pvm[1] : 'a', false);
   }
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).

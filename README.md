@@ -86,6 +86,14 @@ Without `?palette` the site looks as before (a).
 All text pairs checked for ≥ 4.5:1 contrast. Once one is chosen: fold it into the `:root` colours and delete the
 palette block in `css/styles.css`, the picker in `js/main.js` and the palette line in the head script.
 
+## Locations section variants (prototype only)
+
+„Какво ви очаква“ on the homepage has a dashed „Прототип · вариант“ bar with six layouts (also `?obekti=a` … `f`):
+A grid 3 × 2 · B hotel photo + numbered list · C big list, the photo changes on hover · D mosaic, names on the photos ·
+E both cities side by side, no switch · F photo bands, the one pointed at widens. All keep the six services per city
+and link each to its page. Once one is chosen: delete the bar, the other `.fac[data-v]` rules in `css/styles.css` and the
+variant code in `js/main.js`.
+
 ## Motion
 
 Calm, CSS-driven motion with a small script (`js/main.js`), no library:
