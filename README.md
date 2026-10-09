@@ -86,14 +86,6 @@ Without `?palette` the site looks as before (a).
 All text pairs checked for ≥ 4.5:1 contrast. Once one is chosen: fold it into the `:root` colours and delete the
 palette block in `css/styles.css`, the picker in `js/main.js` and the palette line in the head script.
 
-## Locations section variants (prototype only)
-
-„Какво ви очаква“ on the homepage has a dashed „Прототип · вариант“ bar with six layouts (also `?obekti=a` … `f`):
-A grid 3 × 2 · B hotel photo + numbered list · C big list, the photo changes on hover · D mosaic, names on the photos ·
-E both cities side by side, no switch · F photo bands, the one pointed at widens. All keep the six services per city
-and link each to its page. Once one is chosen: delete the bar, the other `.fac[data-v]` rules in `css/styles.css` and the
-variant code in `js/main.js`.
-
 ## Motion
 
 Calm, CSS-driven motion with a small script (`js/main.js`), no library:
@@ -132,10 +124,11 @@ vouchers, first-visit FAQ). Arches were dropped at the owner's request.
   (Варна: call) and „Повече за …“. The H1 („Градски СПА в Бургас и Варна“) is the small line above the city tabs.
 - *Then* the tiles (prices, first visit, vouchers – now opening their own pages), *then* general info instead of the
   Burgas-only blocks: „За нас“ (both locations, the team), „Какво ви очаква“ – a Бургас | Варна switch
-  showing all six services of the chosen city at once (the same six as its slide; each tile opens that service's
-  page; a city picked in the hero opens the same city here), reviews and a booking band. Варна „Масажи“ and
-  „Спа терапии“ use treatment photos (volcanic stones, Gold Amber – both on the Varna menu) until photos from
-  the Varna premises are available. The Burgas services, zones, prices and first-visit FAQ live on
+  and the six services of the chosen city (the same six as its slide) as a numbered list, each opening that service's
+  page: with a mouse, big names and one large photo that follows the name pointed at; on phones and touch tablets,
+  rows with a small photo. A city picked in the hero opens the same city here. Reviews and a booking band follow.
+  Варна „Масажи“ and „Спа терапии“ use treatment photos (volcanic stones, Gold Amber – both on the Varna menu) until
+  photos from the Varna premises are available. The Burgas services, zones, prices and first-visit FAQ live on
   `spa-burgas/`, `ceni/` and `parvo-poseshtenie/`.
 Deliberately avoided from that site: auto-opening chat widget, full-width cookie banner,
 ultra-thin grey text, brand-only English H1.

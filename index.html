@@ -30,7 +30,7 @@
       if (m) sessionStorage.setItem('palette', v);
       if (v) { d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); } } catch (e) {}
   })(document.documentElement);</script>
-  <link rel="stylesheet" href="css/styles.css?v=e81568bf">
+  <link rel="stylesheet" href="css/styles.css?v=f5880e25">
 
   <!-- LocalBusiness (DaySpa) per location. Data from abilityspa.com/contacts/. Varna opening hours and geo are omitted until confirmed — never fill with placeholders. -->
   <script type="application/ld+json">
@@ -220,16 +220,10 @@
       </div>
     </section>
 
-    <!-- ============ II. LOCATIONS: Бургас | Варна switch, all six services of the chosen city at once (js/main.js) ============ -->
+    <!-- ============ II. LOCATIONS: Бургас | Варна switch; the six services of the chosen city as a list with a large preview photo (js/main.js) ============ -->
     <!-- Варна „Масажи“ and „Спа терапии“ use treatment photos (volcanic stones, Gold Amber – both offered in Varna) – replace with photos from the Varna premises. -->
-    <section class="section section-sand fac" id="obekti" aria-labelledby="obekti-title" data-v="a">
+    <section class="section section-sand" id="obekti" aria-labelledby="obekti-title">
       <div class="container">
-        <!-- PROTOTYPE ONLY – layout variants of this section (?obekti=a…f); remove the unused ones and this bar once one is chosen -->
-        <div class="proto-variants" role="group" aria-label="Варианти на секцията (прототип)">
-          <span class="pv-label">Прототип · вариант</span>
-          <span class="pv-btns"><button type="button" data-v="a" aria-pressed="true">A</button><button type="button" data-v="b" aria-pressed="false">B</button><button type="button" data-v="c" aria-pressed="false">C</button><button type="button" data-v="d" aria-pressed="false">D</button><button type="button" data-v="e" aria-pressed="false">E</button><button type="button" data-v="f" aria-pressed="false">F</button></span>
-          <span class="pv-desc" aria-live="polite">Мрежа – шестте услуги, 3 × 2</span>
-        </div>
         <div class="section-head">
           <p class="eyebrow"><span class="num">II.</span> Обектите</p>
           <h2 id="obekti-title">Какво ви очаква</h2>
@@ -238,9 +232,7 @@
           <button class="fac-tab" type="button" role="tab" id="fac-tab-burgas" aria-controls="fac-burgas" aria-selected="true">Бургас</button>
           <button class="fac-tab" type="button" role="tab" id="fac-tab-varna" aria-controls="fac-varna" aria-selected="false" tabindex="-1">Варна</button>
         </div>
-        <div class="fac-panels">
         <div class="fac-panel" id="fac-burgas" role="tabpanel" aria-labelledby="fac-tab-burgas">
-          <figure class="fac-cover"><img src="images/hotel-bulgaria-burgas-1024.webp" srcset="images/hotel-bulgaria-burgas-640.webp 640w, images/hotel-bulgaria-burgas-1024.webp 1024w" sizes="(min-width: 900px) 45vw, 100vw" alt="Хотел „България“ в центъра на Бургас, където се намира Ability Spa" width="1024" height="682" loading="lazy" decoding="async"></figure>
           <div class="fac-top">
             <h3 class="fac-city">Бургас</h3>
             <p class="fac-meta">хотел „България“ · ул. „Александровска“ 21 · всеки ден 07:00 – 22:00</p>
@@ -256,7 +248,6 @@
           </ul>
         </div>
         <div class="fac-panel" id="fac-varna" role="tabpanel" aria-labelledby="fac-tab-varna">
-          <figure class="fac-cover"><img src="images/library/2026_07_hotel_cherno_more.webp" sizes="(min-width: 900px) 45vw, 100vw" alt="Хотел „Черно море“ във Варна, където се намира Ability Spa&amp;Wellness" width="1600" height="1067" loading="lazy" decoding="async"></figure>
           <div class="fac-top">
             <h3 class="fac-city">Варна</h3>
             <p class="fac-meta">хотел „Черно море“ · бул. „Сливница“ 33 · всеки ден [07:00 или 09:00] – 21:00</p>
@@ -270,7 +261,6 @@
             <li><a class="fac-tile" href="masazhi-varna/"><span class="fac-img"><img src="images/library/2025_10_masaj_vulkanichni_kamyni_ability.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Масаж с вулканични камъни" width="1200" height="800" loading="lazy" decoding="async"></span><span class="fac-name">Масажи <span aria-hidden="true">→</span></span></a></li>
             <li><a class="fac-tile" href="terapii/"><span class="fac-img"><img src="images/library/2026_06_terapia_gold_amber.webp" sizes="(min-width: 720px) 31vw, 47vw" alt="Терапия Gold Amber" width="1536" height="1024" loading="lazy" decoding="async"></span><span class="fac-name">Спа терапии <span aria-hidden="true">→</span></span></a></li>
           </ul>
-        </div>
         </div>
       </div>
     </section>
@@ -372,6 +362,6 @@
     <button class="btn btn-light btn-sm" type="button" id="cookie-ok">Приемам</button>
   </div>
 
-  <script src="js/main.js?v=e81568bf" defer></script>
+  <script src="js/main.js?v=f5880e25" defer></script>
 </body>
 </html>
