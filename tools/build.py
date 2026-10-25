@@ -442,7 +442,7 @@ CITIES = {
                 hours='Всеки ден 07:00 – 22:00', cta=(PDF_B, 'СПА меню')),
            dict(name='Варна', title='Уелнес във Варна', href='spa-varna/', hotel='хотел „Черно море“', addr='бул. „Сливница“ 33',
                 tel=(TEL_VARNA, TEL_VARNA_TXT),
-                img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='Инфрачервената пейка в Ability Spa&Wellness Варна',
+                img='images/varna-infrachervena-peika-1080', w=None, alt='Инфрачервената пейка в Ability Spa&Wellness Варна',
                 has=['Сауна и солна парна баня', 'Инфрачервена пейка', 'Фитнес', 'Групови занимания', 'Масажи', 'Спа терапии'],
                 hours='Всеки ден [07:00 или 09:00] – 21:00', cta=(PDF_V, 'СПА меню'))],
     'en': [dict(name='Burgas', title='Spa centre in Burgas', href='en/spa-burgas/', hotel='Hotel Bulgaria', addr='21 Aleksandrovska St.',
@@ -452,7 +452,7 @@ CITIES = {
                 hours='Daily 07:00 – 22:00', cta=(PDF_B, 'Spa menu (BG)')),
            dict(name='Varna', title='Wellness in Varna', href='en/spa-varna/', hotel='Hotel Cherno More', addr='33 Slivnitsa Blvd.',
                 tel=(TEL_VARNA, TEL_VARNA_TXT),
-                img='images/library/2026_01_infrachervena_peika_ability-spa_varna', w=None, alt='The infrared bench at Ability Spa&Wellness Varna',
+                img='images/varna-infrachervena-peika-1080', w=None, alt='The infrared bench at Ability Spa&Wellness Varna',
                 has=['Sauna & salt steam bath', 'Infrared bench', 'Gym', 'Group classes', 'Massages', 'Spa therapies'],
                 hours='Daily [07:00 or 09:00] – 21:00', cta=(PDF_V, 'Spa menu (BG)'))],
 }
@@ -554,7 +554,7 @@ PROMOS = {
                           ('6-месечна фитнес карта + 1 месец бонус', None, '166 €', None),
                           ('Подаръчен ваучер', None, '50 € / 100 €', None)]),
     'varna': dict(city='Варна', title='Halloween предложения', sub='Релакс. Възстановяване. Презареждане.', dates='22.10 – 05.11.2026',
-                  until='5 ноември', page='promocii/varna/', img='images/library/2026_01_relax_zona_abilityspawellness_varna.webp',
+                  until='5 ноември', page='promocii/varna/', img='images/varna-relax-zona-1080.webp',
                   alt='Релакс зоната с шезлонги в Ability Spa&Wellness Варна',
                   items=[('Special SPA club membership', 'неограничен фитнес и СПА + 2 групови занимания месечно · предплатете 10 месеца – '
                           '2 месеца подарък · до изчерпване на 100-те клубни карти', '89 € / месец', None),
@@ -609,7 +609,7 @@ def promo_card(p):
 
 
 CLUB_IMG = {'burgas': ('images/spa-burgas-basein-lampi-1280.webp', 'Закритият басейн с лампи-сфери в Ability SPA Бургас', '50% 50%'),
-            'varna': ('images/library/2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната с шезлонги в Ability Spa&Wellness Варна', '40% 50%')}
+            'varna': ('images/varna-relax-zona-1080.webp', 'Релакс зоната с шезлонги в Ability Spa&Wellness Варна', '50% 50%')}
 
 
 def club_cards(p, lang='bg'):
@@ -653,7 +653,7 @@ HERO_SLIDES = {
              menu=PDF_B, tel=TEL_BURGAS, more=('spa-burgas/', 'Повече за Бургас')),
         dict(key='varna', tab='Варна', eyebrow='Ability SPA&amp;Wellness · хотел „Черно море“', title='Уелнес във&nbsp;Варна',
              lead='Финландска и билкова сауна, солна парна баня, инфрачервена пейка, фитнес Technogym, групови тренировки, масажи и СПА терапии.',
-             img='images/hero-varna-termalna-zona', alt='Термалната зона с осветени пейки в Ability SPA&Wellness Варна', pos='50% 50%',
+             img='images/hero-varna-sauna', alt='Гостенка почива във финландската сауна на Ability SPA&Wellness Варна', pos='50% 50%',
              menu=PDF_V, tel=TEL_VARNA, more=('spa-varna/', 'Повече за Варна'))]),
     'en': dict(h1='Spa in Burgas, wellness in&nbsp;Varna', label='Choose a location', pause='Stop switching automatically', play='Switch automatically',
                menu='Spa menu (BG)', call='Call us', slides=[
@@ -663,7 +663,7 @@ HERO_SLIDES = {
              menu=PDF_B, tel=TEL_BURGAS, more=('en/spa-burgas/', 'More about Burgas')),
         dict(key='varna', tab='Varna', eyebrow='Ability SPA&amp;Wellness · Hotel Cherno More', title='Wellness in&nbsp;Varna',
              lead='Finnish and herbal sauna, salt steam bath, infrared bench, Technogym gym, group classes, massages and spa therapies.',
-             img='images/hero-varna-termalna-zona', alt='The thermal zone with lit benches at Ability SPA&Wellness Varna', pos='50% 50%',
+             img='images/hero-varna-sauna', alt='A guest relaxing in the Finnish sauna at Ability SPA&Wellness Varna', pos='50% 50%',
              menu=PDF_V, tel=TEL_VARNA, more=('en/spa-varna/', 'More about Varna'))]),
 }
 
@@ -1074,27 +1074,27 @@ def build_varna():
             '<dl class="club-facts"><div><dt>Резервации</dt><dd>по телефона, във Viber или WhatsApp</dd></div><div><dt>Паркинг</dt><dd>платен, към хотела</dd></div>'
             '<div><dt>Работно време</dt><dd>всеки ден, [07:00 или 09:00] – 21:00</dd></div></dl></div></div>', sid='obzor')
         grid = facility_grid(p, [
-            ('spa-varna/termalna-zona/', 'Термална зона', 'images/library/2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона', '58% 50%'),
-            ('spa-varna/termalna-zona/', 'Инфрачервена пейка', 'images/library/2026_01_infrachervena_peika_ability-spa_varna.webp', 'Инфрачервената пейка', '50% 50%'),
-            ('spa-varna/fitnes/', 'Фитнес Technogym', 'images/library/2026_01_fitnes_abilityspawellness_varna.webp', 'Фитнес залата', '70% 50%'),
-            ('spa-varna/grupovi-trenirovki/', 'Групови тренировки', 'images/library/2026_01_grupovi_zanimanie_abilityspawellness.webp', 'Групова тренировка по йога', '55% 50%'),
-            ('masazhi-varna/', 'Масажи', 'images/library/2023_07_aspa_001.webp', 'Релаксиращ масаж', '45% 50%'),
+            ('spa-varna/termalna-zona/', 'Термална зона', 'images/varna-termalna-zona-1080.webp', 'Термалната зона', '50% 60%'),
+            ('spa-varna/termalna-zona/', 'Инфрачервена пейка', 'images/varna-infrachervena-peika-1080.webp', 'Инфрачервената пейка', '50% 50%'),
+            ('spa-varna/fitnes/', 'Фитнес Technogym', 'images/varna-fitnes-1080.webp', 'Фитнес залата', '50% 50%'),
+            ('spa-varna/grupovi-trenirovki/', 'Групови тренировки', 'images/varna-grupovi-trenirovki-1080.webp', 'Групова тренировка', '50% 35%'),
+            ('masazhi-varna/', 'Масажи', 'images/varna-masazh-1080.webp', 'Масаж в Ability SPA&Wellness Варна', '50% 40%'),
             ('terapii/', 'СПА терапии', 'images/library/2026_06_terapia_gold_amber.webp', 'Терапия Gold Amber', '50% 50%')])
         z = head_block('Съоръжения', 'Термална зона, фитнес и&nbsp;релакс', 'zoni-h') + grid
-        z += zone_split(p, 'images/library/2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона на Ability Spa&Wellness Варна', 'Термална зона',
+        z += zone_split(p, 'images/varna-termalna-zona-1080.webp', 'Термалната зона на Ability Spa&Wellness Варна', 'Термална зона',
                         'Топлина, тишина и&nbsp;спокойствие', 'Място за истинско възстановяване в елегантна атмосфера, създадена за релакс, детоксикация и презареждане.',
                         ['Финландска (суха) сауна', 'Билкова сауна', 'Парна / солна парна баня', 'Инфрачервена пейка'], ('spa-varna/termalna-zona/', 'Термалната зона'))
-        z += zone_split(p, 'images/library/2026_01_fitnes_abilityspawellness_varna.webp', 'Фитнес залата с изглед във Варна', 'Фитнес',
+        z += zone_split(p, 'images/varna-fitnes-1080.webp', 'Фитнес залата с изглед във Варна', 'Фитнес',
                         'Technogym', 'Висок клас уреди Technogym за силови и кардио упражнения – за интензивни тренировки и за активен, здравословен начин на живот.',
                         ['Еднократна тренировка – 8 €', 'Месечна карта – 50 €'], ('spa-varna/fitnes/', 'Фитнесът'), rev=True)
-        z += zone_split(p, 'images/library/2026_01_grupovi_zanimanie_abilityspawellness.webp', 'Групова тренировка по йога', 'Групови тренировки',
+        z += zone_split(p, 'images/varna-grupovi-trenirovki-1080.webp', 'Групова тренировка по йога', 'Групови тренировки',
                         'Йога, пилатес, kango jumps, табата', 'Под ръководството на опитни инструктори – за различни нива и цели.',
                         ['Еднократна тренировка – 12 €', '10 посещения – 100 €'], ('spa-varna/grupovi-trenirovki/', 'Груповите тренировки'))
-        z += zone_split(p, 'images/library/2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната с шезлонги и камина', 'Релакс зона',
+        z += zone_split(p, 'images/varna-relax-zona-1080.webp', 'Релакс зоната с шезлонги и камина', 'Релакс зона',
                         'Шезлонги и камина', 'Мека светлина, топлината на огъня и тишина – за почивка след процедура или тренировка.', [], None, rev=True)
         s += section(z, cls='facilities', sid='zoni')
         s += section(head_block('Процедури', 'Масажи и&nbsp;терапии във Варна', 'proceduri-h') + cards(p, [
-            ('masazhi-varna/', 'Масажи във Варна', 'от 29 €', 'images/library/2023_07_aspa_001.webp', 'Релаксиращ масаж'),
+            ('masazhi-varna/', 'Масажи във Варна', 'от 29 €', 'images/varna-masazh-1080.webp', 'Масаж в Ability SPA&Wellness Варна'),
             ('terapii/gold-amber/', 'Gold Amber', '78 € · 90 мин', 'images/library/2026_06_terapia_gold_amber.webp', 'Терапия Gold Amber'),
             ('terapii/bulgarian-rose/', 'Bulgarian Rose', '78 € · 90 мин', 'images/library/2026_06_terapia_bulgarian_rose-1.webp', 'Терапия Bulgarian Rose'),
             ('terapii/lavender-touch/', 'Lavender Touch', '78 € · 90 мин', 'images/library/2026_06_terapia_lavender_touch.webp', 'Терапия Lavender Touch')]),

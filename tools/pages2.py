@@ -433,18 +433,18 @@ def build_varna_pages():
 
     def thermal(p):
         z = head_block('Термална зона', 'Топлина, тишина и&nbsp;спокойствие')
-        z += zone_split(p, L + '2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона във Варна', 'Сауни', 'Финландска и&nbsp;билкова сауна',
+        z += zone_split(p, 'images/varna-termalna-zona-1080.webp', 'Термалната зона във Варна', 'Сауни', 'Финландска и&nbsp;билкова сауна',
                         'Финландската (суха) сауна е с висока температура и ниска влажност – подпомага детоксикацията и кръвообращението. Билковата е „мека“ сауна с по-ниска температура, по-висока влажност и натурални билкови аромати.',
                         ['Финландска сауна', 'Билкова сауна'])
-        z += zone_split(p, L + '2026_01_infrachervena_peika_ability-spa_varna.webp', 'Инфрачервената пейка', 'Парна баня и инфрачервена пейка', 'Щадяща топлина',
+        z += zone_split(p, 'images/varna-infrachervena-peika-1080.webp', 'Инфрачервената пейка', 'Парна баня и инфрачервена пейка', 'Щадяща топлина',
                         'Парната / солна парна баня подпомага дихателната система и хидратира кожата. Инфрачервената пейка прониква дълбоко в тъканите, облекчава болките и е подходяща за гости, които предпочитат по-ниски температури.',
                         ['Парна / солна парна баня', 'Инфрачервена пейка'], rev=True)
-        z += zone_split(p, L + '2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната с камина', 'Релакс зона', 'Шезлонги и&nbsp;камина',
+        z += zone_split(p, 'images/varna-relax-zona-1080.webp', 'Релакс зоната с камина', 'Релакс зона', 'Шезлонги и&nbsp;камина',
                         'Мека светлина, топлината на огъня и тишина – за почивка след процедура или тренировка.', [])
         return z
     out.append(zone_page('spa-varna/termalna-zona/', cv + [('spa-varna/termalna-zona/', 'Термална зона')], 'Варна · хотел „Черно море“', 'Термална зона във&nbsp;Варна',
                          'Финландска и билкова сауна, парна / солна парна баня и инфрачервена пейка в хотел „Черно море“ – място за релакс, детоксикация и презареждане.',
-                         (L + '2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона на Ability Spa&Wellness Варна'),
+                         ('images/varna-termalna-zona-1080.webp', 'Термалната зона на Ability Spa&Wellness Варна'),
                          [('СПА – еднократно', '15 €'), ('Multisport', 'делнични дни, 07:00 – 22:00')], thermal,
                          [('СПА – еднократно', None, '15 €'), ('СПА – еднократно за двама', None, '27 €'), ('СПА – 10 / 15 / 20 посещения', None, '143 € / 195 € / 247 €'),
                           ('Фитнес и СПА – еднократно', None, '20 €'), ('Хавлия / халат', 'една хавлия е безплатна', '2 € / 3 €')],
@@ -454,13 +454,13 @@ def build_varna_pages():
 
     def gym(p):
         z = head_block('Фитнес', 'Сила и&nbsp;кардио')
-        z += zone_split(p, L + '2026_01_fitnes_abilityspawellness_varna.webp', 'Фитнес залата с изглед към Варна', 'Technogym', 'Висок клас уреди',
+        z += zone_split(p, 'images/varna-fitnes-1080.webp', 'Фитнес залата с изглед към Варна', 'Technogym', 'Висок клас уреди',
                         'Фитнес зоната е оборудвана с уреди Technogym и е подходяща както за интензивни тренировки, така и за поддържане на активен и здравословен начин на живот – независимо от нивото на подготовка.',
                         ['Силови упражнения', 'Кардио', 'Групови тренировки'])
         return z
     out.append(zone_page('spa-varna/fitnes/', cv + [('spa-varna/fitnes/', 'Фитнес')], 'Варна · хотел „Черно море“', 'Фитнес във&nbsp;Варна',
                          'Фитнес зала с уреди Technogym в хотел „Черно море“ – силови и кардио тренировки, а също йога, пилатес, kangoo jumps и табата с инструктор.',
-                         (L + '2026_01_fitnes_abilityspawellness_varna.webp', 'Фитнес залата на Ability Spa&Wellness Варна'),
+                         ('images/varna-fitnes-1080.webp', 'Фитнес залата на Ability Spa&Wellness Варна'),
                          [('Тренировка', '8 €'), ('Месечна карта', '50 €')], gym,
                          [('Еднократна тренировка', None, '8 €'), ('10 тренировки', None, '60 €'), ('Месечна / 3 / 6 месеца', None, '50 € / 128 € / 205 €'), ('Годишна карта', None, '358 €'),
                           ('Фитнес и СПА – еднократно', None, '20 €'), ('Фитнес и СПА – месечна', 'понеделник – петък / понеделник – неделя', '103 € / 123 €')],
@@ -478,7 +478,7 @@ def build_varna_pages():
     out.append(zone_page('spa-varna/grupovi-trenirovki/', cv + [('spa-varna/grupovi-trenirovki/', 'Групови тренировки')], 'Варна · групови занимания',
                          'Йога, пилатес и&nbsp;групови тренировки във&nbsp;Варна',
                          'Йога, пилатес, kangoo jumps, табата, степ, тае бо и танци с опитни инструктори – за различни нива и цели. Работим с карти Multisport.',
-                         (L + '2026_01_grupovi_zanimanie_abilityspawellness.webp', 'Групова тренировка по йога във Варна'),
+                         ('images/varna-grupovi-trenirovki-1080.webp', 'Групова тренировка по йога във Варна'),
                          [('Тренировка', '12 €'), ('Места', 'до 10 души, с предварително записване')], groups,
                          [('Еднократна тренировка', None, '12 €'), ('10 / 15 / 20 посещения', 'в рамките на 30 дни, може от повече от един човек', '100 € / 135 € / 160 €')],
                          'Ability Spa&Wellness Варна', 'Йога и пилатес във Варна – групови тренировки | Ability SPA',
@@ -492,7 +492,7 @@ def build_varna_pages():
     def body(p):
         s = page_hero(p, crumbs, 'Масажи · хотел „Черно море“', 'Масажи във&nbsp;Варна',
                       'Професионални масажи и СПА терапии в Ability SPA&Wellness, в сърцето на Варна. Масажните кабинети са тихи и уютни, а терапевтите работят с индивидуален подход.',
-                      image=(L + '2023_07_aspa_001.webp', 'Релаксиращ масаж със свещ'),
+                      image=('images/varna-masazh-1080.webp', 'Масаж в Ability SPA&Wellness Варна'),
                       meta=[('Цени', 'от 29 € (30 мин) до 49 € (60 мин)'), ('Резервации', f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a>')],
                       actions=[('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се за час'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')])
         items = [(f'masazhi-burgas/{m["slug"]}/', m['name'], m['varna'][-1][1] if len(m['varna']) == 1 else 'от ' + min(m['varna'], key=lambda x: int(x[1].split()[0]))[1],
@@ -609,7 +609,7 @@ def build_promotions():
                          'Празнични предложения в Ability SPA Бургас до 5.11.2026: 5 + 1 масажа за 195 €, 10 + 2 СПА посещения за 145 €, фитнес 6 + 1 месеца за 166 €.'))
     out.append(city_page('varna', 'promocii/varna/', 'Варна', 'Halloween предложения във&nbsp;Варна',
                          'Релакс. Възстановяване. Презареждане. Специални цени на СПА, фитнес и масажи в хотел „Черно море“ – от 22.10.2026 до 05.11.2026.',
-                         (L + '2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната във Варна'),
+                         ('images/varna-relax-zona-1080.webp', 'Релакс зоната във Варна'),
                          'бул. „Сливница“ 33, хотел „Черно море“', [('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')],
                          'Halloween промоции във Варна | Ability SPA',
                          'Halloween предложения в Ability SPA&Wellness Варна до 5.11.2026: клубна карта 89 € / месец, СПА за двама 85 €, 10 СПА посещения 120 €.'))
@@ -827,7 +827,7 @@ def build_english():
         c = H + [('en/spa-varna/', 'Varna')]
         s = en_hero(p, c, 'Ability Spa&Wellness · Hotel Cherno More', 'Spa in Varna',
                     'In the heart of Varna, in the landmark Hotel Cherno More: Finnish and herbal sauna, steam / salt steam bath, infrared bench, a relax zone with fireplace, a Technogym gym and group classes.',
-                    image=(L + '2026_01_termalna_zona_abilitwellness_varna.webp', 'Thermal zone in Varna'),
+                    image=('images/varna-termalna-zona-1080.webp', 'Thermal zone in Varna'),
                     meta=[('Address', '33 Slivnitsa Blvd.'), ('Hours', 'daily, [07:00 or 09:00] – 21:00'), ('Bookings', f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a> · Viber · WhatsApp'), ('Parking', 'paid, at the hotel')],
                     actions=[('btn-dark', f'tel:{TEL_VARNA}', 'Call to book'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')])
         s += section(f'<div class="two-col">{en_head("Prices", "Spa and gym")}<div>' + price_rows([
@@ -891,7 +891,7 @@ def build_english():
         c = H + [('en/promotions/varna/', 'Offers in Varna')]
         s = en_hero(p, c, 'Offers · Varna', 'Offers in Varna',
                     'Our summer offers in Varna ended on 22 September 2026. [NEW OFFERS – TO BE CONFIRMED BY THE TEAM] Our regular packages start at 50 €.',
-                    image=(L + '2026_01_relax_zona_abilityspawellness_varna.webp', 'Relax zone with fireplace in Varna'),
+                    image=('images/varna-relax-zona-1080.webp', 'Relax zone with fireplace in Varna'),
                     actions=[('btn-dark', f'tel:{TEL_VARNA}', 'Call Varna'), ('btn-outline', 'en/prices/#varna', 'Prices')])
         s += section(f'<div class="two-col">{en_head("Regular packages", "Packages in Varna")}<div>' + price_rows([
             ('Relax', 'day spa pass + 60 min relaxing massage', '50 €'), ('Gentleman', '60 min anti-stress massage + day spa pass', '60 €'),

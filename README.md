@@ -125,7 +125,12 @@ room, cosmetics, reception). The originals are not in the repository – only we
   right, because these photos are bright and the people sit in the middle.
 - `hamam-burgas-kese-*` (ABILITY238), `hamam-burgas-kurna-*` (ABILITY261), `hamam-burgas-ritual-*` (ABILITY226) – the hamam
   page and the hamam tile / block on `spa-burgas/` (they replace a photo of the steam-bath door sign).
-A second archive (probably Varna) is still to come.
+Second archive – **Варна** (94 photos with a model + 26 interiors, up to 8244 × 5496 px). In use now:
+- `hero-varna-sauna-*` (DSC_2345, a guest resting in the Finnish sauna) – the Варна hero slide;
+- `varna-termalna-zona-*` (DSC_3352), `varna-infrachervena-peika-*` (DSC_3394), `varna-fitnes-*` (DSC_3412),
+  `varna-relax-zona-*` (DSC_3382), `varna-grupovi-trenirovki-*` (DSC_2107), `varna-masazh-*` (DSC_2182) – they replace every
+  low-resolution Varna photo from the old site (`spa-varna/` and its zone pages, `masazhi-varna/`, the homepage cards and strip,
+  promotions). The enlarged stand-ins made earlier are deleted.
 
 ## Motion
 
