@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="../css/styles.css?v=e13eb1c7">
+  <link rel="stylesheet" href="../css/styles.css?v=a354392f">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://abilityspa.com/en/"}]}</script>
 </head>
 <body>
@@ -42,7 +42,7 @@
       <div class="header-right">
         <button class="club-btn" type="button" aria-expanded="false" aria-controls="club-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Choose a location</span></button>
         <a class="lang-toggle" href="../" lang="bg" hreflang="bg" aria-label="Български сайт">BG</a>
-        <a class="btn btn-gold btn-book" href="https://book.abilityspa.com/reservations/start?site=1">Book</a>
+        <button class="btn btn-gold contact-btn" type="button" aria-expanded="false" aria-controls="contact-panel"><span class="cb-long">Contact us</span><span class="cb-short">Contact</span></button>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
           <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="menu-label">Menu</span>
@@ -53,6 +53,13 @@
       <div class="club-panel-inner">
         <p class="eyebrow">Choose a location</p>
         <ul class="club-pick"><li><a class="club-pick-link" href="../en/spa-burgas/"><span class="cp-city">Burgas</span><span class="cp-hotel">Ability SPA · Hotel Bulgaria</span><span class="cp-meta">21 Aleksandrovska St. · daily 07:00 – 22:00</span><span class="cp-go" aria-hidden="true">→</span></a></li><li><a class="club-pick-link" href="../en/spa-varna/"><span class="cp-city">Varna</span><span class="cp-hotel">Ability SPA&amp;Wellness · Hotel Cherno More</span><span class="cp-meta">33 Slivnitsa Blvd. · daily [07:00 or 09:00] – 21:00</span><span class="cp-go" aria-hidden="true">→</span></a></li></ul>
+      </div>
+    </div>
+    <div class="club-panel contact-panel" id="contact-panel" hidden>
+      <div class="club-panel-inner">
+        <p class="eyebrow">Contact us</p>
+        <ul class="club-pick"><li class="contact-pick"><span class="cp-city">Burgas</span><a class="cp-tel" href="tel:+359895635555">+359 895 635 555</a><span class="cp-meta">21 Aleksandrovska St. · daily 07:00 – 22:00</span><span class="cp-links"><a href="tel:+35956875260">056 875 260</a><a href="viber://chat?number=%2B359895635555">Viber</a><a href="https://wa.me/359895635555" rel="noopener">WhatsApp</a></span></li><li class="contact-pick"><span class="cp-city">Varna</span><a class="cp-tel" href="tel:+359899994149">+359 899 994 149</a><span class="cp-meta">33 Slivnitsa Blvd. · daily [07:00 or 09:00] – 21:00</span><span class="cp-links"><a href="viber://chat?number=%2B359899994149">Viber</a><a href="https://wa.me/359899994149" rel="noopener">WhatsApp</a></span></li></ul>
+        <a class="text-link" href="../en/contact/">All contact details <span aria-hidden="true">→</span></a>
       </div>
     </div>
     <nav class="main-nav" id="main-nav" aria-label="Menu">
@@ -88,26 +95,34 @@
   </header>
 
   <main id="main">
-    <section class="hero-aire" aria-labelledby="hero-title">
-      <img class="hero-aire-img" src="../images/hero-finlandska-sauna-1600.webp" srcset="../images/hero-finlandska-sauna-960.webp 960w, ../images/hero-finlandska-sauna-1600.webp 1600w, ../images/hero-finlandska-sauna-2400.webp 2400w" sizes="100vw" alt="A guest relaxing in the Finnish sauna at Ability SPA" width="2400" height="1600" fetchpriority="high" decoding="async">
-      <div class="container hero-aire-inner">
-        <p class="eyebrow">Ability SPA &amp; Wellness</p>
-        <h1 id="hero-title">City spa in Burgas and&nbsp;Varna</h1>
-        <p class="hero-aire-lead">Two day spas in city-centre hotels – Hotel Bulgaria in Burgas and Hotel Cherno More in Varna. Each has its own zones.</p>
-        <div class="book-bar" role="group" aria-label="Booking">
-          <fieldset class="bb-city">
-            <legend class="sr-only">Choose a location</legend>
-            <label><input type="radio" name="bb-city" value="burgas" checked><span>Burgas</span></label>
-            <label><input type="radio" name="bb-city" value="varna"><span>Varna</span></label>
-          </fieldset>
-          <p class="bb-info" aria-live="polite"><span data-city="burgas">Hotel Bulgaria · daily 07:00 – 22:00</span><span data-city="varna" hidden>Hotel Cherno More · bookings by phone</span></p>
-          <a class="btn btn-gold bb-go" href="https://book.abilityspa.com/reservations/start?site=1" data-burgas="https://book.abilityspa.com/reservations/start?site=1|Book online" data-varna="tel:+359899994149|Call us">Book online</a>
-          <a class="btn btn-line-light bb-gift" href="../en/vouchers/">Gift voucher</a>
+<section class="hero-slides" aria-labelledby="hero-title" data-interval="7000">
+      <div class="hs-media"><img class="hs-img is-active" data-city="burgas" src="../images/hero-burgas-basein-1600.webp" srcset="../images/hero-burgas-basein-960.webp 960w, ../images/hero-burgas-basein-1600.webp 1600w, ../images/hero-burgas-basein-2400.webp 2400w" sizes="100vw" alt="A couple relaxing on the loungers by the pool at Ability SPA Burgas" width="2400" height="1600" fetchpriority="high" decoding="async" style="object-position: 50% 55%"><img class="hs-img" data-city="varna" src="../images/hero-varna-termalna-zona-1600.webp" srcset="../images/hero-varna-termalna-zona-960.webp 960w, ../images/hero-varna-termalna-zona-1600.webp 1600w, ../images/hero-varna-termalna-zona-2400.webp 2400w" sizes="100vw" alt="The thermal zone with lit benches at Ability SPA&amp;Wellness Varna" width="2400" height="1600" loading="lazy" decoding="async" style="object-position: 50% 50%"></div>
+      <div class="container hs-inner">
+        <h1 id="hero-title" class="hs-h1">Spa in Burgas, wellness in&nbsp;Varna</h1>
+        <div class="hs-controls">
+          <div class="hs-tabs" role="tablist" aria-label="Choose a location"><button class="hs-tab" type="button" role="tab" id="hs-tab-burgas" aria-controls="hs-burgas" aria-selected="true">Burgas</button><button class="hs-tab" type="button" role="tab" id="hs-tab-varna" aria-controls="hs-varna" aria-selected="false" tabindex="-1">Varna</button></div>
+          <button class="hs-pause" type="button" aria-pressed="false" data-pause="Stop switching automatically" data-play="Switch automatically" aria-label="Stop switching automatically">
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
         </div>
-        <p class="bb-nojs">Varna – bookings by phone: <a href="tel:+359899994149">+359 899 994 149</a></p>
+        <div class="hs-panels">
+          <div class="hs-panel is-active" id="hs-burgas" role="tabpanel" aria-labelledby="hs-tab-burgas">
+            <p class="eyebrow">Ability SPA · Hotel Bulgaria</p>
+            <h2 class="hs-title">Spa centre in&nbsp;Burgas</h2>
+            <p class="hs-lead">Pool and jacuzzi, saunas and steam bath, hamam, salt room, gym, massages, osteopathy and beauty treatments – in the city centre.</p>
+            <div class="btn-row"><a class="btn btn-gold" href="https://abilityspa.com/wp-content/uploads/2026/03/ability_spa_menu_dec_25_bg_online.pdf">Spa menu (BG)</a><a class="btn btn-line-light" href="tel:+359895635555">Call us</a></div>
+            <a class="hs-more" href="../en/spa-burgas/">More about Burgas <span aria-hidden="true">→</span></a>
+          </div><div class="hs-panel" id="hs-varna" role="tabpanel" aria-labelledby="hs-tab-varna">
+            <p class="eyebrow">Ability SPA&amp;Wellness · Hotel Cherno More</p>
+            <h2 class="hs-title">Wellness in&nbsp;Varna</h2>
+            <p class="hs-lead">Finnish and herbal sauna, salt steam bath, infrared bench, Technogym gym, group classes, massages and spa therapies.</p>
+            <div class="btn-row"><a class="btn btn-gold" href="https://abilityspa.com/wp-content/uploads/2026/03/ability_spa__wellness_menu_feb_26_bg_online.pdf">Spa menu (BG)</a><a class="btn btn-line-light" href="tel:+359899994149">Call us</a></div>
+            <a class="hs-more" href="../en/spa-varna/">More about Varna <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
       </div>
-    </section>
-    <section class="section section-dark clubs">
+    </section>    <section class="section section-dark clubs">
       <div class="container">
 <div class="section-head center"><p class="eyebrow">Our locations</p><h2 id="loc-title">Choose your location</h2></div><ul class="club-cards"><li class="club-card">
             <a class="club-card-media" href="../en/spa-burgas/" tabindex="-1" aria-hidden="true"><img src="../images/spa-burgas-basein-lampi-1280.webp" alt="" loading="lazy" decoding="async" style="object-position: 50% 50%"></a>
@@ -122,9 +137,10 @@
                 <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><a href="tel:+359895635555">+359 895 635 555</a></li>
               </ul>
               <div class="btn-row">
-                <a class="btn btn-gold" href="https://book.abilityspa.com/reservations/start?site=1">Book online</a>
-                <a class="btn btn-line" href="../en/spa-burgas/">View location <span aria-hidden="true">→</span></a>
+                <a class="btn btn-gold" href="https://abilityspa.com/wp-content/uploads/2026/03/ability_spa_menu_dec_25_bg_online.pdf">Spa menu (BG)</a>
+                <a class="btn btn-line" href="tel:+359895635555">Call</a>
               </div>
+              <a class="text-link club-card-more" href="../en/spa-burgas/">View location <span aria-hidden="true">→</span></a>
             </div>
           </li><li class="club-card">
             <a class="club-card-media" href="../en/spa-varna/" tabindex="-1" aria-hidden="true"><img src="../images/library/2026_01_relax_zona_abilityspawellness_varna.webp" alt="" loading="lazy" decoding="async" style="object-position: 40% 50%"></a>
@@ -139,9 +155,10 @@
                 <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><a href="tel:+359899994149">+359 899 994 149</a></li>
               </ul>
               <div class="btn-row">
-                <a class="btn btn-gold" href="tel:+359899994149">Call to book</a>
-                <a class="btn btn-line" href="../en/spa-varna/">View location <span aria-hidden="true">→</span></a>
+                <a class="btn btn-gold" href="https://abilityspa.com/wp-content/uploads/2026/03/ability_spa__wellness_menu_feb_26_bg_online.pdf">Spa menu (BG)</a>
+                <a class="btn btn-line" href="tel:+359899994149">Call</a>
               </div>
+              <a class="text-link club-card-more" href="../en/spa-varna/">View location <span aria-hidden="true">→</span></a>
             </div>
           </li></ul>
       </div>
@@ -153,9 +170,9 @@
     </section>
     <section class="cta-band" aria-label="Booking">
       <div class="container"><div class="cta-band-inner">
-        <div><h2>Time for yourself?</h2><p>Book online in Burgas, or call us for Varna.</p></div>
+        <div><h2>Your place to relax</h2><p>Call us and we will book your time in Burgas or Varna.</p></div>
         <div class="btn-row">
-          <a class="btn btn-dark btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Book in Burgas <span aria-hidden="true">→</span></a>
+          <a class="btn btn-dark" href="tel:+359895635555">Burgas: +359 895 635 555</a>
           <a class="btn btn-outline" href="tel:+359899994149">Varna: +359 899 994 149</a>
         </div>
       </div></div>
@@ -168,7 +185,7 @@
       <a class="logo logo-footer" href="../en/">
         <img src="../images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
       </a>
-      <p class="footer-tag">City spa in Burgas and Varna, Bulgaria</p>
+      <p class="footer-tag">Spa in Burgas · wellness in Varna</p>
       <ul class="footer-cities"><li><a href="../en/spa-burgas/">Burgas</a></li><li><a href="../en/spa-varna/">Varna</a></li></ul>
     </div>
     <div class="container footer-grid">
@@ -224,6 +241,6 @@
     <button class="btn btn-gold btn-sm" type="button" id="cookie-ok">OK</button>
   </div>
 
-  <script src="../js/main.js?v=e13eb1c7" defer></script>
+  <script src="../js/main.js?v=a354392f" defer></script>
 </body>
 </html>

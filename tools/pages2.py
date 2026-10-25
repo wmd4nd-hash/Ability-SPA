@@ -6,7 +6,7 @@ difference is listed in docs/facts-from-current-site.md. Anything not confirmed 
 """
 import os, re
 from build import *  # noqa: F401,F403 – shared chrome, components and constants
-from build import MASSAGES, ROOT, city_switch, club_cards, e
+from build import MASSAGES, ROOT, city_switch, club_cards, hero_slides, e
 
 L = 'images/library/'
 
@@ -128,8 +128,8 @@ def build_therapy(t):
         meta.append(('Бургас', e(f'{t["burgas"][0]} – {t["burgas"][1]}')))
     if t['varna']:
         meta.append(('Варна', e(f'{t["varna"][0]} – {t["varna"][1]}')))
-    acts = ([('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас')] if t['burgas'] else []) + \
-           ([varna_call() if t['burgas'] else ('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се за час')] if t['varna'] else [])
+    acts = ([('btn-dark', f'tel:{TEL_BURGAS}', 'Бургас: обадете се')] if t['burgas'] else []) + \
+           ([varna_call() if t['burgas'] else ('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се')] if t['varna'] else [])
 
     def body(p):
         s = page_hero(p, crumbs, 'СПА терапии · ' + ' и '.join(where(t)), e(t['name']), e(t['intro'][0]), image=t['img'], meta=meta, actions=acts)
@@ -151,7 +151,7 @@ def build_therapies_hub():
                       'Скраб, масаж и ароматни масла в една процедура – от шоколад и кафе до българска роза и лавандула. В Бургас терапиите са 60 минути, във Варна – 90.',
                       image=(L + '2026_06_terapia_bulgarian_rose-1.webp', 'Терапия с рози и розово олио'),
                       meta=[('Бургас', '60 мин – от 49 €'), ('Варна', '90 мин – 78 €')],
-                      actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), varna_call()])
+                      actions=[('btn-dark', f'tel:{TEL_BURGAS}', 'Бургас: обадете се'), varna_call()])
         s += section(head_block('Изберете терапия', 'Нашите терапии') +
                      cards(p, [(f'terapii/{t["slug"]}/', t['short'], ' · '.join(filter(None, [
                          f'Бургас {t["burgas"][1]}' if t['burgas'] else '', f'Варна {t["varna"][1]}' if t['varna'] else ''])), t['img'][0], t['img'][1]) for t in THERAPIES]))
@@ -285,7 +285,7 @@ def build_cosmetics_hub():
 # ------------------------------------------------------------------------------------------------
 def zone_page(path, crumbs, eyebrow, h1, lead, image, meta, blocks, prices, price_note, title, desc, rel, current, place='burgas', ld=None):
     def body(p):
-        acts = [('btn-dark', BOOK_BURGAS, 'Резервирай')] if place == 'burgas' else [('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')]
+        acts = [('btn-dark', f'tel:{TEL_BURGAS}', 'Обадете се'), ('btn-outline', PDF_B, 'СПА меню')] if place == 'burgas' else [('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')]
         s = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=acts)
         s += section(blocks(p), cls='facilities')
         s += section(f'<div class="two-col">{head_block("Цени", e(price_note))}<div>{price_rows(prices)}'
@@ -536,7 +536,7 @@ def build_packages():
         s = page_hero(p, crumbs, 'СПА пакети · Бургас и Варна', 'СПА пакети',
                       'Комбинирайте СПА, масаж, терапия или фитнес в един пакет на по-добра цена – за себе си, за двама или за подарък.',
                       image=(L + '2023_07_aspa_014.webp', 'Релаксиращ масаж в Ability SPA'),
-                      meta=[('Бургас', 'от 52 €'), ('Варна', 'от 50 €')], actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), varna_call()])
+                      meta=[('Бургас', 'от 52 €'), ('Варна', 'от 50 €')], actions=[('btn-dark', f'tel:{TEL_BURGAS}', 'Бургас: обадете се'), varna_call()])
         s += section(f'<div class="two-col">{head_block("Ability Spa · хотел „България“", "Пакети – Бургас", "burgas")}<div>{price_rows(PACK_B)}'
                      f'<p class="price-other">Пакетите със СПА посещения важат 90 дни от първото посещение. <a href="{PDF_B}" rel="noopener">Меню Бургас (PDF)</a></p></div></div>')
         s += section(f'<div class="two-col">{head_block("Ability Spa&Wellness · хотел „Черно море“", "Пакети – Варна", "varna")}<div>{price_rows(PACK_V)}'
@@ -554,7 +554,7 @@ def build_packages():
         s = page_hero(p, crumbs2, 'Пакети · Бургас и Варна', 'СПА пакет за двама',
                       'Масаж и цял ден СПА за двама – в Бургас с басейн, солна стая и бутилка вино или шампанско, във Варна със сауни и инфрачервена пейка.',
                       image=(L + '2024_07_aspa_427.webp', 'Масаж за релакс в Ability SPA'),
-                      meta=[('Бургас', '120 €'), ('Варна', '100 €')], actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), varna_call()])
+                      meta=[('Бургас', '120 €'), ('Варна', '100 €')], actions=[('btn-dark', f'tel:{TEL_BURGAS}', 'Бургас: обадете се'), varna_call()])
         s += section('<div class="two-col">'
                      f'<div><h2 class="h3">Бургас – 120 €</h2>{checklist(["2 масажа на цяло тяло", "Цял ден СПА – басейн, джакузи, термална зона и фитнес", "Солна стая", "Бутилка вино или шампанско"])}</div>'
                      f'<div><h2 class="h3">Варна – 100 €</h2>{checklist(["2 масажа × 60 минути", "2 дневни СПА карти – сауни, парна баня, инфрачервена пейка"])}</div></div>')
@@ -604,7 +604,7 @@ def build_promotions():
     out.append(city_page('burgas', 'promocii/burgas/', 'Бургас', 'Празнични предложения в&nbsp;Бургас',
                          'Честит рожден ден, Ability SPA! Специални цени на масажи, СПА, басейн, солна стая и фитнес в хотел „България“ – от 22.10.2026 до 05.11.2026.',
                          ('images/library/2024_07_aspa_427.webp', 'Масаж с горещи камъни и свещ в Ability SPA Бургас'),
-                         'ул. „Александровска“ 21, хотел „България“', [('btn-dark', BOOK_BURGAS, 'Резервирай')],
+                         'ул. „Александровска“ 21, хотел „България“', [('btn-dark', f'tel:{TEL_BURGAS}', 'Обадете се'), ('btn-outline', PDF_B, 'СПА меню')],
                          'Празнични промоции в Бургас | Ability SPA',
                          'Празнични предложения в Ability SPA Бургас до 5.11.2026: 5 + 1 масажа за 195 €, 10 + 2 СПА посещения за 145 €, фитнес 6 + 1 месеца за 166 €.'))
     out.append(city_page('varna', 'promocii/varna/', 'Варна', 'Halloween предложения във&nbsp;Варна',
@@ -643,7 +643,7 @@ def build_first_visit():
         s = page_hero(p, crumbs, 'Първо посещение', 'Първо посещение в&nbsp;СПА',
                       'Какво да вземете, как да резервирате, правила за деца, Multisport и СПА етикет – всичко, което е добре да знаете преди да дойдете.',
                       image=(L + '2026_01_p1073163.webp', 'Хавлии и масла в релакс зоната'),
-                      actions=[('btn-dark', BOOK_BURGAS, 'Резервирай в Бургас'), ('btn-outline', '#etiket', 'СПА етикет')])
+                      actions=[('btn-dark', 'kontakti/', 'Свържете се с нас'), ('btn-outline', '#etiket', 'СПА етикет')])
         faq = '<div class="faq">' + ''.join(f'<details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in FAQ) + '</div>'
         s += section(f'<div class="two-col">{head_block("Въпроси", "Преди да дойдете")}{faq}</div>')
         s += section(f'<div class="two-col">{head_block("СПА етикет", "Правила за спокойствие", "etiket", "За да се чувствате комфортно и да получите максимално удоволствие от престоя си.")}'
@@ -662,7 +662,7 @@ def build_about():
     def body(p):
         s = page_hero(p, crumbs, 'За нас', 'Вашето място за релакс',
                       'Посветили сме се изцяло на грижата за вашето здраве, красота и душевен баланс. Вярваме, че всеки гост е специален – и го показваме с внимание и отношение.',
-                      image=(L + '2026_08_hotel-bulgaria.webp', 'Хотел „България“ в центъра на Бургас'), actions=[('btn-dark', BOOK_BURGAS, 'Резервирай'), ('btn-outline', 'kontakti/', 'Контакти')])
+                      image=(L + '2026_08_hotel-bulgaria.webp', 'Хотел „България“ в центъра на Бургас'), actions=[('btn-dark', 'kontakti/', 'Свържете се с нас')])
         s += section(f'<div class="two-col">{head_block("Историята", "Защо Бургас")}' + prose([
             '„На Бургас от доста време му беше необходимо такова място. Градът се разраства и решихме да дадем на хората място, където да релаксират и да се възстановяват пълноценно.“ – Илия Дамянов, управител на Ability SPA.',
             'В обновения хотел „България“ сме съчетали уютна обстановка, индивидуално подбрани процедури, качествени продукти и апарати. По-късно отворихме и Ability SPA&Wellness във Варна, в хотел „Черно море“.',
@@ -769,9 +769,9 @@ def en_page(path, title, desc, crumbs, body, ld=()):
 def en_cta(p):
     return f'''    <section class="cta-band" aria-label="Booking">
       <div class="container"><div class="cta-band-inner">
-        <div><h2>Time for yourself?</h2><p>Book online in Burgas, or call us for Varna.</p></div>
+        <div><h2>Your place to relax</h2><p>Call us and we will book your time in Burgas or Varna.</p></div>
         <div class="btn-row">
-          <a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Book in Burgas <span aria-hidden="true">→</span></a>
+          <a class="btn btn-dark" href="tel:{TEL_BURGAS}">Burgas: {TEL_BURGAS_TXT}</a>
           <a class="btn btn-outline" href="tel:{TEL_VARNA}">Varna: {TEL_VARNA_TXT}</a>
         </div>
       </div></div>
@@ -780,7 +780,7 @@ def en_cta(p):
 
 
 def en_hero(p, crumbs, eyebrow, h1, lead, image=None, meta=None, actions=None):
-    h = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=actions if actions is not None else [('btn-dark', BOOK_BURGAS, 'Book')])
+    h = page_hero(p, crumbs, eyebrow, h1, lead, image=image, meta=meta, actions=actions if actions is not None else [('btn-dark', f'tel:{TEL_VARNA if "varna" in crumbs[-1][0] else TEL_BURGAS}', 'Call us')])
     return h.replace('aria-label="Навигационна пътека"', 'aria-label="Breadcrumb"')
 
 
@@ -794,26 +794,7 @@ def build_english():
 
     def home(p):
         # Same structure as the Bulgarian homepage: full-photo hero with a booking bar, then the two locations.
-        s = f'''    <section class="hero-aire" aria-labelledby="hero-title">
-      <img class="hero-aire-img" src="{p}images/hero-finlandska-sauna-1600.webp" srcset="{p}images/hero-finlandska-sauna-960.webp 960w, {p}images/hero-finlandska-sauna-1600.webp 1600w, {p}images/hero-finlandska-sauna-2400.webp 2400w" sizes="100vw" alt="A guest relaxing in the Finnish sauna at Ability SPA" width="2400" height="1600" fetchpriority="high" decoding="async">
-      <div class="container hero-aire-inner">
-        <p class="eyebrow">Ability SPA &amp; Wellness</p>
-        <h1 id="hero-title">City spa in Burgas and&nbsp;Varna</h1>
-        <p class="hero-aire-lead">Two day spas in city-centre hotels – Hotel Bulgaria in Burgas and Hotel Cherno More in Varna. Each has its own zones.</p>
-        <div class="book-bar" role="group" aria-label="Booking">
-          <fieldset class="bb-city">
-            <legend class="sr-only">Choose a location</legend>
-            <label><input type="radio" name="bb-city" value="burgas" checked><span>Burgas</span></label>
-            <label><input type="radio" name="bb-city" value="varna"><span>Varna</span></label>
-          </fieldset>
-          <p class="bb-info" aria-live="polite"><span data-city="burgas">Hotel Bulgaria · daily 07:00 – 22:00</span><span data-city="varna" hidden>Hotel Cherno More · bookings by phone</span></p>
-          <a class="btn btn-gold bb-go" href="{BOOK_BURGAS}" data-burgas="{BOOK_BURGAS}|Book online" data-varna="tel:{TEL_VARNA}|Call us">Book online</a>
-          <a class="btn btn-line-light bb-gift" href="{p}en/vouchers/">Gift voucher</a>
-        </div>
-        <p class="bb-nojs">Varna – bookings by phone: <a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a></p>
-      </div>
-    </section>
-'''
+        s = hero_slides(p, 'en')
         s += section('<div class="section-head center"><p class="eyebrow">Our locations</p><h2 id="loc-title">Choose your location</h2></div>' + club_cards(p, 'en'),
                      cls='section-dark clubs')
         s += section(en_head('More', 'Massages and gifts') + cards(p, [
@@ -862,7 +843,8 @@ def build_english():
         c = H + [('en/massages/', 'Massages')]
         s = en_hero(p, c, 'Burgas · Varna', 'Massages in Burgas and Varna',
                     'Classic, deep tissue, sports, aromatherapy, anti-cellulite, lymphatic drainage and hot volcanic stone massage, reflexology and osteopathy.',
-                    image=('images/masazh-goreshti-kamani-burgas-1080.webp', 'Hot stone massage'), meta=[('Prices', 'from 28 € (30 min) to 49 € (60 min)')])
+                    image=('images/masazh-goreshti-kamani-burgas-1080.webp', 'Hot stone massage'), meta=[('Prices', 'from 28 € (30 min) to 49 € (60 min)')],
+                    actions=[('btn-dark', BOOK_BURGAS, 'Book a massage in Burgas'), ('btn-outline', f'tel:{TEL_VARNA}', 'Varna: call')])
         s += section(f'<div class="two-col">{en_head("Prices", "Massage menu")}<div>' + price_rows([
             ('Classic massage – partial', '30 min', '29 €'), ('Classic massage – full body', '60 min', '45 €'),
             ('Deep tissue · Sports · Aromatherapy · Therapeutic · Anti-cellulite · Volcanic stones', '60 min', '49 €'),
@@ -922,16 +904,16 @@ def build_english():
 
     def contact(p):
         c = H + [('en/contact/', 'Contact')]
-        s = en_hero(p, c, 'Contact', 'Contact – Burgas and Varna', 'Book online for Burgas, or reach us by phone, Viber or WhatsApp.', actions=[])
+        s = en_hero(p, c, 'Contact', 'Contact – Burgas and Varna', 'Reach us by phone, Viber or WhatsApp.', actions=[])
         s += section(f'''<div class="contact-grid-2">
           <article class="contact-card"><h2 class="h3">Ability Spa – Burgas</h2><p class="kicker">Hotel Bulgaria</p>
           <dl class="svc-meta"><div><dt>Address</dt><dd>21 Aleksandrovska St., Burgas</dd></div><div><dt>Hours</dt><dd>daily, 07:00 – 22:00</dd></div>
           <div><dt>Phone</dt><dd><a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a></dd></div></dl>
-          <div class="btn-row"><a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Book online <span aria-hidden="true">→</span></a></div></article>
+          <div class="btn-row"><a class="btn btn-dark" href="tel:{TEL_BURGAS}">Call</a></div></article>
           <article class="contact-card"><h2 class="h3">Ability Spa&amp;Wellness – Varna</h2><p class="kicker">Hotel Cherno More</p>
           <dl class="svc-meta"><div><dt>Address</dt><dd>33 Slivnitsa Blvd., Varna</dd></div><div><dt>Hours</dt><dd>daily, [07:00 or 09:00] – 21:00</dd></div>
           <div><dt>Phone</dt><dd><a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a></dd></div></dl>
-          <div class="btn-row"><a class="btn btn-dark" href="tel:{TEL_VARNA}">Call to book</a></div></article></div>''')
+          <div class="btn-row"><a class="btn btn-dark" href="tel:{TEL_VARNA}">Call</a></div></article></div>''')
         return s
     out.append(en_page('en/contact/', 'Contact Ability SPA – Burgas and Varna',
                        'Ability SPA contacts: Burgas, 21 Aleksandrovska St. (Hotel Bulgaria) and Varna, 33 Slivnitsa Blvd. (Hotel Cherno More). Phones and hours.',

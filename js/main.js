@@ -3,31 +3,34 @@
   var btn = document.querySelector('.menu-btn');
   var nav = document.getElementById('main-nav');
   if (!btn || !nav) return;
-  var clubBtn = document.querySelector('.club-btn');
-  var clubPanel = document.getElementById('club-panel');
-  function setClub(open) {
-    if (!clubBtn || !clubPanel) return;
-    clubBtn.setAttribute('aria-expanded', String(open));
-    clubPanel.hidden = !open;
+  // Header panels – "Избери обект", "Свържи се с нас" – and the "СПА меню" dropdown: one open at a time,
+  // closed by Esc (focus goes back to its button), a click outside, or opening the menu.
+  var toggles = Array.prototype.slice.call(document.querySelectorAll('.club-btn, .contact-btn, .nav-drop-btn'));
+  function setPanel(b, open) {
+    var panel = document.getElementById(b.getAttribute('aria-controls'));
+    if (!panel) return;
+    b.setAttribute('aria-expanded', String(open)); panel.hidden = !open;
   }
+  function closePanels(except) { toggles.forEach(function (b) { if (b !== except) setPanel(b, false); }); }
   function setOpen(open) {
     btn.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
-    if (open) setClub(false);
+    if (open) closePanels();
   }
-  // "Choose a location" (davidlloyd.co.uk "Find a club"): a panel under the header with both locations.
-  if (clubBtn && clubPanel) {
-    clubBtn.addEventListener('click', function () {
-      var open = clubBtn.getAttribute('aria-expanded') !== 'true';
-      setClub(open); if (open) setOpen(false);
+  toggles.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var open = b.getAttribute('aria-expanded') !== 'true';
+      closePanels(b); setPanel(b, open); if (open) setOpen(false);
     });
-    document.addEventListener('click', function (e) {
-      if (clubBtn.getAttribute('aria-expanded') === 'true' && !e.target.closest('#club-panel, .club-btn')) setClub(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && clubBtn.getAttribute('aria-expanded') === 'true') { setClub(false); clubBtn.focus(); }
-    });
-  }
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.club-btn, .contact-btn, .nav-drop-btn, .club-panel, .nav-drop')) closePanels();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var open = toggles.filter(function (b) { return b.getAttribute('aria-expanded') === 'true'; })[0];
+    if (open) { closePanels(); open.focus(); }
+  });
   btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
   nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
@@ -184,6 +187,53 @@
     if (items[0]) on(items[0]);
   });
 
+
+  // Homepage hero: Бургас / Варна slides. Every 7 s (no visible timer); pauses on hover, keyboard focus and off-screen;
+  // the pause button stops it; picking a city stops it for good; reduced motion never starts it.
+  document.querySelectorAll('.hero-slides').forEach(function (hs) {
+    var tabs = Array.prototype.slice.call(hs.querySelectorAll('[role="tab"]'));
+    var imgs = hs.querySelectorAll('.hs-img'), pause = hs.querySelector('.hs-pause');
+    var ms = Number(hs.getAttribute('data-interval')) || 7000, cur = 0, timer = null;
+    var auto = !reduce && tabs.length > 1, paused = false, hover = false, off = false;
+    function show(i, focus) {
+      tabs.forEach(function (t, k) {
+        var on = k === i, panel = document.getElementById(t.getAttribute('aria-controls'));
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        panel.classList.toggle('is-active', on); panel.setAttribute('aria-hidden', String(!on)); panel.inert = !on;
+        if (imgs[k]) imgs[k].classList.toggle('is-active', on);
+      });
+      cur = i; if (focus) tabs[i].focus();
+    }
+    function tick() {
+      clearTimeout(timer);
+      if (auto && !paused && !hover && !off) timer = setTimeout(function () { show((cur + 1) % tabs.length); tick(); }, ms);
+    }
+    function pick(i, focus) { auto = false; clearTimeout(timer); if (pause) pause.hidden = true; show(i, focus); }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(i); });
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (n) { e.preventDefault(); pick((i + n + tabs.length) % tabs.length, true); }
+      });
+    });
+    if (pause) {
+      if (!auto) pause.hidden = true;
+      pause.addEventListener('click', function () {
+        paused = !paused;
+        pause.setAttribute('aria-pressed', String(paused));
+        pause.setAttribute('aria-label', pause.getAttribute(paused ? 'data-play' : 'data-pause'));
+        tick();
+      });
+    }
+    hs.addEventListener('mouseenter', function () { hover = true; tick(); });
+    hs.addEventListener('mouseleave', function () { hover = false; tick(); });
+    hs.addEventListener('focusin', function () { hover = true; tick(); });
+    hs.addEventListener('focusout', function (e) { if (!hs.contains(e.relatedTarget)) { hover = false; tick(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { off = !en[0].isIntersecting; tick(); }).observe(hs);
+    }
+    show(0); tick();
+  });
 
   // Booking bar (homepage hero): the chosen location sets the main button – Бургас books online, Варна calls.
   document.querySelectorAll('.book-bar').forEach(function (bar) {

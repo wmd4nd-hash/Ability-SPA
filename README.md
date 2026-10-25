@@ -99,6 +99,23 @@ for the structure. Both are translated into Ability's own colours and fonts (bri
   anything and can be deleted. The previous version stays viewable at
   https://raw.githack.com/wmd4nd-hash/Ability-SPA/21e623e/index.html
 
+## Feedback 25.10 (voice messages, after the redesign)
+
+- **Varna is wellness, not spa.** The homepage H1 is now „СПА в Бургас и уелнес във Варна“, and the hero has two slides –
+  „Спа център в Бургас“ (photo: the couple on the loungers by the pool – ABILITY287, the same shoot as the "10 посещения басейн"
+  graphic) and „Уелнес във Варна“ (photo: the Varna thermal zone). Each slide lists only what that location has, with its
+  СПА меню (PDF) and phone. `hero_slides()` in `tools/build.py`; 7 s per slide, no visible timer, pause button, stops once a
+  city is picked. "Градски СПА в Бургас и Варна" and the line suggesting a pool in Varna are gone (also from the title,
+  description and footer).
+- **Online booking only for massages in Бургас.** People should not think they must book a massage to visit. The header's
+  „Резервирай“ became **„Свържи се с нас“** („Контакти“ on phones) – a panel with both phone numbers, Viber and WhatsApp.
+  Booking stays only on `masazhi-burgas/` and its massage pages (`default_actions()`, `cta_band(book=True)`); everywhere else:
+  call the right city, plus the СПА меню where it helps. The booking hint was removed from the homepage structured data too.
+- **„СПА меню“ in the menu** instead of „Пакети“ (moved to the small links): a dropdown with the Бургас and Варна menus (PDF)
+  and the prices page; two direct links in the phone menu.
+- **Wording:** „Елате да го усетите“ → „Вашето място за релакс“ (the phrase the team already uses); the default booking box
+  says the same.
+
 ## Motion
 
 Calm, CSS-driven motion with a small script (`js/main.js`), no library:
