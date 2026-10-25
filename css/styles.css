@@ -1292,3 +1292,471 @@ html[data-palette="g"] .cs-contact a { text-decoration-color: rgba(32, 26, 24, .
 .site-footer .btn-light { color: var(--espresso); }
 html[data-palette="b"] .cta-band-inner .btn-outline { color: var(--white); border-color: var(--sand); }
 html[data-palette="b"] .cta-band-inner .btn-outline:hover { background: var(--sand); color: var(--espresso); }
+
+/* =====================================================================================================
+   REDESIGN 25.10 – the look of beaire.com, the structure of davidlloyd.co.uk, in Ability's own colours.
+   Espresso and cream sections in turn, gold for titles on dark, buttons and fine lines, uppercase serif titles,
+   small spaced labels, square corners. Header: promo bar, info links, what we offer, "choose a location", book.
+   ===================================================================================================== */
+:root {
+  --ink: #201A18;          /* espresso: header, dark sections, footer */
+  --ink-2: #2B2320;        /* cards on dark */
+  --cream: #F5F1EA;        /* page background (an off-white, like beaire.com) */
+  --beige: #EAE3D6;        /* the second light band */
+  --gold-hi: #D6B990;      /* gold button hover */
+  --on-dark: #EDE6DA;      /* body text on espresso */
+  --muted-dark: #CFC5B5;   /* secondary text on espresso */
+  --gold-line: rgba(195, 159, 118, .32);
+  --header-h: 64px;
+  --subnav-h: 0px;
+  --radius: 0;
+}
+@media (min-width: 1200px) { :root { --header-h: 76px; } }
+html:has(.club-nav) { --subnav-h: 57px; scroll-padding-top: calc(var(--header-h) + var(--subnav-h) + 12px); }
+
+body { background: var(--cream); }
+h1, h2 { font-weight: 600; text-transform: uppercase; letter-spacing: .03em; line-height: 1.04; }
+h1 { font-size: clamp(2.25rem, 8.5vw, 5.25rem); }
+h2 { font-size: clamp(2rem, 5.4vw, 3.5rem); }
+h1 em, h2 em { font-style: normal; }
+.center { text-align: center; }
+.btn-row.center { justify-content: center; }
+
+/* Labels: small, spaced, gold (darkened on light backgrounds) */
+.eyebrow { font: 500 .875rem/1.4 var(--sans); letter-spacing: .2em; color: var(--gold-text); }
+.section-head .eyebrow { border-bottom: 0; padding-bottom: 0; margin-bottom: 14px; }
+.section-head.center { text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+.section-head.center .eyebrow { justify-content: center; }
+.section-intro { max-width: 60ch; }
+.section { padding: clamp(64px, 9vw, 120px) 0; }
+.section-sand { background: var(--beige); }
+.section-dark { background: var(--ink); color: var(--on-dark); }
+.section-dark h2, .section-dark .h2 { color: var(--gold); }
+.section-dark h3 { color: var(--white); }
+.section-dark .eyebrow { color: var(--gold); }
+.section-dark a:not(.btn) { color: var(--white); }
+
+/* Buttons: square, spaced capitals; gold is the main action */
+.btn { border-radius: 0; min-height: 50px; padding: 0 28px; border-width: 1px; font: 500 .875rem/1 var(--sans); letter-spacing: .16em; }
+.btn-gold { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn-gold:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+.btn-dark { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.btn-dark:hover { background: #3A2F2B; }
+.btn-line, .btn-outline { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-line:hover, .btn-outline:hover { background: var(--ink); color: var(--white); }
+.btn-line-light, .btn-outline-light,
+:is(.section-dark, .club-card, .page-hero, .promo-card) :is(.btn-line, .btn-outline) { background: transparent; border-color: var(--gold); color: var(--white); }
+.btn-line-light:hover, .btn-outline-light:hover,
+:is(.section-dark, .club-card, .page-hero, .promo-card) :is(.btn-line, .btn-outline):hover { background: var(--gold); color: var(--ink); }
+.btn-light { background: var(--sand); border-color: var(--sand); color: var(--ink); }
+.btn-sm { min-height: 44px; padding: 0 18px; }
+.btn-arrow span { transition: translate .25s; }
+.btn-arrow:hover span { translate: 4px 0; }
+
+/* ---------- Header ---------- */
+.site-header {
+  --pre-h: 0px;
+  position: sticky; top: calc(-1 * var(--pre-h)); z-index: 50;
+  background: var(--ink); color: var(--on-dark); border-bottom: 1px solid rgba(195, 159, 118, .18);
+  backdrop-filter: none;
+}
+.site-header:has(.promo-bar) { --pre-h: 40px; }
+.site-header.is-scrolled { box-shadow: 0 10px 30px rgba(0, 0, 0, .25); }
+.promo-bar a {
+  display: flex; align-items: center; justify-content: center; gap: 14px; height: 40px; padding: 0 var(--gutter);
+  background: var(--gold); color: var(--ink); text-decoration: none; white-space: nowrap; overflow: hidden;
+  font: 500 .875rem/1 var(--sans); letter-spacing: .03em;
+}
+.pb-long { display: none; }
+.pb-go { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.util-bar { display: none; }
+.header-inner { height: var(--header-h); gap: 12px; }
+.logo img { height: 22px; }
+.nav-acts { display: none; }
+.header-right { gap: 8px; }
+.club-btn {
+  display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; cursor: pointer;
+  background: none; border: 1px solid rgba(195, 159, 118, .55); color: var(--white);
+  font: 500 .8125rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+}
+.club-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.club-btn:hover, .club-btn[aria-expanded="true"] { border-color: var(--gold); background: rgba(195, 159, 118, .12); }
+.lang-toggle {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px;
+  color: var(--white); border: 1px solid rgba(195, 159, 118, .45); text-decoration: none; font-weight: 600; font-size: .875rem; letter-spacing: .08em;
+}
+.btn-book { min-height: 44px; padding: 0 16px; font-size: .8125rem; letter-spacing: .14em; }
+.menu-btn { color: var(--white); margin-left: 0; }
+.header-phone { display: none !important; }
+
+/* "Choose a location" panel */
+.club-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--ink); border-top: 1px solid rgba(195, 159, 118, .2); box-shadow: 0 30px 50px rgba(0, 0, 0, .35); }
+.club-panel[hidden] { display: none; }
+.club-panel-inner { max-width: 1440px; margin: 0 auto; padding: 24px var(--gutter) 32px; }
+.club-panel .eyebrow { color: var(--gold); }
+.club-pick { display: grid; gap: 12px; }
+.club-pick-link { position: relative; display: grid; gap: 4px; padding: 22px 60px 22px 24px; border: 1px solid var(--gold-line); color: var(--on-dark); text-decoration: none; transition: border-color .2s, background-color .2s; }
+.club-pick-link:hover, .club-pick-link[aria-current] { border-color: var(--gold); background: rgba(195, 159, 118, .08); }
+.cp-city { font: 600 2rem/1 var(--serif); text-transform: uppercase; letter-spacing: .04em; color: var(--gold); }
+.cp-hotel { color: var(--white); font-weight: 500; }
+.cp-meta { font-size: .9375rem; color: var(--muted-dark); }
+.cp-go { position: absolute; right: 24px; top: 50%; translate: 0 -50%; color: var(--gold); font-size: 1.5rem; transition: translate .25s; }
+.club-pick-link:hover .cp-go { translate: 6px -50%; }
+
+/* Menu panel (phones and tablets) */
+.main-nav { background: var(--ink); border-top: 1px solid rgba(195, 159, 118, .2); border-bottom: 0; box-shadow: 0 30px 50px rgba(0, 0, 0, .35); }
+.nav-inner { gap: 28px; padding: 20px var(--gutter) 36px; }
+.nav-h { margin: 0 0 6px; font: 500 .8125rem/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.nav-clubs a { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid rgba(195, 159, 118, .2); text-decoration: none; }
+.nc-city { font: 600 1.75rem/1.1 var(--serif); text-transform: uppercase; letter-spacing: .03em; color: var(--white); }
+.nc-hotel { font-size: .9375rem; color: var(--muted-dark); }
+.main-nav .nav-main a { color: var(--white); border-bottom-color: rgba(195, 159, 118, .2); font-size: 1.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+.main-nav .nav-sub a { color: var(--on-dark); }
+.main-nav .nav-call { color: var(--on-dark); border-color: rgba(195, 159, 118, .2); }
+.main-nav .nav-call a { color: var(--white); }
+.main-nav .nav-call span { color: var(--gold); }
+.main-nav a[aria-current] { color: var(--gold) !important; }
+
+@media (min-width: 720px) {
+  .club-btn { display: inline-flex; }
+  .club-pick { grid-template-columns: 1fr 1fr; }
+  .nav-inner { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+  .pb-long { display: inline; }
+  .pb-short { display: none; }
+}
+@media (max-width: 899px) { .promo-bar .pb-long { display: none; } .promo-bar .pb-short { display: inline; } }
+@media (max-width: 380px) { .pb-go { display: none; } }
+@media (min-width: 1200px) {
+  .site-header:has(.promo-bar) { --pre-h: 76px; }
+  .site-header { --pre-h: 36px; }
+  .util-bar { display: block; height: 36px; border-bottom: 1px solid rgba(195, 159, 118, .14); }
+  .util-inner { display: flex; align-items: center; justify-content: flex-end; gap: 28px; height: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--gutter); }
+  .util-links { display: flex; gap: 22px; }
+  .util-links a, .util-bar .lang a { color: var(--muted-dark); font-size: .8125rem; letter-spacing: .06em; text-decoration: none; }
+  .util-links a:hover, .util-links a[aria-current] { color: var(--gold); }
+  .util-bar .lang { display: flex; gap: 4px; }
+  .util-bar .lang a { min-height: 28px; min-width: 34px; border: 1px solid transparent; border-radius: 0; font-weight: 600; }
+  .util-bar .lang a[aria-current] { border-color: rgba(195, 159, 118, .5); color: var(--white); }
+  .logo img { height: 26px; }
+  .nav-acts { display: block; margin-left: 36px; }
+  .nav-acts ul { display: flex; gap: 26px; }
+  .nav-acts a {
+    display: inline-flex; align-items: center; min-height: 44px; color: var(--white); text-decoration: none;
+    font: 500 .8125rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; border-bottom: 1px solid transparent;
+  }
+  .nav-acts a:hover, .nav-acts a[aria-current] { color: var(--gold); border-bottom-color: var(--gold); }
+  .menu-btn, .lang-toggle, .main-nav { display: none !important; }
+  .header-left { display: none; }
+}
+
+/* ---------- Homepage hero: one full photo, centred title and a booking bar (beaire.com) ---------- */
+.hero-aire { position: relative; isolation: isolate; overflow: hidden; display: grid; align-items: end; min-height: min(86svh, 840px); background: var(--ink); color: var(--white); }
+.hero-aire-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; animation: hero-settle 14s var(--ease-out) both; }
+.hero-aire::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(20, 15, 13, .45) 0, rgba(20, 15, 13, .5) 40%, rgba(20, 15, 13, .88) 100%); }
+.hero-aire-inner { display: grid; justify-items: center; text-align: center; padding-top: 120px; padding-bottom: 32px; }
+.hero-aire .eyebrow { color: var(--white); justify-content: center; animation: rise-in .9s var(--ease-out) .1s both; }
+.hero-aire h1 { max-width: 15ch; margin: 0 auto 16px; color: var(--gold); text-shadow: 0 2px 30px rgba(0, 0, 0, .35); animation: rise-in 1s var(--ease-out) .2s both; }
+.hero-aire-lead { max-width: 46ch; margin: 0 auto 28px; color: #F2ECE2; animation: rise-in 1s var(--ease-out) .35s both; }
+.book-bar {
+  display: grid; gap: 10px; width: 100%; max-width: 1000px; padding: 12px;
+  background: rgba(32, 26, 24, .84); border: 1px solid var(--gold-line); backdrop-filter: blur(6px);
+  animation: rise-in 1s var(--ease-out) .5s both;
+}
+.bb-city { display: grid; grid-template-columns: 1fr 1fr; min-width: 0; margin: 0; padding: 0; border: 1px solid rgba(195, 159, 118, .55); }
+.bb-city label { position: relative; display: flex; }
+.bb-city input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.bb-city span { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 50px; color: var(--white); font: 500 .875rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; transition: background-color .2s, color .2s; }
+.bb-city input:checked + span { background: rgba(195, 159, 118, .16); color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); }
+.bb-city input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: -3px; }
+.bb-info { margin: 0; align-self: center; color: #E6DED1; font-size: .9375rem; line-height: 1.4; }
+.bb-go, .bb-gift { width: 100%; }
+.bb-nojs { margin: 14px 0 0; font-size: .9375rem; }
+.bb-nojs a { color: var(--white); font-weight: 600; }
+.js .bb-nojs { display: none; }
+@media (min-width: 900px) {
+  .hero-aire { align-items: center; }
+  .hero-aire-inner { padding-top: 120px; padding-bottom: 96px; }
+  .book-bar { grid-template-columns: 250px minmax(0, 1fr) auto auto; align-items: stretch; }
+  .bb-info { padding: 0 8px; text-align: left; }
+  .bb-go, .bb-gift { width: auto; }
+}
+
+/* ---------- Intro statement ---------- */
+.intro-inner { max-width: 900px; text-align: center; }
+.intro .eyebrow { justify-content: center; }
+.intro-title { font-size: clamp(2.5rem, 7.5vw, 4.75rem); margin-bottom: 20px; }
+.intro-lead { margin: 0 auto 16px; max-width: 34ch; font: 500 clamp(1.375rem, 2.8vw, 1.875rem)/1.35 var(--serif); }
+.intro-inner > p:not(.eyebrow):not(.intro-lead) { max-width: 60ch; margin-left: auto; margin-right: auto; }
+.intro-facts { display: grid; margin: 36px 0 24px; border-top: 1px solid var(--line); text-align: left; }
+.intro-facts li { display: grid; gap: 2px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.intro-facts strong { font: 600 1.5rem/1.1 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+@media (min-width: 720px) {
+  .intro-facts { grid-template-columns: repeat(3, 1fr); border-top: 0; text-align: center; }
+  .intro-facts li { padding: 6px 22px; border-bottom: 0; border-left: 1px solid var(--line); }
+  .intro-facts li:first-child { border-left: 0; }
+}
+
+/* ---------- Locations: two cards (beaire.com centres, davidlloyd.co.uk club finder) ---------- */
+.club-cards { display: grid; gap: 28px; margin-top: 8px; }
+.club-card { display: grid; grid-template-rows: auto 1fr; background: var(--ink-2); border: 1px solid rgba(195, 159, 118, .22); }
+.club-card-media { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.club-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+.club-card:hover .club-card-media img { transform: scale(1.04); }
+.club-card-body { padding: 26px 22px 28px; }
+.club-card-city { margin: 0 0 10px; font: 600 clamp(2.75rem, 8vw, 4.25rem)/.95 var(--serif); text-transform: uppercase; letter-spacing: .04em; color: var(--gold); }
+.club-card .eyebrow { color: var(--muted-dark); margin-bottom: 6px; }
+.club-card h3 { margin: 0 0 18px; font: 500 1.375rem/1.3 var(--sans); text-transform: none; letter-spacing: 0; }
+.club-card h3 a { color: var(--white); text-decoration: none; }
+.club-card h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.club-card-has { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; margin: 0 0 20px; color: var(--white); }
+.club-card-has li { position: relative; padding-left: 16px; }
+.club-card-has li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+.club-card-contact { display: grid; gap: 2px; margin: 0 0 24px; padding-top: 14px; border-top: 1px solid rgba(195, 159, 118, .25); color: #E6DED1; font-size: 1rem; line-height: 1.35; }
+.club-card-contact li { display: flex; align-items: center; gap: 10px; min-height: 32px; }
+.club-card-contact svg, .club-hero-meta svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.club-card-contact a { display: inline-flex; align-items: center; min-height: 44px; color: var(--white); font-weight: 600; }
+@media (min-width: 1024px) {
+  .club-cards { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .club-card-body { padding: 32px 36px 36px; }
+}
+
+/* ---------- What we offer: swipeable strip of tall cards (davidlloyd.co.uk) ---------- */
+.acts-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.acts-head .section-head { margin-bottom: 0; }
+.acts-arrows { display: none; gap: 8px; }
+.acts-btn { width: 52px; height: 52px; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 1.25rem; cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
+.acts-btn:hover { background: var(--ink); color: var(--white); }
+.acts-btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--ink); }
+.acts-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: 14px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter);
+}
+.acts-track::-webkit-scrollbar { display: none; }
+.act { position: relative; aspect-ratio: 3 / 4; overflow: hidden; scroll-snap-align: start; background: var(--ink); }
+.act img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+.act::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 15, 13, .9) 0, rgba(20, 15, 13, .35) 45%, rgba(20, 15, 13, 0) 70%); }
+.act:hover img { transform: scale(1.05); }
+.act-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 18px; }
+.act h3 { margin: 0 0 12px; color: var(--white); font: 600 1.625rem/1.05 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+.act-where { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.act-where a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid rgba(195, 159, 118, .8);
+  color: var(--white); text-decoration: none; font: 500 .8125rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; transition: background-color .2s, color .2s;
+}
+.act-where a:hover { background: var(--gold); color: var(--ink); }
+@media (min-width: 720px) { .acts-track { grid-auto-columns: calc((100% - 2 * 14px) / 3.2); } }
+@media (min-width: 900px) and (hover: hover) { .acts-arrows { display: flex; } }
+@media (min-width: 1200px) { .acts-track { grid-auto-columns: calc((100% - 3 * 20px) / 4); gap: 20px; } }
+
+/* ---------- Feature band: one full photo, centred line (beaire.com) ---------- */
+.feature-band, .other-club { position: relative; isolation: isolate; overflow: hidden; background: var(--ink); color: var(--white); text-align: center; padding: clamp(96px, 15vw, 190px) 0; }
+.feature-band-img, .other-club-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; }
+.feature-band::before, .other-club::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(20, 15, 13, .72); }
+.feature-band-inner, .other-club-inner { max-width: 760px; }
+.feature-band h2, .other-club h2 { color: var(--gold); }
+.feature-band .eyebrow, .other-club .eyebrow { color: var(--white); justify-content: center; }
+.feature-band p, .other-club p { color: #F2ECE2; font-size: 1.125rem; }
+.feature-band .btn-row, .other-club .btn-row { justify-content: center; margin-top: 28px; }
+
+/* ---------- Area blocks: photo and text in turn (davidlloyd.co.uk) ---------- */
+.duo-grid { display: grid; gap: 32px; align-items: center; }
+.duo-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.duo-where { margin: 24px 0 28px; border-top: 1px solid var(--line); }
+.duo-where div { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.duo-where dt { font: 600 1.25rem/1.2 var(--serif); text-transform: uppercase; letter-spacing: .05em; }
+.duo-where dd { margin: 0; }
+@media (min-width: 720px) { .duo-where div { grid-template-columns: 120px 1fr; gap: 20px; } }
+@media (min-width: 1024px) {
+  .duo-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 80px; }
+  .duo-rev .duo-media { order: 2; }
+}
+
+/* ---------- Current offers card (davidlloyd.co.uk membership offer) ---------- */
+.promo-sec { padding-top: 0; }
+.duo + .promo-sec, .section-sand + .promo-sec { padding-top: clamp(64px, 9vw, 120px); }
+.promo-card { position: relative; isolation: isolate; overflow: hidden; background: var(--ink); color: var(--white); }
+.promo-card-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; }
+.promo-card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(20, 15, 13, .95) 0, rgba(20, 15, 13, .88) 55%, rgba(20, 15, 13, .76) 100%); }
+.promo-card-body { padding: clamp(32px, 5vw, 64px) clamp(20px, 5vw, 64px); }
+.promo-card .eyebrow { color: var(--white); }
+.promo-card h2 { color: var(--gold); margin-bottom: 8px; }
+.promo-cols { display: grid; gap: 36px; margin-top: 24px; }
+.promo-col { padding-top: 22px; border-top: 1px solid rgba(195, 159, 118, .45); }
+.promo-city { margin: 0 0 6px; font: 500 .8125rem/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.promo-col h3 { margin: 0; color: var(--white); font: 600 1.75rem/1.1 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+.promo-top { margin: 14px 0 24px; }
+.promo-top li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.promo-top strong { flex: none; color: var(--gold); font-weight: 600; white-space: nowrap; }
+@media (min-width: 900px) { .promo-cols { grid-template-columns: 1fr 1fr; gap: 56px; } }
+
+/* ---------- Gift vouchers (beaire.com gift section) ---------- */
+.gift-points { display: grid; gap: 1px; margin: 0 0 40px; background: rgba(195, 159, 118, .3); border: 1px solid rgba(195, 159, 118, .3); }
+.gift-points li { padding: 30px 24px; background: var(--ink); text-align: center; }
+.gift-points h3 { margin-bottom: 10px; color: var(--gold); font: 600 1.5rem/1.15 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+.gift-points p { margin: 0 auto; max-width: 34ch; color: var(--on-dark); }
+@media (min-width: 900px) { .gift-points { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- Reviews, why us, blog, finder ---------- */
+.proof-meta { max-width: 62ch; margin-left: auto; margin-right: auto; }
+.review { border-radius: 0; background: var(--white); }
+.why-grid { display: grid; gap: 32px; }
+.why-list li { display: grid; gap: 4px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.why-list li:first-child { border-top: 1px solid var(--line); }
+.why-list strong { font: 600 1.375rem/1.15 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+@media (min-width: 1024px) { .why-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 80px; align-items: start; } }
+.post-cards { display: grid; gap: 16px; }
+.post-card { display: grid; gap: 14px; align-content: space-between; min-height: 220px; padding: 26px 24px; background: var(--white); border: 1px solid var(--line); text-decoration: none; transition: border-color .2s; }
+.post-card:hover { border-color: var(--gold); }
+.post-cat { font: 500 .8125rem/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-text); }
+.post-title { font: 600 1.5rem/1.15 var(--serif); }
+.post-more { font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 900px) { .post-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+.finder { padding: clamp(72px, 10vw, 128px) 0; background: var(--ink); color: var(--on-dark); text-align: center; border-bottom: 1px solid rgba(195, 159, 118, .2); }
+.finder-inner { max-width: 760px; }
+.finder h2 { color: var(--gold); }
+.finder .eyebrow { justify-content: center; color: var(--white); }
+
+/* ---------- Footer: big city names (beaire.com) + columns (davidlloyd.co.uk) ---------- */
+.site-footer { background: var(--ink); color: var(--on-dark); padding: 0 0 96px; }
+.footer-top { display: grid; justify-items: center; gap: 14px; padding-top: 64px; padding-bottom: 48px; text-align: center; border-bottom: 1px solid rgba(195, 159, 118, .2); }
+.logo-footer { margin: 0; }
+.logo-footer img { height: 28px; }
+.footer-tag { margin: 0; color: var(--gold); font-size: .8125rem; letter-spacing: .2em; text-transform: uppercase; }
+.footer-cities { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 28px; }
+.footer-cities li { display: flex; align-items: center; gap: 28px; }
+.footer-cities li + li::before { content: "·"; color: var(--gold); font-size: 2rem; }
+.footer-cities a { color: var(--white); text-decoration: none; font: 500 clamp(2.5rem, 8vw, 4.25rem)/1.15 var(--serif); text-transform: uppercase; letter-spacing: .04em; transition: color .2s; }
+.footer-cities a:hover { color: var(--gold); }
+.footer-grid { padding-top: 48px; }
+.footer-h { color: var(--gold); letter-spacing: .2em; font-weight: 500; }
+.site-footer p a, .contact-list a { color: var(--white); }
+@media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.cookie-bar { border-radius: 0; background: var(--ink); }
+
+/* ---------- Sub-page hero: espresso, gold title (all generated pages) ---------- */
+.page-hero { background: var(--ink); color: var(--on-dark); }
+.page-hero h1 { color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+.page-hero .eyebrow { color: var(--gold); }
+.page-lead { color: #F2ECE2; }
+.page-hero .breadcrumb ol { color: var(--muted-dark); }
+.page-hero .breadcrumb a { color: var(--muted-dark); }
+.page-hero .breadcrumb [aria-current] { color: var(--white); }
+.page-hero .svc-meta { border-top-color: var(--gold-line); }
+.page-hero .svc-meta > div { border-bottom-color: var(--gold-line); }
+.page-hero .svc-meta dt { color: var(--gold); }
+.page-hero .svc-meta dd, .page-hero .svc-meta a { color: var(--white); }
+.page-hero .btn-dark { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.page-hero .btn-dark:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+.two-col > .section-head { top: calc(var(--header-h) + var(--subnav-h) + 32px); }
+.cta-band-inner { border-radius: 0; background: var(--beige); }
+.section-sand + .cta-band .cta-band-inner { background: var(--white); }
+.tiles.related { background: var(--cream); }
+.price-list dd { white-space: nowrap; }
+.promo-list .pl-new { font-weight: 700; }
+.promo-list .pl-old { margin-left: 8px; color: #6E625A; font-weight: 400; }
+
+/* ---------- Location pages (davidlloyd.co.uk club page) ---------- */
+.club-hero { position: relative; isolation: isolate; overflow: hidden; display: grid; align-items: end; min-height: min(80svh, 760px); background: var(--ink); color: var(--white); }
+.club-hero-img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; animation: hero-settle 14s var(--ease-out) both; }
+.club-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(20, 15, 13, .55) 0, rgba(20, 15, 13, .4) 35%, rgba(20, 15, 13, .9) 100%); }
+.club-hero-inner { display: grid; justify-items: center; text-align: center; padding-top: 32px; padding-bottom: 44px; }
+.club-hero .breadcrumb { margin-bottom: auto; }
+.club-hero .breadcrumb ol { justify-content: center; color: #E6DED1; }
+.club-hero .breadcrumb a { color: #E6DED1; }
+.club-hero .breadcrumb [aria-current] { color: var(--white); }
+.club-hero .eyebrow { color: var(--white); justify-content: center; margin-top: 18vh; }
+.club-hero h1 { max-width: 15ch; margin: 0 auto 16px; color: var(--gold); text-shadow: 0 2px 30px rgba(0, 0, 0, .35); }
+.club-hero-lead { max-width: 52ch; margin: 0 auto 18px; color: #F2ECE2; }
+.club-hero-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 22px; margin: 0 0 22px; color: var(--white); font-size: 1rem; }
+.club-hero-meta li { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; }
+.club-hero-meta a { display: inline-flex; align-items: center; min-height: 44px; color: var(--white); font-weight: 600; }
+.club-hero .btn-row { justify-content: center; }
+.club-nav { position: sticky; top: var(--header-h); z-index: 40; background: var(--cream); border-bottom: 1px solid var(--line); }
+.club-nav-inner { display: flex; align-items: center; gap: 12px; min-height: 56px; }
+.club-nav-name { flex: none; margin: 0; font: 600 1.25rem/1 var(--serif); text-transform: uppercase; letter-spacing: .06em; }
+.club-nav-links { flex: 1; display: flex; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+.club-nav-links::-webkit-scrollbar { display: none; }
+.club-nav-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; white-space: nowrap; color: var(--ink); text-decoration: none; font: 500 .8125rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; border-bottom: 2px solid transparent; }
+.club-nav-links a:hover, .club-nav-links a.is-current { color: var(--gold-text); border-bottom-color: var(--gold); }
+.club-nav-switch { flex: none; display: none; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font: 500 .8125rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.club-nav-switch:hover { background: var(--ink); color: var(--white); }
+@media (min-width: 720px) { .club-nav-switch { display: inline-flex; } }
+@media (min-width: 1200px) { .club-nav-links { -webkit-mask-image: none; mask-image: none; justify-content: center; } }
+.club-facts { margin: 28px 0 0; border-top: 1px solid var(--line); }
+.club-facts div { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.club-facts dt { font-size: .8125rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); }
+.club-facts dd { margin: 0; }
+@media (min-width: 720px) { .club-facts div { grid-template-columns: 170px 1fr; gap: 16px; align-items: baseline; } }
+.facility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 64px; }
+.facility { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink); color: var(--white); text-decoration: none; }
+.facility img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+.facility::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 15, 13, .85) 0, rgba(20, 15, 13, .2) 55%, rgba(20, 15, 13, 0) 75%); }
+.facility:hover img { transform: scale(1.05); }
+.facility-name { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1; font: 600 1.125rem/1.1 var(--serif); text-transform: uppercase; letter-spacing: .03em; }
+@media (min-width: 900px) {
+  .facility-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .facility-name { left: 20px; right: 20px; bottom: 18px; font-size: 1.625rem; }
+}
+#kontakt .section-head, #kontakt .section-head .eyebrow { text-align: center; justify-content: center; }
+.visit-grid { display: grid; border-top: 1px solid var(--line); }
+.visit-item { display: grid; justify-items: center; gap: 6px; padding: 24px 0; text-align: center; border-bottom: 1px solid var(--line); }
+.visit-item svg { width: 34px; height: 34px; fill: none; stroke: var(--gold-text); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.visit-item h3 { margin: 6px 0 0; font: 500 .8125rem/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.visit-item p { margin: 0; }
+.visit-item p a { display: inline-flex; align-items: center; min-height: 40px; font-weight: 600; }
+.visit-note { max-width: 60ch; margin: 24px auto 0; text-align: center; }
+.visit-cta { justify-content: center; margin-top: 28px; }
+@media (min-width: 900px) {
+  .visit-grid { grid-template-columns: repeat(3, 1fr); border-top: 0; }
+  .visit-item { padding: 8px 24px; border-bottom: 0; border-left: 1px solid var(--line); }
+  .visit-item:first-child { border-left: 0; }
+}
+
+/* Dark sections: cards and lists stay readable */
+.section-dark .exp-card { background: var(--ink-2); color: var(--white); }
+.section-dark .price-list > div { border-color: var(--gold-line); }
+
+/* Scroll reveal for the new blocks (same motion as the rest of the site) */
+.js :is(.club-card, .acts-track, .gift-points > li, .why-list > li, .post-cards > li, .facility-grid > li, .visit-item,
+  .promo-col, .intro-facts > li, .duo-media, .duo-text, .finder-inner, .feature-band-inner, .other-club-inner) {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  transition-delay: calc(min(var(--d, 0), 5) * 90ms);
+}
+.js :is(.club-card, .acts-track, .gift-points > li, .why-list > li, .post-cards > li, .facility-grid > li, .visit-item,
+  .promo-col, .intro-facts > li, .duo-media, .duo-text, .finder-inner, .feature-band-inner, .other-club-inner).is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js :is(.club-card, .acts-track, .gift-points > li, .why-list > li, .post-cards > li, .facility-grid > li, .visit-item,
+    .promo-col, .intro-facts > li, .duo-media, .duo-text, .finder-inner, .feature-band-inner, .other-club-inner) { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-aire-img, .club-hero-img, .hero-aire :is(.eyebrow, h1, .hero-aire-lead), .book-bar { animation: none; }
+}
+.scroll-progress { display: none; }
+/* No rule under the labels in the new look (beaire.com keeps them bare) */
+.js .section-head .eyebrow, .js .section-head.is-in .eyebrow { background: none; }
+/* Header: one-line buttons, a little more room on mid-size desktops */
+.club-btn, .btn-book { white-space: nowrap; }
+@media (min-width: 1200px) and (max-width: 1360px) { .nav-acts { margin-left: 24px; } .nav-acts ul { gap: 18px; } .nav-acts a { letter-spacing: .12em; } }
+/* Promo bar on phones: short text, one line, starts at the left so nothing is cut */
+@media (max-width: 719px) { .promo-bar a { justify-content: flex-start; gap: 10px; font-size: .8125rem; } .promo-bar .pb-short { overflow: hidden; text-overflow: ellipsis; } }
+@media (max-width: 479px) { .pb-go .pb-go-t { display: none; } }
+/* Hero: a darker veil behind the centred title so it never competes with the photo */
+.hero-aire::before { background:
+  radial-gradient(ellipse 60% 55% at 50% 52%, rgba(20, 15, 13, .55), rgba(20, 15, 13, 0) 70%),
+  linear-gradient(to bottom, rgba(20, 15, 13, .5) 0, rgba(20, 15, 13, .52) 40%, rgba(20, 15, 13, .9) 100%); }
+/* Location hero and the "other location" band: a darker veil where the title sits (bright lamps, lit hotel sign) */
+.club-hero::before { background:
+  radial-gradient(ellipse 65% 50% at 50% 62%, rgba(20, 15, 13, .6), rgba(20, 15, 13, 0) 72%),
+  linear-gradient(to bottom, rgba(20, 15, 13, .55) 0, rgba(20, 15, 13, .5) 35%, rgba(20, 15, 13, .92) 100%); }
+.other-club::before { background: rgba(20, 15, 13, .8); }
+.club-nav-links { position: relative; }
+.acts-head { flex-wrap: wrap; }
+@media (max-width: 719px) { .blog-teaser .acts-head { display: block; } .blog-teaser .acts-head .text-link { margin-top: 4px; } }
+/* Uppercase titles are wider: long Bulgarian words ("Ароматерапевтичен") must still fit a 360 px phone */
+.page-hero h1 { font-size: clamp(1.75rem, 7.4vw, 4.5rem); overflow-wrap: anywhere; }
+.club-hero h1, .hero-aire h1 { overflow-wrap: anywhere; }
+@media (max-width: 719px) { h2 { overflow-wrap: anywhere; } }
+@media (min-width: 720px) {
+  .page-hero h1, .club-hero h1, .hero-aire h1 { overflow-wrap: normal; }
+  .page-hero.has-media h1 { font-size: clamp(2.5rem, 4.2vw, 3.75rem); }
+}

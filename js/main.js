@@ -3,9 +3,30 @@
   var btn = document.querySelector('.menu-btn');
   var nav = document.getElementById('main-nav');
   if (!btn || !nav) return;
+  var clubBtn = document.querySelector('.club-btn');
+  var clubPanel = document.getElementById('club-panel');
+  function setClub(open) {
+    if (!clubBtn || !clubPanel) return;
+    clubBtn.setAttribute('aria-expanded', String(open));
+    clubPanel.hidden = !open;
+  }
   function setOpen(open) {
     btn.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
+    if (open) setClub(false);
+  }
+  // "Choose a location" (davidlloyd.co.uk "Find a club"): a panel under the header with both locations.
+  if (clubBtn && clubPanel) {
+    clubBtn.addEventListener('click', function () {
+      var open = clubBtn.getAttribute('aria-expanded') !== 'true';
+      setClub(open); if (open) setOpen(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (clubBtn.getAttribute('aria-expanded') === 'true' && !e.target.closest('#club-panel, .club-btn')) setClub(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && clubBtn.getAttribute('aria-expanded') === 'true') { setClub(false); clubBtn.focus(); }
+    });
   }
   btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
   nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
@@ -20,35 +41,6 @@
     try { localStorage.setItem('cookie-ok', '1'); } catch (e) {}
   });
 
-
-  // PROTOTYPE ONLY – colour palettes to compare. Shown once a page is opened with ?palette=a…g (kept while browsing).
-  if (document.documentElement.hasAttribute('data-palette-ui')) {
-    var pals = [['a', 'Сегашна', '#FFFFFF', '#201A18'], ['b', 'Топъл пясък', '#DDD3C0', '#201A18'], ['c', 'Злато', '#C39F76', '#201A18'],
-      ['d', 'Мока', '#F1E9DC', '#3A2C26'], ['e', 'Вечер', '#201A18', '#C39F76'], ['f', 'Басейн', '#F1ECE3', '#16302F'],
-      ['g', 'Светла', '#F7F2EA', '#201A18']];
-    var pick = document.createElement('div');
-    pick.className = 'palette-picker'; pick.setAttribute('role', 'group'); pick.setAttribute('aria-label', 'Цветова комбинация (прототип)');
-    pick.innerHTML = '<button type="button" class="pp-toggle" aria-expanded="false" aria-label="Цветове"><i></i></button><span>Цветове</span>' + pals.map(function (x) {
-      return '<button type="button" data-p="' + x[0] + '" aria-label="' + x[0].toUpperCase() + ' · ' + x[1] + '" title="' + x[0].toUpperCase() + ' · ' + x[1] + '"><i style="--a:' + x[2] + ';--b:' + x[3] + '"></i></button>';
-    }).join('');
-    var mark = function () {
-      var cur = document.documentElement.getAttribute('data-palette') || 'a';
-      pick.querySelectorAll('[data-p]').forEach(function (b) {
-        var on = b.getAttribute('data-p') === cur;
-        b.setAttribute('aria-pressed', String(on));
-        if (on) pick.querySelector('.pp-toggle i').setAttribute('style', b.querySelector('i').getAttribute('style'));
-      });
-    };
-    pick.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      if (b.classList.contains('pp-toggle')) { var o = pick.classList.toggle('is-open'); b.setAttribute('aria-expanded', String(o)); return; }
-      var v = b.getAttribute('data-p');
-      document.documentElement.setAttribute('data-palette', v);
-      try { sessionStorage.setItem('palette', v); var u = new URL(location.href); u.searchParams.set('palette', v); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (err) {}
-      mark(); pick.classList.remove('is-open'); pick.querySelector('.pp-toggle').setAttribute('aria-expanded', 'false');
-    });
-    mark(); document.body.appendChild(pick);
-  }
 
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
@@ -86,7 +78,9 @@
   var revealSel = '.section-head, .statement-title, .statement-cols, .exp-grid > li, .facts-list > li, .tiles-list > li,' +
     ' .facilities .photo, .facilities .split-text, .spa-day-intro, .spa-day-prices, .first-visit-intro, .faq details,' +
     ' .location, .review, .voucher-card, .voucher-text, .two-col > *, .price-group, .contact-card, .cta-band-inner,' +
-    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .fac-tabs';
+    ' .checklist > li, .price-list > div, .class-list > li, .about-text > p, .about-facts > li, .fac-tabs,' +
+    ' .club-card, .acts-track, .gift-points > li, .why-list > li, .post-cards > li, .facility-grid > li, .visit-item,' +
+    ' .promo-col, .intro-facts > li, .duo-media, .duo-text, .finder-inner, .feature-band-inner, .other-club-inner';
   var items = document.querySelectorAll(revealSel);
   items.forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
@@ -190,6 +184,66 @@
     if (items[0]) on(items[0]);
   });
 
+
+  // Booking bar (homepage hero): the chosen location sets the main button – Бургас books online, Варна calls.
+  document.querySelectorAll('.book-bar').forEach(function (bar) {
+    var go = bar.querySelector('.bb-go');
+    function pick(city) {
+      var d = (go.getAttribute('data-' + city) || '').split('|');
+      if (d.length === 2) { go.href = d[0]; go.textContent = d[1]; }
+      bar.querySelectorAll('.bb-info [data-city]').forEach(function (s) { s.hidden = s.getAttribute('data-city') !== city; });
+    }
+    bar.querySelectorAll('input[name="bb-city"]').forEach(function (r) {
+      r.addEventListener('change', function () { if (r.checked) pick(r.value); });
+      if (r.checked) pick(r.value);
+    });
+  });
+
+  // What we offer (homepage strip): arrow buttons scroll by one card; disabled at either end.
+  document.querySelectorAll('.acts').forEach(function (sec) {
+    var track = sec.querySelector('.acts-track'), btns = sec.querySelectorAll('.acts-btn');
+    if (!track || !btns.length) return;
+    function edges() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      btns.forEach(function (b) { b.disabled = b.getAttribute('data-dir') === '-1' ? track.scrollLeft <= 2 : track.scrollLeft >= max; });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var card = track.querySelector('li');
+        var step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth * .8;
+        track.scrollBy({ left: step * Number(b.getAttribute('data-dir')), behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+    track.addEventListener('scroll', edges, { passive: true });
+    window.addEventListener('resize', edges);
+    edges();
+  });
+
+  // Location pages: the in-page menu marks the section being read.
+  var clubLinks = Array.prototype.slice.call(document.querySelectorAll('.club-nav-links a'));
+  if (clubLinks.length && 'IntersectionObserver' in window) {
+    var secs = clubLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    var clubList = clubLinks[0].closest('ul');
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        if (en.target.classList.contains('club-hero')) {   // back at the top: nothing marked, menu scrolled to its start
+          clubLinks.forEach(function (a) { a.classList.remove('is-current'); a.removeAttribute('aria-current'); });
+          clubList.scrollTo({ left: 0, behavior: 'auto' });
+          return;
+        }
+        clubLinks.forEach(function (a) {
+          var on = a.getAttribute('href') === '#' + en.target.id;
+          a.classList.toggle('is-current', on);
+          if (on) { a.setAttribute('aria-current', 'location'); if (clubList.scrollWidth > clubList.clientWidth) clubList.scrollTo({ left: a.parentNode.offsetLeft, behavior: 'auto' }); }
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (s) { spy.observe(s); });
+    var hero = document.querySelector('.club-hero');
+    if (hero) spy.observe(hero);
+  }
 
   // Parallax: big photos drift a little slower than the page (inside their own frame, never over text).
   var par = [];

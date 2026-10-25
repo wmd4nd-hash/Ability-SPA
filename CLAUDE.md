@@ -120,7 +120,12 @@ Contrast rules:
 - Light backgrounds use `#201A18` text. Dark backgrounds use white or `#DDD3C0` text.
 - Gold is for accents, lines, and large display text only, or use a darkened gold for text if needed. Check 4.5:1 contrast.
 
-### References (inspiration only – do NOT copy logos or layouts)
+### Current references (owner, 25.10) – these lead
+- **Design: AIRE Ancient Baths – https://beaire.com/en** (dark/cream rhythm, gold accents, uppercase titles, booking bar, square buttons).
+- **Structure: David Lloyd Clubs – https://www.davidlloyd.co.uk** (promo bar, "find a club", activity menu, one page per location with an in-page menu).
+- Always in Ability's colours and fonts below; see README "Design direction" for how they were applied.
+
+### Earlier references (inspiration only – do NOT copy logos or layouts)
 1. **"Omra Spa" branding** (Behance, by Aiya Kerimova). This is the main structural reference.
    - Minimal, editorial, urban spa feel, which matches Ability's positioning
    - Small uppercase section labels with thin divider lines

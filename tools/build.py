@@ -37,62 +37,114 @@ e = html.escape
 EN_MAP = {'': 'en/', 'spa-burgas/': 'en/spa-burgas/', 'spa-varna/': 'en/spa-varna/', 'masazhi-burgas/': 'en/massages/',
           'ceni/': 'en/prices/', 'vaucheri/': 'en/vouchers/', 'promocii/varna/': 'en/promotions/varna/', 'kontakti/': 'en/contact/'}
 BG_MAP = {v: k for k, v in EN_MAP.items()}
-NAV_MAIN = [('spa-burgas/', 'Бургас'), ('spa-varna/', 'Варна'), ('masazhi-burgas/', 'Масажи'),
-            ('terapii/', 'СПА терапии'), ('kozmetika-burgas/', 'Козметика'), ('ceni/', 'Цени'),
-            ('kontakti/', 'Контакти')]
-NAV_SUB = [('osteopatiya-burgas/', 'Остеопатия'), ('paketi/', 'Пакети'), ('vaucheri/', 'Ваучери'),
-           ('promocii/', 'Промоции'), ('parvo-poseshtenie/', 'Първо посещение'), ('za-nas/', 'За нас'),
-           ('blog/', 'Блог')]
-PHONE_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 '
-             '1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 '
-             '1l-2.3 2.2Z"/></svg>')
+# Header and footer after davidlloyd.co.uk (structure: promo bar, small info links, a menu of what we offer,
+# "choose a location" + "book" buttons) in the look of beaire.com (espresso bar, gold accents, uppercase labels).
+# PROMO_BAR: the current offers, one line above the header – set to None when no promotion runs.
+PROMO_BAR = {'bg': ('promocii/', 'Празнични предложения в Бургас и Halloween предложения във Варна – до 5 ноември',
+                    'Специални предложения до 5 ноември', 'Вижте офертите')}
+
+ICON_PIN_SM = ('<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/>'
+               '<circle cx="12" cy="9.5" r="2.5"/></svg>')
+
+HDR = {
+    'bg': dict(
+        home='', menu='Меню', clubs_btn='Избери обект', book='Резервирай', nav_label='Меню', acts_label='Процедури и зони',
+        util_label='Информация', clubs_h='Изберете обект', acts_h='Процедури и зони', call_h='Обадете се', close='Затвори',
+        lang_label='Език / Language', other_lang=('en', 'EN', 'English version'),
+        acts=[('masazhi-burgas/', 'Масажи'), ('terapii/', 'СПА терапии'), ('kozmetika-burgas/', 'Козметика'),
+              ('osteopatiya-burgas/', 'Остеопатия'), ('fitnes-burgas/', 'Фитнес'), ('paketi/', 'Пакети')],
+        util=[('ceni/', 'Цени'), ('vaucheri/', 'Ваучери'), ('promocii/', 'Промоции'), ('parvo-poseshtenie/', 'Първо посещение'),
+              ('za-nas/', 'За нас'), ('blog/', 'Блог'), ('kontakti/', 'Контакти')],
+        clubs=[('spa-burgas/', 'Бургас', 'Ability SPA · хотел „България“', 'ул. „Александровска“ 21 · всеки ден 07:00 – 22:00'),
+               ('spa-varna/', 'Варна', 'Ability SPA&Wellness · хотел „Черно море“', 'бул. „Сливница“ 33 · всеки ден [07:00 или 09:00] – 21:00')],
+        cities=('Бургас', 'Варна')),
+    'en': dict(
+        home='en/', menu='Menu', clubs_btn='Choose a location', book='Book', nav_label='Menu', acts_label='Treatments',
+        util_label='Information', clubs_h='Choose a location', acts_h='Explore', call_h='Call us', close='Close',
+        lang_label='Language / Език', other_lang=('bg', 'BG', 'Български сайт'),
+        acts=[('en/massages/', 'Massages'), ('en/prices/', 'Prices'), ('en/vouchers/', 'Gift vouchers'),
+              ('en/promotions/varna/', 'Offers in Varna'), ('en/contact/', 'Contact')],
+        util=[('en/prices/', 'Prices'), ('en/vouchers/', 'Gift vouchers'), ('en/contact/', 'Contact')],
+        clubs=[('en/spa-burgas/', 'Burgas', 'Ability SPA · Hotel Bulgaria', '21 Aleksandrovska St. · daily 07:00 – 22:00'),
+               ('en/spa-varna/', 'Varna', 'Ability SPA&Wellness · Hotel Cherno More', '33 Slivnitsa Blvd. · daily [07:00 or 09:00] – 21:00')],
+        cities=('Burgas', 'Varna')),
+}
 
 
-def header(p, current='', path=''):
+def header(p, current='', path='', lang='bg'):
+    T = HDR[lang]
     nl = '\n          '
+    other = (p + EN_MAP.get(path, 'en/')) if lang == 'bg' else (p + BG_MAP.get(path, '') or './')
+    other = other or './'
 
     def li(href, label):
-        cur = ' aria-current="page"' if href == path else ' aria-current="true"' if href == current else ''
+        cur = ' aria-current="page"' if href == path else ' aria-current="true"' if href and href == current else ''
         return f'<li><a href="{p}{href}"{cur}>{e(label)}</a></li>'
+
+    def club(href, name, hotel, meta, short=False):
+        cur = ' aria-current="page"' if href == path else ''
+        if short:
+            return f'<li><a href="{p}{href}"{cur}><span class="nc-city">{e(name)}</span><span class="nc-hotel">{e(hotel)}</span></a></li>'
+        return (f'<li><a class="club-pick-link" href="{p}{href}"{cur}><span class="cp-city">{e(name)}</span>'
+                f'<span class="cp-hotel">{e(hotel)}</span><span class="cp-meta">{e(meta)}</span>'
+                f'<span class="cp-go" aria-hidden="true">→</span></a></li>')
+    promo = ''
+    if lang in PROMO_BAR and PROMO_BAR[lang]:
+        href, long, short, go = PROMO_BAR[lang]
+        promo = (f'<div class="promo-bar"><a href="{p}{href}"><span class="pb-long">{e(long)}</span><span class="pb-short">{e(short)}</span>'
+                 f'<span class="pb-go"><span class="pb-go-t">{e(go)}</span> <span aria-hidden="true">→</span></span></a></div>\n    ')
+    cur_lang = f'<a href="{(p + T["home"]) or "./"}" aria-current="true" lang="{lang}">{lang.upper()}</a>'
+    oth_lang = f'<a href="{other}" lang="{T["other_lang"][0]}" hreflang="{T["other_lang"][0]}">{T["other_lang"][1]}</a>'
+    langs = cur_lang + oth_lang if lang == 'bg' else oth_lang + cur_lang
     return f'''<header class="site-header">
-    <div class="header-inner">
-      <div class="header-left">
-        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
-          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="menu-label">Меню</span>
-        </button>
-        <div class="lang" role="group" aria-label="Език / Language">
-          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
-          <a href="./" aria-current="true" lang="bg">BG</a>
-          <a href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en">EN</a>
-        </div>
-      </div>
-
-      <a class="logo" href="{p or './'}">
-        <!-- TODO: swap for SVG once the vector logo is supplied -->
-        <img src="{p}images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
-      </a>
-
-      <div class="header-right">
-        <a class="header-phone" href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>
-        <a class="lang-toggle" href="{p}{EN_MAP.get(path, 'en/')}" lang="en" hreflang="en" aria-label="English version">EN</a>
-        <a class="btn btn-dark btn-book" href="{BOOK_BURGAS}">Резервирай</a>
+    {promo}<div class="util-bar">
+      <div class="util-inner">
+        <nav aria-label="{e(T["util_label"])}"><ul class="util-links">{"".join(li(h, l) for h, l in T["util"])}</ul></nav>
+        <div class="lang" role="group" aria-label="{e(T["lang_label"])}">{langs}</div>
       </div>
     </div>
-
-    <nav class="main-nav" id="main-nav" aria-label="Основна навигация">
+    <div class="header-inner">
+      <a class="logo" href="{(p + T["home"]) or "./"}">
+        <!-- TODO: swap for SVG once the vector logo is supplied -->
+        <img src="{p}images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110">
+      </a>
+      <nav class="nav-acts" aria-label="{e(T["acts_label"])}"><ul>{"".join(li(h, l) for h, l in T["acts"])}</ul></nav>
+      <div class="header-right">
+        <button class="club-btn" type="button" aria-expanded="false" aria-controls="club-panel">{ICON_PIN_SM}<span>{e(T["clubs_btn"])}</span></button>
+        <a class="lang-toggle" href="{other}" lang="{T["other_lang"][0]}" hreflang="{T["other_lang"][0]}" aria-label="{e(T["other_lang"][2])}">{T["other_lang"][1]}</a>
+        <a class="btn btn-gold btn-book" href="{BOOK_BURGAS}">{e(T["book"])}</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
+          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="menu-label">{e(T["menu"])}</span>
+        </button>
+      </div>
+    </div>
+    <div class="club-panel" id="club-panel" hidden>
+      <div class="club-panel-inner">
+        <p class="eyebrow">{e(T["clubs_h"])}</p>
+        <ul class="club-pick">{"".join(club(*c) for c in T["clubs"])}</ul>
+      </div>
+    </div>
+    <nav class="main-nav" id="main-nav" aria-label="{e(T["nav_label"])}">
       <div class="nav-inner">
-        <ul class="nav-main">
-          {nl.join(li(h, l) for h, l in NAV_MAIN)}
-        </ul>
-        <div class="nav-side">
+        <div class="nav-col">
+          <p class="nav-h">{e(T["clubs_h"])}</p>
+          <ul class="nav-clubs">{"".join(club(*c, short=True) for c in T["clubs"])}</ul>
+        </div>
+        <div class="nav-col">
+          <p class="nav-h">{e(T["acts_h"])}</p>
+          <ul class="nav-main">
+          {nl.join(li(h, l) for h, l in T["acts"])}
+          </ul>
+        </div>
+        <div class="nav-col">
           <ul class="nav-sub">
-            {nl.join(li(h, l) for h, l in NAV_SUB)}
+          {nl.join(li(h, l) for h, l in T["util"])}
           </ul>
           <div class="nav-call">
-            <p>Обадете се</p>
-            <a href="tel:{TEL_BURGAS}"><span>Бургас</span>{TEL_BURGAS_TXT}</a>
-            <a href="tel:{TEL_VARNA}"><span>Варна</span>{TEL_VARNA_TXT}</a>
+            <p>{e(T["call_h"])}</p>
+            <a href="tel:{TEL_BURGAS}"><span>{T["cities"][0]}</span>{TEL_BURGAS_TXT}</a>
+            <a href="tel:{TEL_VARNA}"><span>{T["cities"][1]}</span>{TEL_VARNA_TXT}</a>
           </div>
         </div>
       </div>
@@ -100,32 +152,44 @@ def header(p, current='', path=''):
   </header>'''
 
 
-def footer(p):
-    return f'''<footer class="site-footer" id="kontakti">
+FTR = {
+    'bg': dict(home='', tag='Градски СПА в Бургас и Варна', daily_b='Всеки ден, 07:00 – 22:00', daily_v='Всеки ден, [07:00 или 09:00] – 21:00',
+               addr_b=('ул. „Александровска“ 21', 'хотел „България“'), addr_v=('бул. „Сливница“ 33', 'хотел „Черно море“'),
+               cities=(('spa-burgas/', 'Бургас'), ('spa-varna/', 'Варна')), h_treat='Процедури', h_info='Информация',
+               treat=[('masazhi-burgas/', 'Масажи – Бургас'), ('masazhi-varna/', 'Масажи – Варна'), ('terapii/', 'СПА терапии'),
+                      ('kozmetika-burgas/', 'Козметика'), ('osteopatiya-burgas/', 'Остеопатия'), ('fitnes-burgas/', 'Фитнес – Бургас'),
+                      ('spa-varna/grupovi-trenirovki/', 'Групови тренировки – Варна')],
+               info=[('ceni/', 'Цени'), ('paketi/', 'Пакети'), ('vaucheri/', 'Ваучери'), ('promocii/', 'Промоции'),
+                     ('parvo-poseshtenie/', 'Първо посещение'), ('za-nas/', 'За нас'), ('blog/', 'Блог'), ('kontakti/', 'Контакти')],
+               legal=[('obshti-usloviya/', 'Общи условия'), ('poveritelnost/', 'Поверителност'), ('biskvitki/', 'Бисквитки')],
+               cookie='Сайтът използва бисквитки.', more='Научете повече', ok='Приемам', cookie_label='Бисквитки', fid='kontakti'),
+    'en': dict(home='en/', tag='City spa in Burgas and Varna, Bulgaria', daily_b='Daily, 07:00 – 22:00', daily_v='Daily, [07:00 or 09:00] – 21:00',
+               addr_b=('21 Aleksandrovska St.', 'Hotel Bulgaria'), addr_v=('33 Slivnitsa Blvd.', 'Hotel Cherno More'),
+               cities=(('en/spa-burgas/', 'Burgas'), ('en/spa-varna/', 'Varna')), h_treat='Explore', h_info='Information',
+               treat=[('en/massages/', 'Massages'), ('en/prices/', 'Prices'), ('en/vouchers/', 'Gift vouchers'), ('en/promotions/varna/', 'Offers in Varna')],
+               info=[('en/contact/', 'Contact'), ('', 'Български сайт')],
+               legal=[('poveritelnost/', 'Privacy (BG)'), ('biskvitki/', 'Cookies (BG)')],
+               cookie='This site uses cookies.', more='Learn more', ok='OK', cookie_label='Cookies', fid='contact'),
+}
+
+
+def footer(p, lang='bg'):
+    T = FTR[lang]
+    links = lambda items: ''.join(f'<li><a href="{(p + h) or "./"}">{e(t)}</a></li>' for h, t in items)
+    bl = ' lang="bg"' if lang == 'en' else ''
+    return f'''<footer class="site-footer" id="{T["fid"]}">
+    <div class="container footer-top">
+      <a class="logo logo-footer" href="{(p + T["home"]) or "./"}">
+        <img src="{p}images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
+      </a>
+      <p class="footer-tag">{e(T["tag"])}</p>
+      <ul class="footer-cities">{"".join(f'<li><a href="{p}{h}">{e(n)}</a></li>' for h, n in T["cities"])}</ul>
+    </div>
     <div class="container footer-grid">
       <div>
-        <a class="logo logo-footer" href="{p or './'}">
-          <img src="{p}images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
-        </a>
-        <p class="footer-tag">Градски СПА център в Бургас и Варна.</p>
-        <a class="btn btn-light footer-book" href="{BOOK_BURGAS}">Резервирай</a>
-      </div>
-      <div>
-        <h2 class="footer-h">Изживявания</h2>
-        <ul class="footer-links">
-          <li><a href="{p}masazhi-burgas/">Масажи</a></li>
-          <li><a href="{p}terapii/">СПА терапии</a></li>
-          <li><a href="{p}kozmetika-burgas/">Козметика</a></li>
-          <li><a href="{p}osteopatiya-burgas/">Остеопатия</a></li>
-          <li><a href="{p}ceni/">Цени</a></li>
-          <li><a href="{p}paketi/">Пакети</a></li>
-          <li><a href="{p}parvo-poseshtenie/">Първо посещение</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="footer-h">Бургас</h2>
-        <p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">ул. „Александровска“ 21<br>хотел „България“</a></p>
-        <p>Всеки ден, 07:00 – 22:00</p>
+        <h2 class="footer-h">{e(T["cities"][0][1])}</h2>
+        <p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">{e(T["addr_b"][0])}<br>{e(T["addr_b"][1])}</a></p>
+        <p>{e(T["daily_b"])}</p>
         <ul class="contact-list">
           <li><a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a></li>
           <li><a href="tel:{TEL_BURGAS2}">{TEL_BURGAS2_TXT}</a></li>
@@ -139,9 +203,9 @@ def footer(p):
         </ul>
       </div>
       <div>
-        <h2 class="footer-h">Варна</h2>
-        <p><a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">бул. „Сливница“ 33<br>хотел „Черно море“</a></p>
-        <p>Всеки ден, [07:00 или 09:00] – 21:00</p>
+        <h2 class="footer-h">{e(T["cities"][1][1])}</h2>
+        <p><a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">{e(T["addr_v"][0])}<br>{e(T["addr_v"][1])}</a></p>
+        <p>{e(T["daily_v"])}</p>
         <ul class="contact-list">
           <li><a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a></li>
           <li><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a></li>
@@ -153,123 +217,34 @@ def footer(p):
           <li><a href="https://www.instagram.com/abilityspa.wellness/" rel="noopener">Instagram</a></li>
         </ul>
       </div>
+      <div>
+        <h2 class="footer-h">{e(T["h_treat"])}</h2>
+        <ul class="footer-links">{links(T["treat"])}</ul>
+      </div>
+      <div>
+        <h2 class="footer-h">{e(T["h_info"])}</h2>
+        <ul class="footer-links">{links(T["info"])}</ul>
+      </div>
     </div>
     <div class="container footer-bottom">
       <p>© <span id="year">2026</span> Ability SPA &amp; Wellness</p>
-      <p><a href="{p}vaucheri/">Ваучери</a> · <a href="{p}promocii/">Промоции</a> · <a href="{p}za-nas/">За нас</a> · <a href="{p}blog/">Блог</a> · <a href="{p}obshti-usloviya/">Общи условия</a> · <a href="{p}poveritelnost/">Поверителност</a> · <a href="{p}biskvitki/">Бисквитки</a></p>
+      <p>{" · ".join(f'<a href="{p}{h}"{bl}>{e(t)}</a>' for h, t in T["legal"])}</p>
     </div>
   </footer>
 
   <!-- Slim cookie bar: bottom only, never covers the hero text -->
-  <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Бисквитки" hidden>
-    <p>Сайтът използва бисквитки. <a href="{p}biskvitki/">Научете повече</a></p>
-    <button class="btn btn-light btn-sm" type="button" id="cookie-ok">Приемам</button>
+  <div class="cookie-bar" id="cookie-bar" role="region" aria-label="{e(T["cookie_label"])}" hidden>
+    <p>{e(T["cookie"])} <a href="{p}biskvitki/"{bl}>{e(T["more"])}</a></p>
+    <button class="btn btn-gold btn-sm" type="button" id="cookie-ok">{e(T["ok"])}</button>
   </div>'''
-
-
-EN_NAV = [('en/spa-burgas/', 'Burgas'), ('en/spa-varna/', 'Varna'), ('en/massages/', 'Massages'), ('en/prices/', 'Prices'),
-          ('en/vouchers/', 'Gift vouchers'), ('en/contact/', 'Contact')]
 
 
 def en_header(p, path):
-    nl = '\n          '
-    lis = nl.join(f'<li><a href="{p}{h}"' + (' aria-current="page"' if h == path else '') + f'>{l}</a></li>' for h, l in EN_NAV)
-    bg = p + BG_MAP.get(path, '')
-    return f'''<header class="site-header">
-    <div class="header-inner">
-      <div class="header-left">
-        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
-          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="menu-label">Menu</span>
-        </button>
-        <div class="lang" role="group" aria-label="Language / Език">
-          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
-          <a href="{bg or './'}" lang="bg" hreflang="bg">BG</a>
-          <a href="./" aria-current="true" lang="en">EN</a>
-        </div>
-      </div>
-
-      <a class="logo" href="{p}en/">
-        <img src="{p}images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
-      </a>
-
-      <div class="header-right">
-        <a class="header-phone" href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>
-        <a class="lang-toggle" href="{bg or './'}" lang="bg" hreflang="bg" aria-label="Български сайт">BG</a>
-        <a class="btn btn-dark btn-book" href="{BOOK_BURGAS}">Book</a>
-      </div>
-    </div>
-
-    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <div class="nav-inner">
-        <ul class="nav-main">
-          {lis}
-        </ul>
-        <div class="nav-side">
-          <ul class="nav-sub">
-            <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
-            <li><a href="{bg or './'}" lang="bg">Български сайт</a></li>
-          </ul>
-          <div class="nav-call">
-            <p>Call us</p>
-            <a href="tel:{TEL_BURGAS}"><span>Burgas</span>{TEL_BURGAS_TXT}</a>
-            <a href="tel:{TEL_VARNA}"><span>Varna</span>{TEL_VARNA_TXT}</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>'''
+    return header(p, '', path, 'en')
 
 
 def en_footer(p):
-    return f'''<footer class="site-footer" id="contact">
-    <div class="container footer-grid">
-      <div>
-        <a class="logo logo-footer" href="{p}en/">
-          <img src="{p}images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
-        </a>
-        <p class="footer-tag">City spa in Burgas and Varna, Bulgaria.</p>
-        <a class="btn btn-light footer-book" href="{BOOK_BURGAS}">Book in Burgas</a>
-      </div>
-      <div>
-        <h2 class="footer-h">Explore</h2>
-        <ul class="footer-links">
-          <li><a href="{p}en/massages/">Massages</a></li>
-          <li><a href="{p}en/prices/">Prices</a></li>
-          <li><a href="{p}en/vouchers/">Gift vouchers</a></li>
-          <li><a href="{p}en/promotions/varna/">Offers in Varna</a></li>
-          <li><a href="{p}en/contact/">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="footer-h">Burgas</h2>
-        <p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">21 Aleksandrovska St.<br>Hotel Bulgaria</a></p>
-        <p>Daily, 07:00 – 22:00</p>
-        <ul class="contact-list">
-          <li><a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a></li>
-          <li><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="footer-h">Varna</h2>
-        <p><a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">33 Slivnitsa Blvd.<br>Hotel Cherno More</a></p>
-        <p>Daily, [07:00 or 09:00] – 21:00</p>
-        <ul class="contact-list">
-          <li><a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a></li>
-          <li><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© <span id="year">2026</span> Ability SPA &amp; Wellness</p>
-      <p><a href="{p}poveritelnost/" lang="bg">Privacy (BG)</a> · <a href="{p}biskvitki/" lang="bg">Cookies (BG)</a></p>
-    </div>
-  </footer>
-
-  <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Cookies" hidden>
-    <p>This site uses cookies. <a href="{p}biskvitki/" lang="bg">Learn more</a></p>
-    <button class="btn btn-light btn-sm" type="button" id="cookie-ok">OK</button>
-  </div>'''
+    return footer(p, 'en')
 
 
 def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-burgas.jpg', lang='bg'):
@@ -301,12 +276,7 @@ def head(path, title, desc, p, jsonld, noindex=False, og_image='images/og-spa-bu
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <script>(function (d) {{ d.classList.add('js');
-    /* PROTOTYPE ONLY: colour palettes to compare (?palette=a…g), see js/main.js */
-    try {{ var m = location.search.match(/[?&]palette=([a-g])/), v = m ? m[1] : sessionStorage.getItem('palette');
-      if (m) sessionStorage.setItem('palette', v);
-      if (v) {{ d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); }} }} catch (e) {{}}
-  }})(document.documentElement);</script>
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="{p}css/styles.css?v={ASSET_V}">
 {ld}
 </head>'''
@@ -338,6 +308,8 @@ def page(path, title, desc, body, crumbs, jsonld=(), current='', noindex=False, 
 </body>
 </html>
 '''
+    if lang == 'en':   # shared components carry Bulgarian link labels
+        doc = doc.replace('Научи повече', 'Learn more')
     out = os.path.join(ROOT, path, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(doc)
@@ -510,14 +482,213 @@ def city_switch(p, lang='bg'):
 
 
 def cta_band(p, title='Готови за малко време за себе си?', text='Резервирайте онлайн за Бургас или ни се обадете за Варна.'):
+    if 'Варна' in title:   # a Varna box leads with calling Varna (no online booking there yet)
+        btns = (f'<a class="btn btn-dark btn-arrow" href="tel:{TEL_VARNA}">Обадете се: {TEL_VARNA_TXT} <span aria-hidden="true">→</span></a>'
+                f'<a class="btn btn-outline" href="viber://chat?number=%2B359899994149">Viber</a>')
+    else:
+        btns = (f'<a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Резервирай в Бургас <span aria-hidden="true">→</span></a>'
+                f'<a class="btn btn-outline" href="tel:{TEL_VARNA}">Варна: {TEL_VARNA_TXT}</a>')
     return f'''    <section class="cta-band" aria-label="Резервация">
       <div class="container"><div class="cta-band-inner">
         <div><h2>{title}</h2><p>{text}</p></div>
         <div class="btn-row">
-          <a class="btn btn-dark btn-arrow" href="{BOOK_BURGAS}">Резервирай в Бургас <span aria-hidden="true">→</span></a>
-          <a class="btn btn-outline" href="tel:{TEL_VARNA}">Варна: {TEL_VARNA_TXT}</a>
+          {btns}
         </div>
       </div></div>
+    </section>
+'''
+
+
+# ------------------------------------------------------------------------------------------------
+# Current offers – from abilityspa.com/promotions-burgas/ and /promotions-varna/ and their official graphics (checked 23.10.2026).
+# One source for the promo bar, the homepage, the location pages and promocii/. Items: (name, detail, price, old price).
+# Old prices only where the graphic and the page's discount agree (Варна 5 × 30 мин: graphic 135 €, page −16 % – left out).
+# ------------------------------------------------------------------------------------------------
+PROMOS = {
+    'burgas': dict(city='Бургас', title='Празнични предложения', sub='Честит рожден ден, Ability SPA!', dates='22.10 – 05.11.2026',
+                   until='5 ноември', page='promocii/burgas/', img='images/library/2024_07_aspa_427.webp',
+                   alt='Масаж с горещи камъни и свещ в Ability SPA Бургас',
+                   items=[('5 + 1 масажа × 60 мин', 'масаж по избор', '195 €', None),
+                          ('10 СПА посещения + 2 бонус', 'фитнес, термална зона и басейн', '145 €', None),
+                          ('10 + 2 посещения – термална зона', 'парна баня, билкова сауна, солна стая', '95 €', None),
+                          ('10 + 2 посещения – басейн', 'басейн и джакузи', '95 €', None),
+                          ('10 + 2 посещения – солна стая', None, '95 €', None),
+                          ('6-месечна фитнес карта + 1 месец бонус', None, '166 €', None),
+                          ('Подаръчен ваучер', None, '50 € / 100 €', None)]),
+    'varna': dict(city='Варна', title='Halloween предложения', sub='Релакс. Възстановяване. Презареждане.', dates='22.10 – 05.11.2026',
+                  until='5 ноември', page='promocii/varna/', img='images/library/2026_01_relax_zona_abilityspawellness_varna.webp',
+                  alt='Релакс зоната с шезлонги в Ability Spa&Wellness Варна',
+                  items=[('Special SPA club membership', 'неограничен фитнес и СПА + 2 групови занимания месечно · предплатете 10 месеца – '
+                          '2 месеца подарък · до изчерпване на 100-те клубни карти', '89 € / месец', None),
+                         ('СПА пакет за двама „Ability“', '2 масажа по 60 мин + 5 дневни СПА карти', '85 €', '100 €'),
+                         ('10 СПА посещения', 'финландска и билкова сауна, парна баня', '120 €', '143 €'),
+                         ('5 масажа × 60 мин', 'масаж по избор', '195 €', '225 €'),
+                         ('5 масажа × 30 мин', 'масаж по избор', '120 €', None),
+                         ('6-месечна фитнес карта', 'уреди Technogym', '180 €', '205 €'),
+                         ('Подаръчен ваучер', None, '50 € / 100 €', None)]),
+}
+
+
+def promo_rows(items, limit=None):
+    out = []
+    for n, d, pr, old in items[:limit]:
+        o = f' <s class="pl-old"><span class="sr-only">вместо </span>{e(old)}</s>' if old else ''
+        out.append(f'<div><dt>{e(n)}' + (f' <span>{e(d)}</span>' if d else '') + f'</dt><dd><span class="pl-new">{e(pr)}</span>{o}</dd></div>')
+    return f'<dl class="price-list promo-list">{"".join(out)}</dl>'
+
+
+def promo_card(p):
+    """Homepage: the current offers of both locations in one card (after davidlloyd.co.uk's membership offer)."""
+    if not PROMOS:
+        return ''
+    cols = []
+    for k in ('burgas', 'varna'):
+        o = PROMOS.get(k)
+        if not o:
+            continue
+        top = ''.join(f'<li><span>{e(n)}</span><strong>{e(pr)}</strong></li>' for n, d, pr, old in o['items'][:3])
+        cols.append(f'''<div class="promo-col">
+              <p class="promo-city">{e(o["city"])} · {e(o["dates"])}</p>
+              <h3>{e(o["title"])}</h3>
+              <ul class="promo-top">{top}</ul>
+              <a class="btn btn-gold btn-arrow" href="{p}{o["page"]}">Всички оферти · {e(o["city"])} <span aria-hidden="true">→</span></a>
+            </div>''')
+    until = next(iter(PROMOS.values()))['until']
+    return f'''<section class="section promo-sec" aria-labelledby="promo-title">
+      <div class="container">
+        <div class="promo-card">
+          <img class="promo-card-img" src="{p}images/library/2024_07_aspa_427.webp" alt="" loading="lazy" decoding="async">
+          <div class="promo-card-body">
+            <p class="eyebrow">Само до {e(until)}</p>
+            <h2 id="promo-title">Специални предложения</h2>
+            <div class="promo-cols">
+            {"".join(cols)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>'''
+
+
+CLUB_IMG = {'burgas': ('images/spa-burgas-basein-lampi-1280.webp', 'Закритият басейн с лампи-сфери в Ability SPA Бургас', '50% 50%'),
+            'varna': ('images/library/2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната с шезлонги в Ability Spa&Wellness Варна', '40% 50%')}
+
+
+def club_cards(p, lang='bg'):
+    """Homepage „Изберете своя обект“: both locations side by side (after beaire.com's centres and davidlloyd.co.uk's club finder).
+    Per city: what it has, address / hours / phone, book or call, and a link to the location page."""
+    out = []
+    view = 'Към обекта' if lang == 'bg' else 'View location'
+    for c, k in zip(CITIES[lang], ('burgas', 'varna')):
+        src, alt, pos = CLUB_IMG[k]
+        has = ''.join(f'<li>{e(x)}</li>' for x in c['has'])
+        ext = c['cta'][0].startswith(('http', 'tel:'))
+        brand = 'Ability SPA' if k == 'burgas' else 'Ability SPA&amp;Wellness'
+        out.append(f'''<li class="club-card">
+            <a class="club-card-media" href="{p}{c["href"]}" tabindex="-1" aria-hidden="true"><img src="{p}{src}" alt="" loading="lazy" decoding="async" style="object-position: {pos}"></a>
+            <div class="club-card-body">
+              <p class="club-card-city" aria-hidden="true">{e(c["name"])}</p>
+              <p class="eyebrow">{brand} · {e(c["hotel"])}</p>
+              <h3><a href="{p}{c["href"]}">{e(c["title"])}</a></h3>
+              <ul class="club-card-has">{has}</ul>
+              <ul class="club-card-contact">
+                <li>{ICON_PIN}{e(c["addr"])}</li>
+                <li>{ICON_CLOCK}{e(c["hours"])}</li>
+                <li>{ICON_PHONE}<a href="tel:{c["tel"][0]}">{e(c["tel"][1])}</a></li>
+              </ul>
+              <div class="btn-row">
+                <a class="btn btn-gold" href="{c["cta"][0] if ext else p + c["cta"][0]}">{e(c["cta"][1])}</a>
+                <a class="btn btn-line" href="{p}{c["href"]}">{view} <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </li>''')
+    return f'<ul class="club-cards">{"".join(out)}</ul>'
+
+
+# ------------------------------------------------------------------------------------------------
+# Location pages (after a davidlloyd.co.uk club page): full-photo hero, a sticky in-page menu, overview, facilities,
+# zones, treatments, prices, current offers, how to get there, and the other location.
+# ------------------------------------------------------------------------------------------------
+def club_hero(p, crumbs, eyebrow, h1, lead, image, meta, actions):
+    """image: (base path without -<w>.webp, widths, alt, object-position)"""
+    base, ws, alt, pos = image
+    srcset = ', '.join(f'{p}{base}-{w}.webp {w}w' for w in ws)
+    btns = ''.join(f'<a class="btn {c}" href="{h if h.startswith(("http", "tel:", "viber:", "#")) else p + h}">{t}</a>' for c, h, t in actions)
+    m = ''.join(f'<li>{ic}{v}</li>' for ic, v in meta)
+    return f'''    <section class="club-hero">
+      <img class="club-hero-img" src="{p}{base}-{ws[-1]}.webp" srcset="{srcset}" sizes="100vw" alt="{e(alt)}" fetchpriority="high" decoding="async" style="object-position: {pos}">
+      <div class="container club-hero-inner">
+        {crumbs_html(p, crumbs)}
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{h1}</h1>
+        <p class="club-hero-lead">{lead}</p>
+        <ul class="club-hero-meta">{m}</ul>
+        <div class="btn-row">{btns}</div>
+      </div>
+    </section>
+'''
+
+
+CLUB_NAV = [('obzor', 'Обзор'), ('zoni', 'Зони'), ('proceduri', 'Процедури'), ('ceni', 'Цени'), ('promocii', 'Промоции'), ('kontakt', 'Как да стигнете')]
+
+
+def club_nav(p, name, other):
+    lis = ''.join(f'<li><a href="#{a}">{e(t)}</a></li>' for a, t in CLUB_NAV)
+    return f'''    <nav class="club-nav" aria-label="{e(name)} – на тази страница">
+      <div class="container club-nav-inner">
+        <p class="club-nav-name">{e(name)}</p>
+        <ul class="club-nav-links">{lis}</ul>
+        <a class="club-nav-switch" href="{p}{other[0]}">{e(other[1])} <span aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+'''
+
+
+def facility_grid(p, items):
+    """items: (href, label, image, alt, object-position)"""
+    lis = ''.join(f'<li><a class="facility" href="{p}{h}"><img src="{p}{im}" alt="{e(alt)}" loading="lazy" decoding="async" style="object-position: {pos}">'
+                  f'<span class="facility-name">{e(t)} <span aria-hidden="true">→</span></span></a></li>' for h, t, im, alt, pos in items)
+    return f'<ul class="facility-grid">{lis}</ul>'
+
+
+def visit_block(addr, maps, contact, hours, note=None):
+    n = f'<p class="visit-note">{note}</p>' if note else ''
+    return f'''<div class="visit-grid">
+          <div class="visit-item">{ICON_PIN}<h3>Адрес</h3><p>{addr}</p><a class="text-link" href="{maps}" rel="noopener">Отвори в Google Maps <span aria-hidden="true">→</span></a></div>
+          <div class="visit-item">{ICON_PHONE}<h3>Контакт</h3><p>{contact}</p></div>
+          <div class="visit-item">{ICON_CLOCK}<h3>Работно време</h3><p>{hours}</p></div>
+        </div>{n}'''
+
+
+def promo_section(p, k):
+    o = PROMOS.get(k)
+    if not o:
+        return ''
+    return section(f'''<div class="two-col">
+          <div class="section-head"><p class="eyebrow">Промоции · до {e(o["until"])}</p><h2 id="promocii-h">{e(o["title"])}</h2>
+            <p class="section-intro">{e(o["sub"])} Валидни {e(o["dates"])}.</p>
+            <a class="btn btn-line btn-arrow" href="{p}{o["page"]}">Всички подробности <span aria-hidden="true">→</span></a></div>
+          <div>{promo_rows(o["items"])}</div>
+        </div>''', cls='section-sand', sid='promocii')
+
+
+def other_club(p, k):
+    if k == 'burgas':
+        img_, alt, eyebrow, h2, text, href, btn = ('images/hotel-cherno-more-varna-1600.webp', 'Хотел „Черно море“ във Варна', 'Ability SPA&amp;Wellness · Варна',
+                                                  'И в сърцето на Варна', 'Термална зона, инфрачервена пейка, фитнес Technogym, групови тренировки, масажи и СПА терапии – в хотел „Черно море“.',
+                                                  'spa-varna/', 'Към обекта във Варна')
+    else:
+        img_, alt, eyebrow, h2, text, href, btn = ('images/spa-burgas-basein-lampi-1280.webp', 'Закритият басейн в Ability SPA Бургас', 'Ability SPA · Бургас',
+                                                  'И в центъра на Бургас', 'Закрит басейн с джакузи, термална зона, хамам, солна стая, фитнес Technogym, масажи, остеопатия и козметика – в хотел „България“.',
+                                                  'spa-burgas/', 'Към обекта в Бургас')
+    return f'''    <section class="other-club" aria-labelledby="other-club-h">
+      <img class="other-club-img" src="{p}{img_}" alt="{e(alt)}" loading="lazy" decoding="async">
+      <div class="container other-club-inner">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id="other-club-h">{h2}</h2>
+        <p>{text}</p>
+        <a class="btn btn-gold btn-arrow" href="{p}{href}">{btn} <span aria-hidden="true">→</span></a>
+      </div>
     </section>
 '''
 
@@ -718,12 +889,26 @@ def build_burgas():
     crumbs = [('', 'Начало'), (path, 'Бургас')]
 
     def body(p):
-        s = page_hero(p, crumbs, 'Ability Spa · хотел „България“', 'СПА център в&nbsp;Бургас',
-                      'В сърцето на Бургас, в обновения хотел „България“ – уютна обстановка, индивидуално подбрани процедури, качествени продукти и висококвалифицирани специалисти.',
-                      image=('images/spa-burgas-basein-simetrichen-1080.webp', 'Закритият басейн на Ability Spa Бургас с осветена синя стена'),
-                      meta=[('Адрес', 'ул. „Александровска“ 21'), ('Работно време', 'всеки ден, 07:00 – 22:00'), ('Телефон', f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>')],
-                      actions=[('btn-dark', BOOK_BURGAS, 'Резервирай'), ('btn-outline', '#zoni', 'Разгледай зоните')])
-        z = head_block('Зони', 'Всичко на едно място', 'zoni-h')
+        s = club_hero(p, crumbs, 'Ability SPA · хотел „България“', 'СПА център в&nbsp;Бургас',
+                      'В сърцето на Бургас, в обновения хотел „България“ – басейн, сауни, хамам, солна стая, фитнес и процедури на едно място.',
+                      ('images/spa-burgas-basein-lampi', (800, 1280, 2000), 'Закритият басейн с лампи-сфери в Ability SPA Бургас', '55% 50%'),
+                      [(ICON_PIN, 'ул. „Александровска“ 21'), (ICON_CLOCK, 'Всеки ден 07:00 – 22:00'),
+                       (ICON_PHONE, f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>')],
+                      [('btn-gold', BOOK_BURGAS, 'Резервирай онлайн'), ('btn-line-light', '#kontakt', 'Как да стигнете')])
+        s += club_nav(p, 'Бургас', ('spa-varna/', 'Варна'))
+        s += section('<div class="two-col">' + head_block('Обзор', 'Вашето място за релакс в&nbsp;центъра', 'obzor-h') + '<div>' + prose([
+            'Посветили сме се изцяло на грижата за вашето здраве, красота и душевен баланс – с уютна обстановка, индивидуално подбрани процедури, качествени продукти и апарати.',
+            'Термалната зона, басейнът с джакузи и фитнесът са на едно място, а след тренировка или процедура ви очакват релакс зоната и барът до басейна.']) +
+            '<dl class="club-facts"><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Multisport</dt><dd>в делнични дни, 07:00 – 22:00</dd></div>'
+            '<div><dt>Деца</dt><dd>детски басейн 32–33 °C</dd></div></dl></div></div>', sid='obzor')
+        grid = facility_grid(p, [
+            ('spa-burgas/termalna-zona/', 'Термална зона', 'images/finlandska-sauna-burgas-1080.webp', 'Финландската сауна', '62% 50%'),
+            ('spa-burgas/basein/', 'Басейн и джакузи', 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът', '50% 50%'),
+            ('spa-burgas/hamam/', 'Хамам', 'images/library/2026_01_parna_banya_ability_spa.webp', 'Входът на парната баня', '50% 50%'),
+            ('spa-burgas/solna-staya/', 'Солна стая', 'images/spa-burgas-solna-staya-960.webp', 'Солната стая с шезлонги', '50% 50%'),
+            ('fitnes-burgas/', 'Фитнес Technogym', 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес залата', '50% 50%'),
+            ('masazhi-burgas/', 'Масажи', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Масаж с горещи камъни', '38% 50%')])
+        z = head_block('Съоръжения', 'Всичко на едно място', 'zoni-h') + grid
         z += zone_split(p, 'images/finlandska-sauna-burgas-1080.webp', 'Финландската сауна в Ability Spa Бургас', 'Термална зона',
                         'Сауни, парна баня и&nbsp;релакс', 'Спокойна и елегантна атмосфера, вдъхновена от топлина и хармония.',
                         ['Билкова сауна', 'Финландска сауна', 'Класическа парна баня', 'Релакс зона'], ('spa-burgas/termalna-zona/', 'Термалната зона'))
@@ -740,21 +925,24 @@ def build_burgas():
         z += zone_split(p, 'images/library/2022_11_untitled-design-2.webp', 'Барът до басейна', 'Бар', 'Бар до басейна',
                         'Ароматно кафе, истински билков чай, безалкохолни напитки, фрешове, бира и вино, както и хранителни добавки, сандвичи и торти.', [], None, rev=True)
         s += section(z, cls='facilities', sid='zoni')
-        s += section(head_block('Процедури', 'Масажи, терапии и&nbsp;козметика') + cards(p, [
+        s += section(head_block('Процедури', 'Масажи, терапии и&nbsp;козметика', 'proceduri-h') + cards(p, [
             ('masazhi-burgas/', 'Масажи', 'от 28 €', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Масаж с горещи камъни'),
             ('terapii/', 'СПА терапии', 'от 49 €', 'images/terapiya-vulkanichni-kamani-1080.webp', 'Терапия с вулканични камъни'),
             ('kozmetika-burgas/', 'Козметика', 'от 8 €', 'images/kozmetika-terapiya-za-litse-burgas-1080.webp', 'Терапия за лице'),
-            ('osteopatiya-burgas/', 'Остеопатия', '59 € · 60 мин', 'images/osteopatiya-burgas-petar-damyanov-1080.webp', 'Остеопатия')]), cls='section-sand')
-        s += section('<div class="two-col">' + head_block('Цени', 'СПА достъп') + '<div>' + price_rows([
+            ('osteopatiya-burgas/', 'Остеопатия', '59 € · 60 мин', 'images/osteopatiya-burgas-petar-damyanov-1080.webp', 'Остеопатия')]),
+            cls='section-dark', sid='proceduri')
+        s += section('<div class="two-col">' + head_block('Цени', 'СПА достъп', 'ceni-h') + '<div>' + price_rows([
             ('Еднократно посещение', 'термална зона, басейн и джакузи или солна стая', '12 €'), ('Деца 3–14 г.', 'еднократно посещение', '6 €'),
             ('Дневна СПА карта', 'фитнес, басейн, джакузи и термална зона', '19 €'), ('Дневна СПА карта за двама', None, '35 €'),
             ('Месечна СПА карта', 'понеделник – петък / понеделник – неделя', '110 € / 145 €'), ('Хавлия / халат', 'една хавлия е безплатна', '2 € / 3 €')],
-            'Ability Spa Бургас') + f'<p class="price-other"><a href="{p}ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00</p></div></div>')
-        s += section('<div class="two-col">' + head_block('Как да ни намерите', 'Хотел „България“, центъра на Бургас') + prose([
-            'ул. „Александровска“ 21, гр. Бургас · всеки ден 07:00 – 22:00',
-            f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a> · <a href="tel:{TEL_BURGAS2}">{TEL_BURGAS2_TXT}</a> · <a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a>',
-            '<a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Отвори в Google Maps →</a>']) + '</div>', cls='section-sand')
-        s += cta_band(p)
+            'Ability Spa Бургас') + f'<p class="price-other"><a href="{p}ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00</p></div></div>', sid='ceni')
+        s += promo_section(p, 'burgas')
+        s += section(head_block('Как да стигнете', 'Хотел „България“, центъра на Бургас', 'kontakt-h') + visit_block(
+            'ул. „Александровска“ 21<br>хотел „България“, гр. Бургас', 'https://maps.google.com/?q=ул.+Александровска+21,+Бургас',
+            f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a><br><a href="tel:{TEL_BURGAS2}">{TEL_BURGAS2_TXT}</a><br><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a>',
+            'Всеки ден<br>07:00 – 22:00') + f'<div class="btn-row visit-cta"><a class="btn btn-gold" href="{BOOK_BURGAS}">Резервирай онлайн</a>'
+            f'<a class="btn btn-line" href="viber://chat?number=%2B359895635555">Viber</a></div>', sid='kontakt')
+        s += other_club(p, 'burgas')
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-burgas/#spa', 'name': 'Ability Spa – Бургас',
            'url': f'{SITE}/spa-burgas/', 'telephone': TEL_BURGAS, 'email': 'abilityspa@mail.com', 'priceRange': '$$', 'currenciesAccepted': 'EUR',
@@ -770,12 +958,26 @@ def build_varna():
     crumbs = [('', 'Начало'), (path, 'Варна')]
 
     def body(p):
-        s = page_hero(p, crumbs, 'Ability Spa&Wellness · хотел „Черно море“', 'СПА център във&nbsp;Варна',
-                      'Ability SPA&Wellness посреща гостите си в сърцето на Варна – в емблематичния хотел „Черно море“: СПА зона, модерна фитнес зала, групови тренировки, масажи и терапии.',
-                      image=('images/hotel-cherno-more-varna-1080.webp', 'Хотел „Черно море“ във Варна'),
-                      meta=[('Адрес', 'бул. „Сливница“ 33'), ('Работно време', 'всеки ден, [07:00 или 09:00] – 21:00'), ('Телефон', f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a>'), ('Паркинг', 'платен, към хотела')],
-                      actions=[('btn-dark', f'tel:{TEL_VARNA}', 'Обадете се за час'), ('btn-outline', 'viber://chat?number=%2B359899994149', 'Viber')])
-        z = head_block('Зони', 'Термална зона, фитнес и&nbsp;релакс')
+        s = club_hero(p, crumbs, 'Ability SPA&amp;Wellness · хотел „Черно море“', 'СПА център във&nbsp;Варна',
+                      'В сърцето на Варна, в емблематичния хотел „Черно море“ – СПА зона, модерна фитнес зала, групови тренировки, масажи и терапии.',
+                      ('images/hotel-cherno-more-varna', (1080, 1600, 2400), 'Хотел „Черно море“ във Варна по здрач', '50% 92%'),
+                      [(ICON_PIN, 'бул. „Сливница“ 33'), (ICON_CLOCK, 'Всеки ден [07:00 или 09:00] – 21:00'),
+                       (ICON_PHONE, f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a>')],
+                      [('btn-gold', f'tel:{TEL_VARNA}', 'Обадете се за час'), ('btn-line-light', 'viber://chat?number=%2B359899994149', 'Viber')])
+        s += club_nav(p, 'Варна', ('spa-burgas/', 'Бургас'))
+        s += section('<div class="two-col">' + head_block('Обзор', 'Повече от СПА', 'obzor-h') + '<div>' + prose([
+            'Съчетаваме релакс, възстановяване и движение на едно място в сърцето на Варна – в хотел „Черно море“.',
+            'Термална зона с финландска и билкова сауна, парна баня и инфрачервена пейка, модерен фитнес с уреди Technogym, групови тренировки, професионални масажи и СПА терапии.']) +
+            '<dl class="club-facts"><div><dt>Резервации</dt><dd>по телефона, във Viber или WhatsApp</dd></div><div><dt>Паркинг</dt><dd>платен, към хотела</dd></div>'
+            '<div><dt>Работно време</dt><dd>всеки ден, [07:00 или 09:00] – 21:00</dd></div></dl></div></div>', sid='obzor')
+        grid = facility_grid(p, [
+            ('spa-varna/termalna-zona/', 'Термална зона', 'images/library/2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона', '58% 50%'),
+            ('spa-varna/termalna-zona/', 'Инфрачервена пейка', 'images/library/2026_01_infrachervena_peika_ability-spa_varna.webp', 'Инфрачервената пейка', '50% 50%'),
+            ('spa-varna/fitnes/', 'Фитнес Technogym', 'images/library/2026_01_fitnes_abilityspawellness_varna.webp', 'Фитнес залата', '70% 50%'),
+            ('spa-varna/grupovi-trenirovki/', 'Групови тренировки', 'images/library/2026_01_grupovi_zanimanie_abilityspawellness.webp', 'Групова тренировка по йога', '55% 50%'),
+            ('masazhi-varna/', 'Масажи', 'images/library/2023_07_aspa_001.webp', 'Релаксиращ масаж', '45% 50%'),
+            ('terapii/', 'СПА терапии', 'images/library/2026_06_terapia_gold_amber.webp', 'Терапия Gold Amber', '50% 50%')])
+        z = head_block('Съоръжения', 'Термална зона, фитнес и&nbsp;релакс', 'zoni-h') + grid
         z += zone_split(p, 'images/library/2026_01_termalna_zona_abilitwellness_varna.webp', 'Термалната зона на Ability Spa&Wellness Варна', 'Термална зона',
                         'Топлина, тишина и&nbsp;спокойствие', 'Място за истинско възстановяване в елегантна атмосфера, създадена за релакс, детоксикация и презареждане.',
                         ['Финландска (суха) сауна', 'Билкова сауна', 'Парна / солна парна баня', 'Инфрачервена пейка'], ('spa-varna/termalna-zona/', 'Термалната зона'))
@@ -787,22 +989,25 @@ def build_varna():
                         ['Еднократна тренировка – 12 €', '10 посещения – 100 €'], ('spa-varna/grupovi-trenirovki/', 'Груповите тренировки'))
         z += zone_split(p, 'images/library/2026_01_relax_zona_abilityspawellness_varna.webp', 'Релакс зоната с шезлонги и камина', 'Релакс зона',
                         'Шезлонги и камина', 'Мека светлина, топлината на огъня и тишина – за почивка след процедура или тренировка.', [], None, rev=True)
-        s += section(z, cls='facilities')
-        s += section('<div class="two-col">' + head_block('Цени', 'СПА и фитнес във Варна') + '<div>' + price_rows([
-            ('СПА – еднократно посещение', None, '15 €'), ('СПА – еднократно посещение за двама', None, '27 €'), ('СПА и фитнес – еднократно посещение', None, '20 €'),
-            ('Масажи', '30 / 60 мин', 'от 29 €'), ('СПА терапии', '90 мин', '78 €'), ('СПА пакет за двама „Абилити“', '2 масажа × 60 мин + 2 дневни СПА карти', '100 €')],
-            'Ability Spa&Wellness Варна') + f'<p class="price-other"><a href="{p}ceni/#varna">Всички цени →</a> · <a href="{PDF_V}" rel="noopener">Меню Варна (PDF)</a></p></div></div>', cls='section-sand')
-        s += section(head_block('Процедури', 'Масажи и&nbsp;терапии във Варна') + cards(p, [
+        s += section(z, cls='facilities', sid='zoni')
+        s += section(head_block('Процедури', 'Масажи и&nbsp;терапии във Варна', 'proceduri-h') + cards(p, [
             ('masazhi-varna/', 'Масажи във Варна', 'от 29 €', 'images/library/2023_07_aspa_001.webp', 'Релаксиращ масаж'),
             ('terapii/gold-amber/', 'Gold Amber', '78 € · 90 мин', 'images/library/2026_06_terapia_gold_amber.webp', 'Терапия Gold Amber'),
             ('terapii/bulgarian-rose/', 'Bulgarian Rose', '78 € · 90 мин', 'images/library/2026_06_terapia_bulgarian_rose-1.webp', 'Терапия Bulgarian Rose'),
-            ('terapii/lavender-touch/', 'Lavender Touch', '78 € · 90 мин', 'images/library/2026_06_terapia_lavender_touch.webp', 'Терапия Lavender Touch')]))
-        s += section('<div class="two-col">' + head_block('Как да ни намерите', 'Хотел „Черно море“, Варна') + prose([
-            'бул. „Сливница“ 33, гр. Варна · платен паркинг към хотела',
-            f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a> · <a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a>',
-            'Засега резервации за Варна се правят по телефона, във Viber или WhatsApp.',
-            '<a href="https://maps.google.com/?q=бул.+Сливница+33,+Варна" rel="noopener">Отвори в Google Maps →</a>']) + '</div>', cls='section-sand')
-        s += cta_band(p, 'Запазете час във Варна', 'Обадете се или ни пишете във Viber / WhatsApp.')
+            ('terapii/lavender-touch/', 'Lavender Touch', '78 € · 90 мин', 'images/library/2026_06_terapia_lavender_touch.webp', 'Терапия Lavender Touch')]),
+            cls='section-dark', sid='proceduri')
+        s += section('<div class="two-col">' + head_block('Цени', 'СПА и фитнес във Варна', 'ceni-h') + '<div>' + price_rows([
+            ('СПА – еднократно посещение', None, '15 €'), ('СПА – еднократно посещение за двама', None, '27 €'), ('СПА и фитнес – еднократно посещение', None, '20 €'),
+            ('Масажи', '30 / 60 мин', 'от 29 €'), ('СПА терапии', '90 мин', '78 €'), ('СПА пакет за двама „Абилити“', '2 масажа × 60 мин + 2 дневни СПА карти', '100 €')],
+            'Ability Spa&Wellness Варна') + f'<p class="price-other"><a href="{p}ceni/#varna">Всички цени →</a> · <a href="{PDF_V}" rel="noopener">Меню Варна (PDF)</a></p></div></div>', sid='ceni')
+        s += promo_section(p, 'varna')
+        s += section(head_block('Как да стигнете', 'Хотел „Черно море“, Варна', 'kontakt-h') + visit_block(
+            'бул. „Сливница“ 33<br>хотел „Черно море“, гр. Варна', 'https://maps.google.com/?q=бул.+Сливница+33,+Варна',
+            f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a><br><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a>',
+            'Всеки ден<br>[07:00 или 09:00] – 21:00', 'Засега резервации за Варна се правят по телефона, във Viber или WhatsApp. Паркингът към хотела е платен.') +
+            f'<div class="btn-row visit-cta"><a class="btn btn-gold" href="tel:{TEL_VARNA}">Обадете се</a>'
+            f'<a class="btn btn-line" href="viber://chat?number=%2B359899994149">Viber</a><a class="btn btn-line" href="https://wa.me/359899994149" rel="noopener">WhatsApp</a></div>', sid='kontakt')
+        s += other_club(p, 'varna')
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-varna/#spa', 'name': 'Ability Spa&Wellness – Варна',
            'url': f'{SITE}/spa-varna/', 'telephone': TEL_VARNA, 'email': 'abilityspawellness@gmail.com', 'priceRange': '$$', 'currenciesAccepted': 'EUR',
@@ -983,7 +1188,8 @@ def inject_homepage():
     t = t.replace('href="./spa-burgas/"', 'href="spa-burgas/"')
     t = re.sub(r'css/styles\.css(\?v=\w+)?"', f'css/styles.css?v={ASSET_V}"', t)
     t = re.sub(r'js/main\.js(\?v=\w+)?"', f'js/main.js?v={ASSET_V}"', t)
-    t = re.sub(r'<!-- CITY-CARDS -->.*?<!-- /CITY-CARDS -->', lambda m: '<!-- CITY-CARDS -->' + city_switch('') + '<!-- /CITY-CARDS -->', t, count=1, flags=re.S)
+    t = re.sub(r'<!-- CLUBS -->.*?<!-- /CLUBS -->', lambda m: '<!-- CLUBS -->' + club_cards('') + '<!-- /CLUBS -->', t, count=1, flags=re.S)
+    t = re.sub(r'<!-- PROMO -->.*?<!-- /PROMO -->', lambda m: '<!-- PROMO -->' + promo_card('') + '<!-- /PROMO -->', t, count=1, flags=re.S)
     open(f, 'w', encoding='utf-8').write(t)
 
 

@@ -67,24 +67,37 @@ On desktop it is shown in a phone frame with notes for the owner. Not linked fro
 Everything is front-end only: nothing is saved, paid or sent. Loyalty rules, the reward, how offers are redeemed
 at reception and the payment provider are `[PLACEHOLDERS]` for the owner to decide. Visit history is example data.
 
-## Colour combinations (prototype only)
+## Design direction (feedback 25.10): look of beaire.com, structure of davidlloyd.co.uk
 
-Open any page with `?palette=a` … `g` to compare colour combinations on the real pages; a small picker
-(bottom-left; bottom-right and collapsed to one swatch on phones) switches between them and the choice is kept while browsing (this tab only).
-Without `?palette` the site looks as before (a).
+The owner asked to follow **AIRE Ancient Baths** (beaire.com) for the design and **David Lloyd Clubs** (davidlloyd.co.uk)
+for the structure. Both are translated into Ability's own colours and fonts (brief, section 5) – nothing is copied one-to-one.
 
-- **a · Сегашна** – white pages, light sand sections, espresso bands (current)
-- **b · Топъл пясък** – cream pages, full-sand alternating sections, espresso "ready to book" band
-- **c · Злато** – gold buttons, a gold statement band, light-gold sections
-- **d · Мока** – softer, browner darks instead of near-black, warm off-white pages
-- **e · Вечер** – dark pages with light text and gold accents (light logo, gold book button)
-- **f · Басейн** – a deep pool teal (from the Burgas pool photo) in place of espresso – *outside the current brand colours*
-- **g · Светла** – brown only as an accent (text, buttons, active tab, thin lines): the hero photo fades into cream,
-  the statement band and footer are sand, location cards light, the voucher card gold
-  (on phones the photo sits in a band at the top and the text on cream below it, so both stay visible on any screen height)
-
-All text pairs checked for ≥ 4.5:1 contrast. Once one is chosen: fold it into the `:root` colours and delete the
-palette block in `css/styles.css`, the picker in `js/main.js` and the palette line in the head script.
+- **Look (AIRE):** espresso and cream sections in turn, gold for titles on dark, buttons and fine lines; uppercase Cormorant
+  titles, small spaced Jost labels, square corners; full-photo heroes with a centred title; a booking bar in the homepage hero;
+  big city names in the footer. Body text stays 18 px regular (AIRE's thin grey text is not used – it fails contrast).
+- **Structure (David Lloyd):** a promo bar above the header (`PROMO_BAR` in `tools/build.py` – set to `None` when no
+  offer runs); small info links (Цени, Ваучери, Промоции, Първо посещение, За нас, Блог, Контакти, BG/EN); a menu of what we
+  offer (Масажи, СПА терапии, Козметика, Остеопатия, Фитнес, Пакети); **„Избери обект“** (a panel with both locations, like
+  "Find a club") and **„Резервирай“**. On phones: promo line, logo, EN, Резервирай and the menu (locations first).
+- **Homepage:** hero with booking bar (choose Бургас / Варна – Бургас books online, Варна calls) → „Повече от СПА“ →
+  „Изберете своя обект“ (both locations: what each has, address / hours / phone, book or call, link to the location page –
+  the content of the 08.10 slides) → „Какво ви очаква“ (a swipeable strip; each card says where it is offered) → a full-photo
+  band for massages → thermal zone and fitness blocks (what each city has) → current offers → gift vouchers → reviews →
+  „Защо да изберете нас“ → blog → „Елате да го усетите“. The hero photo is the Finnish sauna, which both locations have
+  (a pool photo would suggest a pool in Varna – feedback 04.10).
+- **Locations work as separate clubs** (`spa-burgas/`, `spa-varna/`, like a David Lloyd club page): full-photo hero with
+  address / hours / phone and book or call; a sticky in-page menu (Обзор · Зони · Процедури · Цени · Промоции · Как да
+  стигнете · the other city); overview; facilities grid; zones; treatments; prices; that city's current offers; how to get
+  there; a band for the other location.
+- **Current offers** live in one place, `PROMOS` in `tools/build.py` (from the live promotion pages and their graphics,
+  checked 23.10.2026): promo bar, homepage card, location pages and `promocii/` all read it. Old prices are shown only where
+  the graphic and the page's discount agree (Варна 5 × 30 мин: graphic 135 €, page −16 % – left out; worth fixing on the live site).
+- New photos: `hero-finlandska-sauna-*`, `spa-burgas-basein-lampi-*`, `hotel-cherno-more-varna-1600/2400` (from the
+  2560 px originals) and `termalna-zona-varna-*` (the 1200 px Varna photo, enlarged with an upscaler that only sharpens –
+  colours unchanged, nothing added).
+- The colour-palette picker (`?palette=`) is retired. Its rules in `css/styles.css` (`html[data-palette=…]`) no longer do
+  anything and can be deleted. The previous version stays viewable at
+  https://raw.githack.com/wmd4nd-hash/Ability-SPA/21e623e/index.html
 
 ## Motion
 
@@ -94,7 +107,6 @@ Calm, CSS-driven motion with a small script (`js/main.js`), no library:
 - the hairline under each section label draws itself; facility photos wipe in
 - big photos (hero, page heroes, location and facility photos on desktop) drift slightly slower than the page (parallax, inside their own frame)
 - hover: cards lift, tile arrows turn, prices light up in gold, buttons get a soft light sweep, menu links slide
-- a thin gold reading-progress line under the header
 
 Hidden-before-reveal only applies when JS runs (`html.js`), and all of it is switched off for `prefers-reduced-motion`.
 

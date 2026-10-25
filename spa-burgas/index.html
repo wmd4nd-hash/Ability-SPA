@@ -19,13 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <script>(function (d) { d.classList.add('js');
-    /* PROTOTYPE ONLY: colour palettes to compare (?palette=a…g), see js/main.js */
-    try { var m = location.search.match(/[?&]palette=([a-g])/), v = m ? m[1] : sessionStorage.getItem('palette');
-      if (m) sessionStorage.setItem('palette', v);
-      if (v) { d.setAttribute('data-palette', v); d.setAttribute('data-palette-ui', ''); } } catch (e) {}
-  })(document.documentElement);</script>
-  <link rel="stylesheet" href="../css/styles.css?v=f5880e25">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="../css/styles.css?v=e13eb1c7">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Начало", "item": "https://abilityspa.com/"}, {"@type": "ListItem", "position": 2, "name": "Бургас", "item": "https://abilityspa.com/spa-burgas/"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "DaySpa", "@id": "https://abilityspa.com/spa-burgas/#spa", "name": "Ability Spa – Бургас", "url": "https://abilityspa.com/spa-burgas/", "telephone": "+359895635555", "email": "abilityspa@mail.com", "priceRange": "$$", "currenciesAccepted": "EUR", "address": {"@type": "PostalAddress", "streetAddress": "ул. „Александровска“ 21, хотел „България“", "addressLocality": "Бургас", "addressCountry": "BG"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "07:00", "closes": "22:00"}], "sameAs": ["https://www.facebook.com/abilityspa", "https://www.instagram.com/abilityspa/"]}</script>
 </head>
@@ -33,51 +28,61 @@
   <a class="skip-link" href="#main">Към съдържанието</a>
 
   <header class="site-header">
+    <div class="promo-bar"><a href="../promocii/"><span class="pb-long">Празнични предложения в Бургас и Halloween предложения във Варна – до 5 ноември</span><span class="pb-short">Специални предложения до 5 ноември</span><span class="pb-go"><span class="pb-go-t">Вижте офертите</span> <span aria-hidden="true">→</span></span></a></div>
+    <div class="util-bar">
+      <div class="util-inner">
+        <nav aria-label="Информация"><ul class="util-links"><li><a href="../ceni/">Цени</a></li><li><a href="../vaucheri/">Ваучери</a></li><li><a href="../promocii/">Промоции</a></li><li><a href="../parvo-poseshtenie/">Първо посещение</a></li><li><a href="../za-nas/">За нас</a></li><li><a href="../blog/">Блог</a></li><li><a href="../kontakti/">Контакти</a></li></ul></nav>
+        <div class="lang" role="group" aria-label="Език / Language"><a href="../" aria-current="true" lang="bg">BG</a><a href="../en/spa-burgas/" lang="en" hreflang="en">EN</a></div>
+      </div>
+    </div>
     <div class="header-inner">
-      <div class="header-left">
+      <a class="logo" href="../">
+        <!-- TODO: swap for SVG once the vector logo is supplied -->
+        <img src="../images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110">
+      </a>
+      <nav class="nav-acts" aria-label="Процедури и зони"><ul><li><a href="../masazhi-burgas/">Масажи</a></li><li><a href="../terapii/">СПА терапии</a></li><li><a href="../kozmetika-burgas/">Козметика</a></li><li><a href="../osteopatiya-burgas/">Остеопатия</a></li><li><a href="../fitnes-burgas/">Фитнес</a></li><li><a href="../paketi/">Пакети</a></li></ul></nav>
+      <div class="header-right">
+        <button class="club-btn" type="button" aria-expanded="false" aria-controls="club-panel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Избери обект</span></button>
+        <a class="lang-toggle" href="../en/spa-burgas/" lang="en" hreflang="en" aria-label="English version">EN</a>
+        <a class="btn btn-gold btn-book" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">
           <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
           <span class="menu-label">Меню</span>
         </button>
-        <div class="lang" role="group" aria-label="Език / Language">
-          <svg class="lang-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
-          <a href="./" aria-current="true" lang="bg">BG</a>
-          <a href="../en/spa-burgas/" lang="en" hreflang="en">EN</a>
-        </div>
-      </div>
-
-      <a class="logo" href="../">
-        <!-- TODO: swap for SVG once the vector logo is supplied -->
-        <img src="../images/logo-horizontal.png" alt="Ability SPA" width="618" height="110">
-      </a>
-
-      <div class="header-right">
-        <a class="header-phone" href="tel:+359895635555">+359 895 635 555</a>
-        <a class="lang-toggle" href="../en/spa-burgas/" lang="en" hreflang="en" aria-label="English version">EN</a>
-        <a class="btn btn-dark btn-book" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
       </div>
     </div>
-
-    <nav class="main-nav" id="main-nav" aria-label="Основна навигация">
+    <div class="club-panel" id="club-panel" hidden>
+      <div class="club-panel-inner">
+        <p class="eyebrow">Изберете обект</p>
+        <ul class="club-pick"><li><a class="club-pick-link" href="../spa-burgas/" aria-current="page"><span class="cp-city">Бургас</span><span class="cp-hotel">Ability SPA · хотел „България“</span><span class="cp-meta">ул. „Александровска“ 21 · всеки ден 07:00 – 22:00</span><span class="cp-go" aria-hidden="true">→</span></a></li><li><a class="club-pick-link" href="../spa-varna/"><span class="cp-city">Варна</span><span class="cp-hotel">Ability SPA&amp;Wellness · хотел „Черно море“</span><span class="cp-meta">бул. „Сливница“ 33 · всеки ден [07:00 или 09:00] – 21:00</span><span class="cp-go" aria-hidden="true">→</span></a></li></ul>
+      </div>
+    </div>
+    <nav class="main-nav" id="main-nav" aria-label="Меню">
       <div class="nav-inner">
-        <ul class="nav-main">
-          <li><a href="../spa-burgas/" aria-current="page">Бургас</a></li>
-          <li><a href="../spa-varna/">Варна</a></li>
+        <div class="nav-col">
+          <p class="nav-h">Изберете обект</p>
+          <ul class="nav-clubs"><li><a href="../spa-burgas/" aria-current="page"><span class="nc-city">Бургас</span><span class="nc-hotel">Ability SPA · хотел „България“</span></a></li><li><a href="../spa-varna/"><span class="nc-city">Варна</span><span class="nc-hotel">Ability SPA&amp;Wellness · хотел „Черно море“</span></a></li></ul>
+        </div>
+        <div class="nav-col">
+          <p class="nav-h">Процедури и зони</p>
+          <ul class="nav-main">
           <li><a href="../masazhi-burgas/">Масажи</a></li>
           <li><a href="../terapii/">СПА терапии</a></li>
           <li><a href="../kozmetika-burgas/">Козметика</a></li>
-          <li><a href="../ceni/">Цени</a></li>
-          <li><a href="../kontakti/">Контакти</a></li>
-        </ul>
-        <div class="nav-side">
-          <ul class="nav-sub">
-            <li><a href="../osteopatiya-burgas/">Остеопатия</a></li>
+          <li><a href="../osteopatiya-burgas/">Остеопатия</a></li>
+          <li><a href="../fitnes-burgas/">Фитнес</a></li>
           <li><a href="../paketi/">Пакети</a></li>
+          </ul>
+        </div>
+        <div class="nav-col">
+          <ul class="nav-sub">
+          <li><a href="../ceni/">Цени</a></li>
           <li><a href="../vaucheri/">Ваучери</a></li>
           <li><a href="../promocii/">Промоции</a></li>
           <li><a href="../parvo-poseshtenie/">Първо посещение</a></li>
           <li><a href="../za-nas/">За нас</a></li>
           <li><a href="../blog/">Блог</a></li>
+          <li><a href="../kontakti/">Контакти</a></li>
           </ul>
           <div class="nav-call">
             <p>Обадете се</p>
@@ -90,22 +95,32 @@
   </header>
 
   <main id="main">
-    <section class="page-hero has-media">
-      <div class="container page-hero-grid">
-        <div class="page-hero-text">
-          <nav class="breadcrumb" aria-label="Навигационна пътека"><ol><li><a href="../">Начало</a></li><li aria-current="page">Бургас</li></ol></nav>
-          <p class="eyebrow">Ability Spa · хотел „България“</p>
-          <h1>СПА център в&nbsp;Бургас</h1>
-          <p class="page-lead">В сърцето на Бургас, в обновения хотел „България“ – уютна обстановка, индивидуално подбрани процедури, качествени продукти и висококвалифицирани специалисти.</p>
-          <dl class="svc-meta"><div><dt>Адрес</dt><dd>ул. „Александровска“ 21</dd></div><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Телефон</dt><dd><a href="tel:+359895635555">+359 895 635 555</a></dd></div></dl>
-          <div class="btn-row"><a class="btn btn-dark btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай <span aria-hidden="true">→</span></a><a class="btn btn-outline btn-arrow" href="#zoni">Разгледай зоните <span aria-hidden="true">→</span></a></div>
-        </div>
-        <div class="page-hero-media"><img class="photo" src="../images/spa-burgas-basein-simetrichen-1080.webp" alt="Закритият басейн на Ability Spa Бургас с осветена синя стена" fetchpriority="high" decoding="async"></div>
+    <section class="club-hero">
+      <img class="club-hero-img" src="../images/spa-burgas-basein-lampi-2000.webp" srcset="../images/spa-burgas-basein-lampi-800.webp 800w, ../images/spa-burgas-basein-lampi-1280.webp 1280w, ../images/spa-burgas-basein-lampi-2000.webp 2000w" sizes="100vw" alt="Закритият басейн с лампи-сфери в Ability SPA Бургас" fetchpriority="high" decoding="async" style="object-position: 55% 50%">
+      <div class="container club-hero-inner">
+        <nav class="breadcrumb" aria-label="Навигационна пътека"><ol><li><a href="../">Начало</a></li><li aria-current="page">Бургас</li></ol></nav>
+        <p class="eyebrow">Ability SPA · хотел „България“</p>
+        <h1>СПА център в&nbsp;Бургас</h1>
+        <p class="club-hero-lead">В сърцето на Бургас, в обновения хотел „България“ – басейн, сауни, хамам, солна стая, фитнес и процедури на едно място.</p>
+        <ul class="club-hero-meta"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>ул. „Александровска“ 21</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Всеки ден 07:00 – 22:00</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><a href="tel:+359895635555">+359 895 635 555</a></li></ul>
+        <div class="btn-row"><a class="btn btn-gold" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн</a><a class="btn btn-line-light" href="#kontakt">Как да стигнете</a></div>
+      </div>
+    </section>
+    <nav class="club-nav" aria-label="Бургас – на тази страница">
+      <div class="container club-nav-inner">
+        <p class="club-nav-name">Бургас</p>
+        <ul class="club-nav-links"><li><a href="#obzor">Обзор</a></li><li><a href="#zoni">Зони</a></li><li><a href="#proceduri">Процедури</a></li><li><a href="#ceni">Цени</a></li><li><a href="#promocii">Промоции</a></li><li><a href="#kontakt">Как да стигнете</a></li></ul>
+        <a class="club-nav-switch" href="../spa-varna/">Варна <span aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+    <section class="section " id="obzor">
+      <div class="container">
+<div class="two-col"><div class="section-head"><p class="eyebrow">Обзор</p><h2 id="obzor-h">Вашето място за релакс в&nbsp;центъра</h2></div><div><div class="prose"><p>Посветили сме се изцяло на грижата за вашето здраве, красота и душевен баланс – с уютна обстановка, индивидуално подбрани процедури, качествени продукти и апарати.</p><p>Термалната зона, басейнът с джакузи и фитнесът са на едно място, а след тренировка или процедура ви очакват релакс зоната и барът до басейна.</p></div><dl class="club-facts"><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Multisport</dt><dd>в делнични дни, 07:00 – 22:00</dd></div><div><dt>Деца</dt><dd>детски басейн 32–33 °C</dd></div></dl></div></div>
       </div>
     </section>
     <section class="section facilities" id="zoni">
       <div class="container">
-<div class="section-head"><p class="eyebrow">Зони</p><h2 id="zoni-h">Всичко на едно място</h2></div><article class="split">
+<div class="section-head"><p class="eyebrow">Съоръжения</p><h2 id="zoni-h">Всичко на едно място</h2></div><ul class="facility-grid"><li><a class="facility" href="../spa-burgas/termalna-zona/"><img src="../images/finlandska-sauna-burgas-1080.webp" alt="Финландската сауна" loading="lazy" decoding="async" style="object-position: 62% 50%"><span class="facility-name">Термална зона <span aria-hidden="true">→</span></span></a></li><li><a class="facility" href="../spa-burgas/basein/"><img src="../images/spa-burgas-dzhakuzi-basein-1080.webp" alt="Джакузито и басейнът" loading="lazy" decoding="async" style="object-position: 50% 50%"><span class="facility-name">Басейн и джакузи <span aria-hidden="true">→</span></span></a></li><li><a class="facility" href="../spa-burgas/hamam/"><img src="../images/library/2026_01_parna_banya_ability_spa.webp" alt="Входът на парната баня" loading="lazy" decoding="async" style="object-position: 50% 50%"><span class="facility-name">Хамам <span aria-hidden="true">→</span></span></a></li><li><a class="facility" href="../spa-burgas/solna-staya/"><img src="../images/spa-burgas-solna-staya-960.webp" alt="Солната стая с шезлонги" loading="lazy" decoding="async" style="object-position: 50% 50%"><span class="facility-name">Солна стая <span aria-hidden="true">→</span></span></a></li><li><a class="facility" href="../fitnes-burgas/"><img src="../images/spa-burgas-fitnes-technogym-zala-1080.webp" alt="Фитнес залата" loading="lazy" decoding="async" style="object-position: 50% 50%"><span class="facility-name">Фитнес Technogym <span aria-hidden="true">→</span></span></a></li><li><a class="facility" href="../masazhi-burgas/"><img src="../images/masazh-goreshti-kamani-burgas-1080.webp" alt="Масаж с горещи камъни" loading="lazy" decoding="async" style="object-position: 38% 50%"><span class="facility-name">Масажи <span aria-hidden="true">→</span></span></a></li></ul><article class="split">
           <img class="photo" src="../images/finlandska-sauna-burgas-1080.webp" alt="Финландската сауна в Ability Spa Бургас" loading="lazy" decoding="async">
           <div class="split-text"><p class="kicker">Термална зона</p><h3>Сауни, парна баня и&nbsp;релакс</h3><p>Спокойна и елегантна атмосфера, вдъхновена от топлина и хармония.</p><ul class="feature-list"><li>Билкова сауна</li><li>Финландска сауна</li><li>Класическа парна баня</li><li>Релакс зона</li></ul><a class="btn btn-outline btn-arrow" href="../spa-burgas/termalna-zona/">Термалната зона <span aria-hidden="true">→</span></a></div>
         </article><article class="split split-rev">
@@ -126,54 +141,56 @@
         </article>
       </div>
     </section>
-    <section class="section section-sand">
+    <section class="section section-dark" id="proceduri">
       <div class="container">
-<div class="section-head"><p class="eyebrow">Процедури</p><h2>Масажи, терапии и&nbsp;козметика</h2></div><ul class="exp-grid"><li><a class="exp-card" href="../masazhi-burgas/"><img class="exp-img" src="../images/masazh-goreshti-kamani-burgas-1080.webp" alt="Масаж с горещи камъни" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">01</p><h3>Масажи</h3><p class="exp-price">от 28 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../terapii/"><img class="exp-img" src="../images/terapiya-vulkanichni-kamani-1080.webp" alt="Терапия с вулканични камъни" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">02</p><h3>СПА терапии</h3><p class="exp-price">от 49 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../kozmetika-burgas/"><img class="exp-img" src="../images/kozmetika-terapiya-za-litse-burgas-1080.webp" alt="Терапия за лице" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">03</p><h3>Козметика</h3><p class="exp-price">от 8 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../osteopatiya-burgas/"><img class="exp-img" src="../images/osteopatiya-burgas-petar-damyanov-1080.webp" alt="Остеопатия" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">04</p><h3>Остеопатия</h3><p class="exp-price">59 € · 60 мин</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li></ul>
+<div class="section-head"><p class="eyebrow">Процедури</p><h2 id="proceduri-h">Масажи, терапии и&nbsp;козметика</h2></div><ul class="exp-grid"><li><a class="exp-card" href="../masazhi-burgas/"><img class="exp-img" src="../images/masazh-goreshti-kamani-burgas-1080.webp" alt="Масаж с горещи камъни" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">01</p><h3>Масажи</h3><p class="exp-price">от 28 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../terapii/"><img class="exp-img" src="../images/terapiya-vulkanichni-kamani-1080.webp" alt="Терапия с вулканични камъни" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">02</p><h3>СПА терапии</h3><p class="exp-price">от 49 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../kozmetika-burgas/"><img class="exp-img" src="../images/kozmetika-terapiya-za-litse-burgas-1080.webp" alt="Терапия за лице" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">03</p><h3>Козметика</h3><p class="exp-price">от 8 €</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li><li><a class="exp-card" href="../osteopatiya-burgas/"><img class="exp-img" src="../images/osteopatiya-burgas-petar-damyanov-1080.webp" alt="Остеопатия" loading="lazy" decoding="async"><div class="exp-body"><p class="exp-num">04</p><h3>Остеопатия</h3><p class="exp-price">59 € · 60 мин</p><span class="exp-more">Научи повече <span aria-hidden="true">→</span></span></div></a></li></ul>
       </div>
     </section>
-    <section class="section ">
+    <section class="section " id="ceni">
       <div class="container">
-<div class="two-col"><div class="section-head"><p class="eyebrow">Цени</p><h2>СПА достъп</h2></div><div><p class="price-note">Ability Spa Бургас</p><dl class="price-list"><div><dt>Еднократно посещение <span>термална зона, басейн и джакузи или солна стая</span></dt><dd>12 €</dd></div><div><dt>Деца 3–14 г. <span>еднократно посещение</span></dt><dd>6 €</dd></div><div><dt>Дневна СПА карта <span>фитнес, басейн, джакузи и термална зона</span></dt><dd>19 €</dd></div><div><dt>Дневна СПА карта за двама</dt><dd>35 €</dd></div><div><dt>Месечна СПА карта <span>понеделник – петък / понеделник – неделя</span></dt><dd>110 € / 145 €</dd></div><div><dt>Хавлия / халат <span>една хавлия е безплатна</span></dt><dd>2 € / 3 €</dd></div></dl><p class="price-other"><a href="../ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00</p></div></div>
+<div class="two-col"><div class="section-head"><p class="eyebrow">Цени</p><h2 id="ceni-h">СПА достъп</h2></div><div><p class="price-note">Ability Spa Бургас</p><dl class="price-list"><div><dt>Еднократно посещение <span>термална зона, басейн и джакузи или солна стая</span></dt><dd>12 €</dd></div><div><dt>Деца 3–14 г. <span>еднократно посещение</span></dt><dd>6 €</dd></div><div><dt>Дневна СПА карта <span>фитнес, басейн, джакузи и термална зона</span></dt><dd>19 €</dd></div><div><dt>Дневна СПА карта за двама</dt><dd>35 €</dd></div><div><dt>Месечна СПА карта <span>понеделник – петък / понеделник – неделя</span></dt><dd>110 € / 145 €</dd></div><div><dt>Хавлия / халат <span>една хавлия е безплатна</span></dt><dd>2 € / 3 €</dd></div></dl><p class="price-other"><a href="../ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00</p></div></div>
       </div>
     </section>
-    <section class="section section-sand">
+    <section class="section section-sand" id="promocii">
       <div class="container">
-<div class="two-col"><div class="section-head"><p class="eyebrow">Как да ни намерите</p><h2>Хотел „България“, центъра на Бургас</h2></div><div class="prose"><p>ул. „Александровска“ 21, гр. Бургас · всеки ден 07:00 – 22:00</p><p><a href="tel:+359895635555">+359 895 635 555</a> · <a href="tel:+35956875260">056 875 260</a> · <a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a></p><p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Отвори в Google Maps →</a></p></div></div>
-      </div>
-    </section>
-    <section class="cta-band" aria-label="Резервация">
-      <div class="container"><div class="cta-band-inner">
-        <div><h2>Готови за малко време за себе си?</h2><p>Резервирайте онлайн за Бургас или ни се обадете за Варна.</p></div>
-        <div class="btn-row">
-          <a class="btn btn-dark btn-arrow" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай в Бургас <span aria-hidden="true">→</span></a>
-          <a class="btn btn-outline" href="tel:+359899994149">Варна: +359 899 994 149</a>
+<div class="two-col">
+          <div class="section-head"><p class="eyebrow">Промоции · до 5 ноември</p><h2 id="promocii-h">Празнични предложения</h2>
+            <p class="section-intro">Честит рожден ден, Ability SPA! Валидни 22.10 – 05.11.2026.</p>
+            <a class="btn btn-line btn-arrow" href="../promocii/burgas/">Всички подробности <span aria-hidden="true">→</span></a></div>
+          <div><dl class="price-list promo-list"><div><dt>5 + 1 масажа × 60 мин <span>масаж по избор</span></dt><dd><span class="pl-new">195 €</span></dd></div><div><dt>10 СПА посещения + 2 бонус <span>фитнес, термална зона и басейн</span></dt><dd><span class="pl-new">145 €</span></dd></div><div><dt>10 + 2 посещения – термална зона <span>парна баня, билкова сауна, солна стая</span></dt><dd><span class="pl-new">95 €</span></dd></div><div><dt>10 + 2 посещения – басейн <span>басейн и джакузи</span></dt><dd><span class="pl-new">95 €</span></dd></div><div><dt>10 + 2 посещения – солна стая</dt><dd><span class="pl-new">95 €</span></dd></div><div><dt>6-месечна фитнес карта + 1 месец бонус</dt><dd><span class="pl-new">166 €</span></dd></div><div><dt>Подаръчен ваучер</dt><dd><span class="pl-new">50 € / 100 €</span></dd></div></dl></div>
         </div>
-      </div></div>
+      </div>
+    </section>
+    <section class="section " id="kontakt">
+      <div class="container">
+<div class="section-head"><p class="eyebrow">Как да стигнете</p><h2 id="kontakt-h">Хотел „България“, центъра на Бургас</h2></div><div class="visit-grid">
+          <div class="visit-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><h3>Адрес</h3><p>ул. „Александровска“ 21<br>хотел „България“, гр. Бургас</p><a class="text-link" href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">Отвори в Google Maps <span aria-hidden="true">→</span></a></div>
+          <div class="visit-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><h3>Контакт</h3><p><a href="tel:+359895635555">+359 895 635 555</a><br><a href="tel:+35956875260">056 875 260</a><br><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a></p></div>
+          <div class="visit-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><h3>Работно време</h3><p>Всеки ден<br>07:00 – 22:00</p></div>
+        </div><div class="btn-row visit-cta"><a class="btn btn-gold" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай онлайн</a><a class="btn btn-line" href="viber://chat?number=%2B359895635555">Viber</a></div>
+      </div>
+    </section>
+    <section class="other-club" aria-labelledby="other-club-h">
+      <img class="other-club-img" src="../images/hotel-cherno-more-varna-1600.webp" alt="Хотел „Черно море“ във Варна" loading="lazy" decoding="async">
+      <div class="container other-club-inner">
+        <p class="eyebrow">Ability SPA&amp;Wellness · Варна</p>
+        <h2 id="other-club-h">И в сърцето на Варна</h2>
+        <p>Термална зона, инфрачервена пейка, фитнес Technogym, групови тренировки, масажи и СПА терапии – в хотел „Черно море“.</p>
+        <a class="btn btn-gold btn-arrow" href="../spa-varna/">Към обекта във Варна <span aria-hidden="true">→</span></a>
+      </div>
     </section>
 
   </main>
 
   <footer class="site-footer" id="kontakti">
+    <div class="container footer-top">
+      <a class="logo logo-footer" href="../">
+        <img src="../images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
+      </a>
+      <p class="footer-tag">Градски СПА в Бургас и Варна</p>
+      <ul class="footer-cities"><li><a href="../spa-burgas/">Бургас</a></li><li><a href="../spa-varna/">Варна</a></li></ul>
+    </div>
     <div class="container footer-grid">
-      <div>
-        <a class="logo logo-footer" href="../">
-          <img src="../images/logo-horizontal-light.png" alt="Ability SPA" width="618" height="110" loading="lazy">
-        </a>
-        <p class="footer-tag">Градски СПА център в Бургас и Варна.</p>
-        <a class="btn btn-light footer-book" href="https://book.abilityspa.com/reservations/start?site=1">Резервирай</a>
-      </div>
-      <div>
-        <h2 class="footer-h">Изживявания</h2>
-        <ul class="footer-links">
-          <li><a href="../masazhi-burgas/">Масажи</a></li>
-          <li><a href="../terapii/">СПА терапии</a></li>
-          <li><a href="../kozmetika-burgas/">Козметика</a></li>
-          <li><a href="../osteopatiya-burgas/">Остеопатия</a></li>
-          <li><a href="../ceni/">Цени</a></li>
-          <li><a href="../paketi/">Пакети</a></li>
-          <li><a href="../parvo-poseshtenie/">Първо посещение</a></li>
-        </ul>
-      </div>
       <div>
         <h2 class="footer-h">Бургас</h2>
         <p><a href="https://maps.google.com/?q=ул.+Александровска+21,+Бургас" rel="noopener">ул. „Александровска“ 21<br>хотел „България“</a></p>
@@ -205,19 +222,27 @@
           <li><a href="https://www.instagram.com/abilityspa.wellness/" rel="noopener">Instagram</a></li>
         </ul>
       </div>
+      <div>
+        <h2 class="footer-h">Процедури</h2>
+        <ul class="footer-links"><li><a href="../masazhi-burgas/">Масажи – Бургас</a></li><li><a href="../masazhi-varna/">Масажи – Варна</a></li><li><a href="../terapii/">СПА терапии</a></li><li><a href="../kozmetika-burgas/">Козметика</a></li><li><a href="../osteopatiya-burgas/">Остеопатия</a></li><li><a href="../fitnes-burgas/">Фитнес – Бургас</a></li><li><a href="../spa-varna/grupovi-trenirovki/">Групови тренировки – Варна</a></li></ul>
+      </div>
+      <div>
+        <h2 class="footer-h">Информация</h2>
+        <ul class="footer-links"><li><a href="../ceni/">Цени</a></li><li><a href="../paketi/">Пакети</a></li><li><a href="../vaucheri/">Ваучери</a></li><li><a href="../promocii/">Промоции</a></li><li><a href="../parvo-poseshtenie/">Първо посещение</a></li><li><a href="../za-nas/">За нас</a></li><li><a href="../blog/">Блог</a></li><li><a href="../kontakti/">Контакти</a></li></ul>
+      </div>
     </div>
     <div class="container footer-bottom">
       <p>© <span id="year">2026</span> Ability SPA &amp; Wellness</p>
-      <p><a href="../vaucheri/">Ваучери</a> · <a href="../promocii/">Промоции</a> · <a href="../za-nas/">За нас</a> · <a href="../blog/">Блог</a> · <a href="../obshti-usloviya/">Общи условия</a> · <a href="../poveritelnost/">Поверителност</a> · <a href="../biskvitki/">Бисквитки</a></p>
+      <p><a href="../obshti-usloviya/">Общи условия</a> · <a href="../poveritelnost/">Поверителност</a> · <a href="../biskvitki/">Бисквитки</a></p>
     </div>
   </footer>
 
   <!-- Slim cookie bar: bottom only, never covers the hero text -->
   <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Бисквитки" hidden>
     <p>Сайтът използва бисквитки. <a href="../biskvitki/">Научете повече</a></p>
-    <button class="btn btn-light btn-sm" type="button" id="cookie-ok">Приемам</button>
+    <button class="btn btn-gold btn-sm" type="button" id="cookie-ok">Приемам</button>
   </div>
 
-  <script src="../js/main.js?v=f5880e25" defer></script>
+  <script src="../js/main.js?v=e13eb1c7" defer></script>
 </body>
 </html>
