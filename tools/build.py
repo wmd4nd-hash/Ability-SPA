@@ -649,7 +649,7 @@ HERO_SLIDES = {
                menu='СПА меню', call='Обадете се', slides=[
         dict(key='burgas', tab='Бургас', eyebrow='Ability SPA · хотел „България“', title='Спа център в&nbsp;Бургас',
              lead='Басейн и джакузи, сауни и парна баня, хамам, солна стая, фитнес, масажи, остеопатия и козметика – в центъра на града.',
-             img='images/hero-burgas-basein', alt='Двойка почива на шезлонгите до басейна в Ability SPA Бургас', pos='50% 55%',
+             img='images/hero-burgas-dvoyka-basein', alt='Двойка седи на ръба на басейна пред осветената стена в Ability SPA Бургас', pos='62% 50%',
              menu=PDF_B, tel=TEL_BURGAS, more=('spa-burgas/', 'Повече за Бургас')),
         dict(key='varna', tab='Варна', eyebrow='Ability SPA&amp;Wellness · хотел „Черно море“', title='Уелнес във&nbsp;Варна',
              lead='Финландска и билкова сауна, солна парна баня, инфрачервена пейка, фитнес Technogym, групови тренировки, масажи и СПА терапии.',
@@ -659,7 +659,7 @@ HERO_SLIDES = {
                menu='Spa menu (BG)', call='Call us', slides=[
         dict(key='burgas', tab='Burgas', eyebrow='Ability SPA · Hotel Bulgaria', title='Spa centre in&nbsp;Burgas',
              lead='Pool and jacuzzi, saunas and steam bath, hamam, salt room, gym, massages, osteopathy and beauty treatments – in the city centre.',
-             img='images/hero-burgas-basein', alt='A couple relaxing on the loungers by the pool at Ability SPA Burgas', pos='50% 55%',
+             img='images/hero-burgas-dvoyka-basein', alt='A couple sitting on the edge of the pool in front of the lit wall at Ability SPA Burgas', pos='62% 50%',
              menu=PDF_B, tel=TEL_BURGAS, more=('en/spa-burgas/', 'More about Burgas')),
         dict(key='varna', tab='Varna', eyebrow='Ability SPA&amp;Wellness · Hotel Cherno More', title='Wellness in&nbsp;Varna',
              lead='Finnish and herbal sauna, salt steam bath, infrared bench, Technogym gym, group classes, massages and spa therapies.',
@@ -1007,7 +1007,7 @@ def build_burgas():
         grid = facility_grid(p, [
             ('spa-burgas/termalna-zona/', 'Термална зона', 'images/finlandska-sauna-burgas-1080.webp', 'Финландската сауна', '62% 50%'),
             ('spa-burgas/basein/', 'Басейн и джакузи', 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът', '50% 50%'),
-            ('spa-burgas/hamam/', 'Хамам', 'images/library/2026_01_parna_banya_ability_spa.webp', 'Входът на парната баня', '50% 50%'),
+            ('spa-burgas/hamam/', 'Хамам', 'images/hamam-burgas-kese-1080.webp', 'Пилинг с кесе в хамама', '55% 40%'),
             ('spa-burgas/solna-staya/', 'Солна стая', 'images/spa-burgas-solna-staya-960.webp', 'Солната стая с шезлонги', '50% 50%'),
             ('fitnes-burgas/', 'Фитнес Technogym', 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес залата', '50% 50%'),
             ('masazhi-burgas/', 'Масажи', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Масаж с горещи камъни', '38% 50%')])
@@ -1018,7 +1018,7 @@ def build_burgas():
         z += zone_split(p, 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и закритият басейн', 'Басейн и джакузи',
                         'Вода за цялото семейство', 'Топъл закрит басейн с релакс зона и джакузи, а за най-малките – детски басейн с температура 32–33&nbsp;°C.',
                         ['Закрит басейн', 'Джакузи', 'Детски басейн 32–33 °C'], ('spa-burgas/basein/', 'Басейнът'), rev=True)
-        z += zone_split(p, 'images/library/2026_01_parna_banya_ability_spa.webp', 'Входът на парната баня в Ability Spa', 'Хамам', 'Турска баня',
+        z += zone_split(p, 'images/hamam-burgas-kurna-1080.webp', 'Двойка до мраморната курна в хамама на Ability SPA Бургас', 'Хамам', 'Турска баня',
                         'Парна баня, пилинг с кесе и пенен масаж – вековен ритуал за релакс и пречистване.', ['45 мин – 55 €'], ('spa-burgas/hamam/', 'Хамамът'))
         z += zone_split(p, 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес зала с уреди Technogym', 'Фитнес',
                         'Technogym и протеинов бар', 'Модерна фитнес зала с уреди Technogym; протеиновият бар до басейна предлага хранителни добавки.',

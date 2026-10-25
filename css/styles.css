@@ -1835,3 +1835,17 @@ h1 em, h2 em { font-style: normal; }
 
 /* Location cards: "Към обекта" as a text link under the two buttons */
 .club-card-more { margin-top: 12px; color: var(--white); }
+/* Hero, desktop: text on espresso on the left, the photo clean on the right (the team's photos are bright –
+   text over them would cover the people). Phones keep the photo band on top. */
+@media (min-width: 900px) {
+  .hero-slides { grid-template-columns: minmax(0, 46%) minmax(0, 1fr); min-height: min(82svh, 800px); }
+  .hs-media { position: relative; inset: auto; z-index: 0; grid-column: 2; grid-row: 1; aspect-ratio: auto; }
+  .hs-media::after { top: 0; bottom: 0; left: 0; right: auto; width: 120px; height: auto; background: linear-gradient(to right, var(--ink), rgba(32, 26, 24, 0)); }
+  .hs-inner { grid-column: 1; grid-row: 1; justify-items: start; text-align: left; align-content: center; width: 100%; max-width: none; margin: 0;
+    padding: 64px 40px 56px max(var(--gutter), calc((100vw - 1440px) / 2 + var(--gutter))); }
+  .hs-panel { justify-items: start; }
+  .hs-panel .eyebrow, .hs-panel .btn-row { justify-content: flex-start; }
+  .hero-slides .hs-title { max-width: none; margin-left: 0; font-size: clamp(2.75rem, 4.6vw, 4.75rem); text-shadow: none; }
+  .hs-lead { margin-left: 0; max-width: 46ch; }
+}
+@media (min-width: 1200px) { .hs-inner { padding-right: 64px; } }
