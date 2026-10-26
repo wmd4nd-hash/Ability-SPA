@@ -649,21 +649,21 @@ HERO_SLIDES = {
                menu='СПА меню', call='Обадете се', slides=[
         dict(key='burgas', tab='Бургас', eyebrow='Ability SPA · хотел „България“', title='Спа център в&nbsp;Бургас',
              lead='Басейн и джакузи, сауни и парна баня, хамам, солна стая, фитнес, масажи, остеопатия и козметика – в центъра на града.',
-             img='images/hero-burgas-dvoyka-basein', alt='Двойка седи на ръба на басейна пред осветената стена в Ability SPA Бургас', pos='62% 50%',
+             img='images/hero-burgas-dvoyka', alt='Двойка седи на ръба на басейна пред осветената стена в Ability SPA Бургас', pos='50% 40%', dpos='50% 45%',
              menu=PDF_B, tel=TEL_BURGAS, more=('spa-burgas/', 'Повече за Бургас')),
         dict(key='varna', tab='Варна', eyebrow='Ability SPA&amp;Wellness · хотел „Черно море“', title='Уелнес във&nbsp;Варна',
              lead='Финландска и билкова сауна, солна парна баня, инфрачервена пейка, фитнес Technogym, групови тренировки, масажи и СПА терапии.',
-             img='images/hero-varna-sauna', alt='Гостенка почива във финландската сауна на Ability SPA&Wellness Варна', pos='50% 50%',
+             img='images/hero-varna-sauna-sedi', alt='Гостенка във финландската сауна на Ability SPA&Wellness Варна', pos='50% 50%', dpos='60% 50%',
              menu=PDF_V, tel=TEL_VARNA, more=('spa-varna/', 'Повече за Варна'))]),
     'en': dict(h1='Spa in Burgas, wellness in&nbsp;Varna', label='Choose a location', pause='Stop switching automatically', play='Switch automatically',
                menu='Spa menu (BG)', call='Call us', slides=[
         dict(key='burgas', tab='Burgas', eyebrow='Ability SPA · Hotel Bulgaria', title='Spa centre in&nbsp;Burgas',
              lead='Pool and jacuzzi, saunas and steam bath, hamam, salt room, gym, massages, osteopathy and beauty treatments – in the city centre.',
-             img='images/hero-burgas-dvoyka-basein', alt='A couple sitting on the edge of the pool in front of the lit wall at Ability SPA Burgas', pos='62% 50%',
+             img='images/hero-burgas-dvoyka', alt='A couple sitting on the edge of the pool in front of the lit wall at Ability SPA Burgas', pos='50% 40%', dpos='50% 45%',
              menu=PDF_B, tel=TEL_BURGAS, more=('en/spa-burgas/', 'More about Burgas')),
         dict(key='varna', tab='Varna', eyebrow='Ability SPA&amp;Wellness · Hotel Cherno More', title='Wellness in&nbsp;Varna',
              lead='Finnish and herbal sauna, salt steam bath, infrared bench, Technogym gym, group classes, massages and spa therapies.',
-             img='images/hero-varna-sauna', alt='A guest relaxing in the Finnish sauna at Ability SPA&Wellness Varna', pos='50% 50%',
+             img='images/hero-varna-sauna-sedi', alt='A guest in the Finnish sauna at Ability SPA&Wellness Varna', pos='50% 50%', dpos='60% 50%',
              menu=PDF_V, tel=TEL_VARNA, more=('en/spa-varna/', 'More about Varna'))]),
 }
 
@@ -675,10 +675,11 @@ def hero_slides(p, lang='bg'):
     T = HERO_SLIDES[lang]
     imgs, tabs, panels = [], [], []
     for i, s in enumerate(T['slides']):
-        srcset = ', '.join(f'{p}{s["img"]}-{w}.webp {w}w' for w in (960, 1600, 2400))
+        srcset = ', '.join(f'{p}{s["img"]}-{w}.webp {w}w' for w in (900, 1400, 2000))   # square crops centred on the people
         load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
-        imgs.append(f'<img class="hs-img{" is-active" if i == 0 else ""}" data-city="{s["key"]}" src="{p}{s["img"]}-1600.webp" srcset="{srcset}" sizes="100vw" '
-                    f'alt="{e(s["alt"])}" width="2400" height="1600" {load} decoding="async" style="object-position: {s["pos"]}">')
+        imgs.append(f'<img class="hs-img{" is-active" if i == 0 else ""}" data-city="{s["key"]}" src="{p}{s["img"]}-1400.webp" srcset="{srcset}" '
+                    f'sizes="(min-width: 900px) 56vw, 100vw" alt="{e(s["alt"])}" width="2000" height="2000" {load} decoding="async" '
+                    f'style="--pos: {s["pos"]}; --dpos: {s["dpos"]}">')   # --pos: phone band, --dpos: desktop column
         sel, ti = ('true', '') if i == 0 else ('false', ' tabindex="-1"')
         tabs.append(f'<button class="hs-tab" type="button" role="tab" id="hs-tab-{s["key"]}" aria-controls="hs-{s["key"]}" aria-selected="{sel}"{ti}>'
                     f'{e(s["tab"])}</button>')

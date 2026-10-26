@@ -123,13 +123,13 @@ for the structure. Both are translated into Ability's own colours and fonts (bri
 
 The team sent the full Burgas photo shoot (169 photos, up to 6720 × 4480 px: gym, saunas, hamam, pool, bar, massages, salt
 room, cosmetics, reception). The originals are not in the repository – only web-sized WebP copies of the ones in use:
-- `hero-burgas-dvoyka-basein-*` – ABILITY326, Mimi and Stanislav on the edge of the pool in front of the wave wall (the photo
+- `hero-burgas-dvoyka-*` (square crop) – ABILITY326, Mimi and Stanislav on the edge of the pool in front of the wave wall (the photo
   the owner asked for); the Burgas hero slide. On desktop the hero is now text on espresso on the left and the photo on the
   right, because these photos are bright and the people sit in the middle.
 - `hamam-burgas-kese-*` (ABILITY238), `hamam-burgas-kurna-*` (ABILITY261), `hamam-burgas-ritual-*` (ABILITY226) – the hamam
   page and the hamam tile / block on `spa-burgas/` (they replace a photo of the steam-bath door sign).
 Second archive – **Варна** (94 photos with a model + 26 interiors, up to 8244 × 5496 px). In use now:
-- `hero-varna-sauna-*` (DSC_2345, a guest resting in the Finnish sauna) – the Варна hero slide;
+- `hero-varna-sauna-sedi-*` (DSC_2349, square crop, a guest sitting in the Finnish sauna) – the Варна hero slide;
 - `varna-termalna-zona-*` (DSC_3352), `varna-infrachervena-peika-*` (DSC_3394), `varna-fitnes-*` (DSC_3412),
   `varna-relax-zona-*` (DSC_3382), `varna-grupovi-trenirovki-*` (DSC_2107), `varna-masazh-*` (DSC_2182) – they replace every
   low-resolution Varna photo from the old site (`spa-varna/` and its zone pages, `masazhi-varna/`, the homepage cards and strip,
