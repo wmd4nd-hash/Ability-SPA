@@ -16,8 +16,11 @@ Homepage prototype for the new abilityspa.com. See `CLAUDE.md` for the full brie
 - `docs/redirect-map.md` – draft 301 map for every old URL, including 58 older addresses still linked internally
 - `docs/preview-*.png` – screenshots at 390 px (phone) and 1440 px (desktop)
 
-**Live preview:** https://raw.githack.com/wmd4nd-hash/Ability-SPA/claude/new-session-bmiv3x/index.html
-(always shows the latest push to this branch; may take a few minutes to refresh)
+**Live preview:** https://wmd4nd-hash.github.io/Ability-SPA/ – GitHub Pages, published from the branch
+`claude/new-session-bmiv3x` (Settings → Pages → Deploy from a branch → `claude/new-session-bmiv3x` / root). Updates about a
+minute after each push. `.nojekyll` makes Pages serve the files as they are.
+The old raw.githack.com link now shows an "External Content Notice" page first (press "Open the page"; remembered for 24 h,
+not at all in some in-app browsers) and redirects images to GitHub – don't rely on it.
 
 Or open `index.html` locally in a browser.
 
