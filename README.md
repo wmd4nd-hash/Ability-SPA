@@ -135,6 +135,19 @@ Second archive – **Варна** (94 photos with a model + 26 interiors, up to 
   low-resolution Varna photo from the old site (`spa-varna/` and its zone pages, `masazhi-varna/`, the homepage cards and strip,
   promotions). The enlarged stand-ins made earlier are deleted.
 
+## Feedback 01.11 (Бургас page)
+
+- Hero slide Бургас: „…масажи, СПА процедури, остеопатия и козметика – в сърцето на гр. Бургас“.
+- `spa-burgas/`: „Вашето любимо място за релакс“; the label above it is „Добре дошли“ and the in-page menu item „За обекта“
+  (instead of „Обзор“, on both location pages); „техника“ instead of „апарати“ (also on `za-nas/`); a new second paragraph.
+- **No pool bar and no protein bar anywhere** (Бургас page, Басейн, Фитнес, homepage).
+- **Children's pool 30–32 °C** everywhere.
+- **Multisport in Бургас: weekdays 07:00–22:00, for the pool, thermal zone or salt room** – removed from fitness; said on the
+  Бургас page, prices, first-visit FAQ and homepage. Varna conditions still to confirm.
+- New photos on the Бургас page: massages – ABILITY389 (`masazh-goreshti-kamani-burgas-2-*`); thermal zone – p1084022 for now
+  (the new-shoot sauna photos ABILITY183 / 188 were in the WeTransfer that expired – to be swapped in when re-sent).
+- Location pages in colour: sections alternate beige and espresso like the homepage, the in-page menu is espresso.
+
 ## Motion
 
 Calm, CSS-driven motion with a small script (`js/main.js`), no library:

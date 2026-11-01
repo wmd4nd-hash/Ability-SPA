@@ -16,11 +16,11 @@ Items marked **[TO CONFIRM]** are unknown and must not be invented. Use visible 
   - **Varna:** inside Hotel "Cherno More" (newest location).
 - **Burgas facilities:**
   - Thermal zone: herbal sauna, Finnish sauna, classic steam bath, hamam, relax zone
-  - Heated indoor pool with relax zone and jacuzzi, plus a children's pool at 32–33 °C
+  - Heated indoor pool with relax zone and jacuzzi, plus a children's pool at 30–32 °C (owner, 01.11)
   - Fitness hall with Technogym equipment and a protein bar by the pool
   - Salt relax room
 - **Service categories:** osteopathy, massages, therapies, beauty/cosmetics (including microneedle mesotherapy)
-- **Other offers:** gift vouchers ("подаръчни ваучери"), promotions, Multisport cards accepted on weekdays 07:00–22:00.
+- **Other offers:** gift vouchers ("подаръчни ваучери"), promotions, Multisport cards accepted on weekdays 07:00–22:00 – in Burgas for the pool, thermal zone or salt room (owner, 01.11). No pool bar or protein bar on the site (owner, 01.11).
 - **Booking:** external online booking system (subdomain linked from the "РЕЗЕРВИРАЙ" button). **[TO CONFIRM exact URL]**
 - **Reputation:** Facebook shows 100% recommend (42 reviews), about 5,000 followers, and price range $$. Reviewers praise cleanliness, staff, the pool, the saunas, and value.
 - **Language:** Bulgarian is primary. English (and possibly Russian) is needed for summer tourists; currently these exist only as PDF menus.

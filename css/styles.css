@@ -1851,3 +1851,33 @@ h1 em, h2 em { font-style: normal; }
   .hs-panel .btn-row { justify-content: flex-start; }
   .hs-more { margin-top: 20px; }
 }
+
+/* =====================================================================================================
+   Location pages in colour (feedback 01.11 – "the white background looks plain"): like the homepage, sections alternate
+   espresso and beige (Добре дошли beige · Съоръжения espresso · Процедури beige · Цени espresso · Промоции beige ·
+   Как да стигнете espresso), and the sticky in-page menu is espresso. Below: what each block needs on espresso.
+   ===================================================================================================== */
+.club-nav { background: var(--ink); border-bottom: 1px solid var(--gold-line); }
+.club-nav-name { color: var(--gold); }
+.club-nav-links a { color: var(--on-dark); }
+.club-nav-links a:hover, .club-nav-links a.is-current { color: var(--gold); border-bottom-color: var(--gold); }
+.club-nav-switch { border-color: rgba(195, 159, 118, .55); color: var(--white); }
+.club-nav-switch:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.section-dark .split-text p { color: var(--on-dark); }
+.section-dark .facility-grid { margin-bottom: 72px; }
+.section-dark .price-list { border-top-color: var(--gold-line); }
+.section-dark .price-list dt { color: var(--white); }
+.section-dark .price-list dt span { color: var(--muted-dark); }
+.section-dark .price-list dd { color: var(--gold); }
+.section-dark .price-list div:hover dd { color: var(--gold-hi); }
+.section-dark .price-note { color: var(--gold); }
+.section-dark .price-other { color: var(--on-dark); }
+.section-dark .visit-grid, .section-dark .visit-item { border-color: var(--gold-line); }
+.section-dark .visit-item svg { stroke: var(--gold); }
+.section-dark .visit-item h3 { color: var(--gold); }
+.section-dark .visit-item p, .section-dark .visit-note { color: var(--on-dark); }
+.section-dark .text-link { color: var(--white); }
+.section-sand .club-facts { border-top-color: rgba(32, 26, 24, .2); }
+.section-sand .club-facts div { border-bottom-color: rgba(32, 26, 24, .2); }
+.section-sand .section-head .eyebrow, .section-sand .club-facts dt { color: #6B4E2E; }   /* darker gold: ≥ 4.5 : 1 on beige */
+.js .section-dark .section-head .eyebrow { background: none; }

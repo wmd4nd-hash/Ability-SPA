@@ -648,7 +648,7 @@ HERO_SLIDES = {
     'bg': dict(h1='СПА в Бургас и уелнес във&nbsp;Варна', label='Изберете обект', pause='Спри автоматичната смяна', play='Пусни автоматичната смяна',
                menu='СПА меню', call='Обадете се', slides=[
         dict(key='burgas', tab='Бургас', eyebrow='Ability SPA · хотел „България“', title='Спа център в&nbsp;Бургас',
-             lead='Басейн и джакузи, сауни и парна баня, хамам, солна стая, фитнес, масажи, остеопатия и козметика – в центъра на града.',
+             lead='Басейн и джакузи, сауни и парна баня, хамам, солна стая, фитнес, масажи, СПА процедури, остеопатия и козметика – в сърцето на гр. Бургас.',
              img='images/hero-burgas-dvoyka', alt='Двойка седи на ръба на басейна пред осветената стена в Ability SPA Бургас', pos='50% 40%', dpos='50% 45%',
              menu=PDF_B, tel=TEL_BURGAS, more=('spa-burgas/', 'Повече за Бургас')),
         dict(key='varna', tab='Варна', eyebrow='Ability SPA&amp;Wellness · хотел „Черно море“', title='Уелнес във&nbsp;Варна',
@@ -658,7 +658,7 @@ HERO_SLIDES = {
     'en': dict(h1='Spa in Burgas, wellness in&nbsp;Varna', label='Choose a location', pause='Stop switching automatically', play='Switch automatically',
                menu='Spa menu (BG)', call='Call us', slides=[
         dict(key='burgas', tab='Burgas', eyebrow='Ability SPA · Hotel Bulgaria', title='Spa centre in&nbsp;Burgas',
-             lead='Pool and jacuzzi, saunas and steam bath, hamam, salt room, gym, massages, osteopathy and beauty treatments – in the city centre.',
+             lead='Pool and jacuzzi, saunas and steam bath, hamam, salt room, gym, massages, spa treatments, osteopathy and beauty treatments – in the heart of Burgas.',
              img='images/hero-burgas-dvoyka', alt='A couple sitting on the edge of the pool in front of the lit wall at Ability SPA Burgas', pos='50% 40%', dpos='50% 45%',
              menu=PDF_B, tel=TEL_BURGAS, more=('en/spa-burgas/', 'More about Burgas')),
         dict(key='varna', tab='Varna', eyebrow='Ability SPA&amp;Wellness · Hotel Cherno More', title='Wellness in&nbsp;Varna',
@@ -732,7 +732,7 @@ def club_hero(p, crumbs, eyebrow, h1, lead, image, meta, actions):
 '''
 
 
-CLUB_NAV = [('obzor', 'Обзор'), ('zoni', 'Зони'), ('proceduri', 'Процедури'), ('ceni', 'Цени'), ('promocii', 'Промоции'), ('kontakt', 'Как да стигнете')]
+CLUB_NAV = [('obzor', 'За обекта'), ('zoni', 'Зони'), ('proceduri', 'Процедури'), ('ceni', 'Цени'), ('promocii', 'Промоции'), ('kontakt', 'Как да стигнете')]
 
 
 def club_nav(p, name, other):
@@ -1000,52 +1000,50 @@ def build_burgas():
                        (ICON_PHONE, f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a>')],
                       [('btn-gold', PDF_B, 'СПА меню'), ('btn-line-light', f'tel:{TEL_BURGAS}', 'Обадете се')])
         s += club_nav(p, 'Бургас', ('spa-varna/', 'Варна'))
-        s += section('<div class="two-col">' + head_block('Обзор', 'Вашето място за релакс в&nbsp;центъра', 'obzor-h') + '<div>' + prose([
-            'Посветили сме се изцяло на грижата за вашето здраве, красота и душевен баланс – с уютна обстановка, индивидуално подбрани процедури, качествени продукти и апарати.',
-            'Термалната зона, басейнът с джакузи и фитнесът са на едно място, а след тренировка или процедура ви очакват релакс зоната и барът до басейна.']) +
-            '<dl class="club-facts"><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Multisport</dt><dd>в делнични дни, 07:00 – 22:00</dd></div>'
-            '<div><dt>Деца</dt><dd>детски басейн 32–33 °C</dd></div></dl></div></div>', sid='obzor')
+        s += section('<div class="two-col">' + head_block('Добре дошли', 'Вашето любимо място за&nbsp;релакс', 'obzor-h') + '<div>' + prose([
+            'Посветили сме се изцяло на грижата за вашето здраве, красота и душевен баланс – с уютна обстановка, индивидуално подбрани процедури, качествени продукти и техника.',
+            'Термална зона, басейн с джакузи, солна стая и фитнес – всичко е на едно място. Тренирайте, отпуснете се в сауната или басейна и завършете с масаж или СПА процедура.']) +
+            '<dl class="club-facts"><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Multisport</dt><dd>в делнични дни, 07:00 – 22:00 – за басейн, термална зона или солна стая</dd></div>'
+            '<div><dt>Деца</dt><dd>детски басейн 30–32 °C</dd></div></dl></div></div>', cls='section-sand', sid='obzor')
         grid = facility_grid(p, [
-            ('spa-burgas/termalna-zona/', 'Термална зона', 'images/finlandska-sauna-burgas-1080.webp', 'Финландската сауна', '62% 50%'),
+            ('spa-burgas/termalna-zona/', 'Термална зона', 'images/library/2026_03_p1084022.webp', 'Гостенка в сауната на Ability SPA Бургас', '55% 50%'),
             ('spa-burgas/basein/', 'Басейн и джакузи', 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът', '50% 50%'),
             ('spa-burgas/hamam/', 'Хамам', 'images/hamam-burgas-kese-1080.webp', 'Пилинг с кесе в хамама', '55% 40%'),
             ('spa-burgas/solna-staya/', 'Солна стая', 'images/spa-burgas-solna-staya-960.webp', 'Солната стая с шезлонги', '50% 50%'),
             ('fitnes-burgas/', 'Фитнес Technogym', 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес залата', '50% 50%'),
-            ('masazhi-burgas/', 'Масажи', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Масаж с горещи камъни', '38% 50%')])
+            ('masazhi-burgas/', 'Масажи', 'images/masazh-goreshti-kamani-burgas-2-1080.webp', 'Масаж с горещи камъни в Ability SPA Бургас', '35% 50%')])
         z = head_block('Съоръжения', 'Всичко на едно място', 'zoni-h') + grid
-        z += zone_split(p, 'images/finlandska-sauna-burgas-1080.webp', 'Финландската сауна в Ability Spa Бургас', 'Термална зона',
+        z += zone_split(p, 'images/library/2026_03_p1084022.webp', 'Гостенка в сауната на Ability SPA Бургас', 'Термална зона',
                         'Сауни, парна баня и&nbsp;релакс', 'Спокойна и елегантна атмосфера, вдъхновена от топлина и хармония.',
                         ['Билкова сауна', 'Финландска сауна', 'Класическа парна баня', 'Релакс зона'], ('spa-burgas/termalna-zona/', 'Термалната зона'))
         z += zone_split(p, 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и закритият басейн', 'Басейн и джакузи',
-                        'Вода за цялото семейство', 'Топъл закрит басейн с релакс зона и джакузи, а за най-малките – детски басейн с температура 32–33&nbsp;°C.',
-                        ['Закрит басейн', 'Джакузи', 'Детски басейн 32–33 °C'], ('spa-burgas/basein/', 'Басейнът'), rev=True)
+                        'Вода за цялото семейство', 'Топъл закрит басейн с релакс зона и джакузи, а за най-малките – детски басейн с температура 30–32&nbsp;°C.',
+                        ['Закрит басейн', 'Джакузи', 'Детски басейн 30–32 °C'], ('spa-burgas/basein/', 'Басейнът'), rev=True)
         z += zone_split(p, 'images/hamam-burgas-kurna-1080.webp', 'Двойка до мраморната курна в хамама на Ability SPA Бургас', 'Хамам', 'Турска баня',
                         'Парна баня, пилинг с кесе и пенен масаж – вековен ритуал за релакс и пречистване.', ['45 мин – 55 €'], ('spa-burgas/hamam/', 'Хамамът'))
         z += zone_split(p, 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес зала с уреди Technogym', 'Фитнес',
-                        'Technogym и протеинов бар', 'Модерна фитнес зала с уреди Technogym; протеиновият бар до басейна предлага хранителни добавки.',
-                        ['Еднократна тренировка – 5 €', 'Месечна карта – 35 €', 'Multisport в делнични дни'], ('fitnes-burgas/', 'Фитнесът'), rev=True)
+                        'Уреди Technogym', 'Модерна фитнес зала с уреди Technogym – без обвързващи договори и директен дебит.',
+                        ['Еднократна тренировка – 5 €', 'Месечна карта – 35 €'], ('fitnes-burgas/', 'Фитнесът'), rev=True)
         z += zone_split(p, 'images/spa-burgas-solna-staya-960.webp', 'Солната стая с шезлонги', 'Солна стая', 'Релакс солна зона',
                         'Тиха солна зона за отпускане и незабравимо СПА изживяване.', ['40 мин – 12 €'], ('spa-burgas/solna-staya/', 'Солната стая'))
-        z += zone_split(p, 'images/library/2022_11_untitled-design-2.webp', 'Барът до басейна', 'Бар', 'Бар до басейна',
-                        'Ароматно кафе, истински билков чай, безалкохолни напитки, фрешове, бира и вино, както и хранителни добавки, сандвичи и торти.', [], None, rev=True)
-        s += section(z, cls='facilities', sid='zoni')
+        s += section(z, cls='facilities section-dark', sid='zoni')
         s += section(head_block('Процедури', 'Масажи, терапии и&nbsp;козметика', 'proceduri-h') + cards(p, [
-            ('masazhi-burgas/', 'Масажи', 'от 28 €', 'images/masazh-goreshti-kamani-burgas-1080.webp', 'Масаж с горещи камъни'),
+            ('masazhi-burgas/', 'Масажи', 'от 28 €', 'images/masazh-goreshti-kamani-burgas-2-1080.webp', 'Масаж с горещи камъни'),
             ('terapii/', 'СПА терапии', 'от 49 €', 'images/terapiya-vulkanichni-kamani-1080.webp', 'Терапия с вулканични камъни'),
             ('kozmetika-burgas/', 'Козметика', 'от 8 €', 'images/kozmetika-terapiya-za-litse-burgas-1080.webp', 'Терапия за лице'),
             ('osteopatiya-burgas/', 'Остеопатия', '59 € · 60 мин', 'images/osteopatiya-burgas-petar-damyanov-1080.webp', 'Остеопатия')]),
-            cls='section-dark', sid='proceduri')
+            cls='section-sand', sid='proceduri')
         s += section('<div class="two-col">' + head_block('Цени', 'СПА достъп', 'ceni-h') + '<div>' + price_rows([
             ('Еднократно посещение', 'термална зона, басейн и джакузи или солна стая', '12 €'), ('Деца 3–14 г.', 'еднократно посещение', '6 €'),
             ('Дневна СПА карта', 'фитнес, басейн, джакузи и термална зона', '19 €'), ('Дневна СПА карта за двама', None, '35 €'),
             ('Месечна СПА карта', 'понеделник – петък / понеделник – неделя', '110 € / 145 €'), ('Хавлия / халат', 'една хавлия е безплатна', '2 € / 3 €')],
-            'Ability Spa Бургас') + f'<p class="price-other"><a href="{p}ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00</p></div></div>', sid='ceni')
+            'Ability Spa Бургас') + f'<p class="price-other"><a href="{p}ceni/">Всички цени →</a> · Multisport: делнични дни, 07:00–22:00 – басейн, термална зона или солна стая</p></div></div>', cls='section-dark', sid='ceni')
         s += promo_section(p, 'burgas')
-        s += section(head_block('Как да стигнете', 'Хотел „България“, центъра на Бургас', 'kontakt-h') + visit_block(
+        s += section(head_block('Как да стигнете', 'Хотел „България“, в&nbsp;сърцето на Бургас', 'kontakt-h') + visit_block(
             'ул. „Александровска“ 21<br>хотел „България“, гр. Бургас', 'https://maps.google.com/?q=ул.+Александровска+21,+Бургас',
             f'<a href="tel:{TEL_BURGAS}">{TEL_BURGAS_TXT}</a><br><a href="tel:{TEL_BURGAS2}">{TEL_BURGAS2_TXT}</a><br><a href="mailto:abilityspa@mail.com">abilityspa@mail.com</a>',
             'Всеки ден<br>07:00 – 22:00') + f'<div class="btn-row visit-cta"><a class="btn btn-gold" href="tel:{TEL_BURGAS}">Обадете се</a>'
-            f'<a class="btn btn-line" href="viber://chat?number=%2B359895635555">Viber</a><a class="btn btn-line" href="{PDF_B}">СПА меню</a></div>', sid='kontakt')
+            f'<a class="btn btn-line" href="viber://chat?number=%2B359895635555">Viber</a><a class="btn btn-line" href="{PDF_B}">СПА меню</a></div>', cls='section-dark', sid='kontakt')
         s += other_club(p, 'burgas')
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-burgas/#spa', 'name': 'Ability Spa – Бургас',
@@ -1069,11 +1067,11 @@ def build_varna():
                        (ICON_PHONE, f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a>')],
                       [('btn-gold', PDF_V, 'СПА меню'), ('btn-line-light', f'tel:{TEL_VARNA}', 'Обадете се')])
         s += club_nav(p, 'Варна', ('spa-burgas/', 'Бургас'))
-        s += section('<div class="two-col">' + head_block('Обзор', 'Повече от СПА', 'obzor-h') + '<div>' + prose([
+        s += section('<div class="two-col">' + head_block('Добре дошли', 'Повече от СПА', 'obzor-h') + '<div>' + prose([
             'Съчетаваме релакс, възстановяване и движение на едно място в сърцето на Варна – в хотел „Черно море“.',
             'Термална зона с финландска и билкова сауна, парна баня и инфрачервена пейка, модерен фитнес с уреди Technogym, групови тренировки, професионални масажи и СПА терапии.']) +
             '<dl class="club-facts"><div><dt>Резервации</dt><dd>по телефона, във Viber или WhatsApp</dd></div><div><dt>Паркинг</dt><dd>платен, към хотела</dd></div>'
-            '<div><dt>Работно време</dt><dd>всеки ден, [07:00 или 09:00] – 21:00</dd></div></dl></div></div>', sid='obzor')
+            '<div><dt>Работно време</dt><dd>всеки ден, [07:00 или 09:00] – 21:00</dd></div></dl></div></div>', cls='section-sand', sid='obzor')
         grid = facility_grid(p, [
             ('spa-varna/termalna-zona/', 'Термална зона', 'images/varna-termalna-zona-1080.webp', 'Термалната зона', '50% 60%'),
             ('spa-varna/termalna-zona/', 'Инфрачервена пейка', 'images/varna-infrachervena-peika-1080.webp', 'Инфрачервената пейка', '50% 50%'),
@@ -1093,24 +1091,24 @@ def build_varna():
                         ['Еднократна тренировка – 12 €', '10 посещения – 100 €'], ('spa-varna/grupovi-trenirovki/', 'Груповите тренировки'))
         z += zone_split(p, 'images/varna-relax-zona-1080.webp', 'Релакс зоната с шезлонги и камина', 'Релакс зона',
                         'Шезлонги и камина', 'Мека светлина, топлината на огъня и тишина – за почивка след процедура или тренировка.', [], None, rev=True)
-        s += section(z, cls='facilities', sid='zoni')
+        s += section(z, cls='facilities section-dark', sid='zoni')
         s += section(head_block('Процедури', 'Масажи и&nbsp;терапии във Варна', 'proceduri-h') + cards(p, [
             ('masazhi-varna/', 'Масажи във Варна', 'от 29 €', 'images/varna-masazh-1080.webp', 'Масаж в Ability SPA&Wellness Варна'),
             ('terapii/gold-amber/', 'Gold Amber', '78 € · 90 мин', 'images/library/2026_06_terapia_gold_amber.webp', 'Терапия Gold Amber'),
             ('terapii/bulgarian-rose/', 'Bulgarian Rose', '78 € · 90 мин', 'images/library/2026_06_terapia_bulgarian_rose-1.webp', 'Терапия Bulgarian Rose'),
             ('terapii/lavender-touch/', 'Lavender Touch', '78 € · 90 мин', 'images/library/2026_06_terapia_lavender_touch.webp', 'Терапия Lavender Touch')]),
-            cls='section-dark', sid='proceduri')
+            cls='section-sand', sid='proceduri')
         s += section('<div class="two-col">' + head_block('Цени', 'СПА и фитнес във Варна', 'ceni-h') + '<div>' + price_rows([
             ('СПА – еднократно посещение', None, '15 €'), ('СПА – еднократно посещение за двама', None, '27 €'), ('СПА и фитнес – еднократно посещение', None, '20 €'),
             ('Масажи', '30 / 60 мин', 'от 29 €'), ('СПА терапии', '90 мин', '78 €'), ('СПА пакет за двама „Абилити“', '2 масажа × 60 мин + 2 дневни СПА карти', '100 €')],
-            'Ability Spa&Wellness Варна') + f'<p class="price-other"><a href="{p}ceni/#varna">Всички цени →</a> · <a href="{PDF_V}" rel="noopener">Меню Варна (PDF)</a></p></div></div>', sid='ceni')
+            'Ability Spa&Wellness Варна') + f'<p class="price-other"><a href="{p}ceni/#varna">Всички цени →</a> · <a href="{PDF_V}" rel="noopener">Меню Варна (PDF)</a></p></div></div>', cls='section-dark', sid='ceni')
         s += promo_section(p, 'varna')
         s += section(head_block('Как да стигнете', 'Хотел „Черно море“, Варна', 'kontakt-h') + visit_block(
             'бул. „Сливница“ 33<br>хотел „Черно море“, гр. Варна', 'https://maps.google.com/?q=бул.+Сливница+33,+Варна',
             f'<a href="tel:{TEL_VARNA}">{TEL_VARNA_TXT}</a><br><a href="mailto:abilityspawellness@gmail.com">abilityspawellness@gmail.com</a>',
             'Всеки ден<br>[07:00 или 09:00] – 21:00', 'Засега резервации за Варна се правят по телефона, във Viber или WhatsApp. Паркингът към хотела е платен.') +
             f'<div class="btn-row visit-cta"><a class="btn btn-gold" href="tel:{TEL_VARNA}">Обадете се</a>'
-            f'<a class="btn btn-line" href="viber://chat?number=%2B359899994149">Viber</a><a class="btn btn-line" href="{PDF_V}">СПА меню</a></div>', sid='kontakt')
+            f'<a class="btn btn-line" href="viber://chat?number=%2B359899994149">Viber</a><a class="btn btn-line" href="{PDF_V}">СПА меню</a></div>', cls='section-dark', sid='kontakt')
         s += other_club(p, 'varna')
         return s
     spa = {'@context': 'https://schema.org', '@type': 'DaySpa', '@id': f'{SITE}/spa-varna/#spa', 'name': 'Ability Spa&Wellness – Варна',
@@ -1172,7 +1170,7 @@ def build_prices():
         blocks = ''.join(f'<div class="price-group"><h3>{e(k)}</h3>{price_rows(v)}</div>' for k, v in V.items())
         s += section(head_block('Ability Spa&Wellness · хотел „Черно море“', 'Цени – Варна', 'varna') +
                      f'<p class="price-other"><a href="{PDF_V}" rel="noopener">Пълно меню Варна (PDF)</a></p><div class="price-groups">{blocks}</div>', cls='section-sand', sid='varna-sec')
-        s += section(prose([PRICE_SOURCE + ' Промоционалните цени са в <a href="' + p + 'promocii/">Промоции</a>. Карти Multisport се приемат в делнични дни, 07:00–22:00.']))
+        s += section(prose([PRICE_SOURCE + ' Промоционалните цени са в <a href="' + p + 'promocii/">Промоции</a>. Карти Multisport се приемат в делнични дни, 07:00–22:00; в Бургас – за басейн, термална зона или солна стая.']))
         s += cta_band(p)
         return s
     return page(path, 'СПА цени в Бургас и Варна | Ability SPA',
