@@ -214,6 +214,9 @@ current-site/
 
 Reference images are for inspiration only. Do not copy the Omra or Velora logos, names, or layouts one-to-one.
 
+### Photo shoot originals
+Google Drive (shared by link): https://drive.google.com/drive/folders/1cy8E5_nqi5OixZtS6fhTLv9QUBkiqrwH – see README "Photo shoot originals".
+
 ### Still missing [TO CONFIRM]
 - Logo in vector format (SVG/AI/PDF)
 - High-resolution original photos, plus treatment/people photos

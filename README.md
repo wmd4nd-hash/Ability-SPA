@@ -121,6 +121,11 @@ for the structure. Both are translated into Ability's own colours and fonts (bri
 
 ## Photo shoot originals (WeTransfer, 25.10)
 
+**Permanent copy (Google Drive, shared by link):** https://drive.google.com/drive/folders/1cy8E5_nqi5OixZtS6fhTLv9QUBkiqrwH
+– `wetransfer_ability-spa-wellness_2026-10-24_1458.zip` (Варна, 1.8 GB) is there as of 05.11; the Бургас archive
+`wetransfer_ability84-jpg_2026-10-24_1511.zip` (169 photos, incl. the sauna photos ABILITY183 / 188) is still to be added.
+The WeTransfer links below have expired.
+
 The team sent the full Burgas photo shoot (169 photos, up to 6720 × 4480 px: gym, saunas, hamam, pool, bar, massages, salt
 room, cosmetics, reception). The originals are not in the repository – only web-sized WebP copies of the ones in use:
 - `hero-burgas-dvoyka-*` (square crop) – ABILITY326, Mimi and Stanislav on the edge of the pool in front of the wave wall (the photo
