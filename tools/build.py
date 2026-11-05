@@ -1006,14 +1006,14 @@ def build_burgas():
             '<dl class="club-facts"><div><dt>Работно време</dt><dd>всеки ден, 07:00 – 22:00</dd></div><div><dt>Multisport</dt><dd>в делнични дни, 07:00 – 22:00 – за басейн, термална зона или солна стая</dd></div>'
             '<div><dt>Деца</dt><dd>детски басейн 30–32 °C</dd></div></dl></div></div>', cls='section-sand', sid='obzor')
         grid = facility_grid(p, [
-            ('spa-burgas/termalna-zona/', 'Термална зона', 'images/library/2026_03_p1084022.webp', 'Гостенка в сауната на Ability SPA Бургас', '55% 50%'),
+            ('spa-burgas/termalna-zona/', 'Термална зона', 'images/termalna-zona-burgas-dvoyka-1080.webp', 'Двойка във финландската сауна на Ability SPA Бургас', '58% 45%'),
             ('spa-burgas/basein/', 'Басейн и джакузи', 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и басейнът', '50% 50%'),
             ('spa-burgas/hamam/', 'Хамам', 'images/hamam-burgas-kese-1080.webp', 'Пилинг с кесе в хамама', '55% 40%'),
             ('spa-burgas/solna-staya/', 'Солна стая', 'images/spa-burgas-solna-staya-960.webp', 'Солната стая с шезлонги', '50% 50%'),
             ('fitnes-burgas/', 'Фитнес Technogym', 'images/spa-burgas-fitnes-technogym-zala-1080.webp', 'Фитнес залата', '50% 50%'),
             ('masazhi-burgas/', 'Масажи', 'images/masazh-goreshti-kamani-burgas-2-1080.webp', 'Масаж с горещи камъни в Ability SPA Бургас', '35% 50%')])
         z = head_block('Съоръжения', 'Всичко на едно място', 'zoni-h') + grid
-        z += zone_split(p, 'images/library/2026_03_p1084022.webp', 'Гостенка в сауната на Ability SPA Бургас', 'Термална зона',
+        z += zone_split(p, 'images/termalna-zona-burgas-dvoyka-2-1080.webp', 'Двойка във финландската сауна на Ability SPA Бургас', 'Термална зона',
                         'Сауни, парна баня и&nbsp;релакс', 'Спокойна и елегантна атмосфера, вдъхновена от топлина и хармония.',
                         ['Билкова сауна', 'Финландска сауна', 'Класическа парна баня', 'Релакс зона'], ('spa-burgas/termalna-zona/', 'Термалната зона'))
         z += zone_split(p, 'images/spa-burgas-dzhakuzi-basein-1080.webp', 'Джакузито и закритият басейн', 'Басейн и джакузи',

@@ -122,8 +122,8 @@ for the structure. Both are translated into Ability's own colours and fonts (bri
 ## Photo shoot originals (WeTransfer, 25.10)
 
 **Permanent copy (Google Drive, shared by link):** https://drive.google.com/drive/folders/1cy8E5_nqi5OixZtS6fhTLv9QUBkiqrwH
-– `wetransfer_ability-spa-wellness_2026-10-24_1458.zip` (Варна, 1.8 GB) is there as of 05.11; the Бургас archive
-`wetransfer_ability84-jpg_2026-10-24_1511.zip` (169 photos, incl. the sauna photos ABILITY183 / 188) is still to be added.
+– both archives: `wetransfer_ability84-jpg_2026-10-24_1511.zip` (Бургас, 169 photos, 1.6 GB) and
+`wetransfer_ability-spa-wellness_2026-10-24_1458.zip` (Варна, 1.8 GB).
 The WeTransfer links below have expired.
 
 The team sent the full Burgas photo shoot (169 photos, up to 6720 × 4480 px: gym, saunas, hamam, pool, bar, massages, salt
@@ -149,8 +149,8 @@ Second archive – **Варна** (94 photos with a model + 26 interiors, up to 
 - **Children's pool 30–32 °C** everywhere.
 - **Multisport in Бургас: weekdays 07:00–22:00, for the pool, thermal zone or salt room** – removed from fitness; said on the
   Бургас page, prices, first-visit FAQ and homepage. Varna conditions still to confirm.
-- New photos on the Бургас page: massages – ABILITY389 (`masazh-goreshti-kamani-burgas-2-*`); thermal zone – p1084022 for now
-  (the new-shoot sauna photos ABILITY183 / 188 were in the WeTransfer that expired – to be swapped in when re-sent).
+- New photos on the Бургас page: massages – ABILITY389 (`masazh-goreshti-kamani-burgas-2-*`); thermal zone – ABILITY183 (tile) and
+  ABILITY188 (thermal zone block), `termalna-zona-burgas-dvoyka-*` – from the Google Drive copy of the shoot.
 - Location pages in colour: sections alternate beige and espresso like the homepage, the in-page menu is espresso.
 
 ## Motion
